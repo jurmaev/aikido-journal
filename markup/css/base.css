@@ -1,0 +1,91 @@
+:root {
+  --background: #f0f5ff;
+  --white: #ffffff;
+  --black: #000000;
+  --grey-800: #17181b;
+  --grey-600: #0000004d;
+  --grey-300: #17181b80;
+  --blue-400: #40a9ff;
+  --blue-700: #1890ff;
+  --red-400: #ff7875;
+  --red-700: #ff4d4f;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  min-width: 320px;
+  background: var(--background);
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  width: 52%;
+  margin: 0 auto;
+}
+
+.btn {
+  background: none;
+  border: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.btn--blue {
+  background-color: var(--blue-700);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn--blue:hover {
+  background-color: var(--blue-400);
+}
+
+.btn--red {
+  background-color: var(--red-700);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn--red:hover {
+  background-color: var(--red-400);
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+  gap: 1.25rem;
+}
+
+.btn--large {
+  width: 100%;
+  padding: 1.1875rem 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.52;
+}
