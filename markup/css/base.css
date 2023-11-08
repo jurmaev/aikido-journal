@@ -23,8 +23,9 @@ html {
 
 body {
   min-width: 320px;
-  background: var(--background);
+  background-color: var(--background);
   font-family: 'Montserrat', sans-serif;
+  color: var(--grey-800);
 }
 
 h1,
@@ -47,6 +48,26 @@ img {
 .container {
   width: 52%;
   margin: 0 auto;
+}
+
+.header {
+  border-bottom: 0.0625rem var(--grey-800) solid;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+}
+
+.logo {
+  width: 3.4375rem;
+  height: 3.4375rem;
+}
+
+.header__btn {
+  padding: 0.625rem 1.25rem;
 }
 
 .btn {
@@ -88,4 +109,36 @@ img {
   font-size: 1.125rem;
   font-weight: 500;
   line-height: 1.52;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  width: 16%;
+  padding: 4rem 0;
+  margin: 0 auto;
+}
+
+.form__title {
+  margin-bottom: 1.5625rem;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 1.43;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.form__label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 0.4375rem;
+}
+
+.form__input {
+  background-color: transparent;
+  padding: 1.3125rem 0 1.3125rem 1.4375rem;
+  margin-bottom: 1.25rem;
+  border-radius: 0.3125rem;
+  border: 0.0625rem var(--grey-800) solid;
 }

@@ -1,25 +1,5 @@
 @import url(./base.css);
 
-.header {
-  border-bottom: 0.0625rem var(--grey-800) solid;
-}
-
-.header__container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2rem 0;
-}
-
-.logo {
-  width: 3.4375rem;
-  height: 3.4375rem;
-}
-
-.header__btn {
-  padding: 0.625rem 1.25rem;
-}
-
 .main__container {
   text-align: center;
   padding: 13.875rem 0;
