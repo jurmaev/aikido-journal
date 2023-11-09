@@ -19,12 +19,12 @@
   line-height: 1.43;
 }
 
-.form__input {
+.children__input {
   margin: 0;
   width: 100%;
 }
 
-.input-group {
+.children-input-group {
   margin-top: 0.625rem;
   margin-bottom: 1.5625rem;
 }
