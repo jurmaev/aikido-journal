@@ -1,0 +1,90 @@
+@import url(base.css);
+
+.parents__header {
+  margin-bottom: 1.625rem;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 1.43;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.parents__label {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+.input-group {
+  margin-top: 0.625rem;
+  margin-bottom: 1.3125rem;
+}
+
+.form__input {
+  width: 100%;
+  margin: 0;
+}
+
+.parents__container {
+  padding: 4rem 0;
+}
+
+.parents__table {
+  width: 100%;
+  border-spacing: 0;
+  border-radius: 0.3125rem;
+}
+
+.parents-data__container {
+  display: flex;
+  align-items: center;
+}
+
+.parents__data {
+  width: 50%;
+  padding: 0.3125rem 0 0.3125rem 0.875rem;
+  border: 0.0625rem solid var(--black);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.43;
+  text-align: left;
+}
+
+tr:first-child th:first-child {
+  border-left-width: 0.0625rem;
+  border-top-width: 0.0625rem;
+  border-top-left-radius: 10px;
+}
+tr:first-child th:last-child {
+  border-top-width: 0.0625rem;
+  border-right-width: 0.0625rem;
+  border-top-right-radius: 10px;
+}
+tr:last-child td:first-child {
+  border-bottom-width: 0.0625rem;
+  border-left-width: 0.0625rem;
+  border-bottom-left-radius: 10px;
+}
+tr:last-child td:last-child {
+  border-bottom-width: 0.0625rem;
+  border-right-width: 0.0625rem;
+  border-bottom-right-radius: 10px;
+}
+
+.parents__data--empty {
+  color: var(--red-700);
+}
+
+.parents__btn {
+  display: flex;
+  align-items: center;
+  margin-left: 0.25rem;
+}
+
+.parents__btn:hover svg path {
+  transition: stroke 0.3s ease-in-out;
+}
+
+.parents__btn:hover svg path {
+  stroke: var(--black-600);
+}
