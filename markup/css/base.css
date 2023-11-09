@@ -186,6 +186,8 @@ img {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
+  animation-name: modal-show;
+  animation-duration: 1s;
 }
 
 .modal-content {
@@ -195,6 +197,17 @@ img {
   padding: 1.1875rem;
   border: 0.0625rem solid var(--black);
   border-radius: 0.3125rem;
+  animation-name: modal-show;
+  animation-duration: 1s;
+}
+
+@keyframes modal-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal__title {
