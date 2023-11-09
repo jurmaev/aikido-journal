@@ -3,10 +3,8 @@
   --white: #ffffff;
   --black: #000000;
   --black-600: #00000099;
+  --black-300: #17181b80;
   --grey-800: #17181b;
-  --grey-700: #17181b99;
-  --grey-600: #0000004d;
-  --grey-300: #17181b80;
   --blue-400: #40a9ff;
   --blue-700: #1890ff;
   --red-400: #ff7875;
@@ -95,7 +93,7 @@ img {
 }
 
 .nav__item:hover {
-  color: var(--grey-700);
+  color: var(--black-600);
 }
 
 .btn {
@@ -176,5 +174,53 @@ img {
 }
 
 .form__input::placeholder {
-  color: var(--grey-300);
+  color: var(--black-300);
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  position: relative;
+  background-color: var(--background);
+  margin: 30vh auto;
+  padding: 1.1875rem;
+}
+
+.modal__title {
+  margin-bottom: 0.625rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+.modal__text {
+  margin-bottom: 0.625rem;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+.modal__close {
+  position: absolute;
+  top: 1.1875rem;
+  right: 1.1875rem;
+}
+
+.modal__close:hover svg path,
+.modal__close:hover svg rect {
+  transition: all 0.3s ease-in-out;
+}
+
+.modal__close:hover svg path,
+.modal__close:hover svg rect {
+  stroke: var(--black-600);
 }

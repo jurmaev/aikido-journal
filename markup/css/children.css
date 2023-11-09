@@ -24,10 +24,6 @@
   width: 100%;
 }
 
-.form__input::placeholder {
-  color: var(--grey-800);
-}
-
 .input-group {
   margin-top: 0.625rem;
   margin-bottom: 1.5625rem;
