@@ -120,6 +120,25 @@ tr td:last-child {
   line-height: 1.43;
 }
 
+.item:not(:last-child) {
+  margin-bottom: 0.3125rem;
+}
+
 .item__text {
   margin-right: 0.25rem;
+  font-size: 1.25rem;
+  line-height: 1.43;
+}
+
+.list__btn {
+  display: flex;
+  align-items: center;
+}
+
+.list__btn:hover svg path {
+  transition: stroke 0.3s ease-in-out;
+}
+
+.list__btn:hover svg path {
+  stroke: var(--black-600);
 }
