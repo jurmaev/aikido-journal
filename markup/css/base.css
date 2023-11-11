@@ -5,6 +5,8 @@
   --black-600: #00000099;
   --black-300: #17181b80;
   --grey-800: #17181b;
+  --blue-100: rgba(24, 144, 255, 0.2);
+  --blue-200: rgba(24, 144, 255, 0.5);
   --blue-400: #40a9ff;
   --blue-700: #1890ff;
   --red-400: #ff7875;
@@ -188,12 +190,15 @@ img {
   background-color: rgba(0, 0, 0, 0.4);
   animation-name: modal-show;
   animation-duration: 1s;
+  /* overflow-y: scroll; */
 }
 
 .modal-content {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background-color: var(--background);
-  margin: 30vh auto;
   padding: 1.1875rem;
   border: 0.0625rem solid var(--black);
   border-radius: 0.3125rem;
