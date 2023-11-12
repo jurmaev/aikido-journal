@@ -81,6 +81,9 @@ tr td:last-child {
 }
 
 .table__check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   background-color: transparent;
   border: 0.0625rem solid var(--black);
