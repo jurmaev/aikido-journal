@@ -1,0 +1,43 @@
+@import url(base.css);
+
+.payment__container {
+  padding: 4rem 0;
+}
+
+.payment__title {
+  margin-bottom: 1.5625rem;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 1.43;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.payment__subtitle {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.43;
+  font-weight: 400;
+}
+
+.payment__input-group {
+  margin-bottom: 1rem;
+}
+
+.payment__input {
+  width: 100%;
+  margin: 0;
+}
+
+.payment__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.payment__item {
+  margin-bottom: 0.125rem;
+  font-size: 1.25rem;
+  line-height: 1.43;
+  font-weight: 400;
+}

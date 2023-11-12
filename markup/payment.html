@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задолженность</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/payment.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__container">
+        <a href="#"
+          ><img src="./img/logo.svg" alt="Aikido journal logo" class="logo"
+        /></a>
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item"><a href="#">Дети</a></li>
+            <li class="nav__item"><a href="#">Родители</a></li>
+            <li class="nav__item"><a href="#">Группы</a></li>
+            <li class="nav__item"><a href="#">Посещаемость</a></li>
+            <li class="nav__item"><a href="#">Задолженность</a></li>
+          </ul>
+        </nav>
+        <button class="btn btn--blue btn--small header__btn">Войти</button>
+      </div>
+    </header>
+    <main>
+      <div class="container payment__container">
+        <h1 class="payment__title">Задолженность</h1>
+        <h2 class="payment__subtitle">Задолженность по оплате</h2>
+        <div class="input-group payment__input-group">
+          <input
+            class="form__input payment__input"
+            type="text"
+            placeholder="Введите ФИО родителя"
+          />
+          <button class="btn btn--blue btn--large">Поиск</button>
+        </div>
+        <ul class="payment__list">
+          <li class="payment__item">
+            Абрамова Маргарита Львовна : 1750 рублей
+          </li>
+          <li class="payment__item">
+            Курочкина Светлана Алексеевна : 1000 рублей
+          </li>
+          <li class="payment__item">Иванова Наталья Сергеевна : 500 рублей</li>
+        </ul>
+      </div>
+    </main>
+  </body>
+</html>
