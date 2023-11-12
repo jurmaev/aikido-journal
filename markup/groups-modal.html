@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Настройка группы">
     <title>Группы</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -56,7 +57,7 @@
             <tr>
               <td class="table__cell">
                 <div class="table-cell__container">
-                  <button class="table__check table__check--active">
+                  <button class="table__check table__check--active" aria-label="Check">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -86,7 +87,7 @@
               </td>
               <td class="table__cell">
                 <div class="table-cell__container">
-                  <button class="table__check">
+                  <button class="table__check" aria-label="Check">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -116,7 +117,7 @@
               </td>
               <td class="table__cell">
                 <div class="table-cell__container">
-                  <button class="table__check table__check--active">
+                  <button class="table__check table__check--active" aria-label="Check">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -146,7 +147,7 @@
               </td>
               <td class="table__cell">
                 <div class="table-cell__container">
-                  <button class="table__check">
+                  <button class="table__check" aria-label="Check">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -176,7 +177,7 @@
               </td>
               <td class="table__cell">
                 <div class="table-cell__container">
-                  <button class="table__check table__check--active">
+                  <button class="table__check table__check--active" aria-label="Check">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -206,7 +207,7 @@
               </td>
               <td class="table__cell">
                 <div class="table-cell__container">
-                  <button class="table__check">
+                  <button class="table__check" aria-label="Check">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -236,7 +237,7 @@
               </td>
               <td class="table__cell">
                 <div class="table-cell__container">
-                  <button class="table__check">
+                  <button class="table__check" aria-label="Check">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -273,7 +274,7 @@
         </div>
         <h2 class="modal__title">Список детей</h2>
         <div class="input-group groups-modal__input-group">
-          <select name="children" id="children" class="groups-modal__select">
+          <select name="children" id="children" class="groups-modal__select" aria-label="Select child">
             <option value="">Выберите ребёнка</option>
           </select>
           <button class="btn btn--blue btn--large">Добавить в группу</button>
@@ -281,7 +282,7 @@
         <ul class="list">
           <li class="item">
             <span class="item__text">Абрамов Пётр Иванович</span
-            ><button class="btn list__btn">
+            ><button class="btn list__btn" aria-label="Delete child">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -312,7 +313,7 @@
           </li>
           <li class="item">
             <span class="item__text">Курочкин Владислав Игорьевич</span
-            ><button class="btn list__btn">
+            ><button class="btn list__btn" aria-label="Delete child">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -343,7 +344,7 @@
           </li>
           <li class="item">
             <span class="item__text">Иванов Александр Степанович</span
-            ><button class="btn list__btn">
+            ><button class="btn list__btn" aria-label="Delete child">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -373,7 +374,7 @@
             </button>
           </li>
         </ul>
-        <button class="btn modal__close">
+        <button class="btn modal__close" aria-label="Close modal">
           <svg
             width="26"
             height="25"

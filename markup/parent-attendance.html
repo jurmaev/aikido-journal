@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Просмотр посещаемости детей" />
     <title>Посещаемость</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,7 +34,12 @@
       <div class="container parent-attendance__container">
         <h1 class="parent-attendance__title">Посещаемость</h1>
         <div class="input-group parent-attendance__input-group">
-          <select name="month" id="month" class="parent-attendance__select">
+          <select
+            name="month"
+            id="month"
+            class="parent-attendance__select"
+            aria-label="Month select"
+          >
             <option value="">Выберите месяц</option>
           </select>
           <button class="btn btn--blue btn--large">Применить</button>
@@ -44,7 +50,7 @@
               <th class="table__header">
                 <div class="table-header__container">
                   ФИО ребенка:
-                  <button class="table__arrow">
+                  <button class="table__arrow" aria-label="Previos week">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="10"
@@ -58,7 +64,7 @@
                         stroke-linecap="round"
                       />
                     </svg></button
-                  ><button class="table__arrow">
+                  ><button class="table__arrow" aria-label="Next week">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="11"

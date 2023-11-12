@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Посещение</title>
+    <meta name="description" content="Посещаемость детей">
+    <title>Посещаемость</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,7 +29,12 @@
             <li class="nav__item"><a href="#">Задолженность</a></li>
           </ul>
         </nav>
-        <button class="btn btn--blue btn--small header__btn">Войти</button>
+        <button
+          class="btn btn--blue btn--small header__btn"
+          aria-label="Войти"
+        >
+          Войти
+        </button>
       </div>
     </header>
     <main>
@@ -39,6 +45,7 @@
             name="group"
             id="group"
             class="form__input attendance__select"
+            aria-label="Select group"
           >
             <option value="">Выберите группу</option>
           </select>
@@ -46,6 +53,7 @@
             name="month"
             id="month"
             class="form__input attendance__select"
+            aria-label="Select month"
           >
             <option value="">Выберите месяц</option>
           </select>
@@ -56,7 +64,7 @@
               <th class="table__header">
                 <div class="table-header__container">
                   ФИО ребенка:
-                  <button class="table__arrow">
+                  <button class="table__arrow" aria-label="Previous week">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="10"
@@ -70,7 +78,7 @@
                         stroke-linecap="round"
                       />
                     </svg></button
-                  ><button class="table__arrow">
+                  ><button class="table__arrow" aria-label="Next week">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="11"
@@ -121,7 +129,7 @@
             <tr>
               <td class="table__cell">Абрамов Пётр Иванович</td>
               <td class="table__cell">
-                <button class="table__check">
+                <button class="table__check" aria-label="Check">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -139,7 +147,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -157,7 +165,10 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check table__check--checked">
+                <button
+                  class="table__check table__check--checked"
+                  aria-label="Check"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -175,7 +186,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -193,7 +204,10 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check table__check--checked">
+                <button
+                  class="table__check table__check--checked"
+                  aria-label="Check"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -211,7 +225,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -229,7 +243,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -250,7 +264,7 @@
             <tr>
               <td class="table__cell">Иванов Александр Степанович</td>
               <td class="table__cell">
-                <button class="table__check">
+                <button class="table__check" aria-label="Check">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -268,7 +282,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -286,7 +300,10 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check table__check--checked">
+                <button
+                  class="table__check table__check--checked"
+                  aria-label="Check"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -304,7 +321,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -322,7 +339,10 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check table__check--checked">
+                <button
+                  class="table__check table__check--checked"
+                  aria-label="Check"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -340,7 +360,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -358,7 +378,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -379,7 +399,7 @@
             <tr>
               <td class="table__cell">Курочкин Владислав Игорьевич</td>
               <td class="table__cell">
-                <button class="table__check">
+                <button class="table__check" aria-label="Check">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -397,7 +417,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -415,7 +435,10 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check table__check--checked">
+                <button
+                  class="table__check table__check--checked"
+                  aria-label="Check"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -433,7 +456,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -451,7 +474,10 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check table__check--checked">
+                <button
+                  class="table__check table__check--checked"
+                  aria-label="Check"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -469,7 +495,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -487,7 +513,7 @@
                 </button>
               </td>
               <td class="table__cell">
-                <button class="table__check" disabled>
+                <button class="table__check" aria-label="Check" disabled>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -507,7 +533,9 @@
             </tr>
           </tbody>
         </table>
-        <button class="btn btn--red btn--large">Сохранить изменения</button>
+        <button class="btn btn--red btn--large" aria-label="Сохранить изменения">
+          Сохранить изменения
+        </button>
       </div>
     </main>
   </body>

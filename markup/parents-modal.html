@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Закрепление ребенка за родителем" />
     <title>Родители</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,14 +23,18 @@
           ФИО ребёнка: <span class="text--red">ребёнок не закреплён</span>
         </p>
         <div class="input-group">
-          <select type="text" class="form__input parents-modal__input">
+          <select
+            type="text"
+            class="form__input parents-modal__input"
+            aria-label="Children select"
+          >
             <option value="">Выберите ребёнка</option>
           </select>
           <button class="btn btn--blue btn--large">
             Закрепить за родителем
           </button>
         </div>
-        <button class="btn modal__close">
+        <button class="btn modal__close" aria-label="Close modal">
           <svg
             width="26"
             height="25"
