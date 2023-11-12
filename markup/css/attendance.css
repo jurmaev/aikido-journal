@@ -86,7 +86,7 @@ table {
 th:first-child,
 td:first-child {
   width: 30%;
-  padding-left: 0.5rem;
+  padding: 0.25rem 0.5rem;
   text-align: left;
 }
 

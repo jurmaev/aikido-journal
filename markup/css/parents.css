@@ -37,11 +37,12 @@
 .parents-data__container {
   display: flex;
   align-items: center;
+  gap: 0.25rem;
 }
 
 .parents__data {
   width: 50%;
-  padding: 0.3125rem 0 0.3125rem 0.875rem;
+  padding: 0.3125rem 0.875rem;
   border: 0.0625rem solid var(--black);
   font-size: 1.25rem;
   font-weight: 400;
@@ -85,7 +86,6 @@ tr:last-child td:last-child {
 .parents__btn {
   display: flex;
   align-items: center;
-  margin-left: 0.25rem;
 }
 
 .parents__btn:hover svg path {
