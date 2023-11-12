@@ -85,16 +85,21 @@ table {
   border-right: 0.125rem solid var(--black);
 }
 
+.table-cell__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .table__cell {
   padding: 0.25rem 0;
   border: 0.0625rem solid var(--black);
-  text-align: center;
 }
 
 th:first-child,
 td:first-child {
   width: 30%;
-  padding: .25rem 0.5rem;
+  padding: 0.25rem 0.5rem;
   text-align: left;
 }
 
