@@ -7,6 +7,7 @@ import ChildrenPage from '../../pages/children-page/children-page';
 import ParentsPage from '../../pages/parents-page/parents-page';
 import GroupsPage from '../../pages/groups-page/groups-page';
 import AttendancePage from '../../pages/attendance-page/attendance-page';
+import PaymentPage from '../../pages/payment-page/payment-page';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path={AppRoutes.Parents} element={<ParentsPage />} />
           <Route path={AppRoutes.Groups} element={<GroupsPage />} />
           <Route path={AppRoutes.Attendance} element={<AttendancePage />} />
+          <Route path={AppRoutes.Payment} element={<PaymentPage />} />
         </Routes>
       </BrowserRouter>
     </>
