@@ -1,28 +1,13 @@
 import styles from './main.module.css';
 import baseStyles from '../base.module.css';
-import { Link } from 'react-router-dom';
+import Header from '../../components/header/header';
+import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 export default function MainPage() {
+  const navigate = useNavigate();
   return (
     <>
-      <header className={baseStyles.header}>
-        <div
-          className={`${baseStyles.container} ${baseStyles.headerContainer}`}
-        >
-          <Link to={AppRoutes.Main}>
-            <img
-              src="./img/logo.svg"
-              alt="Aikido journal logo"
-              className={baseStyles.logo}
-            />
-          </Link>
-          <button
-            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.headerBtn}`}
-          >
-            Войти
-          </button>
-        </div>
-      </header>
+      <Header />
       <main>
         <div className={`${baseStyles.container} ${styles.mainContainer}`}>
           <h1 className={styles.mainTitle}>
@@ -34,11 +19,13 @@ export default function MainPage() {
           <div className={baseStyles.inputGroup}>
             <button
               className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+              onClick={() => navigate(AppRoutes.Login)}
             >
               Войти
             </button>
             <button
               className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+              onClick={() => navigate(AppRoutes.Register)}
             >
               Зарегистрироваться
             </button>

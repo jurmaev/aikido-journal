@@ -1,43 +1,27 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import baseStyles from '../base.module.css';
 import styles from './parent-attendance.module.css';
 import { AppRoutes } from '../../const';
+import Header from '../../components/header/header';
 
 export default function ParentAttendancePage() {
   return (
     <>
-      <header className={baseStyles.header}>
-        <div
-          className={`${baseStyles.container} ${baseStyles.headerContainer}`}
-        >
-          <Link to={AppRoutes.Main}>
-            <img
-              src="./img/logo.svg"
-              alt="Aikido journal logo"
-              className={baseStyles.logo}
-            />
-          </Link>
-          <nav className={`${baseStyles.nav} ${styles.nav}`}>
-            <ul className={baseStyles.navList}>
-              <li className={baseStyles.navItem}>
-                <NavLink to={AppRoutes.ParentProfile}>Профиль</NavLink>
-              </li>
-              <li className={baseStyles.navItem}>
-                <NavLink to={AppRoutes.ParentSchedule}>Расписание</NavLink>
-              </li>
-              <li className={baseStyles.navItem}>
-                <NavLink to={AppRoutes.ParentAttendance}>Посещаемость</NavLink>
-              </li>
-            </ul>
-          </nav>
-          <button
-            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.headerBtn}`}
-            aria-label="Войти"
-          >
-            Войти
-          </button>
-        </div>
-      </header>
+      <Header>
+        <nav className={`${baseStyles.nav} ${styles.nav}`}>
+          <ul className={baseStyles.navList}>
+            <li className={baseStyles.navItem}>
+              <NavLink to={AppRoutes.ParentProfile}>Профиль</NavLink>
+            </li>
+            <li className={baseStyles.navItem}>
+              <NavLink to={AppRoutes.ParentSchedule}>Расписание</NavLink>
+            </li>
+            <li className={baseStyles.navItem}>
+              <NavLink to={AppRoutes.ParentAttendance}>Посещаемость</NavLink>
+            </li>
+          </ul>
+        </nav>
+      </Header>
       <main>
         <div
           className={`${baseStyles.container} ${styles.parentAttendanceContainer}`}

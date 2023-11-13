@@ -1,48 +1,32 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import baseStyles from '../base.module.css';
 import styles, { tableHeaderContainer } from './attendance.module.css';
 import { AppRoutes } from '../../const';
+import Header from '../../components/header/header';
 export default function AttendancePage() {
   return (
     <>
-      <header className={baseStyles.header}>
-        <div
-          className={`${baseStyles.container} ${baseStyles.headerContainer}`}
-        >
-          <Link to={AppRoutes.Main}>
-            <img
-              src="./img/logo.svg"
-              alt="Aikido journal logo"
-              className={baseStyles.logo}
-            />
-          </Link>
-          <nav className={baseStyles.nav}>
-            <ul className={baseStyles.navList}>
-              <li className={baseStyles.navItem}>
-                <NavLink to={AppRoutes.Children}>Дети</NavLink>
-              </li>
-              <li className={baseStyles.navItem}>
-                <NavLink to={AppRoutes.Parents}>Родители</NavLink>
-              </li>
-              <li className={baseStyles.navItem}>
-                <NavLink to={AppRoutes.Groups}>Группы</NavLink>
-              </li>
-              <li className={baseStyles.navItem}>
-                <NavLink to={AppRoutes.Attendance}>Посещаемость</NavLink>
-              </li>
-              <li className={baseStyles.navItem}>
-                <NavLink to={AppRoutes.Payment}>Задолженность</NavLink>
-              </li>
-            </ul>
-          </nav>
-          <button
-            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.headerBtn}`}
-            aria-label="Войти"
-          >
-            Войти
-          </button>
-        </div>
-      </header>
+      <Header>
+        <nav className={baseStyles.nav}>
+          <ul className={baseStyles.navList}>
+            <li className={baseStyles.navItem}>
+              <NavLink to={AppRoutes.Children}>Дети</NavLink>
+            </li>
+            <li className={baseStyles.navItem}>
+              <NavLink to={AppRoutes.Parents}>Родители</NavLink>
+            </li>
+            <li className={baseStyles.navItem}>
+              <NavLink to={AppRoutes.Groups}>Группы</NavLink>
+            </li>
+            <li className={baseStyles.navItem}>
+              <NavLink to={AppRoutes.Attendance}>Посещаемость</NavLink>
+            </li>
+            <li className={baseStyles.navItem}>
+              <NavLink to={AppRoutes.Payment}>Задолженность</NavLink>
+            </li>
+          </ul>
+        </nav>
+      </Header>
       <main>
         <div
           className={`${baseStyles.container} ${styles.attendanceContainer}`}
