@@ -1,61 +1,71 @@
-import './payment.css';
-
+import styles from './payment.module.css';
+import baseStyles from '../base.module.css';
 export default function PaymentPage() {
   return (
     <>
-      <header className="header">
-        <div className="container header__container">
+      <header className={baseStyles.header}>
+        <div
+          className={`${baseStyles.container} ${baseStyles.headerContainer}`}
+        >
           <a href="#">
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
-              className="logo"
+              className={baseStyles.logo}
             />
           </a>
-          <nav className="nav">
-            <ul className="nav__list">
-              <li className="nav__item">
+          <nav className={baseStyles.nav}>
+            <ul className={baseStyles.navList}>
+              <li className={baseStyles.navItem}>
                 <a href="#">Дети</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Родители</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Группы</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Посещаемость</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Задолженность</a>
               </li>
             </ul>
           </nav>
-          <button className="btn btn--blue btn--small header__btn">
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.headerBtn}`}
+          >
             Войти
           </button>
         </div>
       </header>
       <main>
-        <div className="container payment__container">
-          <h1 className="payment__title">Задолженность</h1>
-          <h2 className="payment__subtitle">Задолженность по оплате</h2>
-          <div className="input-group payment__input-group">
+        <div className={`${baseStyles.container} ${styles.paymentContainer}`}>
+          <h1 className={styles.paymentTitle}>Задолженность</h1>
+          <h2 className={styles.paymentSubtitle}>Задолженность по оплате</h2>
+          <div
+            className={`${baseStyles.inputGroup} ${styles.paymentInputGroup}`}
+          >
             <input
-              className="form__input payment__input"
+              className={`${baseStyles.formInput} ${styles.paymentInput}`}
               type="text"
               placeholder="Введите ФИО родителя"
             />
-            <button className="btn btn--blue btn--large">Поиск</button>
+            <button
+              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            >
+              Поиск
+            </button>
           </div>
-          <ul className="payment__list">
-            <li className="payment__item">
+          <ul className={styles.paymentList}>
+            <li className={styles.paymentItem}>
               Абрамова Маргарита Львовна : 1750 рублей
             </li>
-            <li className="payment__item">
+            <li className={styles.paymentItem}>
               Курочкина Светлана Алексеевна : 1000 рублей
             </li>
-            <li className="payment__item">
+            <li className={styles.paymentItem}>
               Иванова Наталья Сергеевна : 500 рублей
             </li>
           </ul>

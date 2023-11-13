@@ -2,7 +2,7 @@
   width: 50%;
 }
 
-.parents__header {
+.parentsHeader {
   margin-bottom: 1.625rem;
   font-size: 1.875rem;
   font-weight: 500;
@@ -11,38 +11,38 @@
   text-align: center;
 }
 
-.parents__label {
+.parentsLabel {
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.43;
 }
 
-.parents-input-group {
+.parentsInputGroup {
   margin-top: 0.625rem;
   margin-bottom: 1.3125rem;
 }
 
-.form__input {
+.formInput {
   width: 100%;
   margin: 0;
 }
 
-.parents__container {
+.parentsContainer {
   padding: 4rem 0;
 }
 
-.parents__table {
+.parentsTable {
   width: 100%;
   border-spacing: 0;
 }
 
-.parents-data__container {
+.parentsDataContainer {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-.parents__data {
+.parentsData {
   width: 50%;
   padding: 0.3125rem 0.875rem;
   border: 0.0625rem solid var(--black);
@@ -52,11 +52,11 @@
   text-align: left;
 }
 
-.parents__data:first-child {
+.parentsData:first-child {
   border-left-width: 0.125rem;
 }
 
-.parents__data:last-child {
+.parentsData:last-child {
   border-right-width: 0.125rem;
 }
 
@@ -81,21 +81,21 @@ tr:last-child td:last-child {
   border-bottom-right-radius: 0.3125rem;
 }
 
-.parents__data--empty {
+.parentsDataEmpty {
   color: var(--red-700);
 }
 
-.parents__btn {
+.parentsBtn {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.parents__btn:hover svg path {
+.parentsBtn:hover svg path {
   transition: stroke 0.3s ease-in-out;
 }
 
-.parents__btn:hover svg path {
+.parentsBtn:hover svg path {
   stroke: var(--black-600);
 }
 
@@ -127,7 +127,7 @@ tr:last-child td:last-child {
   border-color: transparent var(--black-600) transparent transparent;
 }
 
-.parents__btn:hover .tooltip {
+.parentsBtn:hover .tooltip {
   visibility: visible;
   opacity: 1;
 }

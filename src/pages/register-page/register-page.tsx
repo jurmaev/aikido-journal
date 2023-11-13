@@ -1,52 +1,58 @@
+import styles from '../base.module.css';
+
 export default function RegisterPage() {
   return (
     <>
-      <header className="header">
-        <div className="container header__container">
+      <header className={styles.header}>
+        <div className={`${styles.container} ${styles.headerContainer}`}>
           <a href="#">
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
-              className="logo"
+              className={styles.logo}
             />
           </a>
-          <button className="btn btn--blue btn--small header__btn">
+          <button
+            className={`${styles.btn} ${styles.btnBlue} ${styles.headerBtn}`}
+          >
             Войти
           </button>
         </div>
       </header>
       <main>
-        <form className="form">
-          <div className="form__container">
-            <h1 className="form__title">Регистрация</h1>
-            <label htmlFor="number" className="form__label">
+        <form>
+          <div className={styles.formContainer}>
+            <h1 className={styles.formTitle}>Регистрация</h1>
+            <label htmlFor="number" className={styles.formLabel}>
               Введите ваше ФИО
             </label>
             <input
               type="text"
-              className="form__input"
+              className={styles.formInput}
               id="name"
               placeholder="Иванова Елизавета Петровна"
             />
-            <label htmlFor="name" className="form__label">
+            <label htmlFor="name" className={styles.formLabel}>
               Введите номер телефона
             </label>
             <input
               type="tel"
-              className="form__input"
+              className={styles.formInput}
               id="number"
               placeholder="+7 (___) ___-__-__"
             />
-            <label htmlFor="password" className="form__label">
+            <label htmlFor="password" className={styles.formLabel}>
               Придумайте пароль
             </label>
             <input
               type="password"
-              className="form__input"
+              className={styles.formInput}
               id="password"
               placeholder="**********"
             />
-            <button className="btn btn--red btn--large">
+            <button
+              className={`${styles.btn} ${styles.btnRed} ${styles.btnLarge}`}
+            >
               Зарегистрироваться
             </button>
           </div>

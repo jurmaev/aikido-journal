@@ -1,63 +1,77 @@
-import './parents.css';
-
+import styles from './parents.module.css';
+import baseStyles from '../base.module.css';
 export default function ParentsPage() {
   return (
     <>
-      <header className="header">
-        <div className="container header__container">
+      <header className={baseStyles.header}>
+        <div
+          className={`${baseStyles.container} ${baseStyles.headerContainer}`}
+        >
           <a href="#">
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
-              className="logo"
+              className={baseStyles.logo}
             />
           </a>
-          <nav className="nav">
-            <ul className="nav__list">
-              <li className="nav__item">
+          <nav className={`${baseStyles.nav} ${styles.nav}`}>
+            <ul className={baseStyles.navList}>
+              <li className={baseStyles.navItem}>
                 <a href="#">Профиль</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Расписание</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Посещаемость</a>
               </li>
             </ul>
           </nav>
-          <button className="btn btn--blue btn--small header__btn">
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.headerBtn}`}
+            aria-label="Войти"
+          >
             Войти
           </button>
         </div>
       </header>
       <main>
-        <div className="container parents__container">
-          <h1 className="parents__header">Родители</h1>
-          <label htmlFor="search" className="parents__label">
+        <div className={`${baseStyles.container} ${styles.parentsContainer}`}>
+          <h1 className={styles.parentsHeader}>Родители</h1>
+          <label htmlFor="search" className={styles.parentsLabel}>
             Список (Родитель/Ребёнок)
           </label>
-          <div className="input-group parents-input-group">
+          <div
+            className={`${baseStyles.inputGroup} ${styles.parentsInputGroup}`}
+          >
             <input
               type="text"
-              className="form__input parents__input"
+              className={`${baseStyles.formInput} ${styles.formInput}`}
               id="search"
               placeholder="Введите ФИО родителя"
             />
-            <button className="btn btn--blue btn--large">Поиск</button>
+            <button
+              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            >
+              Поиск
+            </button>
           </div>
-          <table className="parents__table">
+          <table className={styles.parentsTable}>
             <thead>
               <tr>
-                <th className="parents__data">Родитель</th>
-                <th className="parents__data">Ребёнок</th>
+                <th className={styles.parentsData}>Родитель</th>
+                <th className={styles.parentsData}>Ребёнок</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="parents__data">
-                  <div className="parents-data__container">
+                <td className={styles.parentsData}>
+                  <div className={styles.parentsDataContainer}>
                     Абрамова Маргарита Львовна
-                    <button className="btn parents__btn" aria-label="Info">
+                    <button
+                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                      aria-label="Info"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -84,16 +98,19 @@ export default function ParentsPage() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <div className="tooltip">
+                      <div className={styles.tooltip}>
                         <a href="tel:+8-800-555-35-35">8(800)555-35-35</a>
                       </div>
                     </button>
                   </div>
                 </td>
-                <td className="parents__data">
-                  <div className="parents-data__container">
+                <td className={styles.parentsData}>
+                  <div className={styles.parentsDataContainer}>
                     Абрамов Пётр Иванович
-                    <button className="btn parents__btn" aria-label="Edit">
+                    <button
+                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                      aria-label="Edit"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -119,10 +136,13 @@ export default function ParentsPage() {
                 </td>
               </tr>
               <tr>
-                <td className="parents__data">
-                  <div className="parents-data__container">
+                <td className={styles.parentsData}>
+                  <div className={styles.parentsDataContainer}>
                     Курочкина Светлана Алексеевна
-                    <button className="btn parents__btn" aria-label="Info">
+                    <button
+                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                      aria-label="Info"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -149,16 +169,19 @@ export default function ParentsPage() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <div className="tooltip">
+                      <div className={styles.tooltip}>
                         <a href="tel:+8-800-555-35-35">8(800)555-35-35</a>
                       </div>
                     </button>
                   </div>
                 </td>
-                <td className="parents__data">
-                  <div className="parents-data__container">
+                <td className={styles.parentsData}>
+                  <div className={styles.parentsDataContainer}>
                     Курочкин Владислав Игорьевич
-                    <button className="btn parents__btn" aria-label="Edit">
+                    <button
+                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                      aria-label="Edit"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -184,10 +207,13 @@ export default function ParentsPage() {
                 </td>
               </tr>
               <tr>
-                <td className="parents__data">
-                  <div className="parents-data__container">
+                <td className={styles.parentsData}>
+                  <div className={styles.parentsDataContainer}>
                     Иванова Наталья Сергеевна
-                    <button className="btn parents__btn" aria-label="Info">
+                    <button
+                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                      aria-label="Info"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -214,16 +240,19 @@ export default function ParentsPage() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <div className="tooltip">
+                      <div className={styles.tooltip}>
                         <a href="tel:+8-800-555-35-35">8(800)555-35-35</a>
                       </div>
                     </button>
                   </div>
                 </td>
-                <td className="parents__data">
-                  <div className="parents-data__container">
+                <td className={styles.parentsData}>
+                  <div className={styles.parentsDataContainer}>
                     Иванов Александр Степанович
-                    <button className="btn parents__btn" aria-label="Edit">
+                    <button
+                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                      aria-label="Edit"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -249,10 +278,13 @@ export default function ParentsPage() {
                 </td>
               </tr>
               <tr>
-                <td className="parents__data">
-                  <div className="parents-data__container">
+                <td className={styles.parentsData}>
+                  <div className={styles.parentsDataContainer}>
                     Терешенко Екатерина Николаевна
-                    <button className="btn parents__btn" aria-label="Info">
+                    <button
+                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                      aria-label="Info"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -279,16 +311,21 @@ export default function ParentsPage() {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <div className="tooltip">
+                      <div className={styles.tooltip}>
                         <a href="tel:+8-800-555-35-35">8(800)555-35-35</a>
                       </div>
                     </button>
                   </div>
                 </td>
-                <td className="parents__data parents__data--empty">
-                  <div className="parents-data__container">
+                <td
+                  className={`${styles.parentsData} ${styles.parentsDataEmpty}`}
+                >
+                  <div className={styles.parentsDataContainer}>
                     ребёнок не закреплён
-                    <button className="btn parents__btn" aria-label="Edit">
+                    <button
+                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                      aria-label="Edit"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"

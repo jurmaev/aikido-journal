@@ -9,6 +9,7 @@ import GroupsPage from '../../pages/groups-page/groups-page';
 import AttendancePage from '../../pages/attendance-page/attendance-page';
 import PaymentPage from '../../pages/payment-page/payment-page';
 import ParentProfilePage from '../../pages/parent-profile-page/parent-profile-page';
+import ParentSchedulePage from '../../pages/parent-schedule-page/parent-schedule-page';
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
           <Route
             path={AppRoutes.ParentProfile}
             element={<ParentProfilePage />}
+          />
+          <Route
+            path={AppRoutes.ParentSchedule}
+            element={<ParentSchedulePage />}
           />
         </Routes>
       </BrowserRouter>
