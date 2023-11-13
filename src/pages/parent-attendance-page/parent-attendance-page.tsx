@@ -10,14 +10,41 @@ export default function ParentAttendancePage() {
       <Header>
         <nav className={`${baseStyles.nav} ${styles.nav}`}>
           <ul className={baseStyles.navList}>
-            <li className={baseStyles.navItem}>
-              <NavLink to={AppRoutes.ParentProfile}>Профиль</NavLink>
+            <li>
+              <NavLink
+                to={AppRoutes.ParentProfile}
+                className={({ isActive }: { isActive: boolean }): string =>
+                  isActive
+                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
+                    : baseStyles.navItem
+                }
+              >
+                Профиль
+              </NavLink>
             </li>
-            <li className={baseStyles.navItem}>
-              <NavLink to={AppRoutes.ParentSchedule}>Расписание</NavLink>
+            <li>
+              <NavLink
+                to={AppRoutes.ParentSchedule}
+                className={({ isActive }: { isActive: boolean }): string =>
+                  isActive
+                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
+                    : baseStyles.navItem
+                }
+              >
+                Расписание
+              </NavLink>
             </li>
-            <li className={baseStyles.navItem}>
-              <NavLink to={AppRoutes.ParentAttendance}>Посещаемость</NavLink>
+            <li>
+              <NavLink
+                to={AppRoutes.ParentAttendance}
+                className={({ isActive }: { isActive: boolean }): string =>
+                  isActive
+                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
+                    : baseStyles.navItem
+                }
+              >
+                Посещаемость
+              </NavLink>
             </li>
           </ul>
         </nav>
