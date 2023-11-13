@@ -1,5 +1,7 @@
 import styles from './parents.module.css';
 import baseStyles from '../base.module.css';
+import { Link, NavLink } from 'react-router-dom';
+import { AppRoutes } from '../../const';
 export default function ParentsPage() {
   return (
     <>
@@ -7,23 +9,29 @@ export default function ParentsPage() {
         <div
           className={`${baseStyles.container} ${baseStyles.headerContainer}`}
         >
-          <a href="#">
+          <Link to={AppRoutes.Main}>
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
               className={baseStyles.logo}
             />
-          </a>
-          <nav className={`${baseStyles.nav} ${styles.nav}`}>
+          </Link>
+          <nav className={baseStyles.nav}>
             <ul className={baseStyles.navList}>
               <li className={baseStyles.navItem}>
-                <a href="#">Профиль</a>
+                <NavLink to={AppRoutes.Children}>Дети</NavLink>
               </li>
               <li className={baseStyles.navItem}>
-                <a href="#">Расписание</a>
+                <NavLink to={AppRoutes.Parents}>Родители</NavLink>
               </li>
               <li className={baseStyles.navItem}>
-                <a href="#">Посещаемость</a>
+                <NavLink to={AppRoutes.Groups}>Группы</NavLink>
+              </li>
+              <li className={baseStyles.navItem}>
+                <NavLink to={AppRoutes.Attendance}>Посещаемость</NavLink>
+              </li>
+              <li className={baseStyles.navItem}>
+                <NavLink to={AppRoutes.Payment}>Задолженность</NavLink>
               </li>
             </ul>
           </nav>

@@ -1,5 +1,7 @@
+import { Link, NavLink } from 'react-router-dom';
 import baseStyles from '../base.module.css';
 import styles, { tableHeaderContainer } from './attendance.module.css';
+import { AppRoutes } from '../../const';
 export default function AttendancePage() {
   return (
     <>
@@ -7,29 +9,29 @@ export default function AttendancePage() {
         <div
           className={`${baseStyles.container} ${baseStyles.headerContainer}`}
         >
-          <a href="#">
+          <Link to={AppRoutes.Main}>
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
               className={baseStyles.logo}
             />
-          </a>
+          </Link>
           <nav className={baseStyles.nav}>
             <ul className={baseStyles.navList}>
               <li className={baseStyles.navItem}>
-                <a href="#">Дети</a>
+                <NavLink to={AppRoutes.Children}>Дети</NavLink>
               </li>
               <li className={baseStyles.navItem}>
-                <a href="#">Родители</a>
+                <NavLink to={AppRoutes.Parents}>Родители</NavLink>
               </li>
               <li className={baseStyles.navItem}>
-                <a href="#">Группы</a>
+                <NavLink to={AppRoutes.Groups}>Группы</NavLink>
               </li>
               <li className={baseStyles.navItem}>
-                <a href="#">Посещаемость</a>
+                <NavLink to={AppRoutes.Attendance}>Посещаемость</NavLink>
               </li>
               <li className={baseStyles.navItem}>
-                <a href="#">Задолженность</a>
+                <NavLink to={AppRoutes.Payment}>Задолженность</NavLink>
               </li>
             </ul>
           </nav>

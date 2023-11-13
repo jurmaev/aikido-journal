@@ -61,12 +61,12 @@ tr th:last-child {
   border-right-width: 0.125rem;
   border-top-right-radius: 0.625rem;
 }
-tr td:first-child {
+tr .tableCell:first-child {
   border-bottom-width: 0.125rem;
   border-left-width: 0.125rem;
   border-bottom-left-radius: 0.625rem;
 }
-tr td:last-child {
+tr .tableCell:last-child {
   border-bottom-width: 0.125rem;
   border-right-width: 0.125rem;
   border-bottom-right-radius: 0.625rem;

@@ -1,16 +1,18 @@
+import { Link } from 'react-router-dom';
 import styles from '../base.module.css';
+import { AppRoutes } from '../../const';
 export default function LoginPage() {
   return (
     <>
       <header className={styles.header}>
         <div className={`${styles.container} ${styles.headerContainer}`}>
-          <a href="#">
+          <Link to={AppRoutes.Main}>
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
               className={styles.logo}
             />
-          </a>
+          </Link>
           <button
             className={`${styles.btn} ${styles.btnBlue} ${styles.headerBtn}`}
           >

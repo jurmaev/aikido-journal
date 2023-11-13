@@ -1,5 +1,7 @@
 import styles from './parent-profile.module.css';
 import baseStyles from '../base.module.css';
+import { Link, NavLink } from 'react-router-dom';
+import { AppRoutes } from '../../const';
 export default function ParentProfilePage() {
   return (
     <>
@@ -7,23 +9,23 @@ export default function ParentProfilePage() {
         <div
           className={`${baseStyles.container} ${baseStyles.headerContainer}`}
         >
-          <a href="#">
+          <Link to={AppRoutes.Main}>
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
               className={baseStyles.logo}
             />
-          </a>
+          </Link>
           <nav className={`${baseStyles.nav} ${styles.nav}`}>
             <ul className={baseStyles.navList}>
               <li className={baseStyles.navItem}>
-                <a href="#">Профиль</a>
+                <NavLink to={AppRoutes.ParentProfile}>Профиль</NavLink>
               </li>
               <li className={baseStyles.navItem}>
-                <a href="#">Расписание</a>
+                <NavLink to={AppRoutes.ParentSchedule}>Расписание</NavLink>
               </li>
               <li className={baseStyles.navItem}>
-                <a href="#">Посещаемость</a>
+                <NavLink to={AppRoutes.ParentAttendance}>Посещаемость</NavLink>
               </li>
             </ul>
           </nav>

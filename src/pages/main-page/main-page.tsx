@@ -1,5 +1,7 @@
 import styles from './main.module.css';
 import baseStyles from '../base.module.css';
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../const';
 export default function MainPage() {
   return (
     <>
@@ -7,13 +9,13 @@ export default function MainPage() {
         <div
           className={`${baseStyles.container} ${baseStyles.headerContainer}`}
         >
-          <a href="#">
+          <Link to={AppRoutes.Main}>
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
               className={baseStyles.logo}
             />
-          </a>
+          </Link>
           <button
             className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.headerBtn}`}
           >
