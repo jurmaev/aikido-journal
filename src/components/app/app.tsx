@@ -10,6 +10,7 @@ import AttendancePage from '../../pages/attendance-page/attendance-page';
 import PaymentPage from '../../pages/payment-page/payment-page';
 import ParentProfilePage from '../../pages/parent-profile-page/parent-profile-page';
 import ParentSchedulePage from '../../pages/parent-schedule-page/parent-schedule-page';
+import ParentAttendancePage from '../../pages/parent-attendance-page/parent-attendance-page';
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
           <Route
             path={AppRoutes.ParentSchedule}
             element={<ParentSchedulePage />}
+          />
+          <Route
+            path={AppRoutes.ParentAttendance}
+            element={<ParentAttendancePage />}
           />
         </Routes>
       </BrowserRouter>

@@ -9,4 +9,5 @@ export const AppRoutes = {
   Payment: '/payment',
   ParentProfile: '/parent/profile',
   ParentSchedule: '/parent/schedule',
+  ParentAttendance: '/parent/attendance',
 };
