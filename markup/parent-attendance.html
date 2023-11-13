@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Просмотр посещаемости детей" />
+    <title>Посещаемость</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/parent-attendance.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__container">
+        <a href="#"
+          ><img src="./img/logo.svg" alt="Aikido journal logo" class="logo"
+        /></a>
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item"><a href="#">Профиль</a></li>
+            <li class="nav__item"><a href="#">Расписание</a></li>
+            <li class="nav__item"><a href="#">Посещаемость</a></li>
+          </ul>
+        </nav>
+        <button class="btn btn--blue btn--small header__btn">Выйти</button>
+      </div>
+    </header>
+    <main>
+      <div class="container parent-attendance__container">
+        <h1 class="parent-attendance__title">Посещаемость</h1>
+        <div class="input-group parent-attendance__input-group">
+          <select
+            name="month"
+            id="month"
+            class="parent-attendance__select"
+            aria-label="Month select"
+          >
+            <option value="">Выберите месяц</option>
+          </select>
+          <button class="btn btn--blue btn--large">Применить</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="table__header">
+                <div class="table-header__container">
+                  ФИО ребенка:
+                  <button class="table__arrow" aria-label="Previos week">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="10"
+                      height="19"
+                      viewBox="0 0 10 19"
+                      fill="none"
+                    >
+                      <path
+                        d="M9.5 1L1 9.5L9.5 18"
+                        stroke="black"
+                        stroke-linecap="round"
+                      />
+                    </svg></button
+                  ><button class="table__arrow" aria-label="Next week">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="11"
+                      height="19"
+                      viewBox="0 0 11 19"
+                      fill="none"
+                    >
+                      <path
+                        d="M1 18L9.5 9.5L1 1"
+                        stroke="black"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </th>
+              <th class="table__header">
+                <div>06.11</div>
+                <div>пн</div>
+              </th>
+              <th class="table__header table__header--inactive">
+                <div>07.11</div>
+                <div>вт</div>
+              </th>
+              <th class="table__header">
+                <div>08.11</div>
+                <div>ср</div>
+              </th>
+              <th class="table__header table__header--inactive">
+                <div>09.11</div>
+                <div>чт</div>
+              </th>
+              <th class="table__header">
+                <div>10.11</div>
+                <div>пт</div>
+              </th>
+              <th class="table__header table__header--inactive">
+                <div>11.11</div>
+                <div>сб</div>
+              </th>
+              <th class="table__header table__header--inactive">
+                <div>12.11</div>
+                <div>вс</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table__cell">Абрамов Пётр Иванович</td>
+              <td class="table__cell">
+                <div class="table-cell__container">
+                  <div class="table__check table__check--checked">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M15 4.5L6.75 12.75L3 9"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </td>
+              <td class="table__cell">
+                <div class="table-cell__container">
+                  <div class="table__check table__check--disabled">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M15 4.5L6.75 12.75L3 9"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </td>
+              <td class="table__cell">
+                <div class="table-cell__container">
+                  <div class="table__cross">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 28 28"
+                      fill="none"
+                    >
+                      <path
+                        d="M18.6666 9.3335L9.33325 18.6668"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M9.33325 9.3335L18.6666 18.6668"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </td>
+              <td class="table__cell">
+                <div class="table-cell__container">
+                  <div class="table__check table__check--disabled">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M15 4.5L6.75 12.75L3 9"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </td>
+              <td class="table__cell">
+                <div class="table-cell__container">
+                  <div class="table__check table__check--checked">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M15 4.5L6.75 12.75L3 9"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </td>
+              <td class="table__cell">
+                <div class="table-cell__container">
+                  <div class="table__check table__check--disabled">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M15 4.5L6.75 12.75L3 9"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </td>
+              <td class="table__cell">
+                <div class="table-cell__container">
+                  <div class="table__check table__check--disabled">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M15 4.5L6.75 12.75L3 9"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>
