@@ -8,7 +8,7 @@ import Modal from '../../components/modal/modal';
 import { children } from '../../mocks/children';
 
 export default function ChildrenPage() {
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [activeModal, setActiveModal] = useState<string | null>(null);
   return (
     <>
       <Header>
@@ -121,7 +121,7 @@ export default function ChildrenPage() {
               <li key={`${child}-item`} className={styles.childrenItem}>
                 <span className={styles.childrenText}>{child}</span>
                 <svg
-                  onClick={() => setIsModalActive(true)}
+                  onClick={() => setActiveModal(child)}
                   className={styles.childrenIcon}
                   width="24"
                   height="24"
@@ -149,7 +149,11 @@ export default function ChildrenPage() {
                   />
                 </svg>
               </li>,
-              <Modal key={`${child}-modal`} isActive={isModalActive} isCentral>
+              <Modal
+                key={`${child}-modal`}
+                isActive={activeModal === child}
+                isCentral
+              >
                 <h2 className={baseStyles.modalTitle}>
                   Вы действительно хотите удалить ребенка?
                 </h2>
@@ -164,7 +168,7 @@ export default function ChildrenPage() {
                   <button
                     className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
                     aria-label="Отменить"
-                    onClick={() => setIsModalActive(false)}
+                    onClick={() => setActiveModal(null)}
                   >
                     Отменить
                   </button>
@@ -172,7 +176,7 @@ export default function ChildrenPage() {
                 <button
                   className={`${baseStyles.btn} ${baseStyles.modalClose}`}
                   aria-label="Close modal"
-                  onClick={() => setIsModalActive(false)}
+                  onClick={() => setActiveModal(null)}
                 >
                   <svg
                     width="26"

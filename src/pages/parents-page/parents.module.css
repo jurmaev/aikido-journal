@@ -131,3 +131,12 @@ tr:last-child td:last-child {
   visibility: visible;
   opacity: 1;
 }
+
+.textRed {
+  color: var(--red-700);
+}
+
+.parentsModalInput {
+  margin: 0;
+  width: 100%;
+}

@@ -3,7 +3,10 @@ import baseStyles from '../base.module.css';
 import { NavLink } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import Header from '../../components/header/header';
+import Modal from '../../components/modal/modal';
+import { useState } from 'react';
 export default function ParentsPage() {
+  const [isModalActive, setIsModalActive] = useState(false);
   return (
     <>
       <Header>
@@ -72,6 +75,65 @@ export default function ParentsPage() {
           </ul>
         </nav>
       </Header>
+      <Modal isActive={isModalActive} isCentral>
+        <h2 className={baseStyles.modalTitle}>
+          Закрепить ребёнка за родителем
+        </h2>
+        <p className={baseStyles.modalText}>
+          ФИО родителя: Терешенко Екатерина Николаевна
+        </p>
+        <p className={baseStyles.modalText}>
+          ФИО ребёнка:{' '}
+          <span className={styles.textRed}>ребёнок не закреплён</span>
+        </p>
+        <div className={baseStyles.inputGroup}>
+          <select
+            className={`${baseStyles.formInput} ${styles.parentsModalInput}`}
+            aria-label="Children select"
+          >
+            <option value="">Выберите ребёнка</option>
+          </select>
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+          >
+            Закрепить за родителем
+          </button>
+        </div>
+        <button
+          className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+          aria-label="Close modal"
+          onClick={() => setIsModalActive(false)}
+        >
+          <svg
+            width="26"
+            height="25"
+            viewBox="0 0 26 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="1"
+              y="0.500366"
+              width="24"
+              height="24"
+              rx="4.5"
+              stroke="black"
+            />
+            <path
+              d="M10 10L16 16"
+              stroke="black"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M16 10L10 16"
+              stroke="black"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      </Modal>
       <main>
         <div className={`${baseStyles.container} ${styles.parentsContainer}`}>
           <h1 className={styles.parentsHeader}>Родители</h1>
@@ -147,6 +209,7 @@ export default function ParentsPage() {
                     <button
                       className={`${baseStyles.btn} ${styles.parentsBtn}`}
                       aria-label="Edit"
+                      onClick={() => setIsModalActive(true)}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -218,6 +281,7 @@ export default function ParentsPage() {
                     <button
                       className={`${baseStyles.btn} ${styles.parentsBtn}`}
                       aria-label="Edit"
+                      onClick={() => setIsModalActive(true)}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -289,6 +353,7 @@ export default function ParentsPage() {
                     <button
                       className={`${baseStyles.btn} ${styles.parentsBtn}`}
                       aria-label="Edit"
+                      onClick={() => setIsModalActive(true)}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -362,6 +427,7 @@ export default function ParentsPage() {
                     <button
                       className={`${baseStyles.btn} ${styles.parentsBtn}`}
                       aria-label="Edit"
+                      onClick={() => setIsModalActive(true)}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
