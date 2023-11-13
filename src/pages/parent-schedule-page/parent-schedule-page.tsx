@@ -56,8 +56,8 @@ export default function ParentSchedulePage() {
                         <path
                           d="M20 6L9 17L4 12"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </div>
@@ -80,8 +80,8 @@ export default function ParentSchedulePage() {
                         <path
                           d="M20 6L9 17L4 12"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </div>
@@ -104,8 +104,8 @@ export default function ParentSchedulePage() {
                         <path
                           d="M20 6L9 17L4 12"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </div>

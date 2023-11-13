@@ -64,7 +64,7 @@ export default function ParentAttendancePage() {
                         <path
                           d="M9.5 1L1 9.5L9.5 18"
                           stroke="black"
-                          stroke-linecap="round"
+                          strokeLinecap="round"
                         />
                       </svg>
                     </button>
@@ -82,7 +82,7 @@ export default function ParentAttendancePage() {
                         <path
                           d="M1 18L9.5 9.5L1 1"
                           stroke="black"
-                          stroke-linecap="round"
+                          strokeLinecap="round"
                         />
                       </svg>
                     </button>
@@ -144,8 +144,8 @@ export default function ParentAttendancePage() {
                         <path
                           d="M15 4.5L6.75 12.75L3 9"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </div>
@@ -166,8 +166,8 @@ export default function ParentAttendancePage() {
                         <path
                           d="M15 4.5L6.75 12.75L3 9"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </div>
@@ -186,14 +186,14 @@ export default function ParentAttendancePage() {
                         <path
                           d="M18.6666 9.3335L9.33325 18.6668"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                         <path
                           d="M9.33325 9.3335L18.6666 18.6668"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </div>
@@ -214,8 +214,8 @@ export default function ParentAttendancePage() {
                         <path
                           d="M15 4.5L6.75 12.75L3 9"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </div>
@@ -236,8 +236,8 @@ export default function ParentAttendancePage() {
                         <path
                           d="M15 4.5L6.75 12.75L3 9"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </div>
@@ -258,8 +258,8 @@ export default function ParentAttendancePage() {
                         <path
                           d="M15 4.5L6.75 12.75L3 9"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </div>
@@ -280,8 +280,8 @@ export default function ParentAttendancePage() {
                         <path
                           d="M15 4.5L6.75 12.75L3 9"
                           stroke="black"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     </div>

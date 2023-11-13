@@ -3,7 +3,11 @@ import baseStyles from '../base.module.css';
 import styles from './children.module.css';
 import { AppRoutes } from '../../const';
 import Header from '../../components/header/header';
+import { useState } from 'react';
+import Modal from '../../components/modal/modal';
+
 export default function ChildrenPage() {
+  const [isModalActive, setIsModalActive] = useState(false);
   return (
     <>
       <Header>
@@ -27,6 +31,61 @@ export default function ChildrenPage() {
           </ul>
         </nav>
       </Header>
+      <Modal isActive={isModalActive} isCentral>
+        <h2 className={baseStyles.modalTitle}>
+          Вы действительно хотите удалить ребенка?
+        </h2>
+        <p className={baseStyles.modalText}>ФИО: Абрамов Пётр Иванович</p>
+        <div className={baseStyles.inputGroup}>
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            aria-label="Удалить"
+          >
+            Удалить
+          </button>
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            aria-label="Отменить"
+            onClick={() => setIsModalActive(false)}
+          >
+            Отменить
+          </button>
+        </div>
+        <button
+          className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+          aria-label="Close modal"
+          onClick={() => setIsModalActive(false)}
+        >
+          <svg
+            width="26"
+            height="25"
+            viewBox="0 0 26 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="1"
+              y="0.500366"
+              width="24"
+              height="24"
+              rx="4.5"
+              stroke="black"
+            />
+            <path
+              d="M10 10L16 16"
+              stroke="black"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M16 10L10 16"
+              stroke="black"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </Modal>
       <main>
         <div className={`${baseStyles.container} ${styles.childrenContainer}`}>
           <h1 className={styles.childrenTitle}>Дети</h1>
@@ -70,7 +129,8 @@ export default function ChildrenPage() {
             <li className={styles.childrenItem}>
               <span className={styles.childrenText}>Абрамов Пётр Иванович</span>
               <svg
-                className="children__icon"
+                onClick={() => setIsModalActive(true)}
+                className={styles.childrenIcon}
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -102,7 +162,8 @@ export default function ChildrenPage() {
                 Курочкин Владислав Игорьевич
               </span>
               <svg
-                className="children__icon"
+                onClick={() => setIsModalActive(true)}
+                className={styles.childrenIcon}
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -134,7 +195,8 @@ export default function ChildrenPage() {
                 Иванов Александр Степанович
               </span>
               <svg
-                className="children__icon"
+                onClick={() => setIsModalActive(true)}
+                className={styles.childrenIcon}
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
