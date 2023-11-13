@@ -1,8 +1,8 @@
-.groups__container {
+.groupsContainer {
   padding: 4rem 0;
 }
 
-.groups__title {
+.groupsTitle {
   margin-bottom: 1.5625rem;
   font-size: 1.875rem;
   font-weight: 500;
@@ -11,42 +11,42 @@
   text-align: center;
 }
 
-.groups__label {
+.groupsLabel {
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.43;
 }
 
-.groups-input-group {
+.groupsInputGroup {
   margin: 0.625rem 0 1.5625rem;
 }
 
-.groups__input {
+.groupsInput {
   width: 100%;
   margin: 0;
 }
 
-.groups__list {
+.groupsList {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.groups__item {
+.groupsItem {
   display: flex;
   align-items: center;
   font-size: 1.25rem;
   line-height: 1.43;
 }
 
-.groups__btn {
+.groupsBtn {
   margin-left: 0.25rem;
 }
 
-.groups__btn:hover svg path {
+.groupsBtn:hover svg path {
   transition: stroke 0.3s ease-in-out;
 }
 
-.groups__btn:hover svg path {
+.groupsBtn:hover svg path {
   stroke: var(--black-600);
 }

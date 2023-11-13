@@ -1,8 +1,10 @@
-.attendance__container {
+@import url('../base.module.css');
+
+.attendanceContainer {
   padding: 4rem 0;
 }
 
-.attendance__title {
+.attendanceTitle {
   margin-bottom: 1.25rem;
   font-size: 1.875rem;
   font-weight: 500;
@@ -11,11 +13,11 @@
   text-transform: uppercase;
 }
 
-.attendance__input-group {
+.attendanceInputGroup {
   margin-bottom: 1.25rem;
 }
 
-.attendance__select {
+.attendanceSelect {
   width: 100%;
   margin: 0;
 }
@@ -26,26 +28,26 @@ table {
   margin-bottom: 1.25rem;
 }
 
-.table__header {
+.tableHeader {
   padding: 0.25rem 0 0.25rem;
   border: 0.0625rem solid var(--black);
   font-weight: 400;
 }
 
-.table__header:first-child {
+.tableHeader:first-child {
   position: relative;
   padding: 0;
 }
 
-.table__header:not(:first-child) {
+.tableHeader:not(:first-child) {
   text-transform: uppercase;
 }
 
-.table__header--inactive {
+.tableHeaderInactive {
   color: var(--black-300);
 }
 
-.table-header__container {
+.tableHeaderContainer {
   position: absolute;
   top: 0;
   left: 0;
@@ -57,7 +59,7 @@ table {
   padding-left: 0.5rem;
 }
 
-.table__arrow {
+.tableArrow {
   height: 100%;
   background-color: transparent;
   padding: 0.625rem 0.75rem;
@@ -66,17 +68,17 @@ table {
   transition: background-color 0.3s ease-in-out;
 }
 
-.table__arrow:hover {
+.tableArrow:hover {
   background-color: var(--black-150);
 }
 
-.table__arrow:first-child {
+.tableArrow:first-child {
   margin-left: auto;
   border-left: 0.125rem solid var(--black);
   border-right: 0.125rem solid var(--black);
 }
 
-.table__cell {
+.tableCell {
   padding: 0.25rem 0;
   border: 0.0625rem solid var(--black);
 }
@@ -88,20 +90,20 @@ td:first-child {
   text-align: left;
 }
 
-.table__header:not(:first-child),
-.table__header:not(:last-child) {
+.tableHeader:not(:first-child),
+.tableHeader:not(:last-child) {
   border-top-width: 0.125rem;
 }
 
-tr:last-child .table__cell {
+tr:last-child .tableCell {
   border-bottom-width: 0.125rem;
 }
 
-.table__cell:first-child {
+.tableCell:first-child {
   border-left-width: 0.125rem;
 }
 
-.table__cell:last-child {
+.tableCell:last-child {
   border-right-width: 0.125rem;
 }
 
@@ -126,7 +128,7 @@ tr:last-child td:last-child {
   border-bottom-right-radius: 0.625rem;
 }
 
-.table__check {
+.tableCheck {
   display: flex;
   align-items: center;
   padding: 0.3125rem;
@@ -138,27 +140,27 @@ tr:last-child td:last-child {
   transition: all 0.3s ease-in-out;
 }
 
-.table__check:hover {
+.tableCheck:hover {
   background-color: var(--blue-200);
 }
 
-.table__check svg {
+.tableCheck svg {
   opacity: 0;
 }
 
-.table__check:disabled {
+.tableCheck:disabled {
   border-color: var(--black-300);
   cursor: default;
 }
 
-.table__check:disabled {
+.tableCheck:disabled {
   background-color: transparent;
 }
 
-.table__check--checked {
+.tableCheckChecked {
   background-color: var(--blue-500);
 }
 
-.table__check--checked svg {
+.tableCheckChecked svg {
   opacity: 1;
 }

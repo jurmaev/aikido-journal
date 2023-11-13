@@ -1,16 +1,16 @@
-.main__container {
+.mainContainer {
   text-align: center;
   padding: 10rem 0;
 }
 
-.main__title {
+.mainTitle {
   margin-bottom: 1.5rem;
   font-size: 2.25rem;
   font-weight: 600;
   line-height: 1.25;
 }
 
-.main__text {
+.mainText {
   margin-bottom: 1.5rem;
   font-size: 1.3125rem;
   font-weight: 400;

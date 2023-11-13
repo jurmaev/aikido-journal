@@ -1,33 +1,43 @@
-import './main.css';
-
+import styles from './main.module.css';
+import baseStyles from '../base.module.css';
 export default function MainPage() {
   return (
     <>
-      <header className="header">
-        <div className="container header__container">
+      <header className={baseStyles.header}>
+        <div
+          className={`${baseStyles.container} ${baseStyles.headerContainer}`}
+        >
           <a href="#">
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
-              className="logo"
+              className={baseStyles.logo}
             />
           </a>
-          <button className="btn btn--blue btn--small header__btn">
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.headerBtn}`}
+          >
             Войти
           </button>
         </div>
       </header>
       <main>
-        <div className="container main__container">
-          <h1 className="main__title">
+        <div className={`${baseStyles.container} ${styles.mainContainer}`}>
+          <h1 className={styles.mainTitle}>
             Добро пожаловать в сервис «Журнал тренера»
           </h1>
-          <p className="main__text">
+          <p className={styles.mainText}>
             Здесь вы можете отслеживать и оплачивать задолженность
           </p>
-          <div className="input-group">
-            <button className="btn btn--blue btn--large">Войти</button>
-            <button className="btn btn--red btn--large">
+          <div className={baseStyles.inputGroup}>
+            <button
+              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            >
+              Войти
+            </button>
+            <button
+              className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            >
               Зарегистрироваться
             </button>
           </div>

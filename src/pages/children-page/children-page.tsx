@@ -1,73 +1,87 @@
-import './children.css';
-
+import baseStyles from '../base.module.css';
+import styles from './children.module.css';
 export default function ChildrenPage() {
   return (
     <>
-      <header className="header">
-        <div className="container header__container">
+      <header className={baseStyles.header}>
+        <div
+          className={`${baseStyles.container} ${baseStyles.headerContainer}`}
+        >
           <a href="#">
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
-              className="logo"
+              className={baseStyles.logo}
             />
           </a>
-          <nav className="nav">
-            <ul className="nav__list">
-              <li className="nav__item">
+          <nav className={baseStyles.nav}>
+            <ul className={baseStyles.navList}>
+              <li className={baseStyles.navItem}>
                 <a href="#">Дети</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Родители</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Группы</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Посещаемость</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Задолженность</a>
               </li>
             </ul>
           </nav>
-          <button className="btn btn--blue btn--small header__btn">
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.headerBtn}`}
+          >
             Войти
           </button>
         </div>
       </header>
       <main>
-        <div className="container children__container">
-          <h1 className="children__title">Дети</h1>
-          <label htmlFor="child" className="children__label">
+        <div className={`${baseStyles.container} ${styles.childrenContainer}`}>
+          <h1 className={styles.childrenTitle}>Дети</h1>
+          <label htmlFor="child" className={styles.childrenLabel}>
             Добавить ребёнка
           </label>
-          <div className="input-group children-input-group">
+          <div
+            className={`${baseStyles.inputGroup} ${styles.childrenInputGroup}`}
+          >
             <input
               type="text"
-              className="form__input children__input"
+              className={`${baseStyles.formInput} ${styles.childrenInput}`}
               id="child"
               placeholder="Введите ФИО родителя"
             />
-            <button className="btn btn--red btn--large">
+            <button
+              className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            >
               Добавить ребёнка
             </button>
           </div>
-          <label htmlFor="search" className="children__label">
+          <label htmlFor="search" className={styles.childrenLabel}>
             Список детей
           </label>
-          <div className="input-group children-input-group">
+          <div
+            className={`${baseStyles.inputGroup} ${styles.childrenInputGroup}`}
+          >
             <input
               type="text"
-              className="form__input children__input"
+              className={`${baseStyles.formInput} ${styles.childrenInput}`}
               id="search"
               placeholder="Введите ФИО ребёнка"
             />
-            <button className="btn btn--blue btn--large">Поиск</button>
+            <button
+              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            >
+              Поиск
+            </button>
           </div>
-          <ul className="children__list">
-            <li className="children__item">
-              <span className="children__text">Абрамов Пётр Иванович</span>
+          <ul className={styles.childrenList}>
+            <li className={styles.childrenItem}>
+              <span className={styles.childrenText}>Абрамов Пётр Иванович</span>
               <svg
                 className="children__icon"
                 width="24"
@@ -96,8 +110,8 @@ export default function ChildrenPage() {
                 />
               </svg>
             </li>
-            <li className="children__item">
-              <span className="children__text">
+            <li className={styles.childrenItem}>
+              <span className={styles.childrenText}>
                 Курочкин Владислав Игорьевич
               </span>
               <svg
@@ -128,8 +142,8 @@ export default function ChildrenPage() {
                 />
               </svg>
             </li>
-            <li className="children__item">
-              <span className="children__text">
+            <li className={styles.childrenItem}>
+              <span className={styles.childrenText}>
                 Иванов Александр Степанович
               </span>
               <svg

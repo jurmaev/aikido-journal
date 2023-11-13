@@ -7,4 +7,5 @@ export const AppRoutes = {
   Groups: '/groups',
   Attendance: '/attendance',
   Payment: '/payment',
+  ParentProfile: '/parent/profile',
 };

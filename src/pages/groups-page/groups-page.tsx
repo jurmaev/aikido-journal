@@ -1,72 +1,91 @@
-import './groups.css';
-
+import baseStyles from '../base.module.css';
+import styles from './groups.module.css';
 export default function GroupsPage() {
   return (
     <>
-      <header className="header">
-        <div className="container header__container">
+      <header className={baseStyles.header}>
+        <div
+          className={`${baseStyles.container} ${baseStyles.headerContainer}`}
+        >
           <a href="#">
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
-              className="logo"
+              className={baseStyles.logo}
             />
           </a>
-          <nav className="nav">
-            <ul className="nav__list">
-              <li className="nav__item">
+          <nav className={baseStyles.nav}>
+            <ul className={baseStyles.navList}>
+              <li className={baseStyles.navItem}>
                 <a href="#">Дети</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Родители</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Группы</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Посещаемость</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Задолженность</a>
               </li>
             </ul>
           </nav>
-          <button className="btn btn--blue btn--small header__btn">
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.headerBtn}`}
+          >
             Войти
           </button>
         </div>
       </header>
       <main>
-        <div className="container groups__container">
-          <h1 className="groups__title">Группы</h1>
-          <label htmlFor="group" className="groups__label">
+        <div className={`${baseStyles.container} ${styles.groupsContainer}`}>
+          <h1 className={styles.groupsTitle}>Группы</h1>
+          <label htmlFor="group" className={styles.groupsLabel}>
             Создать группу
           </label>
-          <div className="input-group groups-input-group">
+          <div
+            className={`${baseStyles.inputGroup} ${styles.groupsInputGroup}`}
+          >
             <input
               type="text"
-              className="form__input groups__input"
+              className={`${baseStyles.formInput} ${styles.groupsInput}`}
               id="group"
               placeholder="Придумайте название группы"
             />
-            <button className="btn btn--red btn--large">Создать</button>
+            <button
+              className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            >
+              Создать
+            </button>
           </div>
-          <label htmlFor="list" className="groups__label">
+          <label htmlFor="list" className={styles.groupsLabel}>
             Список групп
           </label>
-          <div className="input-group groups-input-group">
+          <div
+            className={`${baseStyles.inputGroup} ${styles.groupsInputGroup}`}
+          >
             <input
               type="text"
-              className="form__input groups__input"
+              className={`${baseStyles.formInput} ${styles.groupsInput}`}
               id="list"
               placeholder="Введите название группы"
             />
-            <button className="btn btn--blue btn--large">Поиск</button>
+            <button
+              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            >
+              Поиск
+            </button>
           </div>
-          <ul className="groups__list">
-            <li className="groups__item">
+          <ul className={styles.groupsList}>
+            <li className={styles.groupsItem}>
               <span>Группа 1</span>
-              <button className="btn groups__btn" aria-label="Edit group">
+              <button
+                className={`${baseStyles.btn} ${styles.groupsBtn}`}
+                aria-label="Edit group"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -89,9 +108,12 @@ export default function GroupsPage() {
                 </svg>
               </button>
             </li>
-            <li className="groups__item">
+            <li className={styles.groupsItem}>
               <span>Группа 2</span>
-              <button className="btn groups__btn" aria-label="Edit group">
+              <button
+                className={`${baseStyles.btn} ${styles.groupsBtn}`}
+                aria-label="Edit group"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -114,9 +136,12 @@ export default function GroupsPage() {
                 </svg>
               </button>
             </li>
-            <li className="groups__item">
+            <li className={styles.groupsItem}>
               <span>Группа 3</span>
-              <button className="btn groups__btn" aria-label="Edit group">
+              <button
+                className={`${baseStyles.btn} ${styles.groupsBtn}`}
+                aria-label="Edit group"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

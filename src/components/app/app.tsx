@@ -8,6 +8,7 @@ import ParentsPage from '../../pages/parents-page/parents-page';
 import GroupsPage from '../../pages/groups-page/groups-page';
 import AttendancePage from '../../pages/attendance-page/attendance-page';
 import PaymentPage from '../../pages/payment-page/payment-page';
+import ParentProfilePage from '../../pages/parent-profile-page/parent-profile-page';
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
           <Route path={AppRoutes.Groups} element={<GroupsPage />} />
           <Route path={AppRoutes.Attendance} element={<AttendancePage />} />
           <Route path={AppRoutes.Payment} element={<PaymentPage />} />
+          <Route
+            path={AppRoutes.ParentProfile}
+            element={<ParentProfilePage />}
+          />
         </Routes>
       </BrowserRouter>
     </>

@@ -1,38 +1,40 @@
-import './attendance.css';
-
+import baseStyles from '../base.module.css';
+import styles, { tableHeaderContainer } from './attendance.module.css';
 export default function AttendancePage() {
   return (
     <>
-      <header className="header">
-        <div className="container header__container">
+      <header className={baseStyles.header}>
+        <div
+          className={`${baseStyles.container} ${baseStyles.headerContainer}`}
+        >
           <a href="#">
             <img
               src="./img/logo.svg"
               alt="Aikido journal logo"
-              className="logo"
+              className={baseStyles.logo}
             />
           </a>
-          <nav className="nav">
-            <ul className="nav__list">
-              <li className="nav__item">
+          <nav className={baseStyles.nav}>
+            <ul className={baseStyles.navList}>
+              <li className={baseStyles.navItem}>
                 <a href="#">Дети</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Родители</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Группы</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Посещаемость</a>
               </li>
-              <li className="nav__item">
+              <li className={baseStyles.navItem}>
                 <a href="#">Задолженность</a>
               </li>
             </ul>
           </nav>
           <button
-            className="btn btn--blue btn--small header__btn"
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.headerBtn}`}
             aria-label="Войти"
           >
             Войти
@@ -40,13 +42,17 @@ export default function AttendancePage() {
         </div>
       </header>
       <main>
-        <div className="container attendance__container">
-          <h1 className="attendance__title">Посещаемость</h1>
-          <div className="input-group attendance__input-group">
+        <div
+          className={`${baseStyles.container} ${styles.attendanceContainer}`}
+        >
+          <h1 className={`${styles.attendanceTitle}`}>Посещаемость</h1>
+          <div
+            className={`${baseStyles.inputGroup} ${styles.attendanceInputGroup}`}
+          >
             <select
               name="group"
               id="group"
-              className="form__input attendance__select"
+              className={`${baseStyles.formInput} ${styles.attendanceSelect}`}
               aria-label="Select group"
             >
               <option value="">Выберите группу</option>
@@ -54,7 +60,7 @@ export default function AttendancePage() {
             <select
               name="month"
               id="month"
-              className="form__input attendance__select"
+              className={`${baseStyles.formInput} ${styles.attendanceSelect}`}
               aria-label="Select month"
             >
               <option value="">Выберите месяц</option>
@@ -63,10 +69,13 @@ export default function AttendancePage() {
           <table>
             <thead>
               <tr>
-                <th className="table__header">
-                  <div className="table-header__container">
+                <th className={styles.tableHeader}>
+                  <div className={tableHeaderContainer}>
                     ФИО ребенка:
-                    <button className="table__arrow" aria-label="Previous week">
+                    <button
+                      className={styles.tableArrow}
+                      aria-label="Previous week"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="10"
@@ -81,7 +90,10 @@ export default function AttendancePage() {
                         />
                       </svg>
                     </button>
-                    <button className="table__arrow" aria-label="Next week">
+                    <button
+                      className={styles.tableArrow}
+                      aria-label="Next week"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="11"
@@ -98,31 +110,39 @@ export default function AttendancePage() {
                     </button>
                   </div>
                 </th>
-                <th className="table__header">
+                <th className={styles.tableHeader}>
                   <div>06.11</div>
                   <div>пн</div>
                 </th>
-                <th className="table__header table__header--inactive">
+                <th
+                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
+                >
                   <div>07.11</div>
                   <div>вт</div>
                 </th>
-                <th className="table__header">
+                <th className={styles.tableHeader}>
                   <div>08.11</div>
                   <div>ср</div>
                 </th>
-                <th className="table__header table__header--inactive">
+                <th
+                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
+                >
                   <div>09.11</div>
                   <div>чт</div>
                 </th>
-                <th className="table__header">
+                <th className={styles.tableHeader}>
                   <div>10.11</div>
                   <div>пт</div>
                 </th>
-                <th className="table__header table__header--inactive">
+                <th
+                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
+                >
                   <div>11.11</div>
                   <div>сб</div>
                 </th>
-                <th className="table__header table__header--inactive">
+                <th
+                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
+                >
                   <div>12.11</div>
                   <div>вс</div>
                 </th>
@@ -130,9 +150,9 @@ export default function AttendancePage() {
             </thead>
             <tbody>
               <tr>
-                <td className="table__cell">Абрамов Пётр Иванович</td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check">
+                <td className={styles.tableCell}>Абрамов Пётр Иванович</td>
+                <td className={styles.tableCell}>
+                  <button className={styles.tableCheck} aria-label="Check">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -149,27 +169,31 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className="table__cell">
+                <td className={styles.tableCell}>
                   <button
-                    className="table__check table__check--checked"
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M15 4.5L6.75 12.75L3 9"
+                        stroke="black"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </td>
+                <td className={styles.tableCell}>
+                  <button
+                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
                     aria-label="Check"
                   >
                     <svg
@@ -188,8 +212,12 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
+                <td className={styles.tableCell}>
+                  <button
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -206,9 +234,9 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
+                <td className={styles.tableCell}>
                   <button
-                    className="table__check table__check--checked"
+                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
                     aria-label="Check"
                   >
                     <svg
@@ -227,8 +255,12 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
+                <td className={styles.tableCell}>
+                  <button
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -245,8 +277,12 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
+                <td className={styles.tableCell}>
+                  <button
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -265,9 +301,11 @@ export default function AttendancePage() {
                 </td>
               </tr>
               <tr>
-                <td className="table__cell">Иванов Александр Степанович</td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check">
+                <td className={styles.tableCell}>
+                  Иванов Александр Степанович
+                </td>
+                <td className={styles.tableCell}>
+                  <button className={styles.tableCheck} aria-label="Check">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -284,27 +322,31 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className="table__cell">
+                <td className={styles.tableCell}>
                   <button
-                    className="table__check table__check--checked"
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M15 4.5L6.75 12.75L3 9"
+                        stroke="black"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </td>
+                <td className={styles.tableCell}>
+                  <button
+                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
                     aria-label="Check"
                   >
                     <svg
@@ -323,8 +365,12 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
+                <td className={styles.tableCell}>
+                  <button
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -341,9 +387,9 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
+                <td className={styles.tableCell}>
                   <button
-                    className="table__check table__check--checked"
+                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
                     aria-label="Check"
                   >
                     <svg
@@ -362,8 +408,12 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
+                <td className={styles.tableCell}>
+                  <button
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -380,8 +430,12 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
+                <td className={styles.tableCell}>
+                  <button
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -400,9 +454,11 @@ export default function AttendancePage() {
                 </td>
               </tr>
               <tr>
-                <td className="table__cell">Курочкин Владислав Игорьевич</td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check">
+                <td className={styles.tableCell}>
+                  Курочкин Владислав Игорьевич
+                </td>
+                <td className={styles.tableCell}>
+                  <button className={styles.tableCheck} aria-label="Check">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -419,27 +475,31 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className="table__cell">
+                <td className={styles.tableCell}>
                   <button
-                    className="table__check table__check--checked"
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M15 4.5L6.75 12.75L3 9"
+                        stroke="black"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </td>
+                <td className={styles.tableCell}>
+                  <button
+                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
                     aria-label="Check"
                   >
                     <svg
@@ -458,8 +518,12 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
+                <td className={styles.tableCell}>
+                  <button
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -476,9 +540,9 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
+                <td className={styles.tableCell}>
                   <button
-                    className="table__check table__check--checked"
+                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
                     aria-label="Check"
                   >
                     <svg
@@ -497,8 +561,12 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
+                <td className={styles.tableCell}>
+                  <button
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -515,8 +583,12 @@ export default function AttendancePage() {
                     </svg>
                   </button>
                 </td>
-                <td className="table__cell">
-                  <button className="table__check" aria-label="Check" disabled>
+                <td className={styles.tableCell}>
+                  <button
+                    className={styles.tableCheck}
+                    aria-label="Check"
+                    disabled
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -537,7 +609,7 @@ export default function AttendancePage() {
             </tbody>
           </table>
           <button
-            className="btn btn--red btn--large"
+            className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
             aria-label="Сохранить изменения"
           >
             Сохранить изменения
