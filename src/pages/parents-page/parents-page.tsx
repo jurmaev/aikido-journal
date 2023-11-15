@@ -5,8 +5,12 @@ import { AppRoutes } from '../../const';
 import Header from '../../components/header/header';
 import Modal from '../../components/modal/modal';
 import { useState } from 'react';
+import { parents } from '../../mocks/parents';
+
 export default function ParentsPage() {
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [activeModal, setActiveModal] = useState<string | null>(null);
+  const children = parents.map((parent) => parent.child);
+
   return (
     <>
       <Header>
@@ -75,65 +79,6 @@ export default function ParentsPage() {
           </ul>
         </nav>
       </Header>
-      <Modal isActive={isModalActive} isCentral>
-        <h2 className={baseStyles.modalTitle}>
-          Закрепить ребёнка за родителем
-        </h2>
-        <p className={baseStyles.modalText}>
-          ФИО родителя: Терешенко Екатерина Николаевна
-        </p>
-        <p className={baseStyles.modalText}>
-          ФИО ребёнка:{' '}
-          <span className={styles.textRed}>ребёнок не закреплён</span>
-        </p>
-        <div className={baseStyles.inputGroup}>
-          <select
-            className={`${baseStyles.formInput} ${styles.parentsModalInput}`}
-            aria-label="Children select"
-          >
-            <option value="">Выберите ребёнка</option>
-          </select>
-          <button
-            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
-          >
-            Закрепить за родителем
-          </button>
-        </div>
-        <button
-          className={`${baseStyles.btn} ${baseStyles.modalClose}`}
-          aria-label="Close modal"
-          onClick={() => setIsModalActive(false)}
-        >
-          <svg
-            width="26"
-            height="25"
-            viewBox="0 0 26 25"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x="1"
-              y="0.500366"
-              width="24"
-              height="24"
-              rx="4.5"
-              stroke="black"
-            />
-            <path
-              d="M10 10L16 16"
-              stroke="black"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M16 10L10 16"
-              stroke="black"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </Modal>
       <main>
         <div className={`${baseStyles.container} ${styles.parentsContainer}`}>
           <h1 className={styles.parentsHeader}>Родители</h1>
@@ -163,296 +108,151 @@ export default function ParentsPage() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className={styles.parentsData}>
-                  <div className={styles.parentsDataContainer}>
-                    Абрамова Маргарита Львовна
-                    <button
-                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
-                      aria-label="Info"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
+              {parents.map((parent) => [
+                <tr key={`${parent.phone}-item`}>
+                  <td className={styles.parentsData}>
+                    <div className={styles.parentsDataContainer}>
+                      {parent.name}
+                      <button
+                        className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                        aria-label="Info"
                       >
-                        <path
-                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 8V12"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 16H12.01"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      <div className={styles.tooltip}>
-                        <a href="tel:+8-800-555-35-35">8(800)555-35-35</a>
-                      </div>
-                    </button>
-                  </div>
-                </td>
-                <td className={styles.parentsData}>
-                  <div className={styles.parentsDataContainer}>
-                    Абрамов Пётр Иванович
-                    <button
-                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
-                      aria-label="Edit"
-                      onClick={() => setIsModalActive(true)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                            stroke="black"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M12 8V12"
+                            stroke="black"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M12 16H12.01"
+                            stroke="black"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        <div className={styles.tooltip}>
+                          <a href={`tel:${parent.phone}`}>{parent.phone}</a>
+                        </div>
+                      </button>
+                    </div>
+                  </td>
+                  <td
+                    className={`${styles.parentsData} ${
+                      !parent.child && styles.parentsDataEmpty
+                    }`}
+                  >
+                    <div className={styles.parentsDataContainer}>
+                      {parent.child ? parent.child : 'ребёнок не закреплён'}
+                      <button
+                        className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                        aria-label="Edit"
+                        onClick={() => setActiveModal(parent.phone)}
                       >
-                        <path
-                          d="M11.9403 20H20.8061"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M16.2539 3.49998C16.6458 3.10216 17.1773 2.87866 17.7315 2.87866C18.0059 2.87866 18.2776 2.93353 18.5312 3.04014C18.7847 3.14674 19.0151 3.303 19.2091 3.49998C19.4032 3.69697 19.5571 3.93082 19.6621 4.18819C19.7671 4.44556 19.8212 4.72141 19.8212 4.99998C19.8212 5.27856 19.7671 5.55441 19.6621 5.81178C19.5571 6.06915 19.4032 6.303 19.2091 6.49998L6.89554 19L2.9552 20L3.94029 16L16.2539 3.49998Z"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td className={styles.parentsData}>
-                  <div className={styles.parentsDataContainer}>
-                    Курочкина Светлана Алексеевна
-                    <button
-                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
-                      aria-label="Info"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 8V12"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 16H12.01"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      <div className={styles.tooltip}>
-                        <a href="tel:+8-800-555-35-35">8(800)555-35-35</a>
-                      </div>
-                    </button>
-                  </div>
-                </td>
-                <td className={styles.parentsData}>
-                  <div className={styles.parentsDataContainer}>
-                    Курочкин Владислав Игорьевич
-                    <button
-                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
-                      aria-label="Edit"
-                      onClick={() => setIsModalActive(true)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M11.9403 20H20.8061"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M16.2539 3.49998C16.6458 3.10216 17.1773 2.87866 17.7315 2.87866C18.0059 2.87866 18.2776 2.93353 18.5312 3.04014C18.7847 3.14674 19.0151 3.303 19.2091 3.49998C19.4032 3.69697 19.5571 3.93082 19.6621 4.18819C19.7671 4.44556 19.8212 4.72141 19.8212 4.99998C19.8212 5.27856 19.7671 5.55441 19.6621 5.81178C19.5571 6.06915 19.4032 6.303 19.2091 6.49998L6.89554 19L2.9552 20L3.94029 16L16.2539 3.49998Z"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td className={styles.parentsData}>
-                  <div className={styles.parentsDataContainer}>
-                    Иванова Наталья Сергеевна
-                    <button
-                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
-                      aria-label="Info"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 8V12"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 16H12.01"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      <div className={styles.tooltip}>
-                        <a href="tel:+8-800-555-35-35">8(800)555-35-35</a>
-                      </div>
-                    </button>
-                  </div>
-                </td>
-                <td className={styles.parentsData}>
-                  <div className={styles.parentsDataContainer}>
-                    Иванов Александр Степанович
-                    <button
-                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
-                      aria-label="Edit"
-                      onClick={() => setIsModalActive(true)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M11.9403 20H20.8061"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M16.2539 3.49998C16.6458 3.10216 17.1773 2.87866 17.7315 2.87866C18.0059 2.87866 18.2776 2.93353 18.5312 3.04014C18.7847 3.14674 19.0151 3.303 19.2091 3.49998C19.4032 3.69697 19.5571 3.93082 19.6621 4.18819C19.7671 4.44556 19.8212 4.72141 19.8212 4.99998C19.8212 5.27856 19.7671 5.55441 19.6621 5.81178C19.5571 6.06915 19.4032 6.303 19.2091 6.49998L6.89554 19L2.9552 20L3.94029 16L16.2539 3.49998Z"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td className={styles.parentsData}>
-                  <div className={styles.parentsDataContainer}>
-                    Терешенко Екатерина Николаевна
-                    <button
-                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
-                      aria-label="Info"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 8V12"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 16H12.01"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      <div className={styles.tooltip}>
-                        <a href="tel:+8-800-555-35-35">8(800)555-35-35</a>
-                      </div>
-                    </button>
-                  </div>
-                </td>
-                <td
-                  className={`${styles.parentsData} ${styles.parentsDataEmpty}`}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M11.9403 20H20.8061"
+                            stroke="black"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M16.2539 3.49998C16.6458 3.10216 17.1773 2.87866 17.7315 2.87866C18.0059 2.87866 18.2776 2.93353 18.5312 3.04014C18.7847 3.14674 19.0151 3.303 19.2091 3.49998C19.4032 3.69697 19.5571 3.93082 19.6621 4.18819C19.7671 4.44556 19.8212 4.72141 19.8212 4.99998C19.8212 5.27856 19.7671 5.55441 19.6621 5.81178C19.5571 6.06915 19.4032 6.303 19.2091 6.49998L6.89554 19L2.9552 20L3.94029 16L16.2539 3.49998Z"
+                            stroke="black"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>,
+                <Modal
+                  key={`${parent.phone}-modal`}
+                  isActive={parent.phone === activeModal}
+                  isCentral
                 >
-                  <div className={styles.parentsDataContainer}>
-                    ребёнок не закреплён
-                    <button
-                      className={`${baseStyles.btn} ${styles.parentsBtn}`}
-                      aria-label="Edit"
-                      onClick={() => setIsModalActive(true)}
+                  <h2 className={baseStyles.modalTitle}>
+                    Закрепить ребёнка за родителем
+                  </h2>
+                  <p className={baseStyles.modalText}>
+                    ФИО родителя: {parent.name}
+                  </p>
+                  <p className={baseStyles.modalText}>
+                    ФИО ребёнка:{' '}
+                    <span className={styles.textRed}>ребёнок не закреплён</span>
+                  </p>
+                  <div className={baseStyles.inputGroup}>
+                    <select
+                      className={`${baseStyles.formInput} ${styles.parentsModalInput}`}
+                      aria-label="Children select"
+                      value={parent.child}
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path
-                          d="M11.9403 20H20.8061"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M16.2539 3.49998C16.6458 3.10216 17.1773 2.87866 17.7315 2.87866C18.0059 2.87866 18.2776 2.93353 18.5312 3.04014C18.7847 3.14674 19.0151 3.303 19.2091 3.49998C19.4032 3.69697 19.5571 3.93082 19.6621 4.18819C19.7671 4.44556 19.8212 4.72141 19.8212 4.99998C19.8212 5.27856 19.7671 5.55441 19.6621 5.81178C19.5571 6.06915 19.4032 6.303 19.2091 6.49998L6.89554 19L2.9552 20L3.94029 16L16.2539 3.49998Z"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                      <option value="">Выберите ребёнка</option>
+                      {children.map((child) => (
+                        child && <option key={child} value={child}>{child}</option>
+                      ))}
+                    </select>
+                    <button
+                      className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+                    >
+                      Закрепить за родителем
                     </button>
                   </div>
-                </td>
-              </tr>
+                  <button
+                    className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+                    aria-label="Close modal"
+                    onClick={() => setActiveModal(null)}
+                  >
+                    <svg
+                      width="26"
+                      height="25"
+                      viewBox="0 0 26 25"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        x="1"
+                        y="0.500366"
+                        width="24"
+                        height="24"
+                        rx="4.5"
+                        stroke="black"
+                      />
+                      <path
+                        d="M10 10L16 16"
+                        stroke="black"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M16 10L10 16"
+                        stroke="black"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </Modal>,
+              ])}
             </tbody>
           </table>
         </div>
