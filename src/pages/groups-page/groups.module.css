@@ -99,22 +99,22 @@ table {
 tr th:first-child {
   border-left-width: 0.125rem;
   border-top-width: 0.125rem;
-  border-top-left-radius: 0.625rem;
+  border-top-left-radius: 0.3125rem;
 }
 tr th:last-child {
   border-top-width: 0.125rem;
   border-right-width: 0.125rem;
-  border-top-right-radius: 0.625rem;
+  border-top-right-radius: 0.3125rem;
 }
 tr td:first-child {
   border-bottom-width: 0.125rem;
   border-left-width: 0.125rem;
-  border-bottom-left-radius: 0.625rem;
+  border-bottom-left-radius: 0.3125rem;
 }
 tr td:last-child {
   border-bottom-width: 0.125rem;
   border-right-width: 0.125rem;
-  border-bottom-right-radius: 0.625rem;
+  border-bottom-right-radius: 0.3125rem;
 }
 
 .tableInput {
