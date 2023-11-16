@@ -1,0 +1,62 @@
+.childrenContainer {
+  padding: 4rem 0;
+}
+
+.childrenTitle {
+  margin-bottom: 1.5625rem;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 1.43;
+}
+
+.childrenLabel {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+.childrenInput {
+  margin: 0;
+  width: 100%;
+}
+
+.childrenInputGroup {
+  margin-top: 0.625rem;
+  margin-bottom: 1.5625rem;
+}
+
+.childrenList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.childrenItem {
+  display: flex;
+  align-items: center;
+}
+
+.childrenItem:not(:last-child) {
+  margin-bottom: 0.3125rem;
+}
+
+.childrenText {
+  margin-right: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+.childrenIcon {
+  cursor: pointer;
+}
+
+.childrenIcon:hover path {
+  transition: stroke 0.2s ease-in-out;
+}
+
+.childrenIcon:hover path {
+  stroke: var(--black-600);
+}

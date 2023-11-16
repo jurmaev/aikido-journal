@@ -1,0 +1,142 @@
+.nav {
+  width: 50%;
+}
+
+.parentsHeader {
+  margin-bottom: 1.625rem;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 1.43;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.parentsLabel {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+.parentsInputGroup {
+  margin-top: 0.625rem;
+  margin-bottom: 1.3125rem;
+}
+
+.formInput {
+  width: 100%;
+  margin: 0;
+}
+
+.parentsContainer {
+  padding: 4rem 0;
+}
+
+.parentsTable {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.parentsDataContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.parentsData {
+  width: 50%;
+  padding: 0.3125rem 0.875rem;
+  border: 0.0625rem solid var(--black);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.43;
+  text-align: left;
+}
+
+.parentsData:first-child {
+  border-left-width: 0.125rem;
+}
+
+.parentsData:last-child {
+  border-right-width: 0.125rem;
+}
+
+tr:first-child th:first-child {
+  border-left-width: 0.125rem;
+  border-top-width: 0.125rem;
+  border-top-left-radius: 0.3125rem;
+}
+tr:first-child th:last-child {
+  border-top-width: 0.125rem;
+  border-right-width: 0.125rem;
+  border-top-right-radius: 0.3125rem;
+}
+tr:last-child td:first-child {
+  border-bottom-width: 0.125rem;
+  border-left-width: 0.125rem;
+  border-bottom-left-radius: 0.3125rem;
+}
+tr:last-child td:last-child {
+  border-bottom-width: 0.125rem;
+  border-right-width: 0.125rem;
+  border-bottom-right-radius: 0.3125rem;
+}
+
+.parentsDataEmpty {
+  color: var(--red-700);
+}
+
+.parentsBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.parentsBtn:hover svg path {
+  transition: stroke 0.3s ease-in-out;
+}
+
+.parentsBtn:hover svg path {
+  stroke: var(--black-600);
+}
+
+.tooltip {
+  position: absolute;
+  left: 105%;
+  z-index: 1;
+  width: 9rem;
+  visibility: hidden;
+  padding: 0.25rem;
+  background-color: var(--black-600);
+  color: white;
+  text-align: center;
+  border-radius: 0.3125rem;
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.tooltip::after {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -0.3125rem;
+  border-width: 0.3125rem;
+  border-style: solid;
+  border-color: transparent var(--black-600) transparent transparent;
+}
+
+.parentsBtn:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.textRed {
+  color: var(--red-700);
+}
+
+.parentsModalInput {
+  margin: 0;
+  width: 100%;
+}

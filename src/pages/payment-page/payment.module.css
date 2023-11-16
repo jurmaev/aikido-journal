@@ -1,0 +1,41 @@
+.paymentContainer {
+  padding: 4rem 0;
+}
+
+.paymentTitle {
+  margin-bottom: 1.5625rem;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 1.43;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.paymentSubtitle {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.43;
+  font-weight: 400;
+}
+
+.paymentInputGroup {
+  margin-bottom: 1rem;
+}
+
+.paymentInput {
+  width: 100%;
+  margin: 0;
+}
+
+.paymentList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paymentItem {
+  margin-bottom: 0.125rem;
+  font-size: 1.25rem;
+  line-height: 1.43;
+  font-weight: 400;
+}
