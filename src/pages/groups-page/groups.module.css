@@ -50,3 +50,152 @@
 .groupsBtn:hover svg path {
   stroke: var(--black-600);
 }
+
+
+.groupsModalInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.groupsModalText {
+  margin: 0;
+}
+
+.groupsModalInput {
+  background-color: transparent;
+  border: 0.0625rem solid var(--black);
+  border-radius: 0.25rem;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  margin-bottom: 0.625rem;
+}
+
+.tableCellContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem 1rem;
+}
+
+.tableHeader {
+  padding: 0.4375rem 0;
+  border: 0.0625rem solid var(--black);
+  border-top-width: 0.125rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.tableCell {
+  border: 0.0625rem solid var(--black);
+  border-bottom-width: 0.125rem;
+}
+
+tr th:first-child {
+  border-left-width: 0.125rem;
+  border-top-width: 0.125rem;
+  border-top-left-radius: 0.625rem;
+}
+tr th:last-child {
+  border-top-width: 0.125rem;
+  border-right-width: 0.125rem;
+  border-top-right-radius: 0.625rem;
+}
+tr td:first-child {
+  border-bottom-width: 0.125rem;
+  border-left-width: 0.125rem;
+  border-bottom-left-radius: 0.625rem;
+}
+tr td:last-child {
+  border-bottom-width: 0.125rem;
+  border-right-width: 0.125rem;
+  border-bottom-right-radius: 0.625rem;
+}
+
+.tableInput {
+  width: 100%;
+  padding: 0.625rem 0;
+  background-color: transparent;
+  border: 0.0625rem solid var(--black);
+  border-radius: 0.3125rem;
+  text-align: center;
+  font-size: 0.625rem;
+  line-height: 1.6;
+}
+
+.tableInput::placeholder {
+  color: var(--black-600);
+}
+
+.tableCheck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: transparent;
+  border: 0.0625rem solid var(--black);
+  border-radius: 0.3125rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.tableCheckActive {
+  background-color: var(--blue-500);
+}
+
+.tableCheck:hover {
+  background-color: var(--blue-200);
+}
+
+.groupsModalInputGroup {
+  margin-bottom: 0.9375rem;
+}
+
+.groupsModalSelect {
+  width: 100%;
+  padding: 1.3125rem 0 1.3125rem 1.4375rem;
+  border: 0.0625rem solid var(--black);
+  border-radius: 0.3125rem;
+  background-color: transparent;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  line-height: 1.43;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 0.3125rem;
+}
+
+.itemText {
+  margin-right: 0.25rem;
+  font-size: 1.25rem;
+  line-height: 1.43;
+}
+
+.listBtn {
+  display: flex;
+  align-items: center;
+}
+
+.listBtn:hover svg path {
+  transition: stroke 0.3s ease-in-out;
+}
+
+.listBtn:hover svg path {
+  stroke: var(--black-600);
+}

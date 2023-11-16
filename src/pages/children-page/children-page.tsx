@@ -90,7 +90,7 @@ export default function ChildrenPage() {
               type="text"
               className={`${baseStyles.formInput} ${styles.childrenInput}`}
               id="child"
-              placeholder="Введите ФИО родителя"
+              placeholder="Введите ФИО ребёнка"
             />
             <button
               className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}

@@ -3,7 +3,11 @@ import baseStyles from '../base.module.css';
 import styles from './groups.module.css';
 import { AppRoutes } from '../../const';
 import Header from '../../components/header/header';
+import Modal from '../../components/modal/modal';
+import { useState } from 'react';
+
 export default function GroupsPage() {
+  const [isModalActive, setIsModalActive] = useState(false);
   return (
     <>
       <Header>
@@ -72,6 +76,447 @@ export default function GroupsPage() {
           </ul>
         </nav>
       </Header>
+      <Modal isActive={isModalActive} isCentral={false}>
+        <h2 className={baseStyles.modalTitle}>Настройка группы</h2>
+        <div className={styles.groupsModalInputContainer}>
+          <label
+            htmlFor="group"
+            className={`${baseStyles.modalText} ${styles.groupsModalText}`}
+          >
+            Название группы:
+          </label>
+          <input
+            id="group"
+            type="text"
+            className={styles.groupsModalInput}
+            value="Группа1"
+          />
+        </div>
+        <div className={styles.groupsModalInputContainer}>
+          <label
+            htmlFor="cost"
+            className={`${baseStyles.modalText} ${styles.groupsModalText}`}
+          >
+            Цена за занятие в ₽:
+          </label>
+          <input
+            id="cost"
+            type="text"
+            className={styles.groupsModalInput}
+            value="250"
+          />
+        </div>
+        <p className={baseStyles.modalText}>Задать расписание для группы:</p>
+        <table>
+          <thead>
+            <tr>
+              <th className={styles.tableHeader}>Пн</th>
+              <th className={styles.tableHeader}>Вт</th>
+              <th className={styles.tableHeader}>Ср</th>
+              <th className={styles.tableHeader}>Чт</th>
+              <th className={styles.tableHeader}>Пт</th>
+              <th className={styles.tableHeader}>Сб</th>
+              <th className={styles.tableHeader}>Вс</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className={styles.tableCell}>
+                <div className={styles.tableCellContainer}>
+                  <button
+                    className={`${styles.tableCheck} ${styles.tableCheckActive}`}
+                    aria-label="Check"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M20 6L9 17L4 12"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время начала"
+                  />
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время окончания"
+                  />
+                </div>
+              </td>
+              <td className={styles.tableCell}>
+                <div className={styles.tableCellContainer}>
+                  <button className={styles.tableCheck} aria-label="Check">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M20 6L9 17L4 12"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время начала"
+                  />
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время окончания"
+                  />
+                </div>
+              </td>
+              <td className={styles.tableCell}>
+                <div className={styles.tableCellContainer}>
+                  <button
+                    className={`${styles.tableCheck} ${styles.tableCheckActive}`}
+                    aria-label="Check"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M20 6L9 17L4 12"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время начала"
+                  />
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время окончания"
+                  />
+                </div>
+              </td>
+              <td className={styles.tableCell}>
+                <div className={styles.tableCellContainer}>
+                  <button className={styles.tableCheck} aria-label="Check">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M20 6L9 17L4 12"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время начала"
+                  />
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время окончания"
+                  />
+                </div>
+              </td>
+              <td className={styles.tableCell}>
+                <div className={styles.tableCellContainer}>
+                  <button
+                    className={`${styles.tableCheck} ${styles.tableCheckActive}`}
+                    aria-label="Check"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M20 6L9 17L4 12"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время начала"
+                  />
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время окончания"
+                  />
+                </div>
+              </td>
+              <td className={styles.tableCell}>
+                <div className={styles.tableCellContainer}>
+                  <button className={styles.tableCheck} aria-label="Check">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M20 6L9 17L4 12"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время начала"
+                  />
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время окончания"
+                  />
+                </div>
+              </td>
+              <td className={styles.tableCell}>
+                <div className={styles.tableCellContainer}>
+                  <button className={styles.tableCheck} aria-label="Check">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M20 6L9 17L4 12"
+                        stroke="black"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время начала"
+                  />
+                  <input
+                    type="text"
+                    className={styles.tableInput}
+                    placeholder="Время окончания"
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          className={`${baseStyles.inputGroup} ${styles.groupsModalInputGroup}`}
+        >
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            onClick={() => setIsModalActive(false)}
+          >
+            Сохранить изменения
+          </button>
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+          >
+            Удалить группу
+          </button>
+        </div>
+        <h2 className={baseStyles.modalTitle}>Список детей</h2>
+        <div
+          className={`${baseStyles.inputGroup} ${styles.groupsModalInputGroup}`}
+        >
+          <select
+            name="children"
+            id="children"
+            className={styles.groupsModalSelect}
+            aria-label="Select child"
+          >
+            <option value="">Выберите ребёнка</option>
+          </select>
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+          >
+            Добавить в группу
+          </button>
+        </div>
+        <ul className={styles.list}>
+          <li className={styles.item}>
+            <span className={styles.itemText}>Абрамов Пётр Иванович</span>
+            <button
+              className={`${baseStyles.btn} ${styles.listBtn}`}
+              aria-label="Delete child"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M15 9L9 15"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9 9L15 15"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </li>
+          <li className={styles.item}>
+            <span className={styles.itemText}>
+              Курочкин Владислав Игорьевич
+            </span>
+            <button
+              className={`${baseStyles.btn} ${styles.listBtn}`}
+              aria-label="Delete child"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M15 9L9 15"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9 9L15 15"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </li>
+          <li className={styles.item}>
+            <span className={styles.itemText}>Иванов Александр Степанович</span>
+            <button
+              className={`${baseStyles.btn} ${styles.listBtn}`}
+              aria-label="Delete child"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M15 9L9 15"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9 9L15 15"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </li>
+        </ul>
+        <button
+          className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+          aria-label="Close modal"
+          onClick={() => setIsModalActive(false)}
+        >
+          <svg
+            width="26"
+            height="25"
+            viewBox="0 0 26 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="1"
+              y="0.500366"
+              width="24"
+              height="24"
+              rx="4.5"
+              stroke="black"
+            />
+            <path
+              d="M10 10L16 16"
+              stroke="black"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M16 10L10 16"
+              stroke="black"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </Modal>
       <main>
         <div className={`${baseStyles.container} ${styles.groupsContainer}`}>
           <h1 className={styles.groupsTitle}>Группы</h1>
@@ -89,6 +534,7 @@ export default function GroupsPage() {
             />
             <button
               className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+              onClick={() => setIsModalActive(true)}
             >
               Создать
             </button>
@@ -117,6 +563,7 @@ export default function GroupsPage() {
               <button
                 className={`${baseStyles.btn} ${styles.groupsBtn}`}
                 aria-label="Edit group"
+                onClick={() => setIsModalActive(true)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -145,6 +592,7 @@ export default function GroupsPage() {
               <button
                 className={`${baseStyles.btn} ${styles.groupsBtn}`}
                 aria-label="Edit group"
+                onClick={() => setIsModalActive(true)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -173,6 +621,7 @@ export default function GroupsPage() {
               <button
                 className={`${baseStyles.btn} ${styles.groupsBtn}`}
                 aria-label="Edit group"
+                onClick={() => setIsModalActive(true)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

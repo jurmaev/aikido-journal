@@ -204,12 +204,17 @@ export default function ParentsPage() {
                     <select
                       className={`${baseStyles.formInput} ${styles.parentsModalInput}`}
                       aria-label="Children select"
-                      value={parent.child}
+                      defaultValue={parent.child}
                     >
                       <option value="">Выберите ребёнка</option>
-                      {children.map((child) => (
-                        child && <option key={child} value={child}>{child}</option>
-                      ))}
+                      {children.map(
+                        (child) =>
+                          child && (
+                            <option key={child} value={child}>
+                              {child}
+                            </option>
+                          )
+                      )}
                     </select>
                     <button
                       className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
