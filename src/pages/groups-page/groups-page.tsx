@@ -7,7 +7,9 @@ import Modal from '../../components/modal/modal';
 import { useState } from 'react';
 
 export default function GroupsPage() {
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [isGroupModalActive, setIsGroupModalActive] = useState(false);
+  const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
+  const [isExitModalActive, setIsExitModalActive] = useState(false);
   return (
     <>
       <Header>
@@ -76,7 +78,7 @@ export default function GroupsPage() {
           </ul>
         </nav>
       </Header>
-      <Modal isActive={isModalActive} isCentral={false}>
+      <Modal isActive={isGroupModalActive} isCentral={false}>
         <h2 className={baseStyles.modalTitle}>Настройка группы</h2>
         <div className={styles.groupsModalInputContainer}>
           <label
@@ -137,8 +139,8 @@ export default function GroupsPage() {
                       <path
                         d="M20 6L9 17L4 12"
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </button>
@@ -167,8 +169,8 @@ export default function GroupsPage() {
                       <path
                         d="M20 6L9 17L4 12"
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </button>
@@ -200,8 +202,8 @@ export default function GroupsPage() {
                       <path
                         d="M20 6L9 17L4 12"
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </button>
@@ -230,8 +232,8 @@ export default function GroupsPage() {
                       <path
                         d="M20 6L9 17L4 12"
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </button>
@@ -263,8 +265,8 @@ export default function GroupsPage() {
                       <path
                         d="M20 6L9 17L4 12"
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </button>
@@ -293,8 +295,8 @@ export default function GroupsPage() {
                       <path
                         d="M20 6L9 17L4 12"
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </button>
@@ -323,8 +325,8 @@ export default function GroupsPage() {
                       <path
                         d="M20 6L9 17L4 12"
                         stroke="black"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </button>
@@ -348,12 +350,13 @@ export default function GroupsPage() {
         >
           <button
             className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
-            onClick={() => setIsModalActive(false)}
+            onClick={() => setIsGroupModalActive(false)}
           >
             Сохранить изменения
           </button>
           <button
             className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            onClick={() => setIsDeleteModalActive(true)}
           >
             Удалить группу
           </button>
@@ -393,20 +396,20 @@ export default function GroupsPage() {
                 <path
                   d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
                   stroke="black"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M15 9L9 15"
                   stroke="black"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M9 9L15 15"
                   stroke="black"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>
@@ -429,20 +432,20 @@ export default function GroupsPage() {
                 <path
                   d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
                   stroke="black"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M15 9L9 15"
                   stroke="black"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M9 9L15 15"
                   stroke="black"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>
@@ -463,20 +466,20 @@ export default function GroupsPage() {
                 <path
                   d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
                   stroke="black"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M15 9L9 15"
                   stroke="black"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M9 9L15 15"
                   stroke="black"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>
@@ -485,7 +488,116 @@ export default function GroupsPage() {
         <button
           className={`${baseStyles.btn} ${baseStyles.modalClose}`}
           aria-label="Close modal"
-          onClick={() => setIsModalActive(false)}
+          onClick={() => setIsExitModalActive(true)}
+        >
+          <svg
+            width="26"
+            height="25"
+            viewBox="0 0 26 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="1"
+              y="0.500366"
+              width="24"
+              height="24"
+              rx="4.5"
+              stroke="black"
+            />
+            <path
+              d="M10 10L16 16"
+              stroke="black"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M16 10L10 16"
+              stroke="black"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      </Modal>
+      <Modal isActive={isDeleteModalActive} isCentral>
+        <h2 className={baseStyles.modalTitle}>
+          Вы действительно хотите удалить группу?
+        </h2>
+        <div className={baseStyles.inputGroup}>
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            onClick={() => setIsDeleteModalActive(false)}
+          >
+            Удалить
+          </button>
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            onClick={() => setIsDeleteModalActive(false)}
+          >
+            Отмена
+          </button>
+        </div>
+        <button
+          className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+          aria-label="Close modal"
+          onClick={() => setIsDeleteModalActive(false)}
+        >
+          <svg
+            width="26"
+            height="25"
+            viewBox="0 0 26 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="1"
+              y="0.500366"
+              width="24"
+              height="24"
+              rx="4.5"
+              stroke="black"
+            />
+            <path
+              d="M10 10L16 16"
+              stroke="black"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M16 10L10 16"
+              stroke="black"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      </Modal>
+      <Modal isActive={isExitModalActive} isCentral>
+        <h2 className={baseStyles.modalTitle}>
+          Изменения не сохранены. Вы действительно хотите выйти?
+        </h2>
+        <div className={baseStyles.inputGroup}>
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            onClick={() => {
+              setIsExitModalActive(false);
+              setIsGroupModalActive(false);
+            }}
+          >
+            Выйти
+          </button>
+          <button
+            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            onClick={() => setIsExitModalActive(false)}
+          >
+            Отмена
+          </button>
+        </div>
+        <button
+          className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+          aria-label="Close modal"
+          onClick={() => setIsExitModalActive(false)}
         >
           <svg
             width="26"
@@ -534,7 +646,7 @@ export default function GroupsPage() {
             />
             <button
               className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
-              onClick={() => setIsModalActive(true)}
+              onClick={() => setIsGroupModalActive(true)}
             >
               Создать
             </button>
@@ -563,7 +675,7 @@ export default function GroupsPage() {
               <button
                 className={`${baseStyles.btn} ${styles.groupsBtn}`}
                 aria-label="Edit group"
-                onClick={() => setIsModalActive(true)}
+                onClick={() => setIsGroupModalActive(true)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -592,7 +704,7 @@ export default function GroupsPage() {
               <button
                 className={`${baseStyles.btn} ${styles.groupsBtn}`}
                 aria-label="Edit group"
-                onClick={() => setIsModalActive(true)}
+                onClick={() => setIsGroupModalActive(true)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -621,7 +733,7 @@ export default function GroupsPage() {
               <button
                 className={`${baseStyles.btn} ${styles.groupsBtn}`}
                 aria-label="Edit group"
-                onClick={() => setIsModalActive(true)}
+                onClick={() => setIsGroupModalActive(true)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
