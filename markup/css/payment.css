@@ -1,6 +1,8 @@
 @import url(base.css);
 
 .paymentContainer {
+  display: flex;
+  justify-items: center;
   padding: 4rem 0;
 }
 

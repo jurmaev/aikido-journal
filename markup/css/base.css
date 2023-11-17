@@ -95,7 +95,7 @@ img {
   content: '';
   position: absolute;
   width: 0%;
-  height: 0.125rem;
+  height: 0.0625rem;
   display: block;
   transition: all 0.3s ease;
 }
@@ -232,8 +232,7 @@ img {
   }
 }
 
-
-.modalCenter{
+.modalCenter {
   position: absolute;
   top: 50%;
   left: 50%;
