@@ -271,6 +271,23 @@ img {
 }
 
 @media (max-width: 1024px) {
+  .logo {
+    width: 2.1875rem;
+    height: 2.1875rem;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .headerContainer {
+    padding: 0.625rem 0;
+  }
+
+  .headerBtn {
+    display: none;
+  }
+
   .inputGroup {
     flex-direction: column;
     gap: 1rem;
@@ -300,5 +317,24 @@ img {
     margin-bottom: 0.625rem;
     padding: 0.9375rem 0 0.9375rem 1.3125rem;
     font-size: 0.75rem;
+  }
+
+  .modalContent {
+    padding: 0.5rem;
+  }
+
+  .modalTitle {
+    margin-bottom: 0.125rem;
+    font-size: 0.9375rem;
+  }
+
+  .modalText {
+    margin-bottom: 0.125rem;
+    font-size: 0.6875rem;
+  }
+
+  .modalClose {
+    top: 0.5rem;
+    right: 0.5rem;
   }
 }
