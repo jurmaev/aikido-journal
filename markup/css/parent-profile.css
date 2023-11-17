@@ -4,11 +4,11 @@
   width: 50%;
 }
 
-.profile__container {
+.profileContainer {
   padding: 4rem 0;
 }
 
-.profile__title {
+.profileTitle {
   margin-bottom: 1.5625rem;
   font-size: 1.875rem;
   font-weight: 500;
@@ -17,27 +17,27 @@
   text-transform: uppercase;
 }
 
-.profile__info {
+.profileInfo {
   display: flex;
   margin-bottom: 1.5625rem;
 }
 
-.info__left,
-.info__right {
+.infoLeft,
+.infoRight {
   width: 50%;
 }
 
-.profile__text {
+.profileText {
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.43;
 }
 
-.profile__text:not(:last-child) {
+.profileText:not(:last-child) {
   margin-bottom: 0.625rem;
 }
 
-.payment__container {
+.paymentContainer {
   display: flex;
   align-items: center;
   width: 100%;
