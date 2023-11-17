@@ -51,6 +51,7 @@ img {
 
 .container {
   width: 75%;
+  max-width: 100rem;
   margin: 0 auto;
 }
 
@@ -267,4 +268,37 @@ img {
 .modalClose:hover svg path,
 .modalClose:hover svg rect {
   stroke: var(--black-600);
+}
+
+@media (max-width: 1024px) {
+  .inputGroup {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btnLarge {
+    padding: 0.875rem 0;
+    font-size: 0.875rem;
+  }
+
+  .formContainer {
+    min-width: initial;
+    width: 75%;
+  }
+
+  .formTitle {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .formLabel {
+    font-size: 0.815rem;
+    margin-bottom: 0.125rem;
+  }
+
+  .formInput {
+    margin-bottom: 0.625rem;
+    padding: 0.9375rem 0 0.9375rem 1.3125rem;
+    font-size: 0.75rem;
+  }
 }

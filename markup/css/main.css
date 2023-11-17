@@ -18,3 +18,20 @@
   font-weight: 400;
   line-height: 1.43;
 }
+
+@media (max-width: 1024px) {
+  .mainContainer {
+    padding: 2.5rem 0;
+  }
+
+  .mainTitle {
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    letter-spacing: -1px;
+  }
+
+  .mainText {
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+  }
+}

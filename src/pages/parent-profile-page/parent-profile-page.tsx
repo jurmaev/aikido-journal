@@ -64,7 +64,7 @@ export default function ParentProfilePage() {
           </div>
           <div className={baseStyles.inputGroup}>
             <div className={styles.paymentContainer}>
-              Задолженность по оплате: 750 рублей
+              Задолженность: 750 рублей
             </div>
             <button
               className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
