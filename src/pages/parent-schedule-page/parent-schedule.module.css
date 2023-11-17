@@ -84,10 +84,14 @@ tr .tableCell:last-child {
 }
 
 .tableTime {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 0.5rem;
   border: 0.0625rem solid var(--black);
   border-radius: 0.3125rem;
+  background-color: var(--blue-500);
   text-align: center;
   font-size: 0.6875rem;
   font-weight: 400;

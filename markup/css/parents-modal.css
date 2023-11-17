@@ -1,10 +1,10 @@
 @import url(base.css);
 
-.text--red {
+.textRed {
   color: var(--red-700);
 }
 
-.parents-modal__input {
+.parentsModalInput {
   margin: 0;
   width: 100%;
 }

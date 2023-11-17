@@ -1,20 +1,37 @@
 @import url(./base.css);
 
-.main__container {
+.mainContainer {
   text-align: center;
   padding: 10rem 0;
 }
 
-.main__title {
+.mainTitle {
   margin-bottom: 1.5rem;
   font-size: 2.25rem;
   font-weight: 600;
   line-height: 1.25;
 }
 
-.main__text {
+.mainText {
   margin-bottom: 1.5rem;
   font-size: 1.3125rem;
   font-weight: 400;
   line-height: 1.43;
+}
+
+@media (max-width: 1024px) {
+  .mainContainer {
+    padding: 2.5rem 0;
+  }
+
+  .mainTitle {
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    letter-spacing: -1px;
+  }
+
+  .mainText {
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+  }
 }
