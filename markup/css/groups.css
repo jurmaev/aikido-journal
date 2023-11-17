@@ -42,6 +42,8 @@
 }
 
 .groupsBtn {
+  display: flex;
+  align-items: center;
   margin-left: 0.25rem;
 }
 
@@ -51,4 +53,33 @@
 
 .groupsBtn:hover svg path {
   stroke: var(--black-600);
+}
+
+@media (max-width: 1024px) {
+  .groupsContainer {
+    padding: 2.5rem 0;
+  }
+
+  .groupsTitle {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .groupsLabel {
+    font-size: 0.9375rem;
+  }
+
+  .groupsInputGroup {
+    margin-top: 0.125rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .groupsItem {
+    font-size: 0.8125rem;
+  }
+
+  .groupsBtn {
+    width: 0.8125rem;
+    height: 0.8125rem;
+  }
 }
