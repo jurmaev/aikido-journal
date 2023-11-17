@@ -17,4 +17,10 @@ export const children = [
     surname: 'Иванов',
     patronymic: 'Степанович',
   },
+  {
+    id: '29383267-fd86-4a01-aa81-979315c8f644',
+    name: 'Иван',
+    surname: 'Терешенко',
+    patronymic: 'Петрович',
+  }
 ];

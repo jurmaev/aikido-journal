@@ -6,10 +6,42 @@ import Header from '../../components/header/header';
 import Modal from '../../components/modal/modal';
 import { useState } from 'react';
 import { parents } from '../../mocks/parents';
+import { children } from '../../mocks/children';
+import { Child } from '../../types/children';
 
 export default function ParentsPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  const children = parents.map((parent) => parent.child);
+  const [parentsState, setParentsState] = useState(parents);
+  const [sortValue, setSortValue] = useState('');
+  const [selectValue, setSelectValue] = useState({ parentId: '', childId: '' });
+
+  function handleSortClick() {
+    if (sortValue !== '') {
+      setParentsState(
+        parents.filter((parent) =>
+          parent.name.toLowerCase().includes(sortValue)
+        )
+      );
+    } else {
+      setParentsState(parents);
+    }
+  }
+
+  function handleSelectClick() {
+    const nextParentsState = [...parentsState];
+    const parent = nextParentsState.find(
+      (parent) => parent.id === selectValue.parentId
+    )!;
+
+    const child = children.find(
+      (child) => child.id === selectValue.childId
+    ) as Child;
+    parent.child = {
+      id: child.id,
+      fullName: `${child.surname} ${child.name} ${child.patronymic}`,
+    };
+    setParentsState(nextParentsState);
+  }
 
   return (
     <>
@@ -93,9 +125,11 @@ export default function ParentsPage() {
               className={`${baseStyles.formInput} ${styles.formInput}`}
               id="search"
               placeholder="Введите ФИО родителя"
+              onChange={(evt) => setSortValue(evt.target.value)}
             />
             <button
               className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+              onClick={handleSortClick}
             >
               Поиск
             </button>
@@ -108,8 +142,8 @@ export default function ParentsPage() {
               </tr>
             </thead>
             <tbody>
-              {parents.map((parent) => [
-                <tr key={`${parent.phone}-item`}>
+              {parentsState.map((parent) => [
+                <tr key={`${parent.id}-item`}>
                   <td className={styles.parentsData}>
                     <div className={styles.parentsDataContainer}>
                       {parent.name}
@@ -155,11 +189,13 @@ export default function ParentsPage() {
                     }`}
                   >
                     <div className={styles.parentsDataContainer}>
-                      {parent.child ? parent.child : 'ребёнок не закреплён'}
+                      {parent.child
+                        ? parent.child.fullName
+                        : 'ребёнок не закреплён'}
                       <button
                         className={`${baseStyles.btn} ${styles.parentsBtn}`}
                         aria-label="Edit"
-                        onClick={() => setActiveModal(parent.phone)}
+                        onClick={() => setActiveModal(parent.id)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -186,8 +222,8 @@ export default function ParentsPage() {
                   </td>
                 </tr>,
                 <Modal
-                  key={`${parent.phone}-modal`}
-                  isActive={parent.phone === activeModal}
+                  key={`${parent.id}-modal`}
+                  isActive={parent.id === activeModal}
                   isCentral
                 >
                   <h2 className={baseStyles.modalTitle}>
@@ -204,20 +240,27 @@ export default function ParentsPage() {
                     <select
                       className={`${baseStyles.formInput} ${styles.parentsModalInput}`}
                       aria-label="Children select"
-                      defaultValue={parent.child}
+                      defaultValue={parent.child?.id ? parent.child?.id : ''}
+                      onChange={(evt) => {
+                        setSelectValue({
+                          ...selectValue,
+                          childId: evt.target.value,
+                        });
+                      }}
                     >
                       <option value="">Выберите ребёнка</option>
                       {children.map(
                         (child) =>
                           child && (
-                            <option key={child} value={child}>
-                              {child}
+                            <option key={child.id} value={child.id}>
+                              {`${child.surname} ${child.name} ${child.patronymic}`}
                             </option>
                           )
                       )}
                     </select>
                     <button
                       className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+                      onClick={handleSelectClick}
                     >
                       Закрепить за родителем
                     </button>

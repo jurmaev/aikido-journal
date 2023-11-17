@@ -1,67 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Список групп">
-    <title>Группы</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/groups.css" />
-  </head>
-  <body>
-    <header class="header">
-      <div class="container header__container">
-        <a href="#"
-          ><img src="./img/logo.svg" alt="Aikido journal logo" class="logo"
-        /></a>
-        <nav class="nav">
-          <ul class="nav__list">
-            <li class="nav__item"><a href="#">Дети</a></li>
-            <li class="nav__item"><a href="#">Родители</a></li>
-            <li class="nav__item"><a href="#">Группы</a></li>
-            <li class="nav__item"><a href="#">Посещаемость</a></li>
-            <li class="nav__item"><a href="#">Задолженность</a></li>
-          </ul>
-        </nav>
-        <button class="btn btn--blue btn--small header__btn">Войти</button>
-      </div>
-    </header>
-    <main>
-      <div class="container groups__container">
-        <h1 class="groups__title">Группы</h1>
-        <label for="group" class="groups__label"
-          >Создать группу</label
-        >
-        <div class="input-group groups-input-group">
-          <input type="text" class="form__input groups__input" id="group" placeholder="Придумайте название группы" />
-          <button class="btn btn--red btn--large">Создать</button>
-        </div>
-        <label for="list" class="groups__label">Список групп</label>
-        <div class="input-group groups-input-group">
-          <input type="text" class="form__input groups__input" id="list" placeholder="Введите название группы"/>
-          <button class="btn btn--blue btn--large">Поиск</button>
-        </div>
-        <ul class="groups__list">
-          <li class="groups__item"><span>Группа 1</span><button class="btn groups__btn" aria-label="Edit group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M11.9404 20.0002H20.8062" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16.254 3.50023C16.6459 3.1024 17.1774 2.87891 17.7316 2.87891C18.006 2.87891 18.2778 2.93378 18.5313 3.04038C18.7848 3.14699 19.0152 3.30324 19.2092 3.50023C19.4033 3.69721 19.5572 3.93106 19.6622 4.18843C19.7672 4.4458 19.8213 4.72165 19.8213 5.00023C19.8213 5.2788 19.7672 5.55465 19.6622 5.81202C19.5572 6.06939 19.4033 6.30324 19.2092 6.50023L6.89567 19.0002L2.95532 20.0002L3.94041 16.0002L16.254 3.50023Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg></button></li>
-          <li class="groups__item"><span>Группа 2</span><button class="btn groups__btn" aria-label="Edit group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M11.9404 20.0002H20.8062" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16.254 3.50023C16.6459 3.1024 17.1774 2.87891 17.7316 2.87891C18.006 2.87891 18.2778 2.93378 18.5313 3.04038C18.7848 3.14699 19.0152 3.30324 19.2092 3.50023C19.4033 3.69721 19.5572 3.93106 19.6622 4.18843C19.7672 4.4458 19.8213 4.72165 19.8213 5.00023C19.8213 5.2788 19.7672 5.55465 19.6622 5.81202C19.5572 6.06939 19.4033 6.30324 19.2092 6.50023L6.89567 19.0002L2.95532 20.0002L3.94041 16.0002L16.254 3.50023Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg></button></li>
-          <li class="groups__item"><span>Группа 3</span><button class="btn groups__btn" aria-label="Edit group"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M11.9404 20.0002H20.8062" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M16.254 3.50023C16.6459 3.1024 17.1774 2.87891 17.7316 2.87891C18.006 2.87891 18.2778 2.93378 18.5313 3.04038C18.7848 3.14699 19.0152 3.30324 19.2092 3.50023C19.4033 3.69721 19.5572 3.93106 19.6622 4.18843C19.7672 4.4458 19.8213 4.72165 19.8213 5.00023C19.8213 5.2788 19.7672 5.55465 19.6622 5.81202C19.5572 6.06939 19.4033 6.30324 19.2092 6.50023L6.89567 19.0002L2.95532 20.0002L3.94041 16.0002L16.254 3.50023Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg></button></li>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Список групп">
+  <title>Группы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/groups.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header__container">
+      <a href="#"><img src="./img/logo.svg" alt="Aikido journal logo" class="logo" /></a>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#">Дети</a></li>
+          <li class="nav__item"><a href="#">Родители</a></li>
+          <li class="nav__item"><a href="#">Группы</a></li>
+          <li class="nav__item"><a href="#">Посещаемость</a></li>
+          <li class="nav__item"><a href="#">Задолженность</a></li>
         </ul>
+      </nav>
+      <button class="btn btn--blue btn--small header__btn">Войти</button>
+    </div>
+  </header>
+  <main>
+    <div class="container groups__container">
+      <h1 class="groups__title">Группы</h1>
+      <label for="group" class="groups__label">Создать группу</label>
+      <div class="input-group groups-input-group">
+        <input type="text" class="form__input groups__input" id="group" placeholder="Придумайте название группы" />
+        <button class="btn btn--red btn--large">Создать</button>
       </div>
-    </main>
-  </body>
+      <label for="list" class="groups__label">Список групп</label>
+      <div class="input-group groups-input-group">
+        <input type="text" class="form__input groups__input" id="list" placeholder="Введите название группы" />
+        <button class="btn btn--blue btn--large">Поиск</button>
+      </div>
+      <ul class="groups__list">
+        <li class="groups__item"><span>Группа 1</span><button class="btn groups__btn" aria-label="Edit group"><svg
+              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M11.9404 20.0002H20.8062" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M16.254 3.50023C16.6459 3.1024 17.1774 2.87891 17.7316 2.87891C18.006 2.87891 18.2778 2.93378 18.5313 3.04038C18.7848 3.14699 19.0152 3.30324 19.2092 3.50023C19.4033 3.69721 19.5572 3.93106 19.6622 4.18843C19.7672 4.4458 19.8213 4.72165 19.8213 5.00023C19.8213 5.2788 19.7672 5.55465 19.6622 5.81202C19.5572 6.06939 19.4033 6.30324 19.2092 6.50023L6.89567 19.0002L2.95532 20.0002L3.94041 16.0002L16.254 3.50023Z"
+                stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></button></li>
+        <li class="groups__item"><span>Группа 2</span><button class="btn groups__btn" aria-label="Edit group"><svg
+              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M11.9404 20.0002H20.8062" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M16.254 3.50023C16.6459 3.1024 17.1774 2.87891 17.7316 2.87891C18.006 2.87891 18.2778 2.93378 18.5313 3.04038C18.7848 3.14699 19.0152 3.30324 19.2092 3.50023C19.4033 3.69721 19.5572 3.93106 19.6622 4.18843C19.7672 4.4458 19.8213 4.72165 19.8213 5.00023C19.8213 5.2788 19.7672 5.55465 19.6622 5.81202C19.5572 6.06939 19.4033 6.30324 19.2092 6.50023L6.89567 19.0002L2.95532 20.0002L3.94041 16.0002L16.254 3.50023Z"
+                stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></button></li>
+        <li class="groups__item"><span>Группа 3</span><button class="btn groups__btn" aria-label="Edit group"><svg
+              xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M11.9404 20.0002H20.8062" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M16.254 3.50023C16.6459 3.1024 17.1774 2.87891 17.7316 2.87891C18.006 2.87891 18.2778 2.93378 18.5313 3.04038C18.7848 3.14699 19.0152 3.30324 19.2092 3.50023C19.4033 3.69721 19.5572 3.93106 19.6622 4.18843C19.7672 4.4458 19.8213 4.72165 19.8213 5.00023C19.8213 5.2788 19.7672 5.55465 19.6622 5.81202C19.5572 6.06939 19.4033 6.30324 19.2092 6.50023L6.89567 19.0002L2.95532 20.0002L3.94041 16.0002L16.254 3.50023Z"
+                stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></button></li>
+      </ul>
+    </div>
+  </main>
+</body>
+
 </html>
