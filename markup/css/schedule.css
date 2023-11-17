@@ -88,3 +88,29 @@ tr td:last-child {
   font-weight: 400;
   line-height: 1.6;
 }
+
+@media (max-width: 1024px) {
+  .scheduleContainer {
+    padding: 2.5rem 0;
+  }
+
+  .scheduleTitle {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .scheduleText {
+    font-size: 0.8125rem;
+    margin-bottom: 0.125rem;
+  }
+
+  .tableHeader {
+    padding: 0.25rem 0;
+    font-size: 0.75rem;
+  }
+
+  .tableCellContainer {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.5rem;
+  }
+}
