@@ -1,542 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Посещаемость детей" />
-    <title>Посещаемость</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/attendance.css" />
-  </head>
-  <body>
-    <header class="header">
-      <div class="container header__container">
-        <a href="#"
-          ><img src="./img/logo.svg" alt="Aikido journal logo" class="logo"
-        /></a>
-        <nav class="nav">
-          <ul class="nav__list">
-            <li class="nav__item"><a href="#">Дети</a></li>
-            <li class="nav__item"><a href="#">Родители</a></li>
-            <li class="nav__item"><a href="#">Группы</a></li>
-            <li class="nav__item"><a href="#">Посещаемость</a></li>
-            <li class="nav__item"><a href="#">Задолженность</a></li>
-          </ul>
-        </nav>
-        <button class="btn btn--blue btn--small header__btn" aria-label="Войти">
-          Войти
-        </button>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Посещаемость детей" />
+  <title>Посещаемость</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/attendance.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header__container">
+      <a href="#"><img src="./img/logo.svg" alt="Aikido journal logo" class="logo" /></a>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#">Дети</a></li>
+          <li class="nav__item"><a href="#">Родители</a></li>
+          <li class="nav__item"><a href="#">Группы</a></li>
+          <li class="nav__item"><a href="#">Посещаемость</a></li>
+          <li class="nav__item"><a href="#">Задолженность</a></li>
+        </ul>
+      </nav>
+      <button class="btn btn--blue btn--small header__btn" aria-label="Войти">
+        Войти
+      </button>
+    </div>
+  </header>
+  <main>
+    <div class="container attendance__container">
+      <h1 class="attendance__title">Посещаемость</h1>
+      <div class="input-group attendance__input-group">
+        <select name="group" id="group" class="form__input attendance__select" aria-label="Select group">
+          <option value="">Выберите группу</option>
+        </select>
+        <select name="month" id="month" class="form__input attendance__select" aria-label="Select month">
+          <option value="">Выберите месяц</option>
+        </select>
       </div>
-    </header>
-    <main>
-      <div class="container attendance__container">
-        <h1 class="attendance__title">Посещаемость</h1>
-        <div class="input-group attendance__input-group">
-          <select
-            name="group"
-            id="group"
-            class="form__input attendance__select"
-            aria-label="Select group"
-          >
-            <option value="">Выберите группу</option>
-          </select>
-          <select
-            name="month"
-            id="month"
-            class="form__input attendance__select"
-            aria-label="Select month"
-          >
-            <option value="">Выберите месяц</option>
-          </select>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th class="table__header">
-                <div class="table-header__container">
-                  ФИО ребенка:
-                  <button class="table__arrow" aria-label="Previous week">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="10"
-                      height="19"
-                      viewBox="0 0 10 19"
-                      fill="none"
-                    >
-                      <path
-                        d="M9.5 1L1 9.5L9.5 18"
-                        stroke="black"
-                        stroke-linecap="round"
-                      />
-                    </svg></button
-                  ><button class="table__arrow" aria-label="Next week">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="11"
-                      height="19"
-                      viewBox="0 0 11 19"
-                      fill="none"
-                    >
-                      <path
-                        d="M1 18L9.5 9.5L1 1"
-                        stroke="black"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </th>
-              <th class="table__header">
-                <div>06.11</div>
-                <div>пн</div>
-              </th>
-              <th class="table__header table__header--inactive">
-                <div>07.11</div>
-                <div>вт</div>
-              </th>
-              <th class="table__header">
-                <div>08.11</div>
-                <div>ср</div>
-              </th>
-              <th class="table__header table__header--inactive">
-                <div>09.11</div>
-                <div>чт</div>
-              </th>
-              <th class="table__header">
-                <div>10.11</div>
-                <div>пт</div>
-              </th>
-              <th class="table__header table__header--inactive">
-                <div>11.11</div>
-                <div>сб</div>
-              </th>
-              <th class="table__header table__header--inactive">
-                <div>12.11</div>
-                <div>вс</div>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="table__cell">Абрамов Пётр Иванович</td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
+      <table>
+        <thead>
+          <tr>
+            <th class="table__header">
+              <div class="table-header__container">
+                ФИО ребенка:
+                <button class="table__arrow" aria-label="Previous week">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="19" viewBox="0 0 10 19" fill="none">
+                    <path d="M9.5 1L1 9.5L9.5 18" stroke="black" stroke-linecap="round" />
+                  </svg></button><button class="table__arrow" aria-label="Next week">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="19" viewBox="0 0 11 19" fill="none">
+                    <path d="M1 18L9.5 9.5L1 1" stroke="black" stroke-linecap="round" />
                   </svg>
                 </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button
-                  class="table__check table__check--checked"
-                  aria-label="Check"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button
-                  class="table__check table__check--checked"
-                  aria-label="Check"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td class="table__cell">Иванов Александр Степанович</td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button
-                  class="table__check table__check--checked"
-                  aria-label="Check"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button
-                  class="table__check table__check--checked"
-                  aria-label="Check"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td class="table__cell">Курочкин Владислав Игорьевич</td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button
-                  class="table__check table__check--checked"
-                  aria-label="Check"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button
-                  class="table__check table__check--checked"
-                  aria-label="Check"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td class="table__cell">
-                <button class="table__check" aria-label="Check" disabled>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                  >
-                    <path
-                      d="M15 4.5L6.75 12.75L3 9"
-                      stroke="black"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <button
-          class="btn btn--red btn--large"
-          aria-label="Сохранить изменения"
-        >
-          Сохранить изменения
-        </button>
-      </div>
-    </main>
-  </body>
+              </div>
+            </th>
+            <th class="table__header">
+              <div>06.11</div>
+              <div>пн</div>
+            </th>
+            <th class="table__header table__header--inactive">
+              <div>07.11</div>
+              <div>вт</div>
+            </th>
+            <th class="table__header">
+              <div>08.11</div>
+              <div>ср</div>
+            </th>
+            <th class="table__header table__header--inactive">
+              <div>09.11</div>
+              <div>чт</div>
+            </th>
+            <th class="table__header">
+              <div>10.11</div>
+              <div>пт</div>
+            </th>
+            <th class="table__header table__header--inactive">
+              <div>11.11</div>
+              <div>сб</div>
+            </th>
+            <th class="table__header table__header--inactive">
+              <div>12.11</div>
+              <div>вс</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="table__cell">Абрамов Пётр Иванович</td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check table__check--checked" aria-label="Check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check table__check--checked" aria-label="Check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td class="table__cell">Иванов Александр Степанович</td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check table__check--checked" aria-label="Check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check table__check--checked" aria-label="Check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td class="table__cell">Курочкин Владислав Игорьевич</td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check table__check--checked" aria-label="Check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check table__check--checked" aria-label="Check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+            <td class="table__cell">
+              <button class="table__check" aria-label="Check" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 4.5L6.75 12.75L3 9" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn--red btn--large" aria-label="Сохранить изменения">
+        Сохранить изменения
+      </button>
+    </div>
+  </main>
+</body>
+
 </html>

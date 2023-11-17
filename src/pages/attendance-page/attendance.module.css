@@ -1,0 +1,164 @@
+.attendanceContainer {
+  padding: 4rem 0;
+}
+
+.attendanceTitle {
+  margin-bottom: 1.25rem;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 1.43;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.attendanceInputGroup {
+  margin-bottom: 1.25rem;
+}
+
+.attendanceSelect {
+  width: 100%;
+  margin: 0;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  margin-bottom: 1.25rem;
+}
+
+.tableHeader {
+  padding: 0.25rem 0 0.25rem;
+  border: 0.0625rem solid var(--black);
+  font-weight: 400;
+}
+
+.tableHeader:first-child {
+  position: relative;
+  padding: 0;
+}
+
+.tableHeader:not(:first-child) {
+  text-transform: uppercase;
+}
+
+.tableHeaderInactive {
+  color: var(--black-300);
+}
+
+.tableHeaderContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+}
+
+.tableArrow {
+  height: 100%;
+  background-color: transparent;
+  padding: 0.625rem 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.tableArrow:hover {
+  background-color: var(--black-150);
+}
+
+.tableArrow:first-child {
+  margin-left: auto;
+  border-left: 0.125rem solid var(--black);
+  border-right: 0.125rem solid var(--black);
+}
+
+.tableCell {
+  padding: 0.25rem 0;
+  border: 0.0625rem solid var(--black);
+}
+
+.tableHeader:first-child,
+.tableCell:first-child {
+  width: 30%;
+  padding: 0.25rem 0.5rem;
+  text-align: left;
+}
+
+.tableHeader:not(:first-child),
+.tableHeader:not(:last-child) {
+  border-top-width: 0.125rem;
+}
+
+tr:last-child .tableCell {
+  border-bottom-width: 0.125rem;
+}
+
+.tableCell:first-child {
+  border-left-width: 0.125rem;
+}
+
+.tableCell:last-child {
+  border-right-width: 0.125rem;
+}
+
+tr th:first-child {
+  border-left-width: 0.125rem;
+  border-top-width: 0.125rem;
+  border-top-left-radius: 0.3125rem;
+}
+tr th:last-child {
+  border-top-width: 0.125rem;
+  border-right-width: 0.125rem;
+  border-top-right-radius: 0.3125rem;
+}
+tr:last-child td:first-child {
+  border-bottom-width: 0.125rem;
+  border-left-width: 0.125rem;
+  border-bottom-left-radius: 0.3125rem;
+}
+tr:last-child td:last-child {
+  border-bottom-width: 0.125rem;
+  border-right-width: 0.125rem;
+  border-bottom-right-radius: 0.3125rem;
+}
+
+.tableCheck {
+  display: flex;
+  align-items: center;
+  padding: 0.3125rem;
+  margin: 0 auto;
+  background-color: transparent;
+  border: 0.0625rem solid var(--black);
+  border-radius: 0.3125rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.tableCheck:hover {
+  background-color: var(--blue-200);
+}
+
+.tableCheck svg {
+  opacity: 0;
+}
+
+.tableCheck:disabled {
+  border-color: var(--black-300);
+  cursor: default;
+}
+
+.tableCheck:disabled {
+  background-color: transparent;
+}
+
+.tableCheckChecked {
+  background-color: var(--blue-500);
+}
+
+.tableCheckChecked svg {
+  opacity: 1;
+}
