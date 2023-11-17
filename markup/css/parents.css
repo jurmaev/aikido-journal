@@ -133,3 +133,40 @@ tr:last-child td:last-child {
   visibility: visible;
   opacity: 1;
 }
+
+@media (max-width: 1024px) {
+  .parentsContainer {
+    padding: 2.5rem 0;
+  }
+
+  .parentsHeader {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .parentsLabel {
+    font-size: 0.9375rem;
+  }
+
+  .parentsInputGroup {
+    gap: 0.5rem;
+    margin-top: 0.125rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .parentsData {
+    padding: 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  .parentsBtn {
+    width: 0.8125rem;
+    height: 0.8125rem;
+  }
+
+  .tooltip {
+    width: 7rem;
+    padding: 0.25rem;
+    font-size: 0.75rem;
+  }
+}
