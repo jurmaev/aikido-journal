@@ -1,54 +1,12 @@
-import { NavLink } from 'react-router-dom';
 import baseStyles from '../base.module.css';
 import styles from './parent-attendance.module.css';
-import { AppRoutes } from '../../const';
+import { NavItems } from '../../const';
 import Header from '../../components/header/header';
 
 export default function ParentAttendancePage() {
   return (
     <>
-      <Header>
-        <nav className={`${baseStyles.nav} ${styles.nav}`}>
-          <ul className={baseStyles.navList}>
-            <li>
-              <NavLink
-                to={AppRoutes.ParentProfile}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Профиль
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.ParentSchedule}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Расписание
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.ParentAttendance}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Посещаемость
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </Header>
+      <Header navItems={NavItems.Parent} />
       <main>
         <div
           className={`${baseStyles.container} ${styles.parentAttendanceContainer}`}

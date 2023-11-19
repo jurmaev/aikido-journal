@@ -83,8 +83,8 @@ table {
   border: 0.0625rem solid var(--black);
 }
 
-th:first-child,
-td:first-child {
+.tableHeader:first-child,
+.tableCell:first-child {
   width: 30%;
   padding: 0.25rem 0.5rem;
   text-align: left;

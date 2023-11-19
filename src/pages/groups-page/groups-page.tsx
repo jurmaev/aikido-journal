@@ -1,7 +1,6 @@
-import { NavLink } from 'react-router-dom';
 import baseStyles from '../base.module.css';
 import styles from './groups.module.css';
-import { AppRoutes } from '../../const';
+import { NavItems } from '../../const';
 import Header from '../../components/header/header';
 import Modal from '../../components/modal/modal';
 import { useState } from 'react';
@@ -12,72 +11,7 @@ export default function GroupsPage() {
   const [isExitModalActive, setIsExitModalActive] = useState(false);
   return (
     <>
-      <Header>
-        <nav className={baseStyles.nav}>
-          <ul className={baseStyles.navList}>
-            <li>
-              <NavLink
-                to={AppRoutes.Children}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Дети
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Parents}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Родители
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Groups}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Группы
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Attendance}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Посещаемость
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Payment}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Задолженность
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </Header>
+      <Header navItems={NavItems.Trainer} />
       <Modal isActive={isGroupModalActive} isCentral={false}>
         <h2 className={baseStyles.modalTitle}>Настройка группы</h2>
         <div className={styles.groupsModalInputContainer}>
