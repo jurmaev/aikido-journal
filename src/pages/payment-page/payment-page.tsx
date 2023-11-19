@@ -5,7 +5,7 @@ import Header from '../../components/header/header';
 export default function PaymentPage() {
   return (
     <>
-      <Header navItems={NavItems.Parent} />
+      <Header navItems={NavItems.Trainer} />
       <main>
         <div className={`${baseStyles.container} ${styles.paymentContainer}`}>
           <h1 className={styles.paymentTitle}>Задолженность</h1>

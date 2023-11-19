@@ -7,12 +7,14 @@ import { parents } from '../../mocks/parents';
 import { children } from '../../mocks/children';
 import { Child } from '../../types/children';
 import { NavItems } from '../../const';
+import { getShortName } from '../../utils/names';
 
 export default function ParentsPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [parentsState, setParentsState] = useState(parents);
   const [sortValue, setSortValue] = useState('');
   const [selectValue, setSelectValue] = useState({ parentId: '', childId: '' });
+  const isMobile = window.innerWidth < 1024;
 
   function handleSortClick() {
     if (sortValue !== '') {
@@ -83,7 +85,7 @@ export default function ParentsPage() {
                 <tr key={`${parent.id}-item`}>
                   <td className={styles.parentsData}>
                     <div className={styles.parentsDataContainer}>
-                      {parent.name}
+                      {isMobile ? getShortName(parent.name) : parent.name}
                       <button
                         className={`${baseStyles.btn} ${styles.parentsBtn}`}
                         aria-label="Info"
@@ -127,7 +129,9 @@ export default function ParentsPage() {
                   >
                     <div className={styles.parentsDataContainer}>
                       {parent.child
-                        ? parent.child.fullName
+                        ? isMobile
+                          ? getShortName(parent.child.fullName)
+                          : parent.child.fullName
                         : 'ребёнок не закреплён'}
                       <button
                         className={`${baseStyles.btn} ${styles.parentsBtn}`}

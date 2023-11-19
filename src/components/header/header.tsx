@@ -29,6 +29,7 @@ export default function Header({ navItems }: HeaderProps) {
             <ul className={styles.navList}>
               {navItems.map((item) => (
                 <NavLink
+                  key={item.name}
                   to={item.link}
                   className={({ isActive }: { isActive: boolean }): string =>
                     isActive
