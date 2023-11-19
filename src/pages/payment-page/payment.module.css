@@ -39,3 +39,23 @@
   line-height: 1.43;
   font-weight: 400;
 }
+
+@media (max-width: 1024px) {
+  .paymentContainer {
+    padding: 2.5rem 0;
+  }
+
+  .paymentTitle {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .paymentSubtitle {
+    margin-bottom: 0.125rem;
+    font-size: 0.9375rem;
+  }
+
+  .paymentItem {
+    font-size: 0.8125rem;
+  }
+}

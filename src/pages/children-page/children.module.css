@@ -60,3 +60,37 @@
 .childrenIcon:hover path {
   stroke: var(--black-600);
 }
+
+@media (max-width: 1024px) {
+  .childrenContainer {
+    padding: 2.5rem 0;
+  }
+
+  .childrenTitle {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .childrenLabel {
+    font-size: 0.9375rem;
+  }
+
+  .childrenInputGroup {
+    gap: 0.5rem;
+    margin-top: 0.125rem;
+    margin-bottom: 1rem;
+  }
+
+  .childrenItem {
+    margin-bottom: 0;
+  }
+
+  .childrenText {
+    font-size: 0.8125rem;
+  }
+
+  .childrenIcon {
+    width: 0.9375rem;
+    height: 0.9375rem;
+  }
+}

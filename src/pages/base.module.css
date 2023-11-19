@@ -51,6 +51,7 @@ img {
 
 .container {
   width: 75%;
+  max-width: 100rem;
   margin: 0 auto;
 }
 
@@ -241,6 +242,7 @@ img {
 }
 
 .modalTitle {
+  max-width: calc(100% - 2rem);
   margin-bottom: 0.625rem;
   font-size: 1.5rem;
   font-weight: 400;
@@ -268,4 +270,73 @@ img {
 .modalClose:hover svg path,
 .modalClose:hover svg rect {
   stroke: var(--black-600);
+}
+
+@media (max-width: 1024px) {
+  .logo {
+    width: 2.1875rem;
+    height: 2.1875rem;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .headerContainer {
+    padding: 0.625rem 0;
+  }
+
+  .headerBtn {
+    display: none;
+  }
+
+  .inputGroup {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .btnLarge {
+    padding: 0.875rem 0;
+    font-size: 0.875rem;
+  }
+
+  .formContainer {
+    min-width: initial;
+    width: 75%;
+  }
+
+  .formTitle {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .formLabel {
+    font-size: 0.815rem;
+    margin-bottom: 0.125rem;
+  }
+
+  .formInput {
+    margin-bottom: 0.625rem;
+    padding: 0.9375rem 0 0.9375rem 1.3125rem;
+    font-size: 0.75rem;
+  }
+
+  .modalContent {
+    padding: 0.5rem;
+  }
+
+  .modalTitle {
+    margin-bottom: 0.125rem;
+    font-size: 0.9375rem;
+  }
+
+  .modalText {
+    margin-bottom: 0.125rem;
+    font-size: 0.6875rem;
+  }
+
+  .modalClose {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
 }

@@ -28,6 +28,7 @@ export default function ParentsPage() {
   }
 
   function handleSelectClick() {
+    if (selectValue.childId === '') return;
     const nextParentsState = [...parentsState];
     const parent = nextParentsState.find(
       (parent) => parent.id === selectValue.parentId
@@ -36,11 +37,13 @@ export default function ParentsPage() {
     const child = children.find(
       (child) => child.id === selectValue.childId
     ) as Child;
+
     parent.child = {
       id: child.id,
       fullName: `${child.surname} ${child.name} ${child.patronymic}`,
     };
     setParentsState(nextParentsState);
+    setActiveModal(null);
   }
 
   return (
@@ -245,6 +248,7 @@ export default function ParentsPage() {
                         setSelectValue({
                           ...selectValue,
                           childId: evt.target.value,
+                          parentId: parent.id,
                         });
                       }}
                     >

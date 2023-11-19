@@ -110,22 +110,25 @@ tr:last-child .tableCell {
 tr th:first-child {
   border-left-width: 0.125rem;
   border-top-width: 0.125rem;
-  border-top-left-radius: 0.625rem;
+  border-top-left-radius: 0.3125rem;
 }
+
 tr th:last-child {
   border-top-width: 0.125rem;
   border-right-width: 0.125rem;
-  border-top-right-radius: 0.625rem;
+  border-top-right-radius: 0.3125rem;
 }
+
 tr:last-child td:first-child {
   border-bottom-width: 0.125rem;
   border-left-width: 0.125rem;
-  border-bottom-left-radius: 0.625rem;
+  border-bottom-left-radius: 0.3125rem;
 }
+
 tr:last-child td:last-child {
   border-bottom-width: 0.125rem;
   border-right-width: 0.125rem;
-  border-bottom-right-radius: 0.625rem;
+  border-bottom-right-radius: 0.3125rem;
 }
 
 .tableCheck {
@@ -194,5 +197,19 @@ tr:last-child td:last-child {
 
   table {
     margin-bottom: 0.5rem;
+  }
+
+  .tableArrow {
+    padding: 0.375rem;
+  }
+
+  .tableArrow svg {
+    width: 0.3125rem;
+    height: 0.6875rem;
+  }
+
+  .tableHeader:first-child,
+  .tableCell:first-child {
+    width: 50%;
   }
 }

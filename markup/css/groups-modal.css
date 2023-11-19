@@ -44,25 +44,25 @@ table {
   border-bottom-width: 0.125rem;
 }
 
-tr th:first-child {
+tr .tableHeader:first-child {
   border-left-width: 0.125rem;
   border-top-width: 0.125rem;
-  border-top-left-radius: 0.625rem;
+  border-top-left-radius: 0.3125rem;
 }
-tr th:last-child {
+tr .tableHeader:last-child {
   border-top-width: 0.125rem;
   border-right-width: 0.125rem;
-  border-top-right-radius: 0.625rem;
+  border-top-right-radius: 0.3125rem;
 }
-tr td:first-child {
+tr .tableCell:first-child {
   border-bottom-width: 0.125rem;
   border-left-width: 0.125rem;
-  border-bottom-left-radius: 0.625rem;
+  border-bottom-left-radius: 0.3125rem;
 }
-tr td:last-child {
+tr .tableCell:last-child {
   border-bottom-width: 0.125rem;
   border-right-width: 0.125rem;
-  border-bottom-right-radius: 0.625rem;
+  border-bottom-right-radius: 0.3125rem;
 }
 
 .tableInput {
@@ -169,11 +169,11 @@ tr td:last-child {
   }
 
   .tableCellContainer {
-    padding: 0.5rem 0.25rem;
+    padding: 0.375rem 0.25rem;
   }
 
   .tableCheck {
-    padding: 0.25rem 0;
+    padding: 0 0.25rem;
   }
 
   .tableCheck svg {
@@ -183,6 +183,10 @@ tr td:last-child {
 
   .tableInput {
     padding: 0.25rem 0;
+    font-size: 0.4375rem;
+  }
+
+  .tableInput::placeholder {
     font-size: 0.3125rem;
   }
 
