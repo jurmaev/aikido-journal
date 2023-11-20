@@ -1,5 +1,7 @@
 import styles from '../base.module.css';
 import Header from '../../components/header/header';
+import cn from 'classnames';
+
 export default function LoginPage() {
   return (
     <>
@@ -26,9 +28,7 @@ export default function LoginPage() {
               id="password"
               placeholder="**********"
             />
-            <button
-              className={`${styles.btn} ${styles.btnBlue} ${styles.btnLarge}`}
-            >
+            <button className={cn(styles.btn, styles.btnBlue, styles.btnLarge)}>
               Войти
             </button>
           </div>

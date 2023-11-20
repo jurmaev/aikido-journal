@@ -3,6 +3,7 @@ import styles, { tableHeaderContainer } from './attendance.module.css';
 import { Days, NavItems } from '../../const';
 import Header from '../../components/header/header';
 import { attendance } from '../../mocks/attendance';
+import cn from 'classnames';
 
 export default function AttendancePage() {
   const isMobile = window.innerWidth < 1024;
@@ -15,17 +16,15 @@ export default function AttendancePage() {
     <>
       <Header navItems={NavItems.Trainer} />
       <main>
-        <div
-          className={`${baseStyles.container} ${styles.attendanceContainer}`}
-        >
-          <h1 className={`${styles.attendanceTitle}`}>Посещаемость</h1>
+        <div className={cn(baseStyles.container, styles.attendanceContainer)}>
+          <h1 className={styles.attendanceTitle}>Посещаемость</h1>
           <div
-            className={`${baseStyles.inputGroup} ${styles.attendanceInputGroup}`}
+            className={cn(baseStyles.inputGroup, styles.attendanceInputGroup)}
           >
             <select
               name="group"
               id="group"
-              className={`${baseStyles.formInput} ${styles.attendanceSelect}`}
+              className={cn(baseStyles.formInput, styles.attendanceSelect)}
               aria-label="Select group"
             >
               <option value="">Выберите группу</option>
@@ -38,7 +37,7 @@ export default function AttendancePage() {
             <select
               name="month"
               id="month"
-              className={`${baseStyles.formInput} ${styles.attendanceSelect}`}
+              className={cn(baseStyles.formInput, styles.attendanceSelect)}
               aria-label="Select month"
             >
               <option value="">Выберите месяц</option>
@@ -91,9 +90,9 @@ export default function AttendancePage() {
                 {currentAttendance.schedule.map((day) => (
                   <th
                     key={day.date}
-                    className={`${styles.tableHeader} ${
-                      !day.isTraining && styles.tableHeaderInactive
-                    }`}
+                    className={cn(styles.tableHeader, {
+                      [styles.tableHeaderInactive]: !day.isTraining,
+                    })}
                   >
                     <div>{`${new Date(day.date).getDate()}.${new Date(
                       day.date
@@ -110,9 +109,9 @@ export default function AttendancePage() {
                   {child.attendance.map((day) => (
                     <td key={day.date} className={styles.tableCell}>
                       <button
-                        className={`${styles.tableCheck} ${
-                          day.isTraining && styles.tableCheckChecked
-                        }`}
+                        className={cn(styles.tableCheck, {
+                          [styles.tableCheckChecked]: day.isTraining,
+                        })}
                         aria-label="Check"
                         disabled={day.isTraining === null}
                       >
@@ -138,7 +137,11 @@ export default function AttendancePage() {
             </tbody>
           </table>
           <button
-            className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            className={cn(
+              baseStyles.btn,
+              baseStyles.btnRed,
+              baseStyles.btnLarge
+            )}
             aria-label="Сохранить изменения"
           >
             Сохранить изменения

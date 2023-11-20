@@ -8,6 +8,7 @@ import { children } from '../../mocks/children';
 import { Child } from '../../types/children';
 import { NavItems } from '../../const';
 import { getShortName } from '../../utils/names';
+import cn from 'classnames';
 
 export default function ParentsPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
@@ -51,23 +52,25 @@ export default function ParentsPage() {
     <>
       <Header navItems={NavItems.Trainer} />
       <main>
-        <div className={`${baseStyles.container} ${styles.parentsContainer}`}>
+        <div className={cn(baseStyles.container, styles.parentsContainer)}>
           <h1 className={styles.parentsHeader}>Родители</h1>
           <label htmlFor="search" className={styles.parentsLabel}>
             Список (Родитель/Ребёнок)
           </label>
-          <div
-            className={`${baseStyles.inputGroup} ${styles.parentsInputGroup}`}
-          >
+          <div className={cn(baseStyles.inputGroup, styles.parentsInputGroup)}>
             <input
               type="text"
-              className={`${baseStyles.formInput} ${styles.formInput}`}
+              className={cn(baseStyles.formInput, styles.formInput)}
               id="search"
               placeholder="Введите ФИО родителя"
               onChange={(evt) => setSortValue(evt.target.value)}
             />
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
               onClick={handleSortClick}
             >
               Поиск
@@ -87,7 +90,7 @@ export default function ParentsPage() {
                     <div className={styles.parentsDataContainer}>
                       {isMobile ? getShortName(parent.name) : parent.name}
                       <button
-                        className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                        className={cn(baseStyles.btn, styles.parentsBtn)}
                         aria-label="Info"
                       >
                         <svg
@@ -123,9 +126,9 @@ export default function ParentsPage() {
                     </div>
                   </td>
                   <td
-                    className={`${styles.parentsData} ${
-                      !parent.child && styles.parentsDataEmpty
-                    }`}
+                    className={cn(styles.parentsData, {
+                      [styles.parentsDataEmpty]: !parent.child,
+                    })}
                   >
                     <div className={styles.parentsDataContainer}>
                       {parent.child
@@ -134,7 +137,7 @@ export default function ParentsPage() {
                           : parent.child.fullName
                         : 'ребёнок не закреплён'}
                       <button
-                        className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                        className={cn(baseStyles.btn, styles.parentsBtn)}
                         aria-label="Edit"
                         onClick={() => setActiveModal(parent.id)}
                       >
@@ -180,7 +183,10 @@ export default function ParentsPage() {
                   </p>
                   <div className={baseStyles.inputGroup}>
                     <select
-                      className={`${baseStyles.formInput} ${styles.parentsModalInput}`}
+                      className={cn(
+                        baseStyles.formInput,
+                        styles.parentsModalInput
+                      )}
                       aria-label="Children select"
                       defaultValue={parent.child?.id ? parent.child?.id : ''}
                       onChange={(evt) => {
@@ -202,14 +208,18 @@ export default function ParentsPage() {
                       )}
                     </select>
                     <button
-                      className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+                      className={cn(
+                        baseStyles.btn,
+                        baseStyles.btnBlue,
+                        baseStyles.btnLarge
+                      )}
                       onClick={handleSelectClick}
                     >
                       Закрепить за родителем
                     </button>
                   </div>
                   <button
-                    className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+                    className={cn(baseStyles.btn, baseStyles.modalClose)}
                     aria-label="Close modal"
                     onClick={() => setActiveModal(null)}
                   >

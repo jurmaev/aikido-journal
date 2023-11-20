@@ -3,6 +3,7 @@ import styles from '../../pages/base.module.css';
 import { AppRoutes } from '../../const';
 import logoSrc from './logo.svg';
 import { useState } from 'react';
+import cn from 'classnames';
 
 type HeaderProps = {
   navItems?: Array<{ name: string; link: string }>;
@@ -14,7 +15,7 @@ export default function Header({ navItems }: HeaderProps) {
 
   return (
     <header className={styles.header}>
-      <div className={`${styles.container} ${styles.headerContainer}`}>
+      <div className={cn(styles.container, styles.headerContainer)}>
         {!isNavActive && (
           <Link to={AppRoutes.Main} className={styles.logoLink}>
             <img
@@ -25,7 +26,7 @@ export default function Header({ navItems }: HeaderProps) {
           </Link>
         )}
         {navItems && (
-          <nav className={`${styles.nav} ${isNavActive && styles.active}`}>
+          <nav className={cn(styles.nav, { [styles.active]: isNavActive })}>
             <ul className={styles.navList}>
               {navItems.map((item) => (
                 <NavLink
@@ -83,7 +84,7 @@ export default function Header({ navItems }: HeaderProps) {
           </nav>
         )}
         <button
-          className={`${styles.btn} ${styles.btnBlue} ${styles.headerBtn}`}
+          className={cn(styles.btn, styles.btnBlue, styles.headerBtn)}
           onClick={() => navigate(AppRoutes.Login)}
         >
           Войти

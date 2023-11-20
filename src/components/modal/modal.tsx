@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import styles from '../../pages/base.module.css';
+import cn from 'classnames';
 
 type ModalProps = {
   isActive: boolean;
@@ -13,9 +14,9 @@ export default function Modal({ isActive, isCentral, children }: ModalProps) {
       {isActive && (
         <div className={styles.modal}>
           <div
-            className={`${styles.container} ${styles.modalContent} ${
-              isCentral && styles.modalCenter
-            }`}
+            className={cn(styles.container, styles.modalContent, {
+              [styles.modalCenter]: isCentral,
+            })}
           >
             {children}
           </div>

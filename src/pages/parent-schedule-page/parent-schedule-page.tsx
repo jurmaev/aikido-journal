@@ -2,13 +2,14 @@ import baseStyles from '../base.module.css';
 import styles from './parent-schedule.module.css';
 import { NavItems } from '../../const';
 import Header from '../../components/header/header';
+import cn from 'classnames';
 
 export default function ParentSchedulePage() {
   return (
     <>
       <Header navItems={NavItems.Parent} />
       <main>
-        <div className={`${baseStyles.container} ${styles.scheduleContainer}`}>
+        <div className={cn(baseStyles.container, styles.scheduleContainer)}>
           <h1 className={styles.scheduleTitle}>Расписание</h1>
           <p className={styles.scheduleText}>Ребёнок: Абрамов Пётр Иванович</p>
           <p className={styles.scheduleText}>Название группы: Группа1</p>

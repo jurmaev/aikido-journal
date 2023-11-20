@@ -2,6 +2,7 @@ import baseStyles from '../base.module.css';
 import styles from './parent-attendance.module.css';
 import { NavItems } from '../../const';
 import Header from '../../components/header/header';
+import cn from 'classnames';
 
 export default function ParentAttendancePage() {
   return (
@@ -9,11 +10,14 @@ export default function ParentAttendancePage() {
       <Header navItems={NavItems.Parent} />
       <main>
         <div
-          className={`${baseStyles.container} ${styles.parentAttendanceContainer}`}
+          className={cn(baseStyles.container, styles.parentAttendanceContainer)}
         >
           <h1 className={styles.parentAttendanceTitle}>Посещаемость</h1>
           <div
-            className={`${baseStyles.inputGroup} ${styles.parentAttendanceInputGroup}`}
+            className={cn(
+              baseStyles.inputGroup,
+              styles.parentAttendanceInputGroup
+            )}
           >
             <select
               name="month"
@@ -24,7 +28,11 @@ export default function ParentAttendancePage() {
               <option value="">Выберите месяц</option>
             </select>
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
             >
               Применить
             </button>
@@ -78,7 +86,7 @@ export default function ParentAttendancePage() {
                   <div>пн</div>
                 </th>
                 <th
-                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
+                  className={cn(styles.tableHeader, styles.tableHeaderInactive)}
                 >
                   <div>07.11</div>
                   <div>вт</div>
@@ -88,7 +96,7 @@ export default function ParentAttendancePage() {
                   <div>ср</div>
                 </th>
                 <th
-                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
+                  className={cn(styles.tableHeader, styles.tableHeaderInactive)}
                 >
                   <div>09.11</div>
                   <div>чт</div>
@@ -98,13 +106,13 @@ export default function ParentAttendancePage() {
                   <div>пт</div>
                 </th>
                 <th
-                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
+                  className={cn(styles.tableHeader, styles.tableHeaderInactive)}
                 >
                   <div>11.11</div>
                   <div>сб</div>
                 </th>
                 <th
-                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
+                  className={cn(styles.tableHeader, styles.tableHeaderInactive)}
                 >
                   <div>12.11</div>
                   <div>вс</div>
@@ -117,7 +125,10 @@ export default function ParentAttendancePage() {
                 <td className={styles.tableCell}>
                   <div className={styles.tableCellContainer}>
                     <div
-                      className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
+                      className={cn(
+                        styles.tableCheck,
+                        styles.tableCheckChecked
+                      )}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +150,10 @@ export default function ParentAttendancePage() {
                 <td className={styles.tableCell}>
                   <div className={styles.tableCellContainer}>
                     <div
-                      className={`${styles.tableCheck} ${styles.tableCheckDisabled}`}
+                      className={cn(
+                        styles.tableCheck,
+                        styles.tableCheckDisabled
+                      )}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -187,7 +201,10 @@ export default function ParentAttendancePage() {
                 <td className={styles.tableCell}>
                   <div className={styles.tableCellContainer}>
                     <div
-                      className={`${styles.tableCheck} ${styles.tableCheckDisabled}`}
+                      className={cn(
+                        styles.tableCheck,
+                        styles.tableCheckDisabled
+                      )}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -209,7 +226,10 @@ export default function ParentAttendancePage() {
                 <td className={styles.tableCell}>
                   <div className={styles.tableCellContainer}>
                     <div
-                      className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
+                      className={cn(
+                        styles.tableCheck,
+                        styles.tableCheckChecked
+                      )}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -231,7 +251,10 @@ export default function ParentAttendancePage() {
                 <td className={styles.tableCell}>
                   <div className={styles.tableCellContainer}>
                     <div
-                      className={`${styles.tableCheck} ${styles.tableCheckDisabled}`}
+                      className={cn(
+                        styles.tableCheck,
+                        styles.tableCheckDisabled
+                      )}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +276,10 @@ export default function ParentAttendancePage() {
                 <td className={styles.tableCell}>
                   <div className={styles.tableCellContainer}>
                     <div
-                      className={`${styles.tableCheck} ${styles.tableCheckDisabled}`}
+                      className={cn(
+                        styles.tableCheck,
+                        styles.tableCheckDisabled
+                      )}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

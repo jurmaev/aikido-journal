@@ -2,12 +2,14 @@ import styles from './parent-profile.module.css';
 import baseStyles from '../base.module.css';
 import { NavItems } from '../../const';
 import Header from '../../components/header/header';
+import cn from 'classnames';
+
 export default function ParentProfilePage() {
   return (
     <>
       <Header navItems={NavItems.Parent} />
       <main>
-        <div className={`${baseStyles.container} ${styles.profileContainer}`}>
+        <div className={cn(baseStyles.container, styles.profileContainer)}>
           <h1 className={styles.profileTitle}>Профиль</h1>
           <div className={styles.profileInfo}>
             <div className={styles.infoLeft}>
@@ -25,7 +27,11 @@ export default function ParentProfilePage() {
               Задолженность: 750 рублей
             </div>
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnRed,
+                baseStyles.btnLarge
+              )}
             >
               Оплатить онлайн
             </button>

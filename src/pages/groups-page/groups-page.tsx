@@ -4,6 +4,7 @@ import { NavItems } from '../../const';
 import Header from '../../components/header/header';
 import Modal from '../../components/modal/modal';
 import { useState } from 'react';
+import cn from 'classnames';
 
 export default function GroupsPage() {
   const [isGroupModalActive, setIsGroupModalActive] = useState(false);
@@ -17,7 +18,7 @@ export default function GroupsPage() {
         <div className={styles.groupsModalInputContainer}>
           <label
             htmlFor="group"
-            className={`${baseStyles.modalText} ${styles.groupsModalText}`}
+            className={cn(baseStyles.modalText, styles.groupsModalText)}
           >
             Название группы:
           </label>
@@ -31,7 +32,7 @@ export default function GroupsPage() {
         <div className={styles.groupsModalInputContainer}>
           <label
             htmlFor="cost"
-            className={`${baseStyles.modalText} ${styles.groupsModalText}`}
+            className={cn(baseStyles.modalText, styles.groupsModalText)}
           >
             Цена за занятие в ₽:
           </label>
@@ -60,7 +61,7 @@ export default function GroupsPage() {
               <td className={styles.tableCell}>
                 <div className={styles.tableCellContainer}>
                   <button
-                    className={`${styles.tableCheck} ${styles.tableCheckActive}`}
+                    className={cn(styles.tableCheck, styles.tableCheckActive)}
                     aria-label="Check"
                   >
                     <svg
@@ -123,7 +124,7 @@ export default function GroupsPage() {
               <td className={styles.tableCell}>
                 <div className={styles.tableCellContainer}>
                   <button
-                    className={`${styles.tableCheck} ${styles.tableCheckActive}`}
+                    className={cn(styles.tableCheck, styles.tableCheckActive)}
                     aria-label="Check"
                   >
                     <svg
@@ -186,7 +187,7 @@ export default function GroupsPage() {
               <td className={styles.tableCell}>
                 <div className={styles.tableCellContainer}>
                   <button
-                    className={`${styles.tableCheck} ${styles.tableCheckActive}`}
+                    className={cn(styles.tableCheck, styles.tableCheckActive)}
                     aria-label="Check"
                   >
                     <svg
@@ -280,16 +281,24 @@ export default function GroupsPage() {
           </tbody>
         </table>
         <div
-          className={`${baseStyles.inputGroup} ${styles.groupsModalInputGroup}`}
+          className={cn(baseStyles.inputGroup, styles.groupsModalInputGroup)}
         >
           <button
-            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            className={cn(
+              baseStyles.btn,
+              baseStyles.btnBlue,
+              baseStyles.btnLarge
+            )}
             onClick={() => setIsGroupModalActive(false)}
           >
             Сохранить изменения
           </button>
           <button
-            className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            className={cn(
+              baseStyles.btn,
+              baseStyles.btnRed,
+              baseStyles.btnLarge
+            )}
             onClick={() => setIsDeleteModalActive(true)}
           >
             Удалить группу
@@ -297,7 +306,7 @@ export default function GroupsPage() {
         </div>
         <h2 className={baseStyles.modalTitle}>Список детей</h2>
         <div
-          className={`${baseStyles.inputGroup} ${styles.groupsModalInputGroup}`}
+          className={cn(baseStyles.inputGroup, styles.groupsModalInputGroup)}
         >
           <select
             name="children"
@@ -308,7 +317,11 @@ export default function GroupsPage() {
             <option value="">Выберите ребёнка</option>
           </select>
           <button
-            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            className={cn(
+              baseStyles.btn,
+              baseStyles.btnBlue,
+              baseStyles.btnLarge
+            )}
           >
             Добавить в группу
           </button>
@@ -317,7 +330,7 @@ export default function GroupsPage() {
           <li className={styles.item}>
             <span className={styles.itemText}>Абрамов Пётр Иванович</span>
             <button
-              className={`${baseStyles.btn} ${styles.listBtn}`}
+              className={cn(baseStyles.btn, styles.listBtn)}
               aria-label="Delete child"
             >
               <svg
@@ -353,7 +366,7 @@ export default function GroupsPage() {
               Курочкин Владислав Игорьевич
             </span>
             <button
-              className={`${baseStyles.btn} ${styles.listBtn}`}
+              className={cn(baseStyles.btn, styles.listBtn)}
               aria-label="Delete child"
             >
               <svg
@@ -387,7 +400,7 @@ export default function GroupsPage() {
           <li className={styles.item}>
             <span className={styles.itemText}>Иванов Александр Степанович</span>
             <button
-              className={`${baseStyles.btn} ${styles.listBtn}`}
+              className={cn(baseStyles.btn, styles.listBtn)}
               aria-label="Delete child"
             >
               <svg
@@ -420,7 +433,7 @@ export default function GroupsPage() {
           </li>
         </ul>
         <button
-          className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+          className={cn(baseStyles.btn, baseStyles.modalClose)}
           aria-label="Close modal"
           onClick={() => setIsExitModalActive(true)}
         >
@@ -460,20 +473,28 @@ export default function GroupsPage() {
         </h2>
         <div className={baseStyles.inputGroup}>
           <button
-            className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            className={cn(
+              baseStyles.btn,
+              baseStyles.btnRed,
+              baseStyles.btnLarge
+            )}
             onClick={() => setIsDeleteModalActive(false)}
           >
             Удалить
           </button>
           <button
-            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            className={cn(
+              baseStyles.btn,
+              baseStyles.btnBlue,
+              baseStyles.btnLarge
+            )}
             onClick={() => setIsDeleteModalActive(false)}
           >
             Отмена
           </button>
         </div>
         <button
-          className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+          className={cn(baseStyles.btn, baseStyles.modalClose)}
           aria-label="Close modal"
           onClick={() => setIsDeleteModalActive(false)}
         >
@@ -513,7 +534,11 @@ export default function GroupsPage() {
         </h2>
         <div className={baseStyles.inputGroup}>
           <button
-            className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+            className={cn(
+              baseStyles.btn,
+              baseStyles.btnRed,
+              baseStyles.btnLarge
+            )}
             onClick={() => {
               setIsExitModalActive(false);
               setIsGroupModalActive(false);
@@ -522,14 +547,18 @@ export default function GroupsPage() {
             Выйти
           </button>
           <button
-            className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+            className={cn(
+              baseStyles.btn,
+              baseStyles.btnBlue,
+              baseStyles.btnLarge
+            )}
             onClick={() => setIsExitModalActive(false)}
           >
             Отмена
           </button>
         </div>
         <button
-          className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+          className={cn(baseStyles.btn, baseStyles.modalClose)}
           aria-label="Close modal"
           onClick={() => setIsExitModalActive(false)}
         >
@@ -564,22 +593,24 @@ export default function GroupsPage() {
         </button>
       </Modal>
       <main>
-        <div className={`${baseStyles.container} ${styles.groupsContainer}`}>
+        <div className={cn(baseStyles.container, styles.groupsContainer)}>
           <h1 className={styles.groupsTitle}>Группы</h1>
           <label htmlFor="group" className={styles.groupsLabel}>
             Создать группу
           </label>
-          <div
-            className={`${baseStyles.inputGroup} ${styles.groupsInputGroup}`}
-          >
+          <div className={cn(baseStyles.inputGroup, styles.groupsInputGroup)}>
             <input
               type="text"
-              className={`${baseStyles.formInput} ${styles.groupsInput}`}
+              className={cn(baseStyles.formInput, styles.groupsInput)}
               id="group"
               placeholder="Придумайте название группы"
             />
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnRed,
+                baseStyles.btnLarge
+              )}
               onClick={() => setIsGroupModalActive(true)}
             >
               Создать
@@ -588,17 +619,19 @@ export default function GroupsPage() {
           <label htmlFor="list" className={styles.groupsLabel}>
             Список групп
           </label>
-          <div
-            className={`${baseStyles.inputGroup} ${styles.groupsInputGroup}`}
-          >
+          <div className={cn(baseStyles.inputGroup, styles.groupsInputGroup)}>
             <input
               type="text"
-              className={`${baseStyles.formInput} ${styles.groupsInput}`}
+              className={cn(baseStyles.formInput, styles.groupsInput)}
               id="list"
               placeholder="Введите название группы"
             />
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
             >
               Поиск
             </button>
@@ -607,7 +640,7 @@ export default function GroupsPage() {
             <li className={styles.groupsItem}>
               <span>Группа 1</span>
               <button
-                className={`${baseStyles.btn} ${styles.groupsBtn}`}
+                className={cn(baseStyles.btn, styles.groupsBtn)}
                 aria-label="Edit group"
                 onClick={() => setIsGroupModalActive(true)}
               >
@@ -636,7 +669,7 @@ export default function GroupsPage() {
             <li className={styles.groupsItem}>
               <span>Группа 2</span>
               <button
-                className={`${baseStyles.btn} ${styles.groupsBtn}`}
+                className={cn(baseStyles.btn, styles.groupsBtn)}
                 aria-label="Edit group"
                 onClick={() => setIsGroupModalActive(true)}
               >
@@ -665,7 +698,7 @@ export default function GroupsPage() {
             <li className={styles.groupsItem}>
               <span>Группа 3</span>
               <button
-                className={`${baseStyles.btn} ${styles.groupsBtn}`}
+                className={cn(baseStyles.btn, styles.groupsBtn)}
                 aria-label="Edit group"
                 onClick={() => setIsGroupModalActive(true)}
               >

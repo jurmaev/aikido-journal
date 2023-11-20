@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Modal from '../../components/modal/modal';
 import { children } from '../../mocks/children';
 import { Child } from '../../types/children';
+import cn from 'classnames';
 
 function getFullName(child: Child): string {
   return `${child.surname} ${child.name} ${child.patronymic}`;
@@ -53,23 +54,25 @@ export default function ChildrenPage() {
     <>
       <Header navItems={NavItems.Trainer} />
       <main>
-        <div className={`${baseStyles.container} ${styles.childrenContainer}`}>
+        <div className={cn(baseStyles.container, styles.childrenContainer)}>
           <h1 className={styles.childrenTitle}>Дети</h1>
           <label htmlFor="child" className={styles.childrenLabel}>
             Добавить ребёнка
           </label>
-          <div
-            className={`${baseStyles.inputGroup} ${styles.childrenInputGroup}`}
-          >
+          <div className={cn(baseStyles.inputGroup, styles.childrenInputGroup)}>
             <input
               type="text"
-              className={`${baseStyles.formInput} ${styles.childrenInput}`}
+              className={cn(baseStyles.formInput, styles.childrenInput)}
               id="child"
               placeholder="Введите ФИО ребёнка"
               onChange={(evt) => setAddInput(evt.target.value)}
             />
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnRed,
+                baseStyles.btnLarge
+              )}
               onClick={handleAddClick}
             >
               Добавить ребёнка
@@ -78,18 +81,20 @@ export default function ChildrenPage() {
           <label htmlFor="search" className={styles.childrenLabel}>
             Список детей
           </label>
-          <div
-            className={`${baseStyles.inputGroup} ${styles.childrenInputGroup}`}
-          >
+          <div className={cn(baseStyles.inputGroup, styles.childrenInputGroup)}>
             <input
               type="text"
-              className={`${baseStyles.formInput} ${styles.childrenInput}`}
+              className={cn(baseStyles.formInput, styles.childrenInput)}
               id="search"
               placeholder="Введите ФИО ребёнка"
               onChange={(evt) => setSortValue(evt.target.value)}
             />
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
               onClick={handleSortClick}
             >
               Поиск
@@ -143,14 +148,22 @@ export default function ChildrenPage() {
                 </p>
                 <div className={baseStyles.inputGroup}>
                   <button
-                    className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+                    className={cn(
+                      baseStyles.btn,
+                      baseStyles.btnRed,
+                      baseStyles.btnLarge
+                    )}
                     aria-label="Удалить"
                     onClick={() => handleDeleteClick(child.id)}
                   >
                     Удалить
                   </button>
                   <button
-                    className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+                    className={cn(
+                      baseStyles.btn,
+                      baseStyles.btnBlue,
+                      baseStyles.btnLarge
+                    )}
                     aria-label="Отменить"
                     onClick={() => setActiveModal(null)}
                   >
@@ -158,7 +171,7 @@ export default function ChildrenPage() {
                   </button>
                 </div>
                 <button
-                  className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+                  className={cn(baseStyles.btn, baseStyles.modalClose)}
                   aria-label="Close modal"
                   onClick={() => setActiveModal(null)}
                 >
