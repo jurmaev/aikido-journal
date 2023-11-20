@@ -26,3 +26,5 @@ export const NavItems = {
     { name: 'Задолженность', link: AppRoutes.Payment },
   ],
 };
+
+export const Days = ['вс','пн','вт','ср','чт','пт','сб']

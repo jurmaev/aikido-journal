@@ -171,7 +171,8 @@ export default function ParentsPage() {
                     Закрепить ребёнка за родителем
                   </h2>
                   <p className={baseStyles.modalText}>
-                    ФИО родителя: {parent.name}
+                    ФИО родителя:{' '}
+                    {isMobile ? getShortName(parent.name) : parent.name}
                   </p>
                   <p className={baseStyles.modalText}>
                     ФИО ребёнка:{' '}

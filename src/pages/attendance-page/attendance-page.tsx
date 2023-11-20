@@ -1,8 +1,16 @@
 import baseStyles from '../base.module.css';
 import styles, { tableHeaderContainer } from './attendance.module.css';
-import { NavItems } from '../../const';
+import { Days, NavItems } from '../../const';
 import Header from '../../components/header/header';
+import { attendance } from '../../mocks/attendance';
+
 export default function AttendancePage() {
+  const isMobile = window.innerWidth < 1024;
+  const currentAttendance = attendance[0];
+  const groups = attendance.map((groupAttendance) => {
+    return { id: groupAttendance.id, name: groupAttendance.name };
+  });
+
   return (
     <>
       <Header navItems={NavItems.Trainer} />
@@ -21,6 +29,11 @@ export default function AttendancePage() {
               aria-label="Select group"
             >
               <option value="">Выберите группу</option>
+              {groups.map((group) => (
+                <option key={group.id} value={group.id}>
+                  {group.name}
+                </option>
+              ))}
             </select>
             <select
               name="month"
@@ -75,502 +88,53 @@ export default function AttendancePage() {
                     </button>
                   </div>
                 </th>
-                <th className={styles.tableHeader}>
-                  <div>06.11</div>
-                  <div>пн</div>
-                </th>
-                <th
-                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
-                >
-                  <div>07.11</div>
-                  <div>вт</div>
-                </th>
-                <th className={styles.tableHeader}>
-                  <div>08.11</div>
-                  <div>ср</div>
-                </th>
-                <th
-                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
-                >
-                  <div>09.11</div>
-                  <div>чт</div>
-                </th>
-                <th className={styles.tableHeader}>
-                  <div>10.11</div>
-                  <div>пт</div>
-                </th>
-                <th
-                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
-                >
-                  <div>11.11</div>
-                  <div>сб</div>
-                </th>
-                <th
-                  className={`${styles.tableHeader} ${styles.tableHeaderInactive}`}
-                >
-                  <div>12.11</div>
-                  <div>вс</div>
-                </th>
+                {currentAttendance.schedule.map((day) => (
+                  <th
+                    key={day.date}
+                    className={`${styles.tableHeader} ${
+                      !day.isTraining && styles.tableHeaderInactive
+                    }`}
+                  >
+                    <div>{`${new Date(day.date).getDate()}.${new Date(
+                      day.date
+                    ).getMonth()}`}</div>
+                    <div>{Days[new Date(day.date).getDay()]}</div>
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className={styles.tableCell}>Абрамов Пётр Иванович</td>
-                <td className={styles.tableCell}>
-                  <button className={styles.tableCheck} aria-label="Check">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
-                    aria-label="Check"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
-                    aria-label="Check"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td className={styles.tableCell}>
-                  Иванов Александр Степанович
-                </td>
-                <td className={styles.tableCell}>
-                  <button className={styles.tableCheck} aria-label="Check">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
-                    aria-label="Check"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
-                    aria-label="Check"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td className={styles.tableCell}>
-                  Курочкин Владислав Игорьевич
-                </td>
-                <td className={styles.tableCell}>
-                  <button className={styles.tableCheck} aria-label="Check">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
-                    aria-label="Check"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={`${styles.tableCheck} ${styles.tableCheckChecked}`}
-                    aria-label="Check"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-                <td className={styles.tableCell}>
-                  <button
-                    className={styles.tableCheck}
-                    aria-label="Check"
-                    disabled
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 4.5L6.75 12.75L3 9"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
+              {currentAttendance.children.map((child) => (
+                <tr key={child.id}>
+                  <td className={styles.tableCell}>{child.name}</td>
+                  {child.attendance.map((day) => (
+                    <td key={day.date} className={styles.tableCell}>
+                      <button
+                        className={`${styles.tableCheck} ${
+                          day.isTraining && styles.tableCheckChecked
+                        }`}
+                        aria-label="Check"
+                        disabled={day.isTraining === null}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                        >
+                          <path
+                            d="M15 4.5L6.75 12.75L3 9"
+                            stroke="black"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
           <button
