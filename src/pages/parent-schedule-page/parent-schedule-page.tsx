@@ -5,6 +5,31 @@ import Header from '../../components/header/header';
 import cn from 'classnames';
 import { schedule } from '../../mocks/parent-schedule';
 
+function getHeader(day: string, index: number) {
+  return (
+    <th key={index} className={styles.tableHeader}>
+      {day}
+    </th>
+  );
+}
+
+function getCell(day: {
+  day: string;
+  time: { startTime: string; endTime: string } | null;
+}) {
+  return (
+    <td key={day.day} className={styles.tableCell}>
+      <div className={styles.tableCellContainer}>
+        {day.time && (
+          <div className={styles.tableTime}>
+            {day.time.startTime} - {day.time.endTime}
+          </div>
+        )}
+      </div>
+    </td>
+  );
+}
+
 export default function ParentSchedulePage() {
   const isMobile = window.innerWidth < 1024;
   const days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс '];
@@ -24,33 +49,17 @@ export default function ParentSchedulePage() {
           <table>
             <thead>
               <tr>
-                {days.map(
-                  (day, index) =>
-                    isMobile &&
-                    schedule[index].time && (
-                      <th key={index} className={styles.tableHeader}>
-                        {day}
-                      </th>
-                    )
+                {days.map((day, index) =>
+                  isMobile
+                    ? schedule[index].time && getHeader(day, index)
+                    : getHeader(day, index)
                 )}
               </tr>
             </thead>
             <tbody>
               <tr>
-                {schedule.map(
-                  (item) =>
-                    isMobile &&
-                    item.time && (
-                      <td key={item.day} className={styles.tableCell}>
-                        <div className={styles.tableCellContainer}>
-                          {item.time && (
-                            <div className={styles.tableTime}>
-                              {item.time.startTime} - {item.time.endTime}
-                            </div>
-                          )}
-                        </div>
-                      </td>
-                    )
+                {schedule.map((item) =>
+                  isMobile ? item.time && getCell(item) : getCell(item)
                 )}
               </tr>
             </tbody>
