@@ -1,105 +1,59 @@
 import styles from './payment.module.css';
 import baseStyles from '../base.module.css';
-import { NavLink } from 'react-router-dom';
-import { AppRoutes } from '../../const';
+import { NavItems } from '../../const';
 import Header from '../../components/header/header';
+import cn from 'classnames';
+import { payment } from '../../mocks/payment';
+import { getShortName } from '../../utils/names';
+import { useState } from 'react';
+
 export default function PaymentPage() {
+  const isMobile = window.innerWidth < 1024;
+  const [paymentState, setPaymentState] = useState(payment);
+  const [filterValue, setFilterValue] = useState('');
+
+  function handleFilterClick() {
+    if (filterValue === '') {
+      setPaymentState(payment);
+    } else {
+      setPaymentState(
+        payment.filter((item) => item.name.toLowerCase().includes(filterValue))
+      );
+    }
+  }
+
   return (
     <>
-      <Header>
-        <nav className={baseStyles.nav}>
-          <ul className={baseStyles.navList}>
-            <li>
-              <NavLink
-                to={AppRoutes.Children}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Дети
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Parents}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Родители
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Groups}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Группы
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Attendance}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Посещаемость
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Payment}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Задолженность
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </Header>
+      <Header navItems={NavItems.Trainer} />
       <main>
-        <div className={`${baseStyles.container} ${styles.paymentContainer}`}>
+        <div className={cn(baseStyles.container, styles.paymentContainer)}>
           <h1 className={styles.paymentTitle}>Задолженность</h1>
           <h2 className={styles.paymentSubtitle}>Задолженность по оплате</h2>
-          <div
-            className={`${baseStyles.inputGroup} ${styles.paymentInputGroup}`}
-          >
+          <div className={cn(baseStyles.inputGroup, styles.paymentInputGroup)}>
             <input
-              className={`${baseStyles.formInput} ${styles.paymentInput}`}
+              className={cn(baseStyles.formInput, styles.paymentInput)}
               type="text"
               placeholder="Введите ФИО родителя"
+              onChange={(evt) => setFilterValue(evt.target.value)}
             />
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
+              onClick={handleFilterClick}
             >
               Поиск
             </button>
           </div>
           <ul className={styles.paymentList}>
-            <li className={styles.paymentItem}>
-              Абрамова Маргарита Львовна : 1750 рублей
-            </li>
-            <li className={styles.paymentItem}>
-              Курочкина Светлана Алексеевна : 1000 рублей
-            </li>
-            <li className={styles.paymentItem}>
-              Иванова Наталья Сергеевна : 500 рублей
-            </li>
+            {paymentState.map((item) => (
+              <li key={item.id} className={styles.paymentItem}>
+                {isMobile ? getShortName(item.name) : item.name} : {item.debt}{' '}
+                рублей
+              </li>
+            ))}
           </ul>
         </div>
       </main>

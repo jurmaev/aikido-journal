@@ -56,40 +56,67 @@ tr th:first-child {
   border-top-width: 0.125rem;
   border-top-left-radius: 0.3125rem;
 }
+
 tr th:last-child {
   border-top-width: 0.125rem;
   border-right-width: 0.125rem;
-  border-top-right-radius: 0.3125rem;
+  border-top-right-radius: 0.625rem;
 }
+
 tr .tableCell:first-child {
   border-bottom-width: 0.125rem;
   border-left-width: 0.125rem;
   border-bottom-left-radius: 0.3125rem;
 }
+
 tr .tableCell:last-child {
   border-bottom-width: 0.125rem;
   border-right-width: 0.125rem;
   border-bottom-right-radius: 0.3125rem;
 }
 
-.tableCheck {
+.tableTime {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0.375rem;
-  background-color: var(--blue-500);
-  border: 0.0625rem solid var(--black);
-  border-radius: 0.3125rem;
-}
-
-.tableTime {
-  width: 100%;
   padding: 0.5rem;
   border: 0.0625rem solid var(--black);
   border-radius: 0.3125rem;
+  background-color: var(--blue-500);
   text-align: center;
   font-size: 0.6875rem;
   font-weight: 400;
   line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .scheduleContainer {
+    padding: 2.5rem 0;
+  }
+
+  .scheduleTitle {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .scheduleText {
+    font-size: 0.8125rem;
+    margin-bottom: 0.125rem;
+  }
+
+  .tableHeader {
+    padding: 0.25rem 0;
+    font-size: 0.75rem;
+  }
+
+  .tableCellContainer {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.5rem;
+  }
+
+  .tableTime {
+    padding: 0.25rem;
+    font-size: 0.5625rem;
+  }
 }

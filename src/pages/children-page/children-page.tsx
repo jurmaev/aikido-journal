@@ -1,99 +1,79 @@
-import { NavLink } from 'react-router-dom';
 import baseStyles from '../base.module.css';
 import styles from './children.module.css';
-import { AppRoutes } from '../../const';
+import { NavItems } from '../../const';
 import Header from '../../components/header/header';
 import { useState } from 'react';
 import Modal from '../../components/modal/modal';
 import { children } from '../../mocks/children';
+import { Child } from '../../types/children';
+import cn from 'classnames';
+
+function getFullName(child: Child): string {
+  return `${child.surname} ${child.name} ${child.patronymic}`;
+}
 
 export default function ChildrenPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
+  const [childrenState, setChildrenState] = useState(children);
+  const [addInput, setAddInput] = useState('');
+  const [sortValue, setSortValue] = useState('');
+
+  function appendChild(fullName: string) {
+    const [surname, name, patronymic] = fullName.split(' ');
+    setChildrenState(
+      childrenState.concat({
+        id: crypto.randomUUID(),
+        name: name,
+        surname: surname,
+        patronymic: patronymic ? patronymic : '',
+      })
+    );
+  }
+
+  function handleAddClick() {
+    appendChild(addInput);
+  }
+
+  function handleDeleteClick(id: string) {
+    setChildrenState(childrenState.filter((child) => child.id !== id));
+  }
+
+  function handleSortClick() {
+    if (sortValue !== '') {
+      setChildrenState(
+        children.filter((child) =>
+          getFullName(child).toLowerCase().includes(sortValue)
+        )
+      );
+    } else {
+      setChildrenState(children);
+    }
+  }
+
   return (
     <>
-      <Header>
-        <nav className={baseStyles.nav}>
-          <ul className={baseStyles.navList}>
-            <li>
-              <NavLink
-                to={AppRoutes.Children}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Дети
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Parents}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Родители
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Groups}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Группы
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Attendance}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Посещаемость
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Payment}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Задолженность
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </Header>
+      <Header navItems={NavItems.Trainer} />
       <main>
-        <div className={`${baseStyles.container} ${styles.childrenContainer}`}>
+        <div className={cn(baseStyles.container, styles.childrenContainer)}>
           <h1 className={styles.childrenTitle}>Дети</h1>
           <label htmlFor="child" className={styles.childrenLabel}>
             Добавить ребёнка
           </label>
-          <div
-            className={`${baseStyles.inputGroup} ${styles.childrenInputGroup}`}
-          >
+          <div className={cn(baseStyles.inputGroup, styles.childrenInputGroup)}>
             <input
               type="text"
-              className={`${baseStyles.formInput} ${styles.childrenInput}`}
+              className={cn(baseStyles.formInput, styles.childrenInput)}
               id="child"
               placeholder="Введите ФИО ребёнка"
+              onChange={(evt) => setAddInput(evt.target.value)}
             />
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnRed,
+                baseStyles.btnLarge
+              )}
+              onClick={handleAddClick}
             >
               Добавить ребёнка
             </button>
@@ -101,27 +81,33 @@ export default function ChildrenPage() {
           <label htmlFor="search" className={styles.childrenLabel}>
             Список детей
           </label>
-          <div
-            className={`${baseStyles.inputGroup} ${styles.childrenInputGroup}`}
-          >
+          <div className={cn(baseStyles.inputGroup, styles.childrenInputGroup)}>
             <input
               type="text"
-              className={`${baseStyles.formInput} ${styles.childrenInput}`}
+              className={cn(baseStyles.formInput, styles.childrenInput)}
               id="search"
               placeholder="Введите ФИО ребёнка"
+              onChange={(evt) => setSortValue(evt.target.value)}
             />
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
+              onClick={handleSortClick}
             >
               Поиск
             </button>
           </div>
           <ul className={styles.childrenList}>
-            {children.map((child) => [
-              <li key={`${child}-item`} className={styles.childrenItem}>
-                <span className={styles.childrenText}>{child}</span>
+            {childrenState.map((child) => [
+              <li key={`${child.id}-item`} className={styles.childrenItem}>
+                <span className={styles.childrenText}>
+                  {getFullName(child)}
+                </span>
                 <svg
-                  onClick={() => setActiveModal(child)}
+                  onClick={() => setActiveModal(child.id)}
                   className={styles.childrenIcon}
                   width="24"
                   height="24"
@@ -150,23 +136,34 @@ export default function ChildrenPage() {
                 </svg>
               </li>,
               <Modal
-                key={`${child}-modal`}
-                isActive={activeModal === child}
+                key={`${child.id}-modal`}
+                isActive={activeModal === child.id}
                 isCentral
               >
                 <h2 className={baseStyles.modalTitle}>
                   Вы действительно хотите удалить ребенка?
                 </h2>
-                <p className={baseStyles.modalText}>ФИО: {child}</p>
+                <p className={baseStyles.modalText}>
+                  ФИО: {getFullName(child)}
+                </p>
                 <div className={baseStyles.inputGroup}>
                   <button
-                    className={`${baseStyles.btn} ${baseStyles.btnRed} ${baseStyles.btnLarge}`}
+                    className={cn(
+                      baseStyles.btn,
+                      baseStyles.btnRed,
+                      baseStyles.btnLarge
+                    )}
                     aria-label="Удалить"
+                    onClick={() => handleDeleteClick(child.id)}
                   >
                     Удалить
                   </button>
                   <button
-                    className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+                    className={cn(
+                      baseStyles.btn,
+                      baseStyles.btnBlue,
+                      baseStyles.btnLarge
+                    )}
                     aria-label="Отменить"
                     onClick={() => setActiveModal(null)}
                   >
@@ -174,7 +171,7 @@ export default function ChildrenPage() {
                   </button>
                 </div>
                 <button
-                  className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+                  className={cn(baseStyles.btn, baseStyles.modalClose)}
                   aria-label="Close modal"
                   onClick={() => setActiveModal(null)}
                 >

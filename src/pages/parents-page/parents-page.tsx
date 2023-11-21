@@ -1,101 +1,77 @@
 import styles from './parents.module.css';
 import baseStyles from '../base.module.css';
-import { NavLink } from 'react-router-dom';
-import { AppRoutes } from '../../const';
 import Header from '../../components/header/header';
 import Modal from '../../components/modal/modal';
 import { useState } from 'react';
 import { parents } from '../../mocks/parents';
+import { children } from '../../mocks/children';
+import { Child } from '../../types/children';
+import { NavItems } from '../../const';
+import { getShortName } from '../../utils/names';
+import cn from 'classnames';
 
 export default function ParentsPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  const children = parents.map((parent) => parent.child);
+  const [parentsState, setParentsState] = useState(parents);
+  const [sortValue, setSortValue] = useState('');
+  const [selectValue, setSelectValue] = useState({ parentId: '', childId: '' });
+  const isMobile = window.innerWidth < 1024;
+
+  function handleSortClick() {
+    if (sortValue !== '') {
+      setParentsState(
+        parents.filter((parent) =>
+          parent.name.toLowerCase().includes(sortValue)
+        )
+      );
+    } else {
+      setParentsState(parents);
+    }
+  }
+
+  function handleSelectClick() {
+    if (selectValue.childId === '') return;
+    const nextParentsState = [...parentsState];
+    const parent = nextParentsState.find(
+      (parent) => parent.id === selectValue.parentId
+    )!;
+
+    const child = children.find(
+      (child) => child.id === selectValue.childId
+    ) as Child;
+
+    parent.child = {
+      id: child.id,
+      fullName: `${child.surname} ${child.name} ${child.patronymic}`,
+    };
+    setParentsState(nextParentsState);
+    setActiveModal(null);
+  }
 
   return (
     <>
-      <Header>
-        <nav className={baseStyles.nav}>
-          <ul className={baseStyles.navList}>
-            <li>
-              <NavLink
-                to={AppRoutes.Children}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Дети
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Parents}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Родители
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Groups}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Группы
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Attendance}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Посещаемость
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={AppRoutes.Payment}
-                className={({ isActive }: { isActive: boolean }): string =>
-                  isActive
-                    ? `${baseStyles.navItem} ${baseStyles.navItemActive}`
-                    : baseStyles.navItem
-                }
-              >
-                Задолженность
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </Header>
+      <Header navItems={NavItems.Trainer} />
       <main>
-        <div className={`${baseStyles.container} ${styles.parentsContainer}`}>
+        <div className={cn(baseStyles.container, styles.parentsContainer)}>
           <h1 className={styles.parentsHeader}>Родители</h1>
           <label htmlFor="search" className={styles.parentsLabel}>
             Список (Родитель/Ребёнок)
           </label>
-          <div
-            className={`${baseStyles.inputGroup} ${styles.parentsInputGroup}`}
-          >
+          <div className={cn(baseStyles.inputGroup, styles.parentsInputGroup)}>
             <input
               type="text"
-              className={`${baseStyles.formInput} ${styles.formInput}`}
+              className={cn(baseStyles.formInput, styles.formInput)}
               id="search"
               placeholder="Введите ФИО родителя"
+              onChange={(evt) => setSortValue(evt.target.value)}
             />
             <button
-              className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
+              onClick={handleSortClick}
             >
               Поиск
             </button>
@@ -108,13 +84,13 @@ export default function ParentsPage() {
               </tr>
             </thead>
             <tbody>
-              {parents.map((parent) => [
-                <tr key={`${parent.phone}-item`}>
+              {parentsState.map((parent) => [
+                <tr key={`${parent.id}-item`}>
                   <td className={styles.parentsData}>
                     <div className={styles.parentsDataContainer}>
-                      {parent.name}
+                      {isMobile ? getShortName(parent.name) : parent.name}
                       <button
-                        className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                        className={cn(baseStyles.btn, styles.parentsBtn)}
                         aria-label="Info"
                       >
                         <svg
@@ -150,16 +126,20 @@ export default function ParentsPage() {
                     </div>
                   </td>
                   <td
-                    className={`${styles.parentsData} ${
-                      !parent.child && styles.parentsDataEmpty
-                    }`}
+                    className={cn(styles.parentsData, {
+                      [styles.parentsDataEmpty]: !parent.child,
+                    })}
                   >
                     <div className={styles.parentsDataContainer}>
-                      {parent.child ? parent.child : 'ребёнок не закреплён'}
+                      {parent.child
+                        ? isMobile
+                          ? getShortName(parent.child.fullName)
+                          : parent.child.fullName
+                        : 'ребёнок не закреплён'}
                       <button
-                        className={`${baseStyles.btn} ${styles.parentsBtn}`}
+                        className={cn(baseStyles.btn, styles.parentsBtn)}
                         aria-label="Edit"
-                        onClick={() => setActiveModal(parent.phone)}
+                        onClick={() => setActiveModal(parent.id)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -186,15 +166,16 @@ export default function ParentsPage() {
                   </td>
                 </tr>,
                 <Modal
-                  key={`${parent.phone}-modal`}
-                  isActive={parent.phone === activeModal}
+                  key={`${parent.id}-modal`}
+                  isActive={parent.id === activeModal}
                   isCentral
                 >
                   <h2 className={baseStyles.modalTitle}>
                     Закрепить ребёнка за родителем
                   </h2>
                   <p className={baseStyles.modalText}>
-                    ФИО родителя: {parent.name}
+                    ФИО родителя:{' '}
+                    {isMobile ? getShortName(parent.name) : parent.name}
                   </p>
                   <p className={baseStyles.modalText}>
                     ФИО ребёнка:{' '}
@@ -202,28 +183,43 @@ export default function ParentsPage() {
                   </p>
                   <div className={baseStyles.inputGroup}>
                     <select
-                      className={`${baseStyles.formInput} ${styles.parentsModalInput}`}
+                      className={cn(
+                        baseStyles.formInput,
+                        styles.parentsModalInput
+                      )}
                       aria-label="Children select"
-                      defaultValue={parent.child}
+                      defaultValue={parent.child?.id ? parent.child?.id : ''}
+                      onChange={(evt) => {
+                        setSelectValue({
+                          ...selectValue,
+                          childId: evt.target.value,
+                          parentId: parent.id,
+                        });
+                      }}
                     >
                       <option value="">Выберите ребёнка</option>
                       {children.map(
                         (child) =>
                           child && (
-                            <option key={child} value={child}>
-                              {child}
+                            <option key={child.id} value={child.id}>
+                              {`${child.surname} ${child.name} ${child.patronymic}`}
                             </option>
                           )
                       )}
                     </select>
                     <button
-                      className={`${baseStyles.btn} ${baseStyles.btnBlue} ${baseStyles.btnLarge}`}
+                      className={cn(
+                        baseStyles.btn,
+                        baseStyles.btnBlue,
+                        baseStyles.btnLarge
+                      )}
+                      onClick={handleSelectClick}
                     >
                       Закрепить за родителем
                     </button>
                   </div>
                   <button
-                    className={`${baseStyles.btn} ${baseStyles.modalClose}`}
+                    className={cn(baseStyles.btn, baseStyles.modalClose)}
                     aria-label="Close modal"
                     onClick={() => setActiveModal(null)}
                   >

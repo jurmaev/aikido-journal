@@ -1,10 +1,10 @@
 @import url(base.css);
 
-.payment__container {
+.paymentContainer {
   padding: 4rem 0;
 }
 
-.payment__title {
+.paymentTitle {
   margin-bottom: 1.5625rem;
   font-size: 1.875rem;
   font-weight: 500;
@@ -13,31 +13,51 @@
   text-transform: uppercase;
 }
 
-.payment__subtitle {
+.paymentSubtitle {
   margin-bottom: 1rem;
   font-size: 1.5rem;
   line-height: 1.43;
   font-weight: 400;
 }
 
-.payment__input-group {
+.paymentInputGroup {
   margin-bottom: 1rem;
 }
 
-.payment__input {
+.paymentInput {
   width: 100%;
   margin: 0;
 }
 
-.payment__list {
+.paymentList {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.payment__item {
+.paymentItem {
   margin-bottom: 0.125rem;
   font-size: 1.25rem;
   line-height: 1.43;
   font-weight: 400;
+}
+
+@media (max-width: 1024px) {
+  .paymentContainer {
+    padding: 2.5rem 0;
+  }
+
+  .paymentTitle {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .paymentSubtitle {
+    margin-bottom: 0.125rem;
+    font-size: 0.9375rem;
+  }
+
+  .paymentItem {
+    font-size: 0.8125rem;
+  }
 }

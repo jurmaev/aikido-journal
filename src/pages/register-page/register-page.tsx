@@ -1,5 +1,6 @@
 import styles from '../base.module.css';
 import Header from '../../components/header/header';
+import cn from 'classnames';
 
 export default function RegisterPage() {
   return (
@@ -36,9 +37,7 @@ export default function RegisterPage() {
               id="password"
               placeholder="**********"
             />
-            <button
-              className={`${styles.btn} ${styles.btnRed} ${styles.btnLarge}`}
-            >
+            <button className={cn(styles.btn, styles.btnRed, styles.btnLarge)}>
               Зарегистрироваться
             </button>
           </div>

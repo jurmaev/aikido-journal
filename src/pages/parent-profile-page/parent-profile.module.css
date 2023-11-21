@@ -38,6 +38,7 @@
 .paymentContainer {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 1rem 1.5rem;
   border: 0.0625rem solid var(--black);
@@ -45,4 +46,37 @@
   font-size: 1.3125rem;
   font-weight: 400;
   line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .profileContainer {
+    padding: 2.5rem 0;
+  }
+
+  .profileTitle {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .profileInfo {
+    flex-direction: column;
+    margin-bottom: 0.25rem;
+  }
+
+  .infoLeft,
+  .infoRight {
+    width: 100%;
+  }
+
+  .profileText:not(:last-child) {
+    margin-bottom: 0.25rem;
+  }
+  .profileText {
+    margin-bottom: 0.25rem;
+    font-size: 0.8125rem;
+  }
+
+  .paymentContainer {
+    font-size: 0.8125rem;
+  }
 }
