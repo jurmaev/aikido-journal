@@ -116,4 +116,9 @@ tr .tableCell:last-child {
     padding: 0.75rem 0.5rem;
     font-size: 0.5rem;
   }
+
+  .tableTime {
+    padding: 0.25rem;
+    font-size: 0.5625rem;
+  }
 }

@@ -19,7 +19,7 @@ export default function ParentProfilePage() {
               <p className={styles.profileText}>Дети: Абрамов Пётр Иванович</p>
             </div>
             <div className={styles.infoRight}>
-              <p className={styles.profileText}>Телефон: +7(950)526-26-26</p>
+              <p className={styles.profileText}>Ваш телефон: +7(950)526-26-26</p>
             </div>
           </div>
           <div className={baseStyles.inputGroup}>
