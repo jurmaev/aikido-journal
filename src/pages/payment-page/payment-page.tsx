@@ -3,8 +3,25 @@ import baseStyles from '../base.module.css';
 import { NavItems } from '../../const';
 import Header from '../../components/header/header';
 import cn from 'classnames';
+import { payment } from '../../mocks/payment';
+import { getShortName } from '../../utils/names';
+import { useState } from 'react';
 
 export default function PaymentPage() {
+  const isMobile = window.innerWidth < 1024;
+  const [paymentState, setPaymentState] = useState(payment);
+  const [filterValue, setFilterValue] = useState('');
+
+  function handleFilterClick() {
+    if (filterValue === '') {
+      setPaymentState(payment);
+    } else {
+      setPaymentState(
+        payment.filter((item) => item.name.toLowerCase().includes(filterValue))
+      );
+    }
+  }
+
   return (
     <>
       <Header navItems={NavItems.Trainer} />
@@ -17,6 +34,7 @@ export default function PaymentPage() {
               className={cn(baseStyles.formInput, styles.paymentInput)}
               type="text"
               placeholder="Введите ФИО родителя"
+              onChange={(evt) => setFilterValue(evt.target.value)}
             />
             <button
               className={cn(
@@ -24,20 +42,18 @@ export default function PaymentPage() {
                 baseStyles.btnBlue,
                 baseStyles.btnLarge
               )}
+              onClick={handleFilterClick}
             >
               Поиск
             </button>
           </div>
           <ul className={styles.paymentList}>
-            <li className={styles.paymentItem}>
-              Абрамова Маргарита Львовна : 1750 рублей
-            </li>
-            <li className={styles.paymentItem}>
-              Курочкина Светлана Алексеевна : 1000 рублей
-            </li>
-            <li className={styles.paymentItem}>
-              Иванова Наталья Сергеевна : 500 рублей
-            </li>
+            {paymentState.map((item) => (
+              <li key={item.id} className={styles.paymentItem}>
+                {isMobile ? getShortName(item.name) : item.name} : {item.debt}{' '}
+                рублей
+              </li>
+            ))}
           </ul>
         </div>
       </main>
