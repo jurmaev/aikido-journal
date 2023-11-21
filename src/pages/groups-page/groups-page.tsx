@@ -97,6 +97,7 @@ export default function GroupsPage() {
                 key={`${group.id}-modal`}
                 isActive={activeGroupModal === group.id}
                 isCentral={false}
+                onClose={() => setActiveExitModal(group.id)}
               >
                 <h2 className={baseStyles.modalTitle}>Настройка группы</h2>
                 <div className={styles.groupsModalInputContainer}>
@@ -278,45 +279,12 @@ export default function GroupsPage() {
                     </li>
                   ))}
                 </ul>
-                <button
-                  className={cn(baseStyles.btn, baseStyles.modalClose)}
-                  aria-label="Close modal"
-                  onClick={() => setActiveExitModal(group.id)}
-                >
-                  <svg
-                    width="26"
-                    height="25"
-                    viewBox="0 0 26 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      x="1"
-                      y="0.500366"
-                      width="24"
-                      height="24"
-                      rx="4.5"
-                      stroke="black"
-                    />
-                    <path
-                      d="M10 10L16 16"
-                      stroke="black"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M16 10L10 16"
-                      stroke="black"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
               </Modal>,
               <Modal
                 key={`${group.id}-delete-modal`}
                 isActive={activeDeleteModal === group.id}
                 isCentral
+                onClose={() => setActiveDeleteModal(null)}
               >
                 <h2 className={baseStyles.modalTitle}>
                   Вы действительно хотите удалить группу?
@@ -343,45 +311,12 @@ export default function GroupsPage() {
                     Отмена
                   </button>
                 </div>
-                <button
-                  className={cn(baseStyles.btn, baseStyles.modalClose)}
-                  aria-label="Close modal"
-                  onClick={() => setActiveDeleteModal(null)}
-                >
-                  <svg
-                    width="26"
-                    height="25"
-                    viewBox="0 0 26 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      x="1"
-                      y="0.500366"
-                      width="24"
-                      height="24"
-                      rx="4.5"
-                      stroke="black"
-                    />
-                    <path
-                      d="M10 10L16 16"
-                      stroke="black"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M16 10L10 16"
-                      stroke="black"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
               </Modal>,
               <Modal
                 key={`${group.id}-exit-modal`}
                 isActive={activeExitModal === group.id}
                 isCentral
+                onClose={() => setActiveExitModal(null)}
               >
                 <h2 className={baseStyles.modalTitle}>
                   Изменения не сохранены. Вы действительно хотите выйти?
@@ -411,40 +346,6 @@ export default function GroupsPage() {
                     Отмена
                   </button>
                 </div>
-                <button
-                  className={cn(baseStyles.btn, baseStyles.modalClose)}
-                  aria-label="Close modal"
-                  onClick={() => setActiveExitModal(null)}
-                >
-                  <svg
-                    width="26"
-                    height="25"
-                    viewBox="0 0 26 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      x="1"
-                      y="0.500366"
-                      width="24"
-                      height="24"
-                      rx="4.5"
-                      stroke="black"
-                    />
-                    <path
-                      d="M10 10L16 16"
-                      stroke="black"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M16 10L10 16"
-                      stroke="black"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
               </Modal>,
             ])}
           </ul>

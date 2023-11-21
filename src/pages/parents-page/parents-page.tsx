@@ -169,6 +169,7 @@ export default function ParentsPage() {
                   key={`${parent.id}-modal`}
                   isActive={parent.id === activeModal}
                   isCentral
+                  onClose={() => setActiveModal(null)}
                 >
                   <h2 className={baseStyles.modalTitle}>
                     Закрепить ребёнка за родителем
@@ -218,40 +219,6 @@ export default function ParentsPage() {
                       Закрепить за родителем
                     </button>
                   </div>
-                  <button
-                    className={cn(baseStyles.btn, baseStyles.modalClose)}
-                    aria-label="Close modal"
-                    onClick={() => setActiveModal(null)}
-                  >
-                    <svg
-                      width="26"
-                      height="25"
-                      viewBox="0 0 26 25"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="1"
-                        y="0.500366"
-                        width="24"
-                        height="24"
-                        rx="4.5"
-                        stroke="black"
-                      />
-                      <path
-                        d="M10 10L16 16"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M16 10L10 16"
-                        stroke="black"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
                 </Modal>,
               ])}
             </tbody>
