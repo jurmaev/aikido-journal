@@ -6,6 +6,51 @@ import { attendance } from '../../mocks/attendance';
 import cn from 'classnames';
 import { getShortName } from '../../utils/names';
 
+function getHeader(day: { date: string; isTraining: boolean }) {
+  return (
+    <th
+      key={day.date}
+      className={cn(styles.tableHeader, {
+        [styles.tableHeaderInactive]: !day.isTraining,
+      })}
+    >
+      <div>{`${new Date(day.date).getDate()}.${new Date(
+        day.date
+      ).getMonth()}`}</div>
+      <div>{Days[new Date(day.date).getDay()]}</div>
+    </th>
+  );
+}
+
+function getCell(day: { date: string; isTraining: boolean | null }) {
+  return (
+    <td key={day.date} className={styles.tableCell}>
+      <button
+        className={cn(styles.tableCheck, {
+          [styles.tableCheckChecked]: day.isTraining,
+        })}
+        aria-label="Check"
+        disabled={day.isTraining === null}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+        >
+          <path
+            d="M15 4.5L6.75 12.75L3 9"
+            stroke="black"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+    </td>
+  );
+}
+
 export default function AttendancePage() {
   const isMobile = window.innerWidth < 1024;
   const currentAttendance = attendance[0];
@@ -88,22 +133,8 @@ export default function AttendancePage() {
                     </button>
                   </div>
                 </th>
-                {currentAttendance.schedule.map(
-                  (day) =>
-                    isMobile &&
-                    day.isTraining && (
-                      <th
-                        key={day.date}
-                        className={cn(styles.tableHeader, {
-                          [styles.tableHeaderInactive]: !day.isTraining,
-                        })}
-                      >
-                        <div>{`${new Date(day.date).getDate()}.${new Date(
-                          day.date
-                        ).getMonth()}`}</div>
-                        <div>{Days[new Date(day.date).getDay()]}</div>
-                      </th>
-                    )
+                {currentAttendance.schedule.map((day) =>
+                  isMobile ? day.isTraining && getHeader(day) : getHeader(day)
                 )}
               </tr>
             </thead>
@@ -113,35 +144,10 @@ export default function AttendancePage() {
                   <td className={styles.tableCell}>
                     {isMobile ? getShortName(child.name) : child.name}
                   </td>
-                  {child.attendance.map(
-                    (day) =>
-                      isMobile &&
-                      day.isTraining !== null && (
-                        <td key={day.date} className={styles.tableCell}>
-                          <button
-                            className={cn(styles.tableCheck, {
-                              [styles.tableCheckChecked]: day.isTraining,
-                            })}
-                            aria-label="Check"
-                            disabled={day.isTraining === null}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="18"
-                              height="18"
-                              viewBox="0 0 18 18"
-                              fill="none"
-                            >
-                              <path
-                                d="M15 4.5L6.75 12.75L3 9"
-                                stroke="black"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </button>
-                        </td>
-                      )
+                  {child.attendance.map((day) =>
+                    isMobile
+                      ? day.isTraining !== null && getCell(day)
+                      : getCell(day)
                   )}
                 </tr>
               ))}

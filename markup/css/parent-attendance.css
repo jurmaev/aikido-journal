@@ -166,10 +166,7 @@ tr:last-child td:last-child {
 }
 
 .tableCross {
-  display: inline-flex;
-  align-items: center;
-  border: 0.0625rem solid var(--black);
-  border-radius: 0.3125rem;
+  padding: 0;
   background-color: var(--red-400);
 }
 

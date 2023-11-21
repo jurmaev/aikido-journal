@@ -1,10 +1,89 @@
 import baseStyles from '../base.module.css';
 import styles from './parent-attendance.module.css';
-import { NavItems } from '../../const';
+import { Days, NavItems } from '../../const';
 import Header from '../../components/header/header';
 import cn from 'classnames';
+import { parentAttendance } from '../../mocks/parent-attendance';
+import { getShortName } from '../../utils/names';
+
+function getHeader(day: { date: string; isTraining: boolean }) {
+  return (
+    <th
+      key={day.date}
+      className={cn(styles.tableHeader, {
+        [styles.tableHeaderInactive]: !day.isTraining,
+      })}
+    >
+      <div>{`${new Date(day.date).getDate()}.${new Date(
+        day.date
+      ).getMonth()}`}</div>
+      <div>{Days[new Date(day.date).getDay()]}</div>
+    </th>
+  );
+}
+
+function getCell(day: { date: string; isTraining: boolean | null }) {
+  return (
+    <td key={day.date} className={styles.tableCell}>
+      <div className={styles.tableCellContainer}>
+        <div
+          className={cn(
+            styles.tableCheck,
+            { [styles.tableCheckChecked]: day.isTraining },
+            {
+              [styles.tableCheckDisabled]: day.isTraining === null,
+            },
+            {
+              [styles.tableCross]: day.isTraining !== null && !day.isTraining,
+            }
+          )}
+        >
+          {day.isTraining !== null && !day.isTraining ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+            >
+              <path
+                d="M18.6666 9.3335L9.33325 18.6668"
+                stroke="black"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M9.33325 9.3335L18.6666 18.6668"
+                stroke="black"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+            >
+              <path
+                d="M15 4.5L6.75 12.75L3 9"
+                stroke="black"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </div>
+      </div>
+    </td>
+  );
+}
 
 export default function ParentAttendancePage() {
+  const isMobile = window.innerWidth < 1024;
+
   return (
     <>
       <Header navItems={NavItems.Parent} />
@@ -81,224 +160,24 @@ export default function ParentAttendancePage() {
                     </button>
                   </div>
                 </th>
-                <th className={styles.tableHeader}>
-                  <div>06.11</div>
-                  <div>пн</div>
-                </th>
-                <th
-                  className={cn(styles.tableHeader, styles.tableHeaderInactive)}
-                >
-                  <div>07.11</div>
-                  <div>вт</div>
-                </th>
-                <th className={styles.tableHeader}>
-                  <div>08.11</div>
-                  <div>ср</div>
-                </th>
-                <th
-                  className={cn(styles.tableHeader, styles.tableHeaderInactive)}
-                >
-                  <div>09.11</div>
-                  <div>чт</div>
-                </th>
-                <th className={styles.tableHeader}>
-                  <div>10.11</div>
-                  <div>пт</div>
-                </th>
-                <th
-                  className={cn(styles.tableHeader, styles.tableHeaderInactive)}
-                >
-                  <div>11.11</div>
-                  <div>сб</div>
-                </th>
-                <th
-                  className={cn(styles.tableHeader, styles.tableHeaderInactive)}
-                >
-                  <div>12.11</div>
-                  <div>вс</div>
-                </th>
+                {parentAttendance.schedule.map((day) =>
+                  isMobile ? day.isTraining && getHeader(day) : getHeader(day)
+                )}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className={styles.tableCell}>Абрамов Пётр Иванович</td>
-                <td className={styles.tableCell}>
-                  <div className={styles.tableCellContainer}>
-                    <div
-                      className={cn(
-                        styles.tableCheck,
-                        styles.tableCheckChecked
-                      )}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M15 4.5L6.75 12.75L3 9"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </td>
-                <td className={styles.tableCell}>
-                  <div className={styles.tableCellContainer}>
-                    <div
-                      className={cn(
-                        styles.tableCheck,
-                        styles.tableCheckDisabled
-                      )}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M15 4.5L6.75 12.75L3 9"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </td>
-                <td className={styles.tableCell}>
-                  <div className={styles.tableCellContainer}>
-                    <div className={styles.tableCross}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="28"
-                        height="28"
-                        viewBox="0 0 28 28"
-                        fill="none"
-                      >
-                        <path
-                          d="M18.6666 9.3335L9.33325 18.6668"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M9.33325 9.3335L18.6666 18.6668"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </td>
-                <td className={styles.tableCell}>
-                  <div className={styles.tableCellContainer}>
-                    <div
-                      className={cn(
-                        styles.tableCheck,
-                        styles.tableCheckDisabled
-                      )}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M15 4.5L6.75 12.75L3 9"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </td>
-                <td className={styles.tableCell}>
-                  <div className={styles.tableCellContainer}>
-                    <div
-                      className={cn(
-                        styles.tableCheck,
-                        styles.tableCheckChecked
-                      )}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M15 4.5L6.75 12.75L3 9"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </td>
-                <td className={styles.tableCell}>
-                  <div className={styles.tableCellContainer}>
-                    <div
-                      className={cn(
-                        styles.tableCheck,
-                        styles.tableCheckDisabled
-                      )}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M15 4.5L6.75 12.75L3 9"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </td>
-                <td className={styles.tableCell}>
-                  <div className={styles.tableCellContainer}>
-                    <div
-                      className={cn(
-                        styles.tableCheck,
-                        styles.tableCheckDisabled
-                      )}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                      >
-                        <path
-                          d="M15 4.5L6.75 12.75L3 9"
-                          stroke="black"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+              {parentAttendance.children.map((child) => (
+                <tr key={child.id}>
+                  <td className={styles.tableCell}>
+                    {isMobile ? getShortName(child.name) : child.name}
+                  </td>
+                  {child.attendance.map((day) =>
+                    isMobile
+                      ? day.isTraining !== null && getCell(day)
+                      : getCell(day)
+                  )}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
