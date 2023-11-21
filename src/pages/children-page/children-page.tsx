@@ -5,13 +5,8 @@ import Header from '../../components/header/header';
 import { useState } from 'react';
 import Modal from '../../components/modal/modal';
 import { children } from '../../mocks/children';
-import { Child } from '../../types/children';
 import cn from 'classnames';
-import { capitalizeWords } from '../../utils/names';
-
-function getFullName(child: Child): string {
-  return `${child.surname} ${child.name} ${child.patronymic}`;
-}
+import { capitalizeWords, getFullName } from '../../utils/names';
 
 export default function ChildrenPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);

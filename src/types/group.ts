@@ -17,15 +17,7 @@ export type Group = {
   name: string;
   price: number;
   children: Children;
-  shchedule: {
-    monday: TrainingTime;
-    tuesday: TrainingTime;
-    wednesday: TrainingTime;
-    thursday: TrainingTime;
-    friday: TrainingTime;
-    saturday: TrainingTime;
-    sunday: TrainingTime;
-  };
+  schedule: Array<TrainingTime | null>;
 };
 
 export type GroupAttendance = {
