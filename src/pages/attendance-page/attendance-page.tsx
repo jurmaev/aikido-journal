@@ -5,6 +5,8 @@ import Header from '../../components/header/header';
 import { attendance } from '../../mocks/attendance';
 import cn from 'classnames';
 import { getShortName } from '../../utils/names';
+import { useState } from 'react';
+import { produce } from 'immer';
 
 function getHeader(day: { date: string; isTraining: boolean }) {
   return (
@@ -22,41 +24,57 @@ function getHeader(day: { date: string; isTraining: boolean }) {
   );
 }
 
-function getCell(day: { date: string; isTraining: boolean | null }) {
-  return (
-    <td key={day.date} className={styles.tableCell}>
-      <button
-        className={cn(styles.tableCheck, {
-          [styles.tableCheckChecked]: day.isTraining,
-        })}
-        aria-label="Check"
-        disabled={day.isTraining === null}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 18 18"
-          fill="none"
-        >
-          <path
-            d="M15 4.5L6.75 12.75L3 9"
-            stroke="black"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-    </td>
-  );
-}
-
 export default function AttendancePage() {
   const isMobile = window.innerWidth < 1024;
   const currentAttendance = attendance[0];
+  const [attendanceState, setAttendanceState] = useState(currentAttendance);
   const groups = attendance.map((groupAttendance) => {
     return { id: groupAttendance.id, name: groupAttendance.name };
   });
+
+  function getCell(
+    childId: string,
+    day: { date: string; isTraining: boolean | null }
+  ) {
+    return (
+      <td key={day.date} className={styles.tableCell}>
+        <button
+          className={cn(styles.tableCheck, {
+            [styles.tableCheckChecked]: day.isTraining,
+          })}
+          aria-label="Check"
+          disabled={day.isTraining === null}
+          onClick={() =>
+            setAttendanceState(
+              produce((draft) => {
+                const foundDay = draft.children
+                  .find((child) => child.id === childId)
+                  ?.attendance.find((attDay) => attDay.date === day.date);
+                if (foundDay) {
+                  foundDay.isTraining = !day.isTraining;
+                }
+              })
+            )
+          }
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+          >
+            <path
+              d="M15 4.5L6.75 12.75L3 9"
+              stroke="black"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      </td>
+    );
+  }
 
   return (
     <>
@@ -133,21 +151,21 @@ export default function AttendancePage() {
                     </button>
                   </div>
                 </th>
-                {currentAttendance.schedule.map((day) =>
+                {attendanceState.schedule.map((day) =>
                   isMobile ? day.isTraining && getHeader(day) : getHeader(day)
                 )}
               </tr>
             </thead>
             <tbody>
-              {currentAttendance.children.map((child) => (
+              {attendanceState.children.map((child) => (
                 <tr key={child.id}>
                   <td className={styles.tableCell}>
                     {isMobile ? getShortName(child.name) : child.name}
                   </td>
                   {child.attendance.map((day) =>
                     isMobile
-                      ? day.isTraining !== null && getCell(day)
-                      : getCell(day)
+                      ? day.isTraining !== null && getCell(child.id, day)
+                      : getCell(child.id, day)
                   )}
                 </tr>
               ))}

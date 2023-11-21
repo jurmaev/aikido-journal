@@ -7,6 +7,7 @@ import Modal from '../../components/modal/modal';
 import { children } from '../../mocks/children';
 import { Child } from '../../types/children';
 import cn from 'classnames';
+import { capitalizeWords } from '../../utils/names';
 
 function getFullName(child: Child): string {
   return `${child.surname} ${child.name} ${child.patronymic}`;
@@ -19,7 +20,7 @@ export default function ChildrenPage() {
   const [sortValue, setSortValue] = useState('');
 
   function appendChild(fullName: string) {
-    const [surname, name, patronymic] = fullName.split(' ');
+    const [surname, name, patronymic] = capitalizeWords(fullName).split(' ');
     setChildrenState(
       childrenState.concat({
         id: crypto.randomUUID(),
