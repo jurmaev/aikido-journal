@@ -15,7 +15,7 @@ export default function ChildrenPage() {
   const [addInput, setAddInput] = useState('');
   const [sortValue, setSortValue] = useState('');
   const [errorText, setErrorText] = useState('');
-  const [isSorted, setIsSorted] = useState(false);
+  const [highlightedValue, setHighlightedValue] = useState('');
 
   function handleAddClick() {
     if (
@@ -52,11 +52,11 @@ export default function ChildrenPage() {
         )
       );
       setSortValue(sortValue.trim());
-      setIsSorted(true);
+      setHighlightedValue(sortValue.trim());
     } else {
       setChildrenState(children);
       setSortValue('');
-      setIsSorted(false);
+      setHighlightedValue('');
     }
   }
 
@@ -118,8 +118,8 @@ export default function ChildrenPage() {
               childrenState.map((child) => [
                 <li key={`${child.id}-item`} className={styles.childrenItem}>
                   <span className={styles.childrenText}>
-                    {isSorted
-                      ? highlightText(getFullName(child), sortValue)
+                    {highlightedValue !== ''
+                      ? highlightText(getFullName(child), highlightedValue)
                       : getFullName(child)}
                   </span>
                   <svg

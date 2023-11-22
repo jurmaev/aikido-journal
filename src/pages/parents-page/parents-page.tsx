@@ -9,12 +9,16 @@ import { Child } from '../../types/children';
 import { NavItems } from '../../const';
 import { getShortName } from '../../utils/names';
 import cn from 'classnames';
+import { highlightText } from '../../utils/highlight';
+import { produce } from 'immer';
 
 export default function ParentsPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [parentsState, setParentsState] = useState(parents);
   const [sortValue, setSortValue] = useState('');
   const [selectValue, setSelectValue] = useState({ parentId: '', childId: '' });
+  const [highlightedValue, setHighlightedValue] = useState('');
+  const [errorText, setErrorText] = useState('');
   const isMobile = window.innerWidth < 1024;
 
   function handleSortClick() {
@@ -25,29 +29,57 @@ export default function ParentsPage() {
         )
       );
       setSortValue(sortValue.trim());
+      setHighlightedValue(sortValue.trim());
     } else {
       setParentsState(parents);
       setSortValue('');
+      setHighlightedValue('');
     }
   }
 
   function handleSelectClick() {
-    if (selectValue.childId === '') return;
-    const nextParentsState = [...parentsState];
-    const parent = nextParentsState.find(
-      (parent) => parent.id === selectValue.parentId
-    )!;
+    if (
+      parentsState.some((parent) => parent.child?.id === selectValue.childId)
+    ) {
+      setErrorText('Этот ребенок уже закреплен за другим родителем');
+    } else if (selectValue.childId !== '') {
+      setParentsState(
+        produce((draft) => {
+          const parent = draft.find(
+            (parent) => parent.id === selectValue.parentId
+          )!;
 
-    const child = children.find(
-      (child) => child.id === selectValue.childId
-    ) as Child;
+          const child = children.find(
+            (child) => child.id === selectValue.childId
+          ) as Child;
 
-    parent.child = {
-      id: child.id,
-      fullName: `${child.surname} ${child.name} ${child.patronymic}`,
-    };
-    setParentsState(nextParentsState);
-    setActiveModal(null);
+          parent.child = {
+            id: child.id,
+            fullName: `${child.surname} ${child.name} ${child.patronymic}`,
+          };
+        })
+      );
+
+      setActiveModal(null);
+      setErrorText('');
+    }
+  }
+
+  function getHighlightedParentName(name: string) {
+    if (isMobile) {
+      const shortName = getShortName(name).split(' ');
+      if (highlightedValue !== '') {
+        return (
+          <>
+            {highlightText(shortName[0], highlightedValue)} {shortName.slice(1)}
+          </>
+        );
+      }
+      return <>{getShortName(name)}</>;
+    } else if (highlightedValue !== '') {
+      return <>{highlightText(name, highlightedValue)}</>;
+    }
+    return <>{name}</>;
   }
 
   return (
@@ -92,7 +124,7 @@ export default function ParentsPage() {
                   <tr key={`${parent.id}-item`}>
                     <td className={styles.parentsData}>
                       <div className={styles.parentsDataContainer}>
-                        {isMobile ? getShortName(parent.name) : parent.name}
+                        <p>{getHighlightedParentName(parent.name)}</p>
                         <button
                           className={cn(baseStyles.btn, styles.parentsBtn)}
                           aria-label="Info"
@@ -173,7 +205,10 @@ export default function ParentsPage() {
                     key={`${parent.id}-modal`}
                     isActive={parent.id === activeModal}
                     isCentral
-                    onClose={() => setActiveModal(null)}
+                    onClose={() => {
+                      setActiveModal(null);
+                      setErrorText('');
+                    }}
                   >
                     <h2 className={baseStyles.modalTitle}>
                       Закрепить ребёнка за родителем
@@ -184,8 +219,16 @@ export default function ParentsPage() {
                     </p>
                     <p className={baseStyles.modalText}>
                       ФИО ребёнка:{' '}
-                      <span className={styles.textRed}>
-                        ребёнок не закреплён
+                      <span
+                        className={cn(baseStyles.modalText, {
+                          [styles.parentsDataEmpty]: !parent.child,
+                        })}
+                      >
+                        {parent.child
+                          ? isMobile
+                            ? getShortName(parent.child.fullName)
+                            : parent.child.fullName
+                          : 'ребёнок не закреплён'}
                       </span>
                     </p>
                     <div className={baseStyles.inputGroup}>
@@ -225,6 +268,7 @@ export default function ParentsPage() {
                         Закрепить за родителем
                       </button>
                     </div>
+                    <p className={baseStyles.formError}>{errorText}</p>
                   </Modal>,
                 ])}
               </tbody>
