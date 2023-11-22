@@ -9,7 +9,7 @@ import { Child } from '../../types/children';
 import { NavItems } from '../../const';
 import { getShortName } from '../../utils/names';
 import cn from 'classnames';
-import { highlightText } from '../../utils/highlight';
+import { getHighlightedParentName } from '../../utils/highlight';
 import { produce } from 'immer';
 
 export default function ParentsPage() {
@@ -65,23 +65,6 @@ export default function ParentsPage() {
     }
   }
 
-  function getHighlightedParentName(name: string) {
-    if (isMobile) {
-      const shortName = getShortName(name).split(' ');
-      if (highlightedValue !== '') {
-        return (
-          <>
-            {highlightText(shortName[0], highlightedValue)} {shortName.slice(1)}
-          </>
-        );
-      }
-      return <>{getShortName(name)}</>;
-    } else if (highlightedValue !== '') {
-      return <>{highlightText(name, highlightedValue)}</>;
-    }
-    return <>{name}</>;
-  }
-
   return (
     <>
       <Header navItems={NavItems.Trainer} />
@@ -124,7 +107,13 @@ export default function ParentsPage() {
                   <tr key={`${parent.id}-item`}>
                     <td className={styles.parentsData}>
                       <div className={styles.parentsDataContainer}>
-                        <p>{getHighlightedParentName(parent.name)}</p>
+                        <p>
+                          {getHighlightedParentName(
+                            parent.name,
+                            isMobile,
+                            highlightedValue
+                          )}
+                        </p>
                         <button
                           className={cn(baseStyles.btn, styles.parentsBtn)}
                           aria-label="Info"

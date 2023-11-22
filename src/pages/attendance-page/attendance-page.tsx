@@ -1,5 +1,5 @@
 import baseStyles from '../base.module.css';
-import styles, { tableHeaderContainer } from './attendance.module.css';
+import styles from './attendance.module.css';
 import { Days, NavItems } from '../../const';
 import Header from '../../components/header/header';
 import { attendance } from '../../mocks/attendance';
@@ -111,7 +111,7 @@ export default function AttendancePage() {
             <thead>
               <tr>
                 <th className={styles.tableHeader}>
-                  <div className={tableHeaderContainer}>
+                  <div className={styles.tableHeaderContainer}>
                     ФИО ребенка:
                     <button
                       className={styles.tableArrow}

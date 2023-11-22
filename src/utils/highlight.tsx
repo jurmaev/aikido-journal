@@ -1,3 +1,5 @@
+import { getShortName } from "./names";
+
 export function highlightText(text: string, searchWord: string) {
   searchWord = searchWord.trim();
   if (
@@ -16,4 +18,21 @@ export function highlightText(text: string, searchWord: string) {
       </>
     );
   }
+}
+
+export function getHighlightedParentName(name: string, isMobile: boolean, highlightedValue: string) {
+  if (isMobile) {
+    const shortName = getShortName(name).split(' ');
+    if (highlightedValue !== '') {
+      return (
+        <>
+          {highlightText(shortName[0], highlightedValue)} {shortName.slice(1)}
+        </>
+      );
+    }
+    return <>{getShortName(name)}</>;
+  } else if (highlightedValue !== '') {
+    return <>{highlightText(name, highlightedValue)}</>;
+  }
+  return <>{name}</>;
 }

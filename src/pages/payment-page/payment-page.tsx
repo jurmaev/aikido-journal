@@ -4,18 +4,20 @@ import { NavItems } from '../../const';
 import Header from '../../components/header/header';
 import cn from 'classnames';
 import { payment } from '../../mocks/payment';
-import { getShortName } from '../../utils/names';
 import { useState } from 'react';
+import { getHighlightedParentName } from '../../utils/highlight';
 
 export default function PaymentPage() {
   const isMobile = window.innerWidth < 1024;
   const [paymentState, setPaymentState] = useState(payment);
   const [filterValue, setFilterValue] = useState('');
+  const [highlightedValue, setHighlightedValue] = useState('');
 
   function handleFilterClick() {
     if (filterValue.trim() === '') {
       setPaymentState(payment);
       setFilterValue('');
+      setHighlightedValue('');
     } else {
       setPaymentState(
         payment.filter((item) =>
@@ -23,6 +25,7 @@ export default function PaymentPage() {
         )
       );
       setFilterValue(filterValue.trim());
+      setHighlightedValue(filterValue.trim());
     }
   }
 
@@ -56,8 +59,12 @@ export default function PaymentPage() {
             <ul className={styles.paymentList}>
               {paymentState.map((item) => (
                 <li key={item.id} className={styles.paymentItem}>
-                  {isMobile ? getShortName(item.name) : item.name} : {item.debt}{' '}
-                  рублей
+                  {getHighlightedParentName(
+                    item.name,
+                    isMobile,
+                    highlightedValue
+                  )}{' '}
+                  : {item.debt} рублей
                 </li>
               ))}
             </ul>
