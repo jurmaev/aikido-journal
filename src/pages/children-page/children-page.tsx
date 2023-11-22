@@ -7,6 +7,7 @@ import Modal from '../../components/modal/modal';
 import { children } from '../../mocks/children';
 import cn from 'classnames';
 import { capitalizeWords, getFullName } from '../../utils/names';
+import { highlightText } from '../../utils/highlight';
 
 export default function ChildrenPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
@@ -14,6 +15,7 @@ export default function ChildrenPage() {
   const [addInput, setAddInput] = useState('');
   const [sortValue, setSortValue] = useState('');
   const [errorText, setErrorText] = useState('');
+  const [isSorted, setIsSorted] = useState(false);
 
   function handleAddClick() {
     if (
@@ -50,9 +52,11 @@ export default function ChildrenPage() {
         )
       );
       setSortValue(sortValue.trim());
+      setIsSorted(true);
     } else {
       setChildrenState(children);
       setSortValue('');
+      setIsSorted(false);
     }
   }
 
@@ -114,7 +118,9 @@ export default function ChildrenPage() {
               childrenState.map((child) => [
                 <li key={`${child.id}-item`} className={styles.childrenItem}>
                   <span className={styles.childrenText}>
-                    {getFullName(child)}
+                    {isSorted
+                      ? highlightText(getFullName(child), sortValue)
+                      : getFullName(child)}
                   </span>
                   <svg
                     onClick={() => setActiveModal(child.id)}

@@ -318,6 +318,10 @@ img {
   text-align: center;
 }
 
+mark {
+  background-color: var(--red-400);
+}
+
 @media (max-width: 1024px) {
   .logo {
     width: 2.1875rem;
