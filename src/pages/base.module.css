@@ -308,6 +308,16 @@ img {
   font-size: 0;
 }
 
+.formError {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--red-700);
+}
+
+.failText {
+  text-align: center;
+}
+
 @media (max-width: 1024px) {
   .logo {
     width: 2.1875rem;

@@ -13,12 +13,16 @@ export default function PaymentPage() {
   const [filterValue, setFilterValue] = useState('');
 
   function handleFilterClick() {
-    if (filterValue === '') {
+    if (filterValue.trim() === '') {
       setPaymentState(payment);
+      setFilterValue('');
     } else {
       setPaymentState(
-        payment.filter((item) => item.name.toLowerCase().includes(filterValue))
+        payment.filter((item) =>
+          item.name.toLowerCase().includes(filterValue.trim())
+        )
       );
+      setFilterValue(filterValue.trim());
     }
   }
 
@@ -34,6 +38,7 @@ export default function PaymentPage() {
               className={cn(baseStyles.formInput, styles.paymentInput)}
               type="text"
               placeholder="Введите ФИО родителя"
+              value={filterValue}
               onChange={(evt) => setFilterValue(evt.target.value)}
             />
             <button
@@ -47,14 +52,20 @@ export default function PaymentPage() {
               Поиск
             </button>
           </div>
-          <ul className={styles.paymentList}>
-            {paymentState.map((item) => (
-              <li key={item.id} className={styles.paymentItem}>
-                {isMobile ? getShortName(item.name) : item.name} : {item.debt}{' '}
-                рублей
-              </li>
-            ))}
-          </ul>
+          {paymentState.length !== 0 ? (
+            <ul className={styles.paymentList}>
+              {paymentState.map((item) => (
+                <li key={item.id} className={styles.paymentItem}>
+                  {isMobile ? getShortName(item.name) : item.name} : {item.debt}{' '}
+                  рублей
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={baseStyles.failText}>
+              По вашему запросу ничего не найдено
+            </p>
+          )}
         </div>
       </main>
     </>
