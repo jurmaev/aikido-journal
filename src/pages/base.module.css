@@ -208,7 +208,7 @@ img {
   padding: 3rem 0;
   background-color: rgba(0, 0, 0, 0.4);
   animation-name: modal-show;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   overflow: auto;
 }
 
