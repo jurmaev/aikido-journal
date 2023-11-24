@@ -319,7 +319,10 @@ img {
 }
 
 mark {
+  height: inherit;
   background-color: var(--red-400);
+  font-size: inherit;
+  line-height: inherit;
 }
 
 @media (max-width: 1024px) {

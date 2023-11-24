@@ -69,6 +69,15 @@
   border-radius: 0.25rem;
 }
 
+.groupsModalInput::-webkit-outer-spin-button,
+.groupsModalInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.groupsModalInput[type='number'] {
+  -moz-appearance: textfield;
+}
+
 table {
   width: 100%;
   border-spacing: 0;
