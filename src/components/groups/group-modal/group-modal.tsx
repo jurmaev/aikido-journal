@@ -80,7 +80,7 @@ export default function GroupModal({
 
   function handleCheckClick(day: TrainingTime | null, index: number) {
     if (!day) {
-      day = { startTime: '00:00', endTime: '00:00' };
+      day = { startTime: '', endTime: '' };
     } else {
       day = null;
     }
