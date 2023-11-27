@@ -1,26 +1,11 @@
 import baseStyles from '../base.module.css';
 import styles from './parent-attendance.module.css';
-import { Days, NavItems } from '../../const';
+import { NavItems } from '../../const';
 import Header from '../../components/header/header';
 import cn from 'classnames';
 import { parentAttendance } from '../../mocks/parent-attendance';
 import { getShortName } from '../../utils/names';
-
-function getHeader(day: { date: string; isTraining: boolean }) {
-  return (
-    <th
-      key={day.date}
-      className={cn(styles.tableHeader, {
-        [styles.tableHeaderInactive]: !day.isTraining,
-      })}
-    >
-      <div>{`${new Date(day.date).getDate()}.${new Date(
-        day.date
-      ).getMonth()}`}</div>
-      <div>{Days[new Date(day.date).getDay()]}</div>
-    </th>
-  );
-}
+import AttendanceHeader from '../../components/attendance-header/attendance-header';
 
 function getCell(day: { date: string; isTraining: boolean | null }) {
   return (
@@ -161,7 +146,11 @@ export default function ParentAttendancePage() {
                   </div>
                 </th>
                 {parentAttendance.schedule.map((day) =>
-                  isMobile ? day.isTraining && getHeader(day) : getHeader(day)
+                  isMobile ? (
+                    day.isTraining && <AttendanceHeader day={day} />
+                  ) : (
+                    <AttendanceHeader day={day} />
+                  )
                 )}
               </tr>
             </thead>

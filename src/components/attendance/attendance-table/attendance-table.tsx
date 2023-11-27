@@ -3,26 +3,10 @@ import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/attendance-page/attendance.module.css';
 import cn from 'classnames';
 import { getShortName } from '../../../utils/names';
-import { Days } from '../../../const';
 import { produce } from 'immer';
 import { attendance } from '../../../mocks/attendance';
 import { useState } from 'react';
-
-function getHeader(day: { date: string; isTraining: boolean }) {
-  return (
-    <th
-      key={day.date}
-      className={cn(styles.tableHeader, {
-        [styles.tableHeaderInactive]: !day.isTraining,
-      })}
-    >
-      <div>{`${new Date(day.date).getDate()}.${new Date(
-        day.date
-      ).getMonth()}`}</div>
-      <div>{Days[new Date(day.date).getDay()]}</div>
-    </th>
-  );
-}
+import AttendanceHeader from '../../attendance-header/attendance-header';
 
 export default function AttendanceTable() {
   const isMobile = window.innerWidth < 1024;
@@ -119,7 +103,11 @@ export default function AttendanceTable() {
               </div>
             </th>
             {attendanceState.schedule.map((day) =>
-              isMobile ? day.isTraining && getHeader(day) : getHeader(day)
+              isMobile ? (
+                day.isTraining && <AttendanceHeader day={day} />
+              ) : (
+                <AttendanceHeader day={day} />
+              )
             )}
           </tr>
         </thead>

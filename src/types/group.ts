@@ -1,6 +1,8 @@
 import { Children } from './children';
 
-export type GroupSchedule = Array<{ date: string; isTraining: boolean }>;
+export type ScheduleDay = { date: string; isTraining: boolean };
+
+export type GroupSchedule = ScheduleDay[];
 
 export type TrainingTime = {
   startTime: string;
