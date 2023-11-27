@@ -3,8 +3,7 @@ import styles from '../../../pages/groups-page/groups.module.css';
 import cn from 'classnames';
 import Modal from '../../modal/modal';
 import { Group, TrainingTime } from '../../../types/group';
-import { getFullName } from '../../../utils/names';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { produce } from 'immer';
 import { children } from '../../../mocks/children';
 import GroupChildItem from '../group-child-item/group-child-item';
@@ -14,6 +13,7 @@ import DeleteGroupModal from '../delete-group-modal/delete-group-modal';
 import GroupName from '../group-name/group-name';
 import GroupPrice from '../group-price/group-price';
 import GroupTime from '../group-time/group-time';
+import AddChild from '../add-child/add-child';
 
 type GroupModalProps = {
   group: Group;
@@ -30,7 +30,6 @@ export default function GroupModal({
 }: GroupModalProps) {
   const [groupState, setGroupState] = useState(group);
   const [isChanged, setIsChanged] = useState(false);
-  const childSelectRef = useRef<HTMLSelectElement | null>(null);
   const [isExitModalActive, setIsExitModalActive] = useState(false);
   const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
 
@@ -61,19 +60,13 @@ export default function GroupModal({
     setIsChanged(true);
   }
 
-  function handleAddChild() {
-    if (!childSelectRef.current || childSelectRef.current.value === '') return;
-    if (
-      !groupState.children.some(
-        (child) => child.id === childSelectRef.current?.value
-      )
-    ) {
+  function handleAddChild(childId: string) {
+    if (childId === '') return;
+    if (!groupState.children.some((child) => child.id === childId)) {
       setGroupState(
         produce((draft) => {
           draft.children.push(
-            children.find(
-              (child) => child.id === childSelectRef.current?.value
-            ) as Child
+            children.find((child) => child.id === childId) as Child
           );
         })
       );
@@ -193,6 +186,7 @@ export default function GroupModal({
             </tr>
           </tbody>
         </table>
+
         <div
           className={cn(baseStyles.inputGroup, styles.groupsModalInputGroup)}
         >
@@ -217,35 +211,11 @@ export default function GroupModal({
             Удалить группу
           </button>
         </div>
+
         <h2 className={baseStyles.modalTitle}>Список детей</h2>
-        <div
-          className={cn(baseStyles.inputGroup, styles.groupsModalInputGroup)}
-        >
-          <select
-            name="children"
-            id={`children-${group.id}`}
-            className={styles.groupsModalSelect}
-            aria-label="Select child"
-            ref={childSelectRef}
-          >
-            <option value="">Выберите ребёнка</option>
-            {children.map((child) => (
-              <option key={child.id} value={child.id}>
-                {getFullName(child)}
-              </option>
-            ))}
-          </select>
-          <button
-            className={cn(
-              baseStyles.btn,
-              baseStyles.btnBlue,
-              baseStyles.btnLarge
-            )}
-            onClick={handleAddChild}
-          >
-            Добавить в группу
-          </button>
-        </div>
+
+        <AddChild id={group.id} handleAddChild={handleAddChild} />
+
         <ul className={styles.list}>
           {groupState.children.map((child) => (
             <GroupChildItem

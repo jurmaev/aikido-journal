@@ -6,21 +6,39 @@ import AddGroup from '../add-group/add-group';
 import SearchGroups from '../search-groups/search-groups';
 import { groups } from '../../../mocks/groups';
 import GroupModal from '../group-modal/group-modal';
+import { produce } from 'immer';
+import { highlightText } from '../../../utils/highlight';
 
 export default function GroupList() {
   const [activeGroupModal, setActiveGroupModal] = useState<string>('');
   const [groupsState, setGroupsState] = useState(groups);
+  const [highlightedValue, setHighlightedValue] = useState('');
+
+  function handleSearch(searchValue: string) {
+    if (searchValue === '') {
+      setGroupsState(groups);
+      setHighlightedValue('');
+    } else {
+      setGroupsState(
+        produce(
+          (draft) =>
+            (draft = draft.filter((group) => group.name.includes(searchValue)))
+        )
+      );
+      setHighlightedValue(searchValue);
+    }
+  }
 
   return (
     <>
       <AddGroup setActiveGroupModal={setActiveGroupModal} />
 
-      <SearchGroups />
+      <SearchGroups onSearch={handleSearch} />
 
       <ul className={styles.groupsList}>
         {groupsState.map((group) => [
           <li key={group.id} className={styles.groupsItem}>
-            <span>{group.name}</span>
+            <span>{highlightText(group.name, highlightedValue)}</span>
             <button
               className={cn(baseStyles.btn, styles.groupsBtn)}
               aria-label="Edit group"

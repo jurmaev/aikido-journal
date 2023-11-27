@@ -3,7 +3,11 @@ import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/groups-page/groups.module.css';
 import cn from 'classnames';
 
-export default function SearchGroups() {
+type SearchGroupsProps = {
+  onSearch: (searchValue: string) => void;
+};
+
+export default function SearchGroups({ onSearch }: SearchGroupsProps) {
   const [searchValue, setSearchValue] = useState('');
 
   return (
@@ -25,6 +29,7 @@ export default function SearchGroups() {
             baseStyles.btnBlue,
             baseStyles.btnLarge
           )}
+          onClick={() => onSearch(searchValue)}
         >
           Поиск
         </button>
