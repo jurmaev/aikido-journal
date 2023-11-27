@@ -40,10 +40,10 @@ export default function ParentSchedulePage() {
                 {days.map((day, index) =>
                   isMobile ? (
                     parentSchedule.schedule[index].time && (
-                      <TableHeader day={day} index={index} />
+                      <TableHeader key={index} day={day} index={index} />
                     )
                   ) : (
-                    <TableHeader day={day} index={index} />
+                    <TableHeader key={index} day={day} index={index} />
                   )
                 )}
               </tr>
@@ -52,9 +52,15 @@ export default function ParentSchedulePage() {
               <tr>
                 {parentSchedule.schedule.map((item) =>
                   isMobile ? (
-                    item.time && <TableCell day={item.day} time={item.time} />
+                    item.time && (
+                      <TableCell
+                        key={item.day}
+                        day={item.day}
+                        time={item.time}
+                      />
+                    )
                   ) : (
-                    <TableCell day={item.day} time={item.time} />
+                    <TableCell key={item.day} day={item.day} time={item.time} />
                   )
                 )}
               </tr>
