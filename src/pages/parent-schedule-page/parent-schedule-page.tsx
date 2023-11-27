@@ -3,32 +3,10 @@ import styles from './parent-schedule.module.css';
 import { NavItems } from '../../const';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
-import { schedule } from '../../mocks/parent-schedule';
-
-function getHeader(day: string, index: number) {
-  return (
-    <th key={index} className={styles.tableHeader}>
-      {day}
-    </th>
-  );
-}
-
-function getCell(day: {
-  day: string;
-  time: { startTime: string; endTime: string } | null;
-}) {
-  return (
-    <td key={day.day} className={styles.tableCell}>
-      <div className={styles.tableCellContainer}>
-        {day.time && (
-          <div className={styles.tableTime}>
-            {day.time.startTime} - {day.time.endTime}
-          </div>
-        )}
-      </div>
-    </td>
-  );
-}
+import { parentSchedule } from '../../mocks/parent-schedule';
+import { getFullName } from '../../utils/names';
+import TableHeader from '../../components/parent-schedule/table-header/table-header';
+import TableCell from '../../components/parent-schedule/table-cell/table-cell';
 
 export default function ParentSchedulePage() {
   const isMobile = window.innerWidth < 1024;
@@ -40,26 +18,44 @@ export default function ParentSchedulePage() {
       <main>
         <div className={cn(baseStyles.container, styles.scheduleContainer)}>
           <h1 className={styles.scheduleTitle}>Расписание</h1>
-          <p className={styles.scheduleText}>Ребёнок: Абрамов Пётр Иванович</p>
-          <p className={styles.scheduleText}>Тренер: Иванов Денис Сергеевич</p>
-          <p className={styles.scheduleText}>Номер тренера: +7(950)528-28-28</p>
-          <p className={styles.scheduleText}>Название группы: Группа1</p>
-          <p className={styles.scheduleText}>Цена за занятие: 250₽</p>
+          <p className={styles.scheduleText}>
+            Ребёнок: {getFullName(parentSchedule.child)}
+          </p>
+          <p className={styles.scheduleText}>
+            Тренер: {parentSchedule.trainer.name}
+          </p>
+          <p className={styles.scheduleText}>
+            Номер тренера: {parentSchedule.trainer.phone}
+          </p>
+          <p className={styles.scheduleText}>
+            Название группы: {parentSchedule.group.name}
+          </p>
+          <p className={styles.scheduleText}>
+            Цена за занятие: {parentSchedule.group.cost}₽
+          </p>
           <p className={styles.scheduleText}>Расписание:</p>
           <table>
             <thead>
               <tr>
                 {days.map((day, index) =>
-                  isMobile
-                    ? schedule[index].time && getHeader(day, index)
-                    : getHeader(day, index)
+                  isMobile ? (
+                    parentSchedule.schedule[index].time && (
+                      <TableHeader day={day} index={index} />
+                    )
+                  ) : (
+                    <TableHeader day={day} index={index} />
+                  )
                 )}
               </tr>
             </thead>
             <tbody>
               <tr>
-                {schedule.map((item) =>
-                  isMobile ? item.time && getCell(item) : getCell(item)
+                {parentSchedule.schedule.map((item) =>
+                  isMobile ? (
+                    item.time && <TableCell day={item.day} time={item.time} />
+                  ) : (
+                    <TableCell day={item.day} time={item.time} />
+                  )
                 )}
               </tr>
             </tbody>
