@@ -5,13 +5,10 @@ import cn from 'classnames';
 import AddGroup from '../add-group/add-group';
 import SearchGroups from '../search-groups/search-groups';
 import { groups } from '../../../mocks/groups';
-import Modal from '../../modal/modal';
 import GroupModal from '../group-modal/group-modal';
 
 export default function GroupList() {
   const [activeGroupModal, setActiveGroupModal] = useState<string>('');
-  const [activeDeleteModal, setActiveDeleteModal] = useState<string>('');
-  const [activeExitModal, setActiveExitModal] = useState<string>('');
   const [groupsState, setGroupsState] = useState(groups);
 
   return (
@@ -52,81 +49,12 @@ export default function GroupList() {
             </button>
           </li>,
           <GroupModal
-            key={`${group}-modal`}
+            key={`${group.id}-modal`}
             group={group}
             activeGroupModal={activeGroupModal}
             setActiveGroupModal={setActiveGroupModal}
-            setActiveExitModal={setActiveExitModal}
-            setActiveDeleteModal={setActiveDeleteModal}
             onSave={setGroupsState}
           />,
-          <Modal
-            key={`${group.id}-delete-modal`}
-            isActive={activeDeleteModal === group.id}
-            isCentral
-            onClose={() => setActiveDeleteModal('')}
-          >
-            <h2 className={baseStyles.modalTitle}>
-              Вы действительно хотите удалить группу?
-            </h2>
-            <div className={baseStyles.inputGroup}>
-              <button
-                className={cn(
-                  baseStyles.btn,
-                  baseStyles.btnRed,
-                  baseStyles.btnLarge
-                )}
-                onClick={() => setActiveDeleteModal('')}
-              >
-                Удалить
-              </button>
-              <button
-                className={cn(
-                  baseStyles.btn,
-                  baseStyles.btnBlue,
-                  baseStyles.btnLarge
-                )}
-                onClick={() => setActiveDeleteModal('')}
-              >
-                Отмена
-              </button>
-            </div>
-          </Modal>,
-          <Modal
-            key={`${group.id}-exit-modal`}
-            isActive={activeExitModal === group.id}
-            isCentral
-            onClose={() => setActiveExitModal('')}
-          >
-            <h2 className={baseStyles.modalTitle}>
-              Изменения не сохранены. Вы действительно хотите выйти?
-            </h2>
-            <div className={baseStyles.inputGroup}>
-              <button
-                className={cn(
-                  baseStyles.btn,
-                  baseStyles.btnRed,
-                  baseStyles.btnLarge
-                )}
-                onClick={() => {
-                  setActiveExitModal('');
-                  setActiveGroupModal('');
-                }}
-              >
-                Выйти
-              </button>
-              <button
-                className={cn(
-                  baseStyles.btn,
-                  baseStyles.btnBlue,
-                  baseStyles.btnLarge
-                )}
-                onClick={() => setActiveExitModal('')}
-              >
-                Отмена
-              </button>
-            </div>
-          </Modal>,
         ])}
       </ul>
     </>
