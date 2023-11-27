@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import styles from '../../pages/base.module.css';
+import styles from '../../../pages/base.module.css';
 import cn from 'classnames';
 
 type ModalProps = {

@@ -1,7 +1,7 @@
 import baseStyles from '../base.module.css';
 import styles from './attendance.module.css';
 import { NavItems } from '../../const';
-import Header from '../../components/header/header';
+import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import AttendanceTable from '../../components/attendance/attendance-table/attendance-table';
 

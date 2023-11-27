@@ -1,6 +1,6 @@
 import baseStyles from '../../../pages/base.module.css';
 import cn from 'classnames';
-import Modal from '../../modal/modal';
+import Modal from '../../ui/modal/modal';
 
 type ExitGroupModalProps = {
   isActive: boolean;

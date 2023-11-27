@@ -1,11 +1,11 @@
 import baseStyles from '../base.module.css';
 import styles from './parent-attendance.module.css';
 import { NavItems } from '../../const';
-import Header from '../../components/header/header';
+import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import { parentAttendance } from '../../mocks/parent-attendance';
 import { getShortName } from '../../utils/names';
-import AttendanceHeader from '../../components/attendance-header/attendance-header';
+import AttendanceHeader from '../../components/ui/attendance-header/attendance-header';
 
 function getCell(day: { date: string; isTraining: boolean | null }) {
   return (

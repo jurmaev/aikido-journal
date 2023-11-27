@@ -1,7 +1,7 @@
 import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/groups-page/groups.module.css';
 import cn from 'classnames';
-import Modal from '../../modal/modal';
+import Modal from '../../ui/modal/modal';
 import { Group, TrainingTime } from '../../../types/group';
 import { useState } from 'react';
 import { produce } from 'immer';

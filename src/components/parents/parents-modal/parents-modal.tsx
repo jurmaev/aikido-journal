@@ -1,7 +1,7 @@
 import styles from '../../../pages/parents-page/parents.module.css';
 import baseStyles from '../../../pages/base.module.css';
 import cn from 'classnames';
-import Modal from '../../modal/modal';
+import Modal from '../../ui/modal/modal';
 import { getFullName, getShortName } from '../../../utils/names';
 import { children } from '../../../mocks/children';
 import { Parent } from '../../../types/parents';

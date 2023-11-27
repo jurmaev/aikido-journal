@@ -1,10 +1,14 @@
 import styles from './parent-profile.module.css';
 import baseStyles from '../base.module.css';
 import { NavItems } from '../../const';
-import Header from '../../components/header/header';
+import Header from '../../components/ui/header/header';
 import cn from 'classnames';
+import { parentProfile } from '../../mocks/parent-profile';
+import { getFullName } from '../../utils/names';
 
 export default function ParentProfilePage() {
+  const profileInfo = parentProfile;
+
   return (
     <>
       <Header navItems={NavItems.Parent} />
@@ -13,18 +17,20 @@ export default function ParentProfilePage() {
           <h1 className={styles.profileTitle}>Профиль</h1>
           <div className={styles.profileInfo}>
             <div className={styles.infoLeft}>
+              <p className={styles.profileText}>Вы: {profileInfo.name}</p>
               <p className={styles.profileText}>
-                Вы: Абрамова Маргарита Львовна
+                Дети: {getFullName(profileInfo.child)}
               </p>
-              <p className={styles.profileText}>Дети: Абрамов Пётр Иванович</p>
             </div>
             <div className={styles.infoRight}>
-              <p className={styles.profileText}>Ваш телефон: +7(950)526-26-26</p>
+              <p className={styles.profileText}>
+                Ваш телефон: {profileInfo.phone}
+              </p>
             </div>
           </div>
           <div className={baseStyles.inputGroup}>
             <div className={styles.paymentContainer}>
-              Задолженность: 750 рублей
+              Задолженность: {profileInfo.debt} рублей
             </div>
             <button
               className={cn(

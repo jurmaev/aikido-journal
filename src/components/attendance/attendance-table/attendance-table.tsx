@@ -6,7 +6,7 @@ import { getShortName } from '../../../utils/names';
 import { produce } from 'immer';
 import { attendance } from '../../../mocks/attendance';
 import { useState } from 'react';
-import AttendanceHeader from '../../attendance-header/attendance-header';
+import AttendanceHeader from '../../ui/attendance-header/attendance-header';
 
 export default function AttendanceTable() {
   const isMobile = window.innerWidth < 1024;

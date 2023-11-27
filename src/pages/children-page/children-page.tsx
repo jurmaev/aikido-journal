@@ -1,7 +1,7 @@
 import baseStyles from '../base.module.css';
 import styles from './children.module.css';
 import { NavItems } from '../../const';
-import Header from '../../components/header/header';
+import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import ChildrenList from '../../components/children/children-list/children-list';
 

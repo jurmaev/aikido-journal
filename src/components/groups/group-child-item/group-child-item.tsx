@@ -3,7 +3,7 @@ import styles from '../../../pages/groups-page/groups.module.css';
 import cn from 'classnames';
 import { Child } from '../../../types/children';
 import { getFullName } from '../../../utils/names';
-import Modal from '../../modal/modal';
+import Modal from '../../ui/modal/modal';
 import { useState } from 'react';
 
 type GroupChildItemProps = {

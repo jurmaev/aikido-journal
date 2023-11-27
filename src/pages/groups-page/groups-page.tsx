@@ -1,7 +1,7 @@
 import baseStyles from '../base.module.css';
 import styles from './groups.module.css';
 import { NavItems } from '../../const';
-import Header from '../../components/header/header';
+import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import GroupList from '../../components/groups/group-list/group-list';
 

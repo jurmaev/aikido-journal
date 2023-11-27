@@ -1,6 +1,6 @@
-import { Days } from '../../const';
-import styles from '../../pages/attendance-page/attendance.module.css';
-import { ScheduleDay } from '../../types/group';
+import { Days } from '../../../const';
+import styles from '../../../pages/attendance-page/attendance.module.css';
+import { ScheduleDay } from '../../../types/group';
 import cn from 'classnames';
 
 type AttendanceHeaderProps = {

@@ -1,6 +1,6 @@
 import styles from './parents.module.css';
 import baseStyles from '../base.module.css';
-import Header from '../../components/header/header';
+import Header from '../../components/ui/header/header';
 import { NavItems } from '../../const';
 import cn from 'classnames';
 import ParentsTable from '../../components/parents/parents-table/parents-table';

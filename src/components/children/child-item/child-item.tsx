@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { Child } from '../../../types/children';
 import { getFullName } from '../../../utils/names';
 import { highlightText } from '../../../utils/highlight';
-import Modal from '../../modal/modal';
+import Modal from '../../ui/modal/modal';
 import { useState } from 'react';
 
 type ChildItemProps = {
