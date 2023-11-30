@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus, Namespace } from '../../const';
 import { UserData } from '../../types/state';
 import { login, register } from './api-actions';
-import { setToken } from '../../utils/token';
+import { dropToken, setToken } from '../../utils/token';
 
 const initialState: UserData = {
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -11,7 +11,12 @@ const initialState: UserData = {
 export const userData = createSlice({
   name: Namespace.User,
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.authorizationStatus = AuthorizationStatus.NoAuth;
+      dropToken();
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(register.fulfilled, (state, action) => {
@@ -24,3 +29,5 @@ export const userData = createSlice({
       });
   },
 });
+
+export const { logout } = userData.actions;
