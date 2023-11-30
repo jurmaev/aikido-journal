@@ -1,3 +1,5 @@
+type ValueOf<T> = T[keyof T];
+
 export const AppRoutes = {
   Main: '/',
   Login: '/login',
@@ -27,4 +29,20 @@ export const NavItems = {
   ],
 };
 
-export const Days = ['вс','пн','вт','ср','чт','пт','сб']
+export const Days = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+
+export const Namespace = {
+  User: 'user',
+};
+
+export const AuthorizationStatus = {
+  Auth: 'Auth',
+  NoAuth: 'NoAuth',
+  Unknown: 'Unknown',
+} as const;
+
+export type AuthorizationStatusValues = ValueOf<typeof AuthorizationStatus>;
+
+export const ApiRoute = {
+  User: '/users'
+}
