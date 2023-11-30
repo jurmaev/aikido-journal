@@ -1,4 +1,4 @@
-import { Child } from "../types/children";
+import { Child } from '../types/children';
 
 export function getShortName(name: string) {
   const nameParts = name.split(' ');
@@ -7,6 +7,7 @@ export function getShortName(name: string) {
 
 export function capitalizeWords(words: string) {
   return words
+    .replace(/\s+/g, ' ')
     .split(' ')
     .map((word) => word[0].toUpperCase() + word.substring(1))
     .join(' ');

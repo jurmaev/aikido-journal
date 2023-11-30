@@ -14,8 +14,8 @@ export default function AddChild({ onAddChild }: AddChildProps) {
 
   function handleAddClick() {
     if (
-      addInput.trim().split(' ').length >= 2 &&
-      addInput.trim().split(' ').length < 4
+      addInput.trim().replace(/\s+/g, ' ').split(' ').length >= 2 &&
+      addInput.trim().replace(/\s+/g, ' ').split(' ').length < 4
     ) {
       const [surname, name, patronymic] = capitalizeWords(
         addInput.trim()
