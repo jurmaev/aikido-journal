@@ -2,7 +2,7 @@ import { useState } from 'react';
 import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/children-page/children.module.css';
 import cn from 'classnames';
-import { capitalizeWords } from '../../../utils/names';
+import { capitalizeWords, trimSpaces } from '../../../utils/names';
 
 type AddChildProps = {
   onAddChild: (surname: string, name: string, patronymic: string) => void;
@@ -14,8 +14,8 @@ export default function AddChild({ onAddChild }: AddChildProps) {
 
   function handleAddClick() {
     if (
-      addInput.trim().replace(/\s+/g, ' ').split(' ').length >= 2 &&
-      addInput.trim().replace(/\s+/g, ' ').split(' ').length < 4
+      trimSpaces(addInput).split(' ').length >= 2 &&
+      trimSpaces(addInput).split(' ').length < 4
     ) {
       const [surname, name, patronymic] = capitalizeWords(
         addInput.trim()

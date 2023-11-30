@@ -6,8 +6,7 @@ export function getShortName(name: string) {
 }
 
 export function capitalizeWords(words: string) {
-  return words
-    .replace(/\s+/g, ' ')
+  return trimSpaces(words)
     .split(' ')
     .map((word) => word[0].toUpperCase() + word.substring(1))
     .join(' ');
@@ -15,4 +14,8 @@ export function capitalizeWords(words: string) {
 
 export function getFullName(child: Child): string {
   return `${child.surname} ${child.name} ${child.patronymic}`;
+}
+
+export function trimSpaces(string: string) {
+  return string.trim().replace(/\s+/g, ' ');
 }
