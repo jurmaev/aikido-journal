@@ -13,6 +13,6 @@ export type UserLogin = {
 };
 
 export type Token = {
-  accessToken: string;
-  tokenType: string;
+  access_token: string;
+  token_type: string;
 };

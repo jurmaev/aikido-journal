@@ -10,18 +10,21 @@ export const register = createAsyncThunk<
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
 >('users/register', async (user, { extra: api }) => {
   const {
-    data: { accessToken },
+    data: { access_token },
   } = await api.post<Token>(`${ApiRoute.User}/register`, user);
-  return accessToken;
+  return access_token;
 });
 
 export const login = createAsyncThunk<
   string,
   UserLogin,
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
->('users/register', async (user, { extra: api }) => {
+>('users/login', async (user, { extra: api }) => {
+  const formData = new FormData();
+  formData.append('username', user.username);
+  formData.append('password', user.password);
   const {
-    data: { accessToken },
-  } = await api.post<Token>(`${ApiRoute.User}/login`, user);
-  return accessToken;
+    data: { access_token },
+  } = await api.post<Token>(`${ApiRoute.User}/login`, formData);
+  return access_token;
 });
