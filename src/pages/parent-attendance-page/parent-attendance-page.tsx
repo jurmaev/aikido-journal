@@ -1,85 +1,13 @@
 import baseStyles from '../base.module.css';
 import styles from './parent-attendance.module.css';
-import { Days, NavItems } from '../../const';
-import Header from '../../components/header/header';
+import { NavItems } from '../../const';
+import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import { parentAttendance } from '../../mocks/parent-attendance';
 import { getShortName } from '../../utils/names';
-
-function getHeader(day: { date: string; isTraining: boolean }) {
-  return (
-    <th
-      key={day.date}
-      className={cn(styles.tableHeader, {
-        [styles.tableHeaderInactive]: !day.isTraining,
-      })}
-    >
-      <div>{`${new Date(day.date).getDate()}.${new Date(
-        day.date
-      ).getMonth()}`}</div>
-      <div>{Days[new Date(day.date).getDay()]}</div>
-    </th>
-  );
-}
-
-function getCell(day: { date: string; isTraining: boolean | null }) {
-  return (
-    <td key={day.date} className={styles.tableCell}>
-      <div className={styles.tableCellContainer}>
-        <div
-          className={cn(
-            styles.tableCheck,
-            { [styles.tableCheckChecked]: day.isTraining },
-            {
-              [styles.tableCheckDisabled]: day.isTraining === null,
-            },
-            {
-              [styles.tableCross]: day.isTraining !== null && !day.isTraining,
-            }
-          )}
-        >
-          {day.isTraining !== null && !day.isTraining ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 28 28"
-              fill="none"
-            >
-              <path
-                d="M18.6666 9.3335L9.33325 18.6668"
-                stroke="black"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M9.33325 9.3335L18.6666 18.6668"
-                stroke="black"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-            >
-              <path
-                d="M15 4.5L6.75 12.75L3 9"
-                stroke="black"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
-        </div>
-      </div>
-    </td>
-  );
-}
+import AttendanceHeader from '../../components/ui/attendance-header/attendance-header';
+import TableCell from '../../components/parent-attendance/table-cell/table-cell';
+import AttendanceSelect from '../../components/parent-attendance/attendance-select/attendance-select';
 
 export default function ParentAttendancePage() {
   const isMobile = window.innerWidth < 1024;
@@ -92,30 +20,9 @@ export default function ParentAttendancePage() {
           className={cn(baseStyles.container, styles.parentAttendanceContainer)}
         >
           <h1 className={styles.parentAttendanceTitle}>Посещаемость</h1>
-          <div
-            className={cn(
-              baseStyles.inputGroup,
-              styles.parentAttendanceInputGroup
-            )}
-          >
-            <select
-              name="month"
-              id="month"
-              className={styles.parentAttendanceSelect}
-              aria-label="Month select"
-            >
-              <option value="">Выберите месяц</option>
-            </select>
-            <button
-              className={cn(
-                baseStyles.btn,
-                baseStyles.btnBlue,
-                baseStyles.btnLarge
-              )}
-            >
-              Применить
-            </button>
-          </div>
+
+          <AttendanceSelect />
+
           <table>
             <thead>
               <tr>
@@ -161,7 +68,13 @@ export default function ParentAttendancePage() {
                   </div>
                 </th>
                 {parentAttendance.schedule.map((day) =>
-                  isMobile ? day.isTraining && getHeader(day) : getHeader(day)
+                  isMobile ? (
+                    day.isTraining && (
+                      <AttendanceHeader key={day.date} day={day} />
+                    )
+                  ) : (
+                    <AttendanceHeader key={day.date} day={day} />
+                  )
                 )}
               </tr>
             </thead>
@@ -172,9 +85,21 @@ export default function ParentAttendancePage() {
                     {isMobile ? getShortName(child.name) : child.name}
                   </td>
                   {child.attendance.map((day) =>
-                    isMobile
-                      ? day.isTraining !== null && getCell(day)
-                      : getCell(day)
+                    isMobile ? (
+                      day.isTraining !== null && (
+                        <TableCell
+                          key={day.date}
+                          date={day.date}
+                          isTraining={day.isTraining}
+                        />
+                      )
+                    ) : (
+                      <TableCell
+                        key={day.date}
+                        date={day.date}
+                        isTraining={day.isTraining}
+                      />
+                    )
                   )}
                 </tr>
               ))}

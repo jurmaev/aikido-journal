@@ -1,5 +1,5 @@
 import styles from '../base.module.css';
-import Header from '../../components/header/header';
+import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 
 export default function RegisterPage() {

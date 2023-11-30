@@ -1,6 +1,6 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import styles from '../../pages/base.module.css';
-import { AppRoutes } from '../../const';
+import styles from '../../../pages/base.module.css';
+import { AppRoutes } from '../../../const';
 import logoSrc from './logo.svg';
 import { useState } from 'react';
 import cn from 'classnames';
