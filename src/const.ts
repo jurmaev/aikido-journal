@@ -33,6 +33,7 @@ export const Days = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
 
 export const Namespace = {
   User: 'user',
+  Children: 'chlidren'
 };
 
 export const AuthorizationStatus = {
@@ -44,5 +45,6 @@ export const AuthorizationStatus = {
 export type AuthorizationStatusValues = ValueOf<typeof AuthorizationStatus>;
 
 export const ApiRoute = {
-  User: '/users'
+  User: '/users',
+  Children: '/children'
 }

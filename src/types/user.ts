@@ -16,3 +16,9 @@ export type Token = {
   access_token: string;
   token_type: string;
 };
+
+export type FullName = {
+  name: string;
+  surname: string;
+  patronymic?: string;
+};
