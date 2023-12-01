@@ -12,23 +12,13 @@ import { createChild } from '../../../store/children-data/api-actions';
 export default function ChildrenList() {
   const dispatch = useAppDispatch();
   const children = useAppSelector(getChildren);
-  const [childrenState, setChildrenState] = useState(children);
   const [highlightedValue, setHighlightedValue] = useState('');
+  const filteredChildren = children.filter((child) =>
+    getFullName(child).toLowerCase().includes(highlightedValue)
+  );
 
   function handleDelete(id: string) {
-    setChildrenState(childrenState.filter((child) => child.id !== id));
-  }
-
-  function handleSortChildren(sortValue: string) {
-    if (sortValue !== '') {
-      setChildrenState(
-        children.filter((child) =>
-          getFullName(child).toLowerCase().includes(sortValue)
-        )
-      );
-    } else {
-      setChildrenState(children);
-    }
+    return null;
   }
 
   function handleAddChild(surname: string, name: string, patronymic?: string) {
@@ -41,14 +31,11 @@ export default function ChildrenList() {
     <>
       <AddChild onAddChild={handleAddChild} />
 
-      <SearchChildren
-        onSort={handleSortChildren}
-        setHighlightedValue={setHighlightedValue}
-      />
+      <SearchChildren setHighlightedValue={setHighlightedValue} />
 
       <ul className={styles.childrenList}>
-        {childrenState.length !== 0 ? (
-          childrenState.map((child) => (
+        {filteredChildren.length !== 0 ? (
+          filteredChildren.map((child) => (
             <ChildItem
               key={child.id}
               child={child}

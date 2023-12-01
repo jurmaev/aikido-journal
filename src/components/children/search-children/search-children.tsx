@@ -4,23 +4,19 @@ import styles from '../../../pages/children-page/children.module.css';
 import cn from 'classnames';
 
 type SearchChildrenProps = {
-  onSort: (sortValue: string) => void;
   setHighlightedValue: React.Dispatch<SetStateAction<string>>;
 };
 
 export default function SearchChildren({
-  onSort,
   setHighlightedValue,
 }: SearchChildrenProps) {
   const [sortValue, setSortValue] = useState('');
 
   function handleSortClick() {
     if (sortValue.trim() !== '') {
-      onSort(sortValue.trim());
       setSortValue(sortValue.trim());
       setHighlightedValue(sortValue.trim());
     } else {
-      onSort(sortValue);
       setSortValue('');
       setHighlightedValue('');
     }

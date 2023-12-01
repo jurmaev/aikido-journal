@@ -5,6 +5,7 @@ import { createChild, getChildren } from './api-actions';
 
 const initialState: ChildrenData = {
   children: [],
+  // filteredChildren: []
 };
 
 export const childrenData = createSlice({
