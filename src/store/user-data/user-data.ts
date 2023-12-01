@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus, Namespace } from '../../const';
 import { UserData } from '../../types/state';
 import { login, register } from './api-actions';
-import { dropToken, setToken } from '../../utils/token';
+import { dropToken, getToken, setToken } from '../../utils/token';
 
 const initialState: UserData = {
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -15,6 +15,11 @@ export const userData = createSlice({
     logout: (state) => {
       state.authorizationStatus = AuthorizationStatus.NoAuth;
       dropToken();
+    },
+    checkAuth: (state) => {
+      state.authorizationStatus = getToken()
+        ? AuthorizationStatus.Auth
+        : AuthorizationStatus.NoAuth;
     },
   },
   extraReducers(builder) {
@@ -30,4 +35,4 @@ export const userData = createSlice({
   },
 });
 
-export const { logout } = userData.actions;
+export const { logout, checkAuth } = userData.actions;

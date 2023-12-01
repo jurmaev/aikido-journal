@@ -4,8 +4,17 @@ import { NavItems } from '../../const';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import ChildrenList from '../../components/children/children-list/children-list';
+import { useAppDispatch } from '../../hooks';
+import { useEffect } from 'react';
+import { getChildren } from '../../store/children-data/api-actions';
 
 export default function ChildrenPage() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getChildren());
+  }, [dispatch]);
+
   return (
     <>
       <Header navItems={NavItems.Trainer} />

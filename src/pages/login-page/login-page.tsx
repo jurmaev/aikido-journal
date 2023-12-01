@@ -1,7 +1,7 @@
 import styles from '../base.module.css';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { UserLogin } from '../../types/user';
 import { login } from '../../store/user-data/api-actions';
@@ -13,6 +13,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const phoneRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [error, setError] = useState('');
 
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
@@ -25,6 +26,8 @@ export default function LoginPage() {
       dispatch(login(user)).then((data) => {
         if (data.meta.requestStatus === 'fulfilled') {
           navigate(AppRoutes.Main);
+        } else if (data.meta.requestStatus === 'rejected') {
+          setError('Неверный логин или пароль');
         }
       });
     }
@@ -57,6 +60,7 @@ export default function LoginPage() {
               placeholder="**********"
               ref={passwordRef}
             />
+            <p className={styles.formError}>{error}</p>
             <button className={cn(styles.btn, styles.btnBlue, styles.btnLarge)}>
               Войти
             </button>

@@ -3,11 +3,15 @@ import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/children-page/children.module.css';
 import ChildItem from '../child-item/child-item';
 import SearchChildren from '../search-children/search-children';
-import { children } from '../../../mocks/children';
 import { getFullName } from '../../../utils/names';
 import AddChild from '../add-child/add-child';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { getChildren } from '../../../store/children-data/children-data.selectors';
+import { createChild } from '../../../store/children-data/api-actions';
 
 export default function ChildrenList() {
+  const dispatch = useAppDispatch();
+  const children = useAppSelector(getChildren);
   const [childrenState, setChildrenState] = useState(children);
   const [highlightedValue, setHighlightedValue] = useState('');
 
@@ -27,14 +31,9 @@ export default function ChildrenList() {
     }
   }
 
-  function handleAddChild(surname: string, name: string, patronymic: string) {
-    setChildrenState(
-      childrenState.concat({
-        id: crypto.randomUUID(),
-        name: name,
-        surname: surname,
-        patronymic: patronymic ? patronymic : '',
-      })
+  function handleAddChild(surname: string, name: string, patronymic?: string) {
+    dispatch(
+      createChild({ name: name, surname: surname, patronymic: patronymic })
     );
   }
 
