@@ -7,7 +7,10 @@ import { getFullName } from '../../../utils/names';
 import AddChild from '../add-child/add-child';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getChildren } from '../../../store/children-data/children-data.selectors';
-import { createChild } from '../../../store/children-data/api-actions';
+import {
+  createChild,
+  removeChild,
+} from '../../../store/children-data/api-actions';
 
 export default function ChildrenList() {
   const dispatch = useAppDispatch();
@@ -18,7 +21,7 @@ export default function ChildrenList() {
   );
 
   function handleDelete(id: string) {
-    return null;
+    dispatch(removeChild(id));
   }
 
   function handleAddChild(surname: string, name: string, patronymic?: string) {

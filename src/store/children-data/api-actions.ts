@@ -25,3 +25,12 @@ export const createChild = createAsyncThunk<
   );
   return data;
 });
+
+export const removeChild = createAsyncThunk<
+  string,
+  string,
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>('children/remove', async (id, { extra: api }) => {
+  await api.post<Child>(`${ApiRoute.Children}/remove/${id}`);
+  return id;
+});
