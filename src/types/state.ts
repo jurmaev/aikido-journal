@@ -1,6 +1,7 @@
 import { AuthorizationStatusValues } from '../const';
 import { store } from '../store';
 import { Children } from './children';
+import { Parents } from './parents';
 
 export type State = ReturnType<typeof store.getState>;
 
@@ -12,4 +13,8 @@ export type UserData = {
 
 export type ChildrenData = {
   children: Children;
-}
+};
+
+export type ParentsData = {
+  parents: Parents;
+};
