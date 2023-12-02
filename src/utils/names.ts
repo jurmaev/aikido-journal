@@ -1,4 +1,4 @@
-import { Child } from '../types/children';
+import { FullName } from '../types/user';
 
 export function getShortName(name: string) {
   const nameParts = name.split(' ');
@@ -12,7 +12,7 @@ export function capitalizeWords(words: string) {
     .join(' ');
 }
 
-export function getFullName(child: Child): string {
+export function getFullName(child: FullName): string {
   return `${child.surname} ${child.name} ${child.patronymic}`;
 }
 

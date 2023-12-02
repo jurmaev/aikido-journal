@@ -13,7 +13,7 @@ export const parentsData = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(getParents.fulfilled, (state, action) => {
-      state.parents = state.parents.concat(action.payload);
+      state.parents = action.payload;
     });
   },
 });

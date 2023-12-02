@@ -4,10 +4,10 @@ import cn from 'classnames';
 import { useState } from 'react';
 
 type SearchTableProps = {
-  handleSort: (sortValue: string) => void;
+  onSort: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function SearchTable({ handleSort }: SearchTableProps) {
+export default function SearchTable({ onSort: onSort }: SearchTableProps) {
   const [sortValue, setSortValue] = useState('');
 
   return (
@@ -30,7 +30,7 @@ export default function SearchTable({ handleSort }: SearchTableProps) {
             baseStyles.btnBlue,
             baseStyles.btnLarge
           )}
-          onClick={() => handleSort(sortValue.trim())}
+          onClick={() => onSort(sortValue.trim())}
         >
           Поиск
         </button>

@@ -3,12 +3,14 @@ import baseStyles from '../../../pages/base.module.css';
 import cn from 'classnames';
 import Modal from '../../ui/modal/modal';
 import { getFullName, getShortName } from '../../../utils/names';
-import { children } from '../../../mocks/children';
 import { Parent } from '../../../types/parents';
 import { useState } from 'react';
+import { Child, Children } from '../../../types/children';
 
 type ParentsModalProps = {
   parent: Parent;
+  child: Child | null;
+  children: Children;
   errorText: string;
   setErrorText: React.Dispatch<React.SetStateAction<string>>;
   handleSelect: (selectValue: { parentId: string; childId: string }) => void;
@@ -18,6 +20,8 @@ type ParentsModalProps = {
 
 export default function ParentsModal({
   parent,
+  child,
+  children,
   errorText,
   setErrorText,
   handleSelect,
@@ -44,13 +48,13 @@ export default function ParentsModal({
         ФИО ребёнка:{' '}
         <span
           className={cn(baseStyles.modalText, {
-            [styles.parentsDataEmpty]: !parent.child,
+            [styles.parentsDataEmpty]: !child,
           })}
         >
-          {parent.child
+          {child
             ? isMobile
-              ? getShortName(getFullName(parent.child))
-              : getShortName(getFullName(parent.child))
+              ? getShortName(getFullName(child))
+              : getShortName(getFullName(child))
             : 'ребёнок не закреплён'}
         </span>
       </p>
@@ -58,7 +62,7 @@ export default function ParentsModal({
         <select
           className={cn(baseStyles.formInput, styles.parentsModalInput)}
           aria-label="Children select"
-          defaultValue={parent.child?.id ? parent.child?.id : ''}
+          defaultValue={child?.id ? child?.id : ''}
           onChange={(evt) => {
             setSelectValue({
               ...selectValue,

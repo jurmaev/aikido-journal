@@ -2,37 +2,39 @@ import styles from '../../../pages/parents-page/parents.module.css';
 import baseStyles from '../../../pages/base.module.css';
 import SearchTable from '../search-table/search-table';
 import { useState } from 'react';
-import { parents } from '../../../mocks/parents';
 import { produce } from 'immer';
-import { children } from '../../../mocks/children';
 import { Child } from '../../../types/children';
 import ParentsRow from '../parents-row/parents-row';
 import ParentsModal from '../parents-modal/parents-modal';
+import { useAppSelector } from '../../../hooks';
+import { getParents } from '../../../store/parents-data/parents-data.selectors';
 
 export default function ParentsTable() {
-  const [parentsState, setParentsState] = useState(parents);
+  const parents = useAppSelector(getParents);
   const [errorText, setErrorText] = useState('');
   const [activeModal, setActiveModal] = useState('');
   const [highlightedValue, setHighlightedValue] = useState('');
+  const sortedParents = parents.filter((parent) =>
+    parent.name.toLowerCase().includes(highlightedValue)
+  );
+  const children = parents.map((parent) => parent.children).flat();
 
-  function handleSort(sortValue: string) {
-    if (sortValue !== '') {
-      setParentsState(
-        parents.filter((parent) =>
-          parent.name.toLowerCase().includes(sortValue)
-        )
-      );
-      setHighlightedValue(sortValue);
-    } else {
-      setParentsState(parents);
-      setHighlightedValue('');
-    }
-  }
+  // function handleSort(sortValue: string) {
+  //   if (sortValue !== '') {
+  //     setParentsState(
+  //       parents.filter((parent) =>
+  //         parent.name.toLowerCase().includes(sortValue)
+  //       )
+  //     );
+  //     setHighlightedValue(sortValue);
+  //   } else {
+  //     setParentsState(parents);
+  //     setHighlightedValue('');
+  //   }
+  // }
 
   function handleSelect(selectValue: { parentId: string; childId: string }) {
-    if (
-      parentsState.some((parent) => parent.child?.id === selectValue.childId)
-    ) {
+    if (parents.some((parent) => parent.children?.id === selectValue.childId)) {
       setErrorText('Этот ребенок уже закреплен за другим родителем');
     } else if (selectValue.childId !== '') {
       setParentsState(
@@ -55,9 +57,9 @@ export default function ParentsTable() {
 
   return (
     <>
-      <SearchTable handleSort={handleSort} />
+      <SearchTable onSort={setHighlightedValue} />
 
-      {parentsState.length !== 0 ? (
+      {sortedParents.length !== 0 ? (
         <>
           <table className={styles.parentsTable}>
             <thead>
@@ -67,28 +69,65 @@ export default function ParentsTable() {
               </tr>
             </thead>
             <tbody>
-              {parentsState.map((parent) => (
-                <ParentsRow
-                  key={`${parent.id}-row`}
-                  parent={parent}
-                  highlightedValue={highlightedValue}
-                  setActiveModal={setActiveModal}
-                />
-              ))}
+              <>
+                {sortedParents.map((parent) => {
+                  if (parent.children.length === 0) {
+                    return (
+                      <ParentsRow
+                        key={`${parent.id}-row`}
+                        parent={parent}
+                        child={null}
+                        highlightedValue={highlightedValue}
+                        setActiveModal={setActiveModal}
+                      />
+                    );
+                  } else {
+                    return parent.children.map((child) => (
+                      <ParentsRow
+                        key={`${parent.id}-${child.id}-row`}
+                        parent={parent}
+                        child={child}
+                        highlightedValue={highlightedValue}
+                        setActiveModal={setActiveModal}
+                      />
+                    ));
+                  }
+                })}
+              </>
             </tbody>
           </table>
           <>
-            {parentsState.map((parent) => (
-              <ParentsModal
-                key={`${parent.id}-modal`}
-                parent={parent}
-                errorText={errorText}
-                setErrorText={setErrorText}
-                handleSelect={handleSelect}
-                activeModal={activeModal}
-                setActiveModal={setActiveModal}
-              />
-            ))}
+            {sortedParents.map((parent) => {
+              if (parent.children.length === 0) {
+                return (
+                  <ParentsModal
+                    key={`${parent.id}-modal`}
+                    child={null}
+                    children={children}
+                    parent={parent}
+                    errorText={errorText}
+                    setErrorText={setErrorText}
+                    handleSelect={handleSelect}
+                    activeModal={activeModal}
+                    setActiveModal={setActiveModal}
+                  />
+                );
+              } else {
+                return parent.children.map((child) => (
+                  <ParentsModal
+                    key={`${parent.id}-modal`}
+                    child={child}
+                    children={children}
+                    parent={parent}
+                    errorText={errorText}
+                    setErrorText={setErrorText}
+                    handleSelect={handleSelect}
+                    activeModal={activeModal}
+                    setActiveModal={setActiveModal}
+                  />
+                ));
+              }
+            })}
           </>
         </>
       ) : (

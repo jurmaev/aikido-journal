@@ -4,8 +4,17 @@ import Header from '../../components/ui/header/header';
 import { NavItems } from '../../const';
 import cn from 'classnames';
 import ParentsTable from '../../components/parents/parents-table/parents-table';
+import { useAppDispatch } from '../../hooks';
+import { useEffect } from 'react';
+import { getParents } from '../../store/parents-data/api-actions';
 
 export default function ParentsPage() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getParents());
+  }, [dispatch]);
+
   return (
     <>
       <Header navItems={NavItems.Trainer} />
