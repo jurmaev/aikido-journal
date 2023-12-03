@@ -23,6 +23,11 @@ export default function SearchTable({ onSort: onSort }: SearchTableProps) {
           placeholder="Введите ФИО родителя"
           value={sortValue}
           onChange={(evt) => setSortValue(evt.target.value)}
+          onKeyDown={(evt) => {
+            if (evt.key === 'Enter') {
+              onSort(sortValue.trim());
+            }
+          }}
         />
         <button
           className={cn(

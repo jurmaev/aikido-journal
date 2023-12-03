@@ -35,6 +35,11 @@ export default function SearchChildren({
           placeholder="Введите ФИО ребёнка"
           value={sortValue}
           onChange={(evt) => setSortValue(evt.target.value)}
+          onKeyDown={(evt) => {
+            if (evt.key === 'Enter') {
+              handleSortClick();
+            }
+          }}
         />
         <button
           className={cn(

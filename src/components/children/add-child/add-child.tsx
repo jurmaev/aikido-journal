@@ -42,6 +42,11 @@ export default function AddChild({ onAddChild }: AddChildProps) {
           placeholder="Введите ФИО ребёнка"
           value={addInput}
           onChange={(evt) => setAddInput(evt.target.value)}
+          onKeyDown={(evt) => {
+            if (evt.key === 'Enter') {
+              handleAddClick();
+            }
+          }}
         />
         <button
           className={cn(baseStyles.btn, baseStyles.btnRed, baseStyles.btnLarge)}
