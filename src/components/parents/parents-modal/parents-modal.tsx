@@ -18,7 +18,7 @@ type ParentsModalProps = {
   setActiveModal: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function ParentsModal({
+export default function   ParentsModal({
   parent,
   child,
   children,
@@ -42,7 +42,7 @@ export default function ParentsModal({
     >
       <h2 className={baseStyles.modalTitle}>Закрепить ребёнка за родителем</h2>
       <p className={baseStyles.modalText}>
-        ФИО родителя: {isMobile ? getShortName(parent.name) : parent.name}
+        ФИО родителя: {isMobile ? getShortName(getFullName(parent)) : getFullName(parent)}
       </p>
       <p className={baseStyles.modalText}>
         ФИО ребёнка:{' '}
@@ -76,7 +76,7 @@ export default function ParentsModal({
             (child) =>
               child && (
                 <option key={child.id} value={child.id}>
-                  {`${child.surname} ${child.name} ${child.patronymic}`}
+                  {getFullName(child)}
                 </option>
               )
           )}

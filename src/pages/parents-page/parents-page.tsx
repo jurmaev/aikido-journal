@@ -7,12 +7,14 @@ import ParentsTable from '../../components/parents/parents-table/parents-table';
 import { useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
 import { getParents } from '../../store/parents-data/api-actions';
+import { getChildrenWithoutParentApi } from '../../store/children-data/api-actions';
 
 export default function ParentsPage() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getParents());
+    dispatch(getChildrenWithoutParentApi());
   }, [dispatch]);
 
   return (

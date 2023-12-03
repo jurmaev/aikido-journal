@@ -26,7 +26,11 @@ export default function ChildrenList() {
 
   function handleAddChild(surname: string, name: string, patronymic?: string) {
     dispatch(
-      createChild({ name: name, surname: surname, patronymic: patronymic })
+      createChild({
+        name: name,
+        surname: surname,
+        patronymic: patronymic ? patronymic : null,
+      })
     );
   }
 

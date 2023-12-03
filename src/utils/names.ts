@@ -1,8 +1,11 @@
 import { FullName } from '../types/user';
 
-export function getShortName(name: string) {
-  const nameParts = name.split(' ');
-  return `${nameParts[0]} ${nameParts[1][0]}. ${nameParts[2][0]}.`;
+export function getShortName(fullName: string) {
+  const [surname, name, patronymic] = fullName.split(' ');
+  if (patronymic) {
+    return `${surname[0]} ${name[0]}. ${patronymic[0]}.`;
+  }
+  return `${surname[0]} ${name[0]}.`;
 }
 
 export function capitalizeWords(words: string) {
@@ -12,8 +15,12 @@ export function capitalizeWords(words: string) {
     .join(' ');
 }
 
-export function getFullName(child: FullName): string {
-  return `${child.surname} ${child.name} ${child.patronymic}`;
+export function getFullName(fullName: FullName): string {
+  if (fullName.patronymic) {
+    return `${fullName.surname} ${fullName.name} ${fullName.patronymic}`;
+  } else {
+    return `${fullName.surname} ${fullName.name}`;
+  }
 }
 
 export function trimSpaces(string: string) {

@@ -1,10 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Namespace } from '../../const';
 import { ChildrenData } from '../../types/state';
-import { createChild, getChildren, removeChild } from './api-actions';
+import {
+  createChild,
+  getChildren,
+  getChildrenWithoutParentApi,
+  removeChild,
+} from './api-actions';
 
 const initialState: ChildrenData = {
   children: [],
+  childrenWithoutParent: [],
 };
 
 export const childrenData = createSlice({
@@ -23,6 +29,9 @@ export const childrenData = createSlice({
         state.children = state.children.filter(
           (child) => child.id !== action.payload
         );
+      })
+      .addCase(getChildrenWithoutParentApi.fulfilled, (state, action) => {
+        state.childrenWithoutParent = action.payload;
       });
   },
 });

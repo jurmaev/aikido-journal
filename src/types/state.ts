@@ -13,6 +13,7 @@ export type UserData = {
 
 export type ChildrenData = {
   children: Children;
+  childrenWithoutParent: Children;
 };
 
 export type ParentsData = {

@@ -91,7 +91,10 @@ export default function Header({ navItems }: HeaderProps) {
         {authorizationStatus === AuthorizationStatus.Auth ? (
           <button
             className={cn(styles.btn, styles.btnBlue, styles.headerBtn)}
-            onClick={() => dispatch(logout())}
+            onClick={() => {
+              dispatch(logout());
+              navigate(AppRoutes.Main);
+            }}
           >
             Выйти
           </button>

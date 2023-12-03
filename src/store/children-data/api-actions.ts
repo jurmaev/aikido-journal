@@ -34,3 +34,14 @@ export const removeChild = createAsyncThunk<
   await api.post<Child>(`${ApiRoute.Children}/remove/${id}`);
   return id;
 });
+
+export const getChildrenWithoutParentApi = createAsyncThunk<
+  Children,
+  undefined,
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>('children/getWithoutParent', async (_arg, { extra: api }) => {
+  const { data } = await api.get<Children>(
+    `${ApiRoute.Children}/children_without_parent`
+  );
+  return data;
+});

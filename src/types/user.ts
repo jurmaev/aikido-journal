@@ -20,5 +20,5 @@ export type Token = {
 export type FullName = {
   name: string;
   surname: string;
-  patronymic?: string;
+  patronymic?: string | null;
 };

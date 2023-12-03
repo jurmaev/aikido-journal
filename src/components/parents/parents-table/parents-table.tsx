@@ -2,14 +2,13 @@ import styles from '../../../pages/parents-page/parents.module.css';
 import baseStyles from '../../../pages/base.module.css';
 import SearchTable from '../search-table/search-table';
 import { useState } from 'react';
-import { produce } from 'immer';
-import { Child } from '../../../types/children';
 import ParentsRow from '../parents-row/parents-row';
 import ParentsModal from '../parents-modal/parents-modal';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getParents } from '../../../store/parents-data/parents-data.selectors';
-import { getChildren } from '../../../store/children-data/children-data.selectors';
+import { getChildrenWithoutParent } from '../../../store/children-data/children-data.selectors';
 import { setChild } from '../../../store/parents-data/api-actions';
+import { getChildrenWithoutParentApi } from '../../../store/children-data/api-actions';
 
 export default function ParentsTable() {
   const dispatch = useAppDispatch();
@@ -20,21 +19,7 @@ export default function ParentsTable() {
   const sortedParents = parents.filter((parent) =>
     parent.name.toLowerCase().includes(highlightedValue)
   );
-  const children = useAppSelector(getChildren);
-
-  // function handleSort(sortValue: string) {
-  //   if (sortValue !== '') {
-  //     setParentsState(
-  //       parents.filter((parent) =>
-  //         parent.name.toLowerCase().includes(sortValue)
-  //       )
-  //     );
-  //     setHighlightedValue(sortValue);
-  //   } else {
-  //     setParentsState(parents);
-  //     setHighlightedValue('');
-  //   }
-  // }
+  const children = useAppSelector(getChildrenWithoutParent);
 
   function handleSelect(selectValue: { parentId: string; childId: string }) {
     if (children.some((child) => child.id === selectValue.childId)) {
@@ -46,6 +31,7 @@ export default function ParentsTable() {
           childId: selectValue.childId,
         })
       );
+      dispatch(getChildrenWithoutParentApi());
       setActiveModal('');
       setErrorText('');
     }
