@@ -8,7 +8,6 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getParents } from '../../../store/parents-data/parents-data.selectors';
 import { getChildrenWithoutParent } from '../../../store/children-data/children-data.selectors';
 import { setChild } from '../../../store/parents-data/api-actions';
-import { getChildrenWithoutParentApi } from '../../../store/children-data/api-actions';
 
 export default function ParentsTable() {
   const dispatch = useAppDispatch();
@@ -31,7 +30,6 @@ export default function ParentsTable() {
           childId: selectValue.childId,
         })
       );
-      dispatch(getChildrenWithoutParentApi());
       setActiveModal('');
       setErrorText('');
     }
@@ -97,7 +95,7 @@ export default function ParentsTable() {
               } else {
                 return parent.children.map((child) => (
                   <ParentsModal
-                    key={`${parent.id}-modal`}
+                    key={`${parent.id}-${child.id}-modal`}
                     child={child}
                     children={children}
                     parent={parent}

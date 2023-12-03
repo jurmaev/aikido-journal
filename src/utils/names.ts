@@ -3,9 +3,9 @@ import { FullName } from '../types/user';
 export function getShortName(fullName: string) {
   const [surname, name, patronymic] = fullName.split(' ');
   if (patronymic) {
-    return `${surname[0]} ${name[0]}. ${patronymic[0]}.`;
+    return `${surname} ${name[0]}. ${patronymic[0]}.`;
   }
-  return `${surname[0]} ${name[0]}.`;
+  return `${surname} ${name[0]}.`;
 }
 
 export function capitalizeWords(words: string) {

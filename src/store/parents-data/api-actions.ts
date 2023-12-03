@@ -3,6 +3,7 @@ import { AppDispatch, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../const';
 import { Parent, Parents } from '../../types/parents';
+import { getChildrenWithoutParentApi } from '../children-data/api-actions';
 
 export const getParents = createAsyncThunk<
   Parents,
@@ -17,9 +18,13 @@ export const setChild = createAsyncThunk<
   Parent,
   { parentId: string; childId: string },
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
->('parents/setChild', async ({ parentId, childId }, { extra: api }) => {
-  const { data } = await api.get<Parent>(
-    `${ApiRoute.Parents}/${parentId}/add_child/${childId}`
-  );
-  return data;
-});
+>(
+  'parents/setChild',
+  async ({ parentId, childId }, { extra: api, dispatch }) => {
+    const { data } = await api.get<Parent>(
+      `${ApiRoute.Parents}/${parentId}/add_child/${childId}`
+    );
+    dispatch(getChildrenWithoutParentApi());
+    return data;
+  }
+);

@@ -104,9 +104,9 @@ export default function AttendanceTable() {
             </th>
             {attendanceState.schedule.map((day) =>
               isMobile ? (
-                day.isTraining && <AttendanceHeader day={day} />
+                day.isTraining && <AttendanceHeader key={day.date} day={day} />
               ) : (
-                <AttendanceHeader day={day} />
+                <AttendanceHeader key={day.date} day={day} />
               )
             )}
           </tr>
