@@ -6,10 +6,13 @@ import { produce } from 'immer';
 import { Child } from '../../../types/children';
 import ParentsRow from '../parents-row/parents-row';
 import ParentsModal from '../parents-modal/parents-modal';
-import { useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getParents } from '../../../store/parents-data/parents-data.selectors';
+import { getChildren } from '../../../store/children-data/children-data.selectors';
+import { setChild } from '../../../store/parents-data/api-actions';
 
 export default function ParentsTable() {
+  const dispatch = useAppDispatch();
   const parents = useAppSelector(getParents);
   const [errorText, setErrorText] = useState('');
   const [activeModal, setActiveModal] = useState('');
@@ -17,7 +20,7 @@ export default function ParentsTable() {
   const sortedParents = parents.filter((parent) =>
     parent.name.toLowerCase().includes(highlightedValue)
   );
-  const children = parents.map((parent) => parent.children).flat();
+  const children = useAppSelector(getChildren);
 
   // function handleSort(sortValue: string) {
   //   if (sortValue !== '') {
@@ -34,20 +37,13 @@ export default function ParentsTable() {
   // }
 
   function handleSelect(selectValue: { parentId: string; childId: string }) {
-    if (parents.some((parent) => parent.children?.id === selectValue.childId)) {
+    if (children.some((child) => child.id === selectValue.childId)) {
       setErrorText('Этот ребенок уже закреплен за другим родителем');
     } else if (selectValue.childId !== '') {
-      setParentsState(
-        produce((draft) => {
-          const parent = draft.find(
-            (parent) => parent.id === selectValue.parentId
-          )!;
-
-          const child = children.find(
-            (child) => child.id === selectValue.childId
-          ) as Child;
-
-          parent.child = child;
+      dispatch(
+        setChild({
+          parentId: selectValue.parentId,
+          childId: selectValue.childId,
         })
       );
       setActiveModal('');
