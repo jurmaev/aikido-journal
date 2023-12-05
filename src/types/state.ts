@@ -7,8 +7,16 @@ export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
 
+export type UserRole = 'coach' | 'parent';
+
 export type UserData = {
   authorizationStatus: AuthorizationStatusValues;
+  role: UserRole | null;
+};
+
+export type LoginData = {
+  token: string;
+  role: UserRole;
 };
 
 export type ChildrenData = {

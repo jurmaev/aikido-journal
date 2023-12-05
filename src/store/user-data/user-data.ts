@@ -6,6 +6,7 @@ import { dropToken, getToken, setToken } from '../../utils/token';
 
 const initialState: UserData = {
   authorizationStatus: AuthorizationStatus.Unknown,
+  role: null,
 };
 
 export const userData = createSlice({
@@ -25,12 +26,16 @@ export const userData = createSlice({
   extraReducers(builder) {
     builder
       .addCase(register.fulfilled, (state, action) => {
+        const loginData = action.payload;
         state.authorizationStatus = AuthorizationStatus.Auth;
-        setToken(action.payload);
+        state.role = loginData.role;
+        setToken(loginData.token);
       })
       .addCase(login.fulfilled, (state, action) => {
+        const loginData = action.payload;
         state.authorizationStatus = AuthorizationStatus.Auth;
-        setToken(action.payload);
+        state.role = loginData.role;
+        setToken(loginData.token);
       });
   },
 });

@@ -1,9 +1,11 @@
+import { UserRole } from './state';
+
 export type UserRegister = {
   phone_number: string;
   name: string;
   surname: string;
   patronymic?: string;
-  role: 'coach' | 'parent';
+  role: UserRole;
   password: string;
 };
 

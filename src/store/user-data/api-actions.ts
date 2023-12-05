@@ -1,22 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, State } from '../../types/state';
+import { AppDispatch, LoginData, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../const';
 import { Token, UserLogin, UserRegister } from '../../types/user';
+import { jwtDecode } from 'jwt-decode';
 
 export const register = createAsyncThunk<
-  string,
+  LoginData,
   UserRegister,
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
 >('users/register', async (user, { extra: api }) => {
   const {
     data: { access_token },
   } = await api.post<Token>(`${ApiRoute.User}/register`, user);
-  return access_token;
+  const role: 'parent' | 'coach' = jwtDecode(access_token).user_role;
+  return { token: access_token, role: role };
 });
 
 export const login = createAsyncThunk<
-  string,
+  LoginData,
   UserLogin,
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
 >('users/login', async (user, { extra: api }) => {
@@ -26,5 +28,6 @@ export const login = createAsyncThunk<
   const {
     data: { access_token },
   } = await api.post<Token>(`${ApiRoute.User}/login`, formData);
-  return access_token;
+  const role: 'parent' | 'coach' = jwtDecode(access_token).user_role;
+  return { token: access_token, role: role };
 });

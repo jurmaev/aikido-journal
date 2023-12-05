@@ -5,16 +5,23 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoutes, AuthorizationStatus, NavItems } from '../../const';
 import cn from 'classnames';
 import { useAppSelector } from '../../hooks';
-import { getAuthorizationStatus } from '../../store/user-data/user-data.selectors';
+import {
+  getAuthorizationStatus,
+  getUserRole,
+} from '../../store/user-data/user-data.selectors';
 
 export default function MainPage() {
   const navigate = useNavigate();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const role = useAppSelector(getUserRole);
 
   return (
     <>
-      {authorizationStatus === AuthorizationStatus.Auth ? (
+      {authorizationStatus === AuthorizationStatus.Auth && role === 'coach' ? (
         <Header navItems={NavItems.Trainer} />
+      ) : authorizationStatus === AuthorizationStatus.Auth &&
+        role === 'parent' ? (
+        <Header navItems={NavItems.Parent} />
       ) : (
         <Header />
       )}
