@@ -6,6 +6,7 @@ import { getFullName, getShortName } from '../../../utils/names';
 import { Parent } from '../../../types/parents';
 import { useState } from 'react';
 import { Child, Children } from '../../../types/children';
+import { useIsMobile } from '../../../hooks/use-is-mobile';
 
 type ParentsModalProps = {
   parent: Parent;
@@ -18,7 +19,7 @@ type ParentsModalProps = {
   setActiveModal: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function   ParentsModal({
+export default function ParentsModal({
   parent,
   child,
   children,
@@ -28,7 +29,7 @@ export default function   ParentsModal({
   activeModal,
   setActiveModal,
 }: ParentsModalProps) {
-  const isMobile = window.innerWidth < 1024;
+  const isMobile = useIsMobile();
   const [selectValue, setSelectValue] = useState({ parentId: '', childId: '' });
 
   return (
@@ -42,7 +43,8 @@ export default function   ParentsModal({
     >
       <h2 className={baseStyles.modalTitle}>Закрепить ребёнка за родителем</h2>
       <p className={baseStyles.modalText}>
-        ФИО родителя: {isMobile ? getShortName(getFullName(parent)) : getFullName(parent)}
+        ФИО родителя:{' '}
+        {isMobile ? getShortName(getFullName(parent)) : getFullName(parent)}
       </p>
       <p className={baseStyles.modalText}>
         ФИО ребёнка:{' '}
@@ -51,10 +53,10 @@ export default function   ParentsModal({
             [styles.parentsDataEmpty]: !child,
           })}
         >
-          {child
-            ? isMobile
-              ? getShortName(getFullName(child))
-              : getShortName(getFullName(child))
+          {child && isMobile
+            ? getShortName(getFullName(child))
+            : child
+            ? getFullName(child)
             : 'ребёнок не закреплён'}
         </span>
       </p>

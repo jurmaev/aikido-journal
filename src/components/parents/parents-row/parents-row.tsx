@@ -5,6 +5,7 @@ import { Parent } from '../../../types/parents';
 import { getHighlightedParentName } from '../../../utils/highlight';
 import { getFullName, getShortName } from '../../../utils/names';
 import { Child } from '../../../types/children';
+import { useIsMobile } from '../../../hooks/use-is-mobile';
 
 type ParentsRowProps = {
   parent: Parent;
@@ -19,7 +20,7 @@ export default function ParentsRow({
   highlightedValue,
   setActiveModal,
 }: ParentsRowProps) {
-  const isMobile = window.innerWidth < 1024;
+  const isMobile = useIsMobile();
 
   return (
     <tr>

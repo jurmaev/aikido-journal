@@ -7,9 +7,10 @@ import { parentSchedule } from '../../mocks/parent-schedule';
 import { getFullName } from '../../utils/names';
 import TableHeader from '../../components/parent-schedule/table-header/table-header';
 import TableCell from '../../components/parent-schedule/table-cell/table-cell';
+import { useIsMobile } from '../../hooks/use-is-mobile';
 
 export default function ParentSchedulePage() {
-  const isMobile = window.innerWidth < 1024;
+  const isMobile = useIsMobile();
   const days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс '];
 
   return (

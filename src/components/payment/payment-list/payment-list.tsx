@@ -4,9 +4,10 @@ import PaymentSearch from '../payment-search/payment-search';
 import { getHighlightedParentName } from '../../../utils/highlight';
 import { useState } from 'react';
 import { payment } from '../../../mocks/payment';
+import { useIsMobile } from '../../../hooks/use-is-mobile';
 
 export default function PaymentList() {
-  const isMobile = window.innerWidth < 1024;
+  const isMobile = useIsMobile();
   const [paymentState, setPaymentState] = useState(payment);
   const [highlightedValue, setHighlightedValue] = useState('');
 

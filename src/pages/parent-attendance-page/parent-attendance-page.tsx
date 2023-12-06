@@ -8,9 +8,10 @@ import { getShortName } from '../../utils/names';
 import AttendanceHeader from '../../components/ui/attendance-header/attendance-header';
 import TableCell from '../../components/parent-attendance/table-cell/table-cell';
 import AttendanceSelect from '../../components/parent-attendance/attendance-select/attendance-select';
+import { useIsMobile } from '../../hooks/use-is-mobile';
 
 export default function ParentAttendancePage() {
-  const isMobile = window.innerWidth < 1024;
+  const isMobile = useIsMobile();
 
   return (
     <>
