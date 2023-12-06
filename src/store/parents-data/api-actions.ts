@@ -16,7 +16,7 @@ export const getParents = createAsyncThunk<
 
 export const setChild = createAsyncThunk<
   Parent,
-  { parentId: string; childId: string },
+  { parentId: string; childId: number },
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
 >(
   'parents/setChild',

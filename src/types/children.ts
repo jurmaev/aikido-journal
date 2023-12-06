@@ -1,5 +1,5 @@
 export type Child = {
-  id: string;
+  id: number;
   name: string;
   surname: string;
   patronymic: string | null;

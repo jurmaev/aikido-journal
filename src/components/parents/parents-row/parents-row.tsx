@@ -4,19 +4,19 @@ import cn from 'classnames';
 import { Parent } from '../../../types/parents';
 import { getHighlightedParentName } from '../../../utils/highlight';
 import { getFullName, getShortName } from '../../../utils/names';
-import { Child } from '../../../types/children';
+import { Children } from '../../../types/children';
 import { useIsMobile } from '../../../hooks/use-is-mobile';
 
 type ParentsRowProps = {
   parent: Parent;
-  child: Child | null;
+  children: Children;
   highlightedValue: string;
   setActiveModal: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default function ParentsRow({
   parent,
-  child,
+  children,
   highlightedValue,
   setActiveModal,
 }: ParentsRowProps) {
@@ -27,7 +27,11 @@ export default function ParentsRow({
       <td className={styles.parentsData}>
         <div className={styles.parentsDataContainer}>
           <p>
-            {getHighlightedParentName(getFullName(parent), isMobile, highlightedValue)}
+            {getHighlightedParentName(
+              getFullName(parent),
+              isMobile,
+              highlightedValue
+            )}
           </p>
           <button
             className={cn(baseStyles.btn, styles.parentsBtn)}
@@ -67,14 +71,16 @@ export default function ParentsRow({
       </td>
       <td
         className={cn(styles.parentsData, {
-          [styles.parentsDataEmpty]: !child,
+          [styles.parentsDataEmpty]: children.length === 0,
         })}
       >
         <div className={styles.parentsDataContainer}>
-          {child
-            ? isMobile
-              ? getShortName(getFullName(child))
-              : getFullName(child)
+          {children.length !== 0 && isMobile
+            ? children
+                .map((child) => getShortName(getFullName(child)))
+                .join(', ')
+            : children.length !== 0
+            ? children.map((child) => getFullName(child)).join(', ')
             : 'ребёнок не закреплён'}
           <button
             className={cn(baseStyles.btn, styles.parentsBtn)}
