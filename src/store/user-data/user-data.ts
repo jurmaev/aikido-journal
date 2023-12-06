@@ -15,6 +15,7 @@ export const userData = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
+      state.role = null;
       state.authorizationStatus = AuthorizationStatus.NoAuth;
       dropToken();
     },
