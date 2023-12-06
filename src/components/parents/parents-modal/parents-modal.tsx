@@ -4,16 +4,15 @@ import cn from 'classnames';
 import Modal from '../../ui/modal/modal';
 import { getFullName, getShortName } from '../../../utils/names';
 import { Parent } from '../../../types/parents';
-import { useRef, useState } from 'react';
 import { Children } from '../../../types/children';
 import { useIsMobile } from '../../../hooks/use-is-mobile';
-import { produce } from 'immer';
+import ChildSelect from '../child-select/child-select';
 
 type ParentsModalProps = {
   parent: Parent;
   children: Children;
   childrenOptions: Children;
-  handleSelect: (selectValue: { parentId: string; childId: number }) => void;
+  handleSelect: (parentId: string, childId: number) => void;
   activeModal: string;
   setActiveModal: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -27,16 +26,6 @@ export default function ParentsModal({
   setActiveModal,
 }: ParentsModalProps) {
   const isMobile = useIsMobile();
-  const [selectValues, setSelectValues] = useState(
-    children.map((child) => {
-      return {
-        childId: child.id,
-        parentId: parent.id,
-        selectedChildId: child.id,
-      };
-    })
-  );
-  const selectRef = useRef<HTMLSelectElement>(null);
 
   return (
     <Modal
@@ -77,99 +66,21 @@ export default function ParentsModal({
 
       {children.length !== 0 &&
         children.map((child) => (
-          <div key={`${child.id}-select`} className={baseStyles.inputGroup}>
-            <select
-              className={cn(baseStyles.formInput, styles.parentsModalInput)}
-              aria-label="Children select"
-              defaultValue={child ? child.id : ''}
-              onChange={(evt) => {
-                setSelectValues(
-                  produce((draft) => {
-                    const foundItem = draft.find(
-                      (item) => item.childId === child.id
-                    )!;
-                    foundItem.selectedChildId = Number(evt.target.value);
-                  })
-                );
-              }}
-            >
-              <option value="">Выберите ребёнка</option>
-              <option value={child.id}>{getFullName(child)}</option>
-              {childrenOptions.map(
-                (child) =>
-                  child && (
-                    <option key={child.id} value={child.id}>
-                      {getFullName(child)}
-                    </option>
-                  )
-              )}
-            </select>
-            <button
-              className={cn(
-                baseStyles.btn,
-                baseStyles.btnBlue,
-                baseStyles.btnLarge
-              )}
-              onClick={() =>
-                handleSelect(
-                  selectValues.find((value) => value.childId === child.id)!
-                )
-              }
-              disabled={
-                selectValues.find(
-                  (value) => value.selectedChildId === child.id
-                ) !== undefined
-              }
-            >
-              Закрепить
-            </button>
-          </div>
+          <ChildSelect
+            key={`${child.id}-select`}
+            child={child}
+            parentId={parent.id}
+            childrenOptions={childrenOptions}
+            handleSelect={handleSelect}
+          />
         ))}
 
-      <div className={baseStyles.inputGroup}>
-        <select
-          className={cn(baseStyles.formInput, styles.parentsModalInput)}
-          aria-label="Children select"
-          ref={selectRef}
-          onChange={(evt) => {
-            setSelectValues(
-              produce((draft) => {
-                draft.push({
-                  childId: Number(evt.target.value),
-                  parentId: parent.id,
-                  selectedChildId: Number(evt.target.value),
-                });
-              })
-            );
-          }}
-        >
-          <option value="">Выберите ребёнка</option>
-          {childrenOptions.map(
-            (child) =>
-              child && (
-                <option key={child.id} value={child.id}>
-                  {getFullName(child)}
-                </option>
-              )
-          )}
-        </select>
-        <button
-          className={cn(
-            baseStyles.btn,
-            baseStyles.btnBlue,
-            baseStyles.btnLarge
-          )}
-          onClick={() =>
-            handleSelect(
-              selectValues.find(
-                (value) => value.childId === Number(selectRef.current?.value)
-              )!
-            )
-          }
-        >
-          Закрепить
-        </button>
-      </div>
+      <ChildSelect
+        child={null}
+        parentId={parent.id}
+        childrenOptions={childrenOptions}
+        handleSelect={handleSelect}
+      />
     </Modal>
   );
 }

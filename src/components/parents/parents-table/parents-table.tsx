@@ -19,11 +19,11 @@ export default function ParentsTable() {
   );
   const children = useAppSelector(getChildrenWithoutParent);
 
-  function handleSelect(selectValue: { parentId: string; childId: number }) {
+  function handleSelect(parentId: string, childId: number) {
     dispatch(
       setChild({
-        parentId: selectValue.parentId,
-        childId: selectValue.childId,
+        parentId: parentId,
+        childId: childId,
       })
     );
     setActiveModal('');
