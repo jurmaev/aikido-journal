@@ -5,7 +5,10 @@ import logoSrc from './logo.svg';
 import { useState } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { getAuthorizationStatus } from '../../../store/user-data/user-data.selectors';
+import {
+  getAuthorizationStatus,
+  getUserRole,
+} from '../../../store/user-data/user-data.selectors';
 import { logout } from '../../../store/user-data/user-data';
 
 type HeaderProps = {
@@ -17,6 +20,7 @@ export default function Header({ navItems }: HeaderProps) {
   const navigate = useNavigate();
   const [isNavActive, setIsNavActive] = useState(false);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const role = useAppSelector(getUserRole);
 
   return (
     <header className={styles.header}>
@@ -31,7 +35,12 @@ export default function Header({ navItems }: HeaderProps) {
           </Link>
         )}
         {navItems && (
-          <nav className={cn(styles.nav, { [styles.active]: isNavActive })}>
+          <nav
+            className={cn(styles.nav, {
+              [styles.active]: isNavActive,
+              [styles.parentNav]: role === 'parent',
+            })}
+          >
             <ul className={styles.navList}>
               {navItems.map((item) => (
                 <NavLink

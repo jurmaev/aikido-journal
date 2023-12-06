@@ -75,6 +75,10 @@ img {
   width: 70%;
 }
 
+.parentNav {
+  width: 50%;
+}
+
 .navList {
   margin: 0;
   padding: 0;
