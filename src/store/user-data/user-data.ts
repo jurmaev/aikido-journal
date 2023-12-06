@@ -3,6 +3,7 @@ import { AuthorizationStatus, Namespace } from '../../const';
 import { UserData } from '../../types/state';
 import { login, register } from './api-actions';
 import { dropToken, getToken, setToken } from '../../utils/token';
+import { jwtDecode } from 'jwt-decode';
 
 const initialState: UserData = {
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -18,9 +19,11 @@ export const userData = createSlice({
       dropToken();
     },
     checkAuth: (state) => {
-      state.authorizationStatus = getToken()
+      const token = getToken();
+      state.authorizationStatus = token
         ? AuthorizationStatus.Auth
         : AuthorizationStatus.NoAuth;
+      state.role = token && jwtDecode(token).user_role;
     },
   },
   extraReducers(builder) {
