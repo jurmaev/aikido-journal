@@ -76,13 +76,13 @@ export default function GroupModal({
 
   function handleCheckClick(day: TrainingTime | null, index: number) {
     if (!day) {
-      day = { startTime: '', endTime: '' };
+      day = { start: '', end: '' };
     } else {
       day = null;
     }
     setGroupState(
       produce((draft) => {
-        draft.schedule[index] = day;
+        draft.days[index] = day;
       })
     );
     setIsChanged(true);
@@ -104,7 +104,7 @@ export default function GroupModal({
   ) {
     setGroupState(
       produce((draft) => {
-        draft.schedule[index]!.startTime = evt.target.value;
+        draft.days[index]!.start = evt.target.value;
       })
     );
     setIsChanged(true);
@@ -116,7 +116,7 @@ export default function GroupModal({
   ) {
     setGroupState(
       produce((draft) => {
-        draft.schedule[index]!.endTime = evt.target.value;
+        draft.days[index]!.end = evt.target.value;
       })
     );
     setIsChanged(true);
@@ -173,7 +173,7 @@ export default function GroupModal({
           </thead>
           <tbody>
             <tr>
-              {groupState.schedule.map((day, index) => (
+              {groupState.days.map((day, index) => (
                 <GroupTime
                   key={index}
                   day={day}

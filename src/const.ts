@@ -35,6 +35,7 @@ export const Namespace = {
   User: 'user',
   Children: 'chlidren',
   Parents: 'parents',
+  Groups: 'groups',
 };
 
 export const AuthorizationStatus = {
@@ -49,4 +50,5 @@ export const ApiRoute = {
   User: '/users',
   Children: '/children',
   Parents: '/parents',
+  Groups: '/groups',
 };

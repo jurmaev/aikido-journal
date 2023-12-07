@@ -7,20 +7,20 @@ export const groups: Group[] = [
     name: 'Группа 1',
     price: 250,
     children: children,
-    schedule: [
+    days: [
       {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
       null,
       {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
       null,
       {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
       null,
       null,
@@ -31,20 +31,20 @@ export const groups: Group[] = [
     name: 'Группа 2',
     price: 250,
     children: children,
-    schedule: [
+    days: [
       {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
       null,
       {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
       null,
       {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
       null,
       null,
@@ -55,20 +55,20 @@ export const groups: Group[] = [
     name: 'Группа 3',
     price: 250,
     children: children,
-    schedule: [
+    days: [
       {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
       null,
       {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
       null,
       {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
       null,
       null,
