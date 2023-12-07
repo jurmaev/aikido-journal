@@ -5,11 +5,11 @@ import { ApiRoute } from '../../const';
 import { Child, Children } from '../../types/children';
 import { FullName } from '../../types/user';
 
-export const getChildren = createAsyncThunk<
+export const fetchChildren = createAsyncThunk<
   Children,
   undefined,
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
->('children/get', async (_arg, { extra: api }) => {
+>('children/fetch', async (_arg, { extra: api }) => {
   const { data } = await api.get<Children>(`${ApiRoute.Children}/all`);
   return data;
 });
@@ -35,11 +35,11 @@ export const removeChild = createAsyncThunk<
   return id;
 });
 
-export const getChildrenWithoutParentApi = createAsyncThunk<
+export const fetchChildrenWithoutParentApi = createAsyncThunk<
   Children,
   undefined,
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
->('children/getWithoutParent', async (_arg, { extra: api }) => {
+>('children/fetchWithoutParent', async (_arg, { extra: api }) => {
   const { data } = await api.get<Children>(
     `${ApiRoute.Children}/children_without_parent`
   );

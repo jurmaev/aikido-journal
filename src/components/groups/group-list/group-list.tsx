@@ -4,27 +4,23 @@ import styles from '../../../pages/groups-page/groups.module.css';
 import cn from 'classnames';
 import AddGroup from '../add-group/add-group';
 import SearchGroups from '../search-groups/search-groups';
-import { groups } from '../../../mocks/groups';
 import GroupModal from '../group-modal/group-modal';
-import { produce } from 'immer';
 import { highlightText } from '../../../utils/highlight';
+import { useAppSelector } from '../../../hooks';
+import { getGroups } from '../../../store/group-data/group-data.selectors';
 
 export default function GroupList() {
   const [activeGroupModal, setActiveGroupModal] = useState<string>('');
-  const [groupsState, setGroupsState] = useState(groups);
+  const groups = useAppSelector(getGroups);
   const [highlightedValue, setHighlightedValue] = useState('');
+  const sortedGroups = groups.filter((group) =>
+    group.name.includes(highlightedValue)
+  );
 
   function handleSearch(searchValue: string) {
     if (searchValue === '') {
-      setGroupsState(groups);
       setHighlightedValue('');
     } else {
-      setGroupsState(
-        produce(
-          (draft) =>
-            (draft = draft.filter((group) => group.name.includes(searchValue)))
-        )
-      );
       setHighlightedValue(searchValue);
     }
   }
@@ -36,7 +32,7 @@ export default function GroupList() {
       <SearchGroups onSearch={handleSearch} />
 
       <ul className={styles.groupsList}>
-        {groupsState.map((group) => [
+        {sortedGroups.map((group) => [
           <li key={group.id} className={styles.groupsItem}>
             <span>{highlightText(group.name, highlightedValue)}</span>
             <button
@@ -71,7 +67,6 @@ export default function GroupList() {
             group={group}
             activeGroupModal={activeGroupModal}
             setActiveGroupModal={setActiveGroupModal}
-            onSave={setGroupsState}
           />,
         ])}
       </ul>

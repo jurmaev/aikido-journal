@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Namespace } from '../../const';
 import { ParentsData } from '../../types/state';
-import { getParents, removeChild, setChild } from './api-actions';
+import { fetchParents, removeChild, setChild } from './api-actions';
 
 const initialState: ParentsData = {
   parents: [],
@@ -13,7 +13,7 @@ export const parentsData = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getParents.fulfilled, (state, action) => {
+      .addCase(fetchParents.fulfilled, (state, action) => {
         state.parents = action.payload;
       })
       .addCase(setChild.fulfilled, (state, action) => {

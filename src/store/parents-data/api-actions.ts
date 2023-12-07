@@ -3,13 +3,13 @@ import { AppDispatch, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../const';
 import { Parent, Parents } from '../../types/parents';
-import { getChildrenWithoutParentApi } from '../children-data/api-actions';
+import { fetchChildrenWithoutParentApi } from '../children-data/api-actions';
 
-export const getParents = createAsyncThunk<
+export const fetchParents = createAsyncThunk<
   Parents,
   undefined,
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
->('parents/get', async (_arg, { extra: api }) => {
+>('parents/fetch', async (_arg, { extra: api }) => {
   const { data } = await api.get<Parents>(`${ApiRoute.Parents}/all`);
   return data;
 });
@@ -24,7 +24,7 @@ export const setChild = createAsyncThunk<
     const { data } = await api.get<Parent>(
       `${ApiRoute.Parents}/${parentId}/add_child/${childId}`
     );
-    dispatch(getChildrenWithoutParentApi());
+    dispatch(fetchChildrenWithoutParentApi());
     return data;
   }
 );
@@ -37,7 +37,7 @@ export const removeChild = createAsyncThunk<
   'parents/removeChild',
   async ({ parentId, childId }, { extra: api, dispatch }) => {
     await api.get(`${ApiRoute.Parents}/${parentId}/remove_child/${childId}`);
-    dispatch(getChildrenWithoutParentApi());
+    dispatch(fetchChildrenWithoutParentApi());
     return {parentId, childId};
   }
 );

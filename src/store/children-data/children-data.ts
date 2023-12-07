@@ -3,8 +3,8 @@ import { Namespace } from '../../const';
 import { ChildrenData } from '../../types/state';
 import {
   createChild,
-  getChildren,
-  getChildrenWithoutParentApi,
+  fetchChildren,
+  fetchChildrenWithoutParentApi,
   removeChild,
 } from './api-actions';
 
@@ -19,7 +19,7 @@ export const childrenData = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getChildren.fulfilled, (state, action) => {
+      .addCase(fetchChildren.fulfilled, (state, action) => {
         state.children = action.payload;
       })
       .addCase(createChild.fulfilled, (state, action) => {
@@ -30,7 +30,7 @@ export const childrenData = createSlice({
           (child) => child.id !== action.payload
         );
       })
-      .addCase(getChildrenWithoutParentApi.fulfilled, (state, action) => {
+      .addCase(fetchChildrenWithoutParentApi.fulfilled, (state, action) => {
         state.childrenWithoutParent = action.payload;
       });
   },

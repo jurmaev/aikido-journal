@@ -19,14 +19,12 @@ type GroupModalProps = {
   group: Group;
   activeGroupModal: string;
   setActiveGroupModal: React.Dispatch<React.SetStateAction<string>>;
-  onSave: React.Dispatch<React.SetStateAction<Group[]>>;
 };
 
 export default function GroupModal({
   group,
   activeGroupModal,
   setActiveGroupModal,
-  onSave,
 }: GroupModalProps) {
   const [groupState, setGroupState] = useState(group);
   const [isChanged, setIsChanged] = useState(false);
