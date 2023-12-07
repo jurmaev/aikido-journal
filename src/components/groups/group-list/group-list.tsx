@@ -33,7 +33,7 @@ export default function GroupList() {
 
       <ul className={styles.groupsList}>
         {sortedGroups.map((group) => [
-          <li key={group.id} className={styles.groupsItem}>
+          <li key={`${group.id}-group`} className={styles.groupsItem}>
             <span>{highlightText(group.name, highlightedValue)}</span>
             <button
               className={cn(baseStyles.btn, styles.groupsBtn)}

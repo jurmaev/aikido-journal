@@ -101,7 +101,11 @@ export default function GroupModal({
   ) {
     setGroupState(
       produce((draft) => {
-        draft.days[index]!.start = evt.target.value;
+        if (draft.days[index]) {
+          draft.days[index]!.start = evt.target.value;
+        } else {
+          draft.days[index] = { start: evt.target.value, end: '' };
+        }
       })
     );
     setIsChanged(true);
@@ -113,7 +117,11 @@ export default function GroupModal({
   ) {
     setGroupState(
       produce((draft) => {
-        draft.days[index]!.end = evt.target.value;
+        if (draft.days[index]) {
+          draft.days[index]!.end = evt.target.value;
+        } else {
+          draft.days[index] = { end: evt.target.value, start: '' };
+        }
       })
     );
     setIsChanged(true);
