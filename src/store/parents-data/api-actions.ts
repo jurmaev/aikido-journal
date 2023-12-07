@@ -28,3 +28,16 @@ export const setChild = createAsyncThunk<
     return data;
   }
 );
+
+export const removeChild = createAsyncThunk<
+  { parentId: string; childId: number },
+  { parentId: string; childId: number },
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>(
+  'parents/removeChild',
+  async ({ parentId, childId }, { extra: api, dispatch }) => {
+    await api.get(`${ApiRoute.Parents}/${parentId}/remove_child/${childId}`);
+    dispatch(getChildrenWithoutParentApi());
+    return {parentId, childId};
+  }
+);

@@ -27,8 +27,8 @@ export const createChild = createAsyncThunk<
 });
 
 export const removeChild = createAsyncThunk<
-  string,
-  string,
+  number,
+  number,
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
 >('children/remove', async (id, { extra: api }) => {
   await api.post<Child>(`${ApiRoute.Children}/remove/${id}`);

@@ -20,7 +20,7 @@ export default function ChildrenList() {
     getFullName(child).toLowerCase().includes(highlightedValue)
   );
 
-  function handleDelete(id: string) {
+  function handleDelete(id: number) {
     dispatch(removeChild(id));
   }
 
