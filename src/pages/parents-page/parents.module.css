@@ -153,6 +153,13 @@ tr:last-child td:last-child {
   stroke: var(--black-600);
 }
 
+.childText{
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  margin-bottom: 0;
+}
+
 @media (max-width: 1024px) {
   .parentsContainer {
     padding: 2.5rem 0;
