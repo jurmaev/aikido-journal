@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 type AddChildProps = {
   id: string;
-  handleAddChild: (childId: string) => void;
+  handleAddChild: (childId: number) => void;
 };
 
 export default function AddChild({ id, handleAddChild }: AddChildProps) {
@@ -23,7 +23,7 @@ export default function AddChild({ id, handleAddChild }: AddChildProps) {
         value={selectValue}
         onChange={(evt) => setSelectValue(evt.target.value)}
       >
-        <option value="">Выберите ребёнка</option>
+        <option value="-1">Выберите ребёнка</option>
         {children.map((child) => (
           <option key={child.id} value={child.id}>
             {getFullName(child)}
@@ -32,7 +32,7 @@ export default function AddChild({ id, handleAddChild }: AddChildProps) {
       </select>
       <button
         className={cn(baseStyles.btn, baseStyles.btnBlue, baseStyles.btnLarge)}
-        onClick={() => handleAddChild(selectValue)}
+        onClick={() => handleAddChild(Number(selectValue))}
       >
         Добавить в группу
       </button>

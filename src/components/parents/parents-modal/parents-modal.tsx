@@ -47,43 +47,31 @@ export default function ParentsModal({
         {isMobile ? getShortName(getFullName(parent)) : getFullName(parent)}
       </p>
 
-      {children.length !== 0 &&
+      {children.length !== 0 ? (
         children.map((child) => (
-          <span key={`${child.id}-full-name`} className={baseStyles.modalText}>
+          <div key={`${child.id}-full-name`} className={baseStyles.modalText}>
             ФИО ребёнка:{' '}
             <span
               className={cn(baseStyles.modalText, styles.childText, {
                 [styles.parentsDataEmpty]: !child,
               })}
             >
-              {child && isMobile ? (
-                <ChildItem child={child} handleDelete={handleDelete} />
-              ) : child ? (
+              {isMobile ? (
                 <ChildItem child={child} handleDelete={handleDelete} />
               ) : (
-                'ребёнок не закреплён'
+                <ChildItem child={child} handleDelete={handleDelete} />
               )}
             </span>
+          </div>
+        ))
+      ) : (
+        <p className={baseStyles.modalText}>
+          ФИО ребёнка:{' '}
+          <span className={cn(baseStyles.modalText, styles.parentsDataEmpty)}>
+            ребёнок не закреплён
           </span>
-        ))}
-
-      <p className={baseStyles.modalText}>
-        ФИО ребёнка:{' '}
-        <span className={cn(baseStyles.modalText, styles.parentsDataEmpty)}>
-          ребёнок не закреплён
-        </span>
-      </p>
-
-      {children.length !== 0 &&
-        children.map((child) => (
-          <ChildSelect
-            key={`${child.id}-select`}
-            child={child}
-            parentId={parent.id}
-            childrenOptions={childrenOptions}
-            handleSelect={handleSelect}
-          />
-        ))}
+        </p>
+      )}
 
       <ChildSelect
         child={null}

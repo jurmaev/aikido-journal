@@ -5,7 +5,6 @@ import Modal from '../../ui/modal/modal';
 import { Group, TrainingTime } from '../../../types/group';
 import { useState } from 'react';
 import { produce } from 'immer';
-import { children } from '../../../mocks/children';
 import GroupChildItem from '../group-child-item/group-child-item';
 import { Child } from '../../../types/children';
 import ExitGroupModal from '../exit-group-modal/exit-group-modal';
@@ -49,7 +48,7 @@ export default function GroupModal({
     setIsChanged(true);
   }
 
-  function handleDeleteChild(id: string) {
+  function handleDeleteChild(id: number) {
     setGroupState(
       produce((draft) => {
         draft.children = draft.children.filter((child) => child.id !== id);
@@ -58,8 +57,8 @@ export default function GroupModal({
     setIsChanged(true);
   }
 
-  function handleAddChild(childId: string) {
-    if (childId === '') return;
+  function handleAddChild(childId: number) {
+    if (childId === -1) return;
     if (!groupState.children.some((child) => child.id === childId)) {
       setGroupState(
         produce((draft) => {
