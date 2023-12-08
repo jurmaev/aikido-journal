@@ -27,6 +27,7 @@ export default function ChildSelect({
       <select
         className={cn(baseStyles.formInput, styles.parentsModalInput)}
         aria-label="Children select"
+        name='Child select'
         defaultValue="-1"
         onChange={(evt) => {
           setSelectValue({

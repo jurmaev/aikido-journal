@@ -22,6 +22,11 @@ export default function SearchGroups({ onSearch }: SearchGroupsProps) {
           id="list"
           placeholder="Введите название группы"
           onChange={(evt) => setSearchValue(evt.target.value)}
+          onKeyDown={(evt) => {
+            if (evt.key === 'Enter') {
+              onSearch(searchValue);
+            }
+          }}
         />
         <button
           className={cn(

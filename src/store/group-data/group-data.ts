@@ -23,7 +23,7 @@ export const groupData = createSlice({
     addNewGroup: (state, action: PayloadAction<string>) => {
       state.newGroup = {
         name: action.payload,
-        price: undefined,
+        price: '',
         children: [],
         days: [null, null, null, null, null, null, null],
       };

@@ -6,7 +6,6 @@ import { Group, TrainingTime } from '../../../types/group';
 import { useState } from 'react';
 import { produce } from 'immer';
 import GroupChildItem from '../group-child-item/group-child-item';
-import { Child } from '../../../types/children';
 import ExitGroupModal from '../exit-group-modal/exit-group-modal';
 import DeleteGroupModal from '../delete-group-modal/delete-group-modal';
 import GroupName from '../group-name/group-name';
@@ -229,7 +228,7 @@ export default function GroupModal({
         <AddChild name={group.name} handleAddChild={handleAddChild} />
 
         <ul className={styles.list}>
-          {groupState.children.map((child) => (
+          {group.children.map((child) => (
             <GroupChildItem
               key={child.id}
               child={child}

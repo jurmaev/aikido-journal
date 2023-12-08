@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 type GroupPriceProps = {
   name: string;
-  value: number | undefined;
+  value: number | string;
   onChange: (value: number) => void;
 };
 

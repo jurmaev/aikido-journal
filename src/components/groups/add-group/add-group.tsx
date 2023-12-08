@@ -30,6 +30,11 @@ export default function AddGroup({ setActiveGroupModal }: AddGroupProps) {
           id="group"
           placeholder="Придумайте название группы"
           onChange={(evt) => setGroupName(evt.target.value)}
+          onKeyDown={(evt) => {
+            if (evt.key === 'Enter') {
+              handleClick();
+            }
+          }}
         />
         <button
           className={cn(baseStyles.btn, baseStyles.btnRed, baseStyles.btnLarge)}
