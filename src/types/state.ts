@@ -32,4 +32,5 @@ export type ParentsData = {
 export type GroupData = {
   groups: Groups;
   newGroup: Group | null;
+  childrenWithoutGroup: Children;
 };

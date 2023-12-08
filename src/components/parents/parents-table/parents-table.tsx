@@ -6,7 +6,6 @@ import ParentsRow from '../parents-row/parents-row';
 import ParentsModal from '../parents-modal/parents-modal';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getParents } from '../../../store/parents-data/parents-data.selectors';
-import { getChildrenWithoutParent } from '../../../store/children-data/children-data.selectors';
 import { setChild } from '../../../store/parents-data/api-actions';
 
 export default function ParentsTable() {
@@ -17,7 +16,6 @@ export default function ParentsTable() {
   const sortedParents = parents.filter((parent) =>
     parent.name.toLowerCase().includes(highlightedValue)
   );
-  const children = useAppSelector(getChildrenWithoutParent);
 
   function handleSelect(parentId: string, childId: number) {
     dispatch(
@@ -61,7 +59,6 @@ export default function ParentsTable() {
               <ParentsModal
                 key={`${parent.id}-modal`}
                 children={parent.children}
-                childrenOptions={children}
                 parent={parent}
                 handleSelect={handleSelect}
                 activeModal={activeModal}

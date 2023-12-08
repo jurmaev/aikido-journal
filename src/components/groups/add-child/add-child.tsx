@@ -2,8 +2,9 @@ import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/groups-page/groups.module.css';
 import cn from 'classnames';
 import { getFullName } from '../../../utils/names';
-import { children } from '../../../mocks/children';
 import { useState } from 'react';
+import { useAppSelector } from '../../../hooks';
+import { getChildrenWithoutGroup } from '../../../store/group-data/group-data.selectors';
 
 type AddChildProps = {
   name: string;
@@ -12,6 +13,7 @@ type AddChildProps = {
 
 export default function AddChild({ name, handleAddChild }: AddChildProps) {
   const [selectValue, setSelectValue] = useState('');
+  const children = useAppSelector(getChildrenWithoutGroup);
 
   return (
     <div className={cn(baseStyles.inputGroup, styles.groupsModalInputGroup)}>

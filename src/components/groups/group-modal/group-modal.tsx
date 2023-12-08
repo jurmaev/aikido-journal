@@ -15,7 +15,9 @@ import GroupTime from '../group-time/group-time';
 import AddChild from '../add-child/add-child';
 import { useAppDispatch } from '../../../hooks';
 import {
+  addChild,
   createGroup,
+  removeChild,
   removeGroup,
 } from '../../../store/group-data/api-actions';
 import { removeNewGroup } from '../../../store/group-data/group-data';
@@ -58,26 +60,13 @@ export default function GroupModal({
   }
 
   function handleDeleteChild(id: number) {
-    setGroupState(
-      produce((draft) => {
-        draft.children = draft.children.filter((child) => child.id !== id);
-      })
-    );
+    dispatch(removeChild({ name: group.name, childId: id }));
     setIsChanged(true);
   }
 
   function handleAddChild(childId: number) {
     if (childId === -1) return;
-    if (!groupState.children.some((child) => child.id === childId)) {
-      setGroupState(
-        produce((draft) => {
-          draft.children.push(
-            children.find((child) => child.id === childId) as Child
-          );
-        })
-      );
-      setIsChanged(true);
-    }
+    dispatch(addChild({ name: group.name, childId: childId }));
   }
 
   function handleCheckClick(day: TrainingTime | null, index: number) {

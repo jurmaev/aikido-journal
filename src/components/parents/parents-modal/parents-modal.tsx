@@ -7,14 +7,15 @@ import { Parent } from '../../../types/parents';
 import { Children } from '../../../types/children';
 import { useIsMobile } from '../../../hooks/use-is-mobile';
 import ChildSelect from '../child-select/child-select';
-import { useAppDispatch } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { removeChild } from '../../../store/parents-data/api-actions';
 import ChildItem from '../child/child';
+import { getChildrenWithoutParent } from '../../../store/children-data/children-data.selectors';
 
 type ParentsModalProps = {
   parent: Parent;
   children: Children;
-  childrenOptions: Children;
+  // childrenOptions: Children;
   handleSelect: (parentId: string, childId: number) => void;
   activeModal: string;
   setActiveModal: React.Dispatch<React.SetStateAction<string>>;
@@ -23,13 +24,14 @@ type ParentsModalProps = {
 export default function ParentsModal({
   parent,
   children,
-  childrenOptions,
+  // childrenOptions,
   handleSelect,
   activeModal,
   setActiveModal,
 }: ParentsModalProps) {
   const isMobile = useIsMobile();
   const dispatch = useAppDispatch();
+  const childrenOptions = useAppSelector(getChildrenWithoutParent);
 
   function handleDelete(childId: number) {
     dispatch(removeChild({ parentId: parent.id, childId: childId }));

@@ -1,12 +1,19 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Namespace } from '../../const';
 import { GroupData } from '../../types/state';
-import { createGroup, fetchGroups, removeGroup } from './api-actions';
+import {
+  createGroup,
+  fetchChildrenWithoutGroup,
+  fetchGroups,
+  removeChild,
+  removeGroup,
+} from './api-actions';
 import { TrainingTime } from '../../types/group';
 
 const initialState: GroupData = {
   groups: [],
   newGroup: null,
+  childrenWithoutGroup: [],
 };
 
 export const groupData = createSlice({
@@ -52,6 +59,16 @@ export const groupData = createSlice({
       .addCase(removeGroup.fulfilled, (state, action) => {
         state.groups = state.groups.filter(
           (group) => group.name !== action.payload
+        );
+      })
+      .addCase(fetchChildrenWithoutGroup.fulfilled, (state, action) => {
+        state.childrenWithoutGroup = action.payload;
+      })
+      .addCase(removeChild.fulfilled, (state, action) => {
+        const { name, childId } = action.payload;
+        const group = state.groups.find((group) => group.name === name)!;
+        group.children = group?.children.filter(
+          (child) => child.id !== childId
         );
       });
   },

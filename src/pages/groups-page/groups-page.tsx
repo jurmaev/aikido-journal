@@ -6,13 +6,17 @@ import cn from 'classnames';
 import GroupList from '../../components/groups/group-list/group-list';
 import { useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
-import { fetchGroups } from '../../store/group-data/api-actions';
+import {
+  fetchChildrenWithoutGroup,
+  fetchGroups,
+} from '../../store/group-data/api-actions';
 
 export default function GroupsPage() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchGroups());
+    dispatch(fetchChildrenWithoutGroup());
   }, [dispatch]);
 
   return (
