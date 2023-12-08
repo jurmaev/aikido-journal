@@ -3,22 +3,22 @@ import styles from '../../../pages/groups-page/groups.module.css';
 import cn from 'classnames';
 
 type GroupNameProps = {
-  id: string;
+  name: string;
   value: string;
   onChange: (value: string) => void;
 };
 
-export default function GroupName({ id, value, onChange }: GroupNameProps) {
+export default function GroupName({ name, value, onChange }: GroupNameProps) {
   return (
     <div className={styles.groupsModalInputContainer}>
       <label
-        htmlFor={`group-${id}`}
+        htmlFor={`group-${name}`}
         className={cn(baseStyles.modalText, styles.groupsModalText)}
       >
         Название группы:
       </label>
       <input
-        id={`group-${id}`}
+        id={`group-${name}`}
         type="text"
         className={styles.groupsModalInput}
         value={value}

@@ -145,20 +145,20 @@ export default function GroupModal({
   return (
     <>
       <Modal
-        isActive={activeGroupModal === group.id}
+        isActive={activeGroupModal === group.name}
         isCentral={false}
         onClose={handleCloseClick}
       >
         <h2 className={baseStyles.modalTitle}>Настройка группы</h2>
 
         <GroupName
-          id={group.id}
+          name={group.name}
           value={groupState.name}
           onChange={handleNameChange}
         />
 
         <GroupPrice
-          id={group.id}
+          name={group.name}
           value={groupState.price}
           onChange={handlePriceChange}
         />

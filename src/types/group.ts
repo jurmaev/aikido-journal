@@ -15,9 +15,8 @@ export type ChildAttendance = Array<{
 }>;
 
 export type Group = {
-  id: string;
   name: string;
-  price: number;
+  price: number | undefined;
   children: Children;
   days: Array<TrainingTime | null>;
 };

@@ -33,12 +33,12 @@ export default function GroupList() {
 
       <ul className={styles.groupsList}>
         {sortedGroups.map((group) => [
-          <li key={`${group.id}-group`} className={styles.groupsItem}>
+          <li key={`${group.name}-group`} className={styles.groupsItem}>
             <span>{highlightText(group.name, highlightedValue)}</span>
             <button
               className={cn(baseStyles.btn, styles.groupsBtn)}
               aria-label="Edit group"
-              onClick={() => setActiveGroupModal(group.id)}
+              onClick={() => setActiveGroupModal(group.name)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +63,7 @@ export default function GroupList() {
             </button>
           </li>,
           <GroupModal
-            key={`${group.id}-modal`}
+            key={`${group.name}-modal`}
             group={group}
             activeGroupModal={activeGroupModal}
             setActiveGroupModal={setActiveGroupModal}

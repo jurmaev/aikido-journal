@@ -74,7 +74,6 @@ export default function ParentsModal({
       )}
 
       <ChildSelect
-        child={null}
         parentId={parent.id}
         childrenOptions={childrenOptions}
         handleSelect={handleSelect}
