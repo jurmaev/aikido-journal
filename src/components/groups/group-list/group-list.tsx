@@ -25,7 +25,7 @@ export default function GroupList() {
     if (searchValue === '') {
       setHighlightedValue('');
     } else {
-      setHighlightedValue(searchValue);
+      setHighlightedValue(searchValue.toLowerCase());
     }
   }
 

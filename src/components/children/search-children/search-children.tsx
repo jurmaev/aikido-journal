@@ -15,7 +15,7 @@ export default function SearchChildren({
   function handleSortClick() {
     if (sortValue.trim() !== '') {
       setSortValue(sortValue.trim());
-      setHighlightedValue(sortValue.trim());
+      setHighlightedValue(sortValue.trim().toLowerCase());
     } else {
       setSortValue('');
       setHighlightedValue('');

@@ -25,7 +25,7 @@ export default function SearchTable({ onSort: onSort }: SearchTableProps) {
           onChange={(evt) => setSortValue(evt.target.value)}
           onKeyDown={(evt) => {
             if (evt.key === 'Enter') {
-              onSort(sortValue.trim());
+              onSort(sortValue.trim().toLowerCase());
             }
           }}
         />
@@ -35,7 +35,7 @@ export default function SearchTable({ onSort: onSort }: SearchTableProps) {
             baseStyles.btnBlue,
             baseStyles.btnLarge
           )}
-          onClick={() => onSort(sortValue.trim())}
+          onClick={() => onSort(sortValue.trim().toLowerCase())}
         >
           Поиск
         </button>
