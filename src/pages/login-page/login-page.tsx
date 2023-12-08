@@ -7,6 +7,7 @@ import { UserLogin } from '../../types/user';
 import { login } from '../../store/user-data/api-actions';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../const';
+import { PatternFormat } from 'react-number-format';
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
@@ -43,12 +44,12 @@ export default function LoginPage() {
             <label htmlFor="number" className={styles.formLabel}>
               Введите номер телефона
             </label>
-            <input
-              type="tel"
+            <PatternFormat
+              format="+7 (###) ###-##-##"
+              allowEmptyFormatting
+              mask="_"
+              getInputRef={phoneRef}
               className={styles.formInput}
-              id="number"
-              placeholder="+7 (___) ___-__-__"
-              ref={phoneRef}
             />
             <label htmlFor="password" className={styles.formLabel}>
               Введите пароль

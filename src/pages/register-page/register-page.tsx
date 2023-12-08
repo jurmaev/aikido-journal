@@ -8,6 +8,7 @@ import { UserRegister } from '../../types/user';
 import { trimSpaces } from '../../utils/names';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../const';
+import { PatternFormat } from 'react-number-format';
 
 export default function RegisterPage() {
   const dispatch = useAppDispatch();
@@ -89,13 +90,12 @@ export default function RegisterPage() {
             <label htmlFor="name" className={styles.formLabel}>
               Введите номер телефона
             </label>
-            {/* <p className={styles.formError}>{errors.phone}</p> */}
-            <input
-              type="tel"
+            <PatternFormat
+              format="+7 (###) ###-##-##"
+              allowEmptyFormatting
+              mask="_"
+              getInputRef={phoneRef}
               className={styles.formInput}
-              id="number"
-              placeholder="+7 (___) ___-__-__"
-              ref={phoneRef}
             />
 
             <label htmlFor="password" className={styles.formLabel}>
