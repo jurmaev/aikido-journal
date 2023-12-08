@@ -7,10 +7,14 @@ import SearchGroups from '../search-groups/search-groups';
 import GroupModal from '../group-modal/group-modal';
 import { highlightText } from '../../../utils/highlight';
 import { useAppSelector } from '../../../hooks';
-import { getGroups } from '../../../store/group-data/group-data.selectors';
+import {
+  getGroups,
+  getNewGroup,
+} from '../../../store/group-data/group-data.selectors';
 
 export default function GroupList() {
   const [activeGroupModal, setActiveGroupModal] = useState<string>('');
+  const newGroup = useAppSelector(getNewGroup);
   const groups = useAppSelector(getGroups);
   const [highlightedValue, setHighlightedValue] = useState('');
   const sortedGroups = groups.filter((group) =>
@@ -67,9 +71,19 @@ export default function GroupList() {
             group={group}
             activeGroupModal={activeGroupModal}
             setActiveGroupModal={setActiveGroupModal}
+            isNew={false}
           />,
         ])}
       </ul>
+      {newGroup && (
+        <GroupModal
+          key={`${newGroup.name}-modal`}
+          group={newGroup}
+          activeGroupModal={activeGroupModal}
+          setActiveGroupModal={setActiveGroupModal}
+          isNew
+        />
+      )}
     </>
   );
 }

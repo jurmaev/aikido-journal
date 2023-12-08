@@ -3,7 +3,7 @@ import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/groups-page/groups.module.css';
 import cn from 'classnames';
 import { useAppDispatch } from '../../../hooks';
-import { addEmptyGroup } from '../../../store/group-data/group-data';
+import { addNewGroup } from '../../../store/group-data/group-data';
 
 type AddGroupProps = {
   setActiveGroupModal: React.Dispatch<React.SetStateAction<string>>;
@@ -14,7 +14,7 @@ export default function AddGroup({ setActiveGroupModal }: AddGroupProps) {
   const dispatch = useAppDispatch();
 
   function handleClick() {
-    dispatch(addEmptyGroup(groupName.trim()));
+    dispatch(addNewGroup(groupName.trim()));
     setActiveGroupModal(groupName.trim());
   }
 

@@ -1,7 +1,7 @@
 import { AuthorizationStatusValues } from '../const';
 import { store } from '../store';
 import { Children } from './children';
-import { Groups } from './group';
+import { Group, Groups } from './group';
 import { Parents } from './parents';
 
 export type State = ReturnType<typeof store.getState>;
@@ -31,4 +31,5 @@ export type ParentsData = {
 
 export type GroupData = {
   groups: Groups;
+  newGroup: Group | null;
 };

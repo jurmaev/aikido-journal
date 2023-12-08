@@ -13,22 +13,28 @@ import GroupName from '../group-name/group-name';
 import GroupPrice from '../group-price/group-price';
 import GroupTime from '../group-time/group-time';
 import AddChild from '../add-child/add-child';
+import { useAppDispatch } from '../../../hooks';
+import { createGroup } from '../../../store/group-data/api-actions';
+import { removeNewGroup } from '../../../store/group-data/group-data';
 
 type GroupModalProps = {
   group: Group;
   activeGroupModal: string;
   setActiveGroupModal: React.Dispatch<React.SetStateAction<string>>;
+  isNew: boolean;
 };
 
 export default function GroupModal({
   group,
   activeGroupModal,
   setActiveGroupModal,
+  isNew,
 }: GroupModalProps) {
   const [groupState, setGroupState] = useState(group);
   const [isChanged, setIsChanged] = useState(false);
   const [isExitModalActive, setIsExitModalActive] = useState(false);
   const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
+  const dispatch = useAppDispatch();
 
   function handleNameChange(name: string) {
     setGroupState(
@@ -86,13 +92,18 @@ export default function GroupModal({
   }
 
   function handleSaveClick() {
-    onSave(
-      produce((draft) => {
-        draft = draft.filter((draftGroup) => draftGroup.id !== group.id);
-        draft.push(groupState);
-      })
-    );
-    setActiveGroupModal('');
+    if (!isNew) {
+      onSave(
+        produce((draft) => {
+          draft = draft.filter((draftGroup) => draftGroup.id !== group.id);
+          draft.push(groupState);
+        })
+      );
+      setActiveGroupModal('');
+    } else {
+      dispatch(createGroup(groupState));
+      dispatch(removeNewGroup());
+    }
   }
 
   function handleStartTimeChange(
@@ -219,7 +230,7 @@ export default function GroupModal({
 
         <h2 className={baseStyles.modalTitle}>Список детей</h2>
 
-        <AddChild id={group.id} handleAddChild={handleAddChild} />
+        <AddChild name={group.name} handleAddChild={handleAddChild} />
 
         <ul className={styles.list}>
           {groupState.children.map((child) => (

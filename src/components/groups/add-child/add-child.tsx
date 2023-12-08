@@ -6,18 +6,18 @@ import { children } from '../../../mocks/children';
 import { useState } from 'react';
 
 type AddChildProps = {
-  id: string;
+  name: string;
   handleAddChild: (childId: number) => void;
 };
 
-export default function AddChild({ id, handleAddChild }: AddChildProps) {
+export default function AddChild({ name, handleAddChild }: AddChildProps) {
   const [selectValue, setSelectValue] = useState('');
 
   return (
     <div className={cn(baseStyles.inputGroup, styles.groupsModalInputGroup)}>
       <select
         name="children"
-        id={`children-${id}`}
+        id={`children-${name}`}
         className={styles.groupsModalSelect}
         aria-label="Select child"
         value={selectValue}
