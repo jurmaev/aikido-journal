@@ -21,3 +21,12 @@ export const createGroup = createAsyncThunk<
   const { data } = await api.post<Group>(`${ApiRoute.Groups}/create`, group);
   return data;
 });
+
+export const removeGroup = createAsyncThunk<
+  string,
+  string,
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>('groups/remove', async (name, { extra: api }) => {
+  await api.get(`${ApiRoute.Groups}/remove/${name}`);
+  return name;
+});

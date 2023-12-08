@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Namespace } from '../../const';
 import { GroupData } from '../../types/state';
-import { createGroup, fetchGroups } from './api-actions';
+import { createGroup, fetchGroups, removeGroup } from './api-actions';
 import { TrainingTime } from '../../types/group';
 
 const initialState: GroupData = {
@@ -48,6 +48,11 @@ export const groupData = createSlice({
       })
       .addCase(createGroup.fulfilled, (state, action) => {
         state.groups.push(action.payload);
+      })
+      .addCase(removeGroup.fulfilled, (state, action) => {
+        state.groups = state.groups.filter(
+          (group) => group.name !== action.payload
+        );
       });
   },
 });

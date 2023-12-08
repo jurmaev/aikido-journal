@@ -14,7 +14,10 @@ import GroupPrice from '../group-price/group-price';
 import GroupTime from '../group-time/group-time';
 import AddChild from '../add-child/add-child';
 import { useAppDispatch } from '../../../hooks';
-import { createGroup } from '../../../store/group-data/api-actions';
+import {
+  createGroup,
+  removeGroup,
+} from '../../../store/group-data/api-actions';
 import { removeNewGroup } from '../../../store/group-data/group-data';
 
 type GroupModalProps = {
@@ -153,6 +156,10 @@ export default function GroupModal({
     setIsChanged(false);
   }
 
+  function handleDeleteGroup() {
+    dispatch(removeGroup(group.name));
+  }
+
   return (
     <>
       <Modal
@@ -252,6 +259,7 @@ export default function GroupModal({
         isActive={isDeleteModalActive}
         setIsActive={setIsDeleteModalActive}
         setActiveGroupModal={setActiveGroupModal}
+        onDelete={handleDeleteGroup}
       />
     </>
   );
