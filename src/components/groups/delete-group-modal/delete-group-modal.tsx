@@ -6,12 +6,14 @@ type DeleteGroupModalProps = {
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
   setActiveGroupModal: React.Dispatch<React.SetStateAction<string>>;
+  onDelete: () => void;
 };
 
 export default function DeleteGroupModal({
   isActive,
   setIsActive,
   setActiveGroupModal,
+  onDelete,
 }: DeleteGroupModalProps) {
   return (
     <Modal isActive={isActive} isCentral onClose={() => setIsActive(false)}>
@@ -24,6 +26,7 @@ export default function DeleteGroupModal({
           onClick={() => {
             setIsActive(false);
             setActiveGroupModal('');
+            onDelete();
           }}
         >
           Удалить

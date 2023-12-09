@@ -52,14 +52,14 @@ export default function GroupTime({
           type="time"
           className={styles.tableInput}
           placeholder="Время начала"
-          value={day ? day?.startTime : ''}
+          value={day ? day?.start : ''}
           onChange={(evt) => handleStartTimeChange(evt, index)}
         />
         <input
           type="time"
           className={styles.tableInput}
           placeholder="Время окончания"
-          value={day ? day?.endTime : ''}
+          value={day ? day?.end : ''}
           onChange={(evt) => handleEndTimeChange(evt, index)}
         />
       </div>

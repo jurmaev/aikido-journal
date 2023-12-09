@@ -5,8 +5,8 @@ export type ScheduleDay = { date: string; isTraining: boolean };
 export type GroupSchedule = ScheduleDay[];
 
 export type TrainingTime = {
-  startTime: string;
-  endTime: string;
+  start: string;
+  end: string;
 };
 
 export type ChildAttendance = Array<{
@@ -15,12 +15,13 @@ export type ChildAttendance = Array<{
 }>;
 
 export type Group = {
-  id: string;
   name: string;
-  price: number;
+  price: number | string;
   children: Children;
-  schedule: Array<TrainingTime | null>;
+  days: Array<TrainingTime | null>;
 };
+
+export type Groups = Group[];
 
 export type GroupAttendance = {
   id: string;

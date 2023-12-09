@@ -1,16 +1,14 @@
-import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/children-page/children.module.css';
-import cn from 'classnames';
 import { Child } from '../../../types/children';
 import { getFullName } from '../../../utils/names';
 import { highlightText } from '../../../utils/highlight';
-import Modal from '../../ui/modal/modal';
 import { useState } from 'react';
+import DeleteChildModal from '../delete-child-modal/delete-child-modal';
 
 type ChildItemProps = {
   child: Child;
   highlightedValue: string;
-  handleDelete: (id: string) => void;
+  handleDelete: (id: number) => void;
 };
 
 export default function ChildItem({
@@ -22,7 +20,7 @@ export default function ChildItem({
 
   return (
     <>
-      <li key={`${child.id}-item`} className={styles.childrenItem}>
+      <li className={styles.childrenItem}>
         <span className={styles.childrenText}>
           {highlightedValue !== ''
             ? highlightText(getFullName(child), highlightedValue)
@@ -57,41 +55,12 @@ export default function ChildItem({
           />
         </svg>
       </li>
-      <Modal
-        key={`${child.id}-modal`}
+      <DeleteChildModal
+        child={child}
         isActive={isActive}
-        isCentral
-        onClose={() => setIsActive(false)}
-      >
-        <h2 className={baseStyles.modalTitle}>
-          Вы действительно хотите удалить ребенка?
-        </h2>
-        <p className={baseStyles.modalText}>ФИО: {getFullName(child)}</p>
-        <div className={baseStyles.inputGroup}>
-          <button
-            className={cn(
-              baseStyles.btn,
-              baseStyles.btnRed,
-              baseStyles.btnLarge
-            )}
-            aria-label="Удалить"
-            onClick={() => handleDelete(child.id)}
-          >
-            Удалить
-          </button>
-          <button
-            className={cn(
-              baseStyles.btn,
-              baseStyles.btnBlue,
-              baseStyles.btnLarge
-            )}
-            aria-label="Отменить"
-            onClick={() => setIsActive(false)}
-          >
-            Отменить
-          </button>
-        </div>
-      </Modal>
+        setIsActive={setIsActive}
+        handleDelete={handleDelete}
+      />
     </>
   );
 }

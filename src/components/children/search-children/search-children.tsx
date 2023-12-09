@@ -4,23 +4,19 @@ import styles from '../../../pages/children-page/children.module.css';
 import cn from 'classnames';
 
 type SearchChildrenProps = {
-  onSort: (sortValue: string) => void;
   setHighlightedValue: React.Dispatch<SetStateAction<string>>;
 };
 
 export default function SearchChildren({
-  onSort,
   setHighlightedValue,
 }: SearchChildrenProps) {
   const [sortValue, setSortValue] = useState('');
 
   function handleSortClick() {
     if (sortValue.trim() !== '') {
-      onSort(sortValue.trim());
       setSortValue(sortValue.trim());
-      setHighlightedValue(sortValue.trim());
+      setHighlightedValue(sortValue.trim().toLowerCase());
     } else {
-      onSort(sortValue);
       setSortValue('');
       setHighlightedValue('');
     }
@@ -39,6 +35,11 @@ export default function SearchChildren({
           placeholder="Введите ФИО ребёнка"
           value={sortValue}
           onChange={(evt) => setSortValue(evt.target.value)}
+          onKeyDown={(evt) => {
+            if (evt.key === 'Enter') {
+              handleSortClick();
+            }
+          }}
         />
         <button
           className={cn(

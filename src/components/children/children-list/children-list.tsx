@@ -3,37 +3,33 @@ import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/children-page/children.module.css';
 import ChildItem from '../child-item/child-item';
 import SearchChildren from '../search-children/search-children';
-import { children } from '../../../mocks/children';
 import { getFullName } from '../../../utils/names';
 import AddChild from '../add-child/add-child';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { getChildren } from '../../../store/children-data/children-data.selectors';
+import {
+  createChild,
+  removeChild,
+} from '../../../store/children-data/api-actions';
 
 export default function ChildrenList() {
-  const [childrenState, setChildrenState] = useState(children);
+  const dispatch = useAppDispatch();
+  const children = useAppSelector(getChildren);
   const [highlightedValue, setHighlightedValue] = useState('');
+  const filteredChildren = children.filter((child) =>
+    getFullName(child).toLowerCase().includes(highlightedValue)
+  );
 
-  function handleDelete(id: string) {
-    setChildrenState(childrenState.filter((child) => child.id !== id));
+  function handleDelete(id: number) {
+    dispatch(removeChild(id));
   }
 
-  function handleSortChildren(sortValue: string) {
-    if (sortValue !== '') {
-      setChildrenState(
-        children.filter((child) =>
-          getFullName(child).toLowerCase().includes(sortValue)
-        )
-      );
-    } else {
-      setChildrenState(children);
-    }
-  }
-
-  function handleAddChild(surname: string, name: string, patronymic: string) {
-    setChildrenState(
-      childrenState.concat({
-        id: crypto.randomUUID(),
+  function handleAddChild(surname: string, name: string, patronymic?: string) {
+    dispatch(
+      createChild({
         name: name,
         surname: surname,
-        patronymic: patronymic ? patronymic : '',
+        patronymic: patronymic ? patronymic : null,
       })
     );
   }
@@ -42,14 +38,11 @@ export default function ChildrenList() {
     <>
       <AddChild onAddChild={handleAddChild} />
 
-      <SearchChildren
-        onSort={handleSortChildren}
-        setHighlightedValue={setHighlightedValue}
-      />
+      <SearchChildren setHighlightedValue={setHighlightedValue} />
 
       <ul className={styles.childrenList}>
-        {childrenState.length !== 0 ? (
-          childrenState.map((child) => (
+        {filteredChildren.length !== 0 ? (
+          filteredChildren.map((child) => (
             <ChildItem
               key={child.id}
               child={child}

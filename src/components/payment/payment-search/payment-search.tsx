@@ -36,6 +36,11 @@ export default function PaymentSearch({
           placeholder="Введите ФИО родителя"
           value={filterValue}
           onChange={(evt) => setFilterValue(evt.target.value)}
+          onKeyDown={(evt) => {
+            if (evt.key === 'Enter') {
+              handleFilterClick();
+            }
+          }}
         />
         <button
           className={cn(

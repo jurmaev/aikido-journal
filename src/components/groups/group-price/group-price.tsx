@@ -3,22 +3,22 @@ import styles from '../../../pages/groups-page/groups.module.css';
 import cn from 'classnames';
 
 type GroupPriceProps = {
-  id: string;
-  value: number;
+  name: string;
+  value: number | string;
   onChange: (value: number) => void;
 };
 
-export default function GroupPrice({ id, value, onChange }: GroupPriceProps) {
+export default function GroupPrice({ name, value, onChange }: GroupPriceProps) {
   return (
     <div className={styles.groupsModalInputContainer}>
       <label
-        htmlFor={`cost-${id}`}
+        htmlFor={`cost-${name}`}
         className={cn(baseStyles.modalText, styles.groupsModalText)}
       >
         Цена за занятие в ₽:
       </label>
       <input
-        id={`cost-${id}`}
+        id={`cost-${name}`}
         type="number"
         className={styles.groupsModalInput}
         value={value}

@@ -1,17 +1,26 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styles from '../../../pages/base.module.css';
-import { AppRoutes } from '../../../const';
+import { AppRoutes, AuthorizationStatus } from '../../../const';
 import logoSrc from './logo.svg';
 import { useState } from 'react';
 import cn from 'classnames';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import {
+  getAuthorizationStatus,
+  getUserRole,
+} from '../../../store/user-data/user-data.selectors';
+import { logout } from '../../../store/user-data/user-data';
 
 type HeaderProps = {
   navItems?: Array<{ name: string; link: string }>;
 };
 
 export default function Header({ navItems }: HeaderProps) {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isNavActive, setIsNavActive] = useState(false);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const role = useAppSelector(getUserRole);
 
   return (
     <header className={styles.header}>
@@ -26,7 +35,12 @@ export default function Header({ navItems }: HeaderProps) {
           </Link>
         )}
         {navItems && (
-          <nav className={cn(styles.nav, { [styles.active]: isNavActive })}>
+          <nav
+            className={cn(styles.nav, {
+              [styles.active]: isNavActive,
+              [styles.parentNav]: role === 'parent',
+            })}
+          >
             <ul className={styles.navList}>
               {navItems.map((item) => (
                 <NavLink
@@ -83,12 +97,24 @@ export default function Header({ navItems }: HeaderProps) {
             </button>
           </nav>
         )}
-        <button
-          className={cn(styles.btn, styles.btnBlue, styles.headerBtn)}
-          onClick={() => navigate(AppRoutes.Login)}
-        >
-          Войти
-        </button>
+        {authorizationStatus === AuthorizationStatus.Auth ? (
+          <button
+            className={cn(styles.btn, styles.btnBlue, styles.headerBtn)}
+            onClick={() => {
+              dispatch(logout());
+              navigate(AppRoutes.Main);
+            }}
+          >
+            Выйти
+          </button>
+        ) : (
+          <button
+            className={cn(styles.btn, styles.btnBlue, styles.headerBtn)}
+            onClick={() => navigate(AppRoutes.Login)}
+          >
+            Войти
+          </button>
+        )}
       </div>
     </header>
   );

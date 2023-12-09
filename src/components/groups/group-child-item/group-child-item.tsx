@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 type GroupChildItemProps = {
   child: Child;
-  handleDelete: (id: string) => void;
+  handleDelete: (id: number) => void;
 };
 
 export default function GroupChildItem({

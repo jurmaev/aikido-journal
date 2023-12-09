@@ -5,33 +5,40 @@ import Modal from '../../ui/modal/modal';
 import { Group, TrainingTime } from '../../../types/group';
 import { useState } from 'react';
 import { produce } from 'immer';
-import { children } from '../../../mocks/children';
 import GroupChildItem from '../group-child-item/group-child-item';
-import { Child } from '../../../types/children';
 import ExitGroupModal from '../exit-group-modal/exit-group-modal';
 import DeleteGroupModal from '../delete-group-modal/delete-group-modal';
 import GroupName from '../group-name/group-name';
 import GroupPrice from '../group-price/group-price';
 import GroupTime from '../group-time/group-time';
 import AddChild from '../add-child/add-child';
+import { useAppDispatch } from '../../../hooks';
+import {
+  addChild,
+  createGroup,
+  removeChild,
+  removeGroup,
+} from '../../../store/group-data/api-actions';
+import { removeNewGroup } from '../../../store/group-data/group-data';
 
 type GroupModalProps = {
   group: Group;
   activeGroupModal: string;
   setActiveGroupModal: React.Dispatch<React.SetStateAction<string>>;
-  onSave: React.Dispatch<React.SetStateAction<Group[]>>;
+  isNew: boolean;
 };
 
 export default function GroupModal({
   group,
   activeGroupModal,
   setActiveGroupModal,
-  onSave,
+  isNew,
 }: GroupModalProps) {
   const [groupState, setGroupState] = useState(group);
   const [isChanged, setIsChanged] = useState(false);
   const [isExitModalActive, setIsExitModalActive] = useState(false);
   const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
+  const dispatch = useAppDispatch();
 
   function handleNameChange(name: string) {
     setGroupState(
@@ -51,51 +58,43 @@ export default function GroupModal({
     setIsChanged(true);
   }
 
-  function handleDeleteChild(id: string) {
-    setGroupState(
-      produce((draft) => {
-        draft.children = draft.children.filter((child) => child.id !== id);
-      })
-    );
+  function handleDeleteChild(id: number) {
+    dispatch(removeChild({ name: group.name, childId: id }));
     setIsChanged(true);
   }
 
-  function handleAddChild(childId: string) {
-    if (childId === '') return;
-    if (!groupState.children.some((child) => child.id === childId)) {
-      setGroupState(
-        produce((draft) => {
-          draft.children.push(
-            children.find((child) => child.id === childId) as Child
-          );
-        })
-      );
-      setIsChanged(true);
-    }
+  function handleAddChild(childId: number) {
+    if (childId === -1) return;
+    dispatch(addChild({ name: group.name, childId: childId }));
   }
 
   function handleCheckClick(day: TrainingTime | null, index: number) {
     if (!day) {
-      day = { startTime: '', endTime: '' };
+      day = { start: '', end: '' };
     } else {
       day = null;
     }
     setGroupState(
       produce((draft) => {
-        draft.schedule[index] = day;
+        draft.days[index] = day;
       })
     );
     setIsChanged(true);
   }
 
   function handleSaveClick() {
-    onSave(
-      produce((draft) => {
-        draft = draft.filter((draftGroup) => draftGroup.id !== group.id);
-        draft.push(groupState);
-      })
-    );
-    setActiveGroupModal('');
+    if (!isNew) {
+      onSave(
+        produce((draft) => {
+          draft = draft.filter((draftGroup) => draftGroup.id !== group.id);
+          draft.push(groupState);
+        })
+      );
+      setActiveGroupModal('');
+    } else {
+      dispatch(createGroup(groupState));
+      dispatch(removeNewGroup());
+    }
   }
 
   function handleStartTimeChange(
@@ -104,7 +103,11 @@ export default function GroupModal({
   ) {
     setGroupState(
       produce((draft) => {
-        draft.schedule[index]!.startTime = evt.target.value;
+        if (draft.days[index]) {
+          draft.days[index]!.start = evt.target.value;
+        } else {
+          draft.days[index] = { start: evt.target.value, end: '' };
+        }
       })
     );
     setIsChanged(true);
@@ -116,7 +119,11 @@ export default function GroupModal({
   ) {
     setGroupState(
       produce((draft) => {
-        draft.schedule[index]!.endTime = evt.target.value;
+        if (draft.days[index]) {
+          draft.days[index]!.end = evt.target.value;
+        } else {
+          draft.days[index] = { end: evt.target.value, start: '' };
+        }
       })
     );
     setIsChanged(true);
@@ -137,23 +144,27 @@ export default function GroupModal({
     setIsChanged(false);
   }
 
+  function handleDeleteGroup() {
+    dispatch(removeGroup(group.name));
+  }
+
   return (
     <>
       <Modal
-        isActive={activeGroupModal === group.id}
+        isActive={activeGroupModal === group.name}
         isCentral={false}
         onClose={handleCloseClick}
       >
         <h2 className={baseStyles.modalTitle}>Настройка группы</h2>
 
         <GroupName
-          id={group.id}
+          name={group.name}
           value={groupState.name}
           onChange={handleNameChange}
         />
 
         <GroupPrice
-          id={group.id}
+          name={group.name}
           value={groupState.price}
           onChange={handlePriceChange}
         />
@@ -173,7 +184,7 @@ export default function GroupModal({
           </thead>
           <tbody>
             <tr>
-              {groupState.schedule.map((day, index) => (
+              {groupState.days.map((day, index) => (
                 <GroupTime
                   key={index}
                   day={day}
@@ -214,10 +225,10 @@ export default function GroupModal({
 
         <h2 className={baseStyles.modalTitle}>Список детей</h2>
 
-        <AddChild id={group.id} handleAddChild={handleAddChild} />
+        <AddChild name={group.name} handleAddChild={handleAddChild} />
 
         <ul className={styles.list}>
-          {groupState.children.map((child) => (
+          {group.children.map((child) => (
             <GroupChildItem
               key={child.id}
               child={child}
@@ -236,6 +247,7 @@ export default function GroupModal({
         isActive={isDeleteModalActive}
         setIsActive={setIsDeleteModalActive}
         setActiveGroupModal={setActiveGroupModal}
+        onDelete={handleDeleteGroup}
       />
     </>
   );

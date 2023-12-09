@@ -4,10 +4,10 @@ import cn from 'classnames';
 import { useState } from 'react';
 
 type SearchTableProps = {
-  handleSort: (sortValue: string) => void;
+  onSort: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function SearchTable({ handleSort }: SearchTableProps) {
+export default function SearchTable({ onSort: onSort }: SearchTableProps) {
   const [sortValue, setSortValue] = useState('');
 
   return (
@@ -23,6 +23,11 @@ export default function SearchTable({ handleSort }: SearchTableProps) {
           placeholder="Введите ФИО родителя"
           value={sortValue}
           onChange={(evt) => setSortValue(evt.target.value)}
+          onKeyDown={(evt) => {
+            if (evt.key === 'Enter') {
+              onSort(sortValue.trim().toLowerCase());
+            }
+          }}
         />
         <button
           className={cn(
@@ -30,7 +35,7 @@ export default function SearchTable({ handleSort }: SearchTableProps) {
             baseStyles.btnBlue,
             baseStyles.btnLarge
           )}
-          onClick={() => handleSort(sortValue.trim())}
+          onClick={() => onSort(sortValue.trim().toLowerCase())}
         >
           Поиск
         </button>

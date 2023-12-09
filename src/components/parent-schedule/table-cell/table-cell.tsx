@@ -12,7 +12,7 @@ export default function TableCell({ day, time }: TableCellProps) {
       <div className={styles.tableCellContainer}>
         {time && (
           <div className={styles.tableTime}>
-            {time.startTime} - {time.endTime}
+            {time.start} - {time.end}
           </div>
         )}
       </div>

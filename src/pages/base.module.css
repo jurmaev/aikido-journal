@@ -75,6 +75,10 @@ img {
   width: 70%;
 }
 
+.parentNav {
+  width: 50%;
+}
+
 .navList {
   margin: 0;
   padding: 0;
@@ -135,6 +139,11 @@ img {
   background-color: var(--blue-400);
 }
 
+.btnBlue:disabled {
+  background-color: var(--blue-400);
+  cursor: default;
+}
+
 .btnRed {
   background-color: var(--red-700);
   transition: background-color 0.3s ease-in-out;
@@ -148,6 +157,10 @@ img {
   display: flex;
   width: 100%;
   gap: 1.25rem;
+}
+
+.inputGroup:not(:last-child) {
+  margin-bottom: 1rem;
 }
 
 .btnLarge {

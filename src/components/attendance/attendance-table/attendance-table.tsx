@@ -7,9 +7,10 @@ import { produce } from 'immer';
 import { attendance } from '../../../mocks/attendance';
 import { useState } from 'react';
 import AttendanceHeader from '../../ui/attendance-header/attendance-header';
+import { useIsMobile } from '../../../hooks/use-is-mobile';
 
 export default function AttendanceTable() {
-  const isMobile = window.innerWidth < 1024;
+  const isMobile = useIsMobile();
   const currentAttendance = attendance[0];
   const [attendanceState, setAttendanceState] = useState(currentAttendance);
 
@@ -104,9 +105,9 @@ export default function AttendanceTable() {
             </th>
             {attendanceState.schedule.map((day) =>
               isMobile ? (
-                day.isTraining && <AttendanceHeader day={day} />
+                day.isTraining && <AttendanceHeader key={day.date} day={day} />
               ) : (
-                <AttendanceHeader day={day} />
+                <AttendanceHeader key={day.date} day={day} />
               )
             )}
           </tr>

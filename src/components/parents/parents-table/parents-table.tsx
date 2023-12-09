@@ -2,62 +2,37 @@ import styles from '../../../pages/parents-page/parents.module.css';
 import baseStyles from '../../../pages/base.module.css';
 import SearchTable from '../search-table/search-table';
 import { useState } from 'react';
-import { parents } from '../../../mocks/parents';
-import { produce } from 'immer';
-import { children } from '../../../mocks/children';
-import { Child } from '../../../types/children';
 import ParentsRow from '../parents-row/parents-row';
 import ParentsModal from '../parents-modal/parents-modal';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { getParents } from '../../../store/parents-data/parents-data.selectors';
+import { setChild } from '../../../store/parents-data/api-actions';
+import { getFullName } from '../../../utils/names';
 
 export default function ParentsTable() {
-  const [parentsState, setParentsState] = useState(parents);
-  const [errorText, setErrorText] = useState('');
+  const dispatch = useAppDispatch();
+  const parents = useAppSelector(getParents);
   const [activeModal, setActiveModal] = useState('');
   const [highlightedValue, setHighlightedValue] = useState('');
+  const sortedParents = parents.filter((parent) =>
+    getFullName(parent).toLowerCase().includes(highlightedValue)
+  );
 
-  function handleSort(sortValue: string) {
-    if (sortValue !== '') {
-      setParentsState(
-        parents.filter((parent) =>
-          parent.name.toLowerCase().includes(sortValue)
-        )
-      );
-      setHighlightedValue(sortValue);
-    } else {
-      setParentsState(parents);
-      setHighlightedValue('');
-    }
-  }
-
-  function handleSelect(selectValue: { parentId: string; childId: string }) {
-    if (
-      parentsState.some((parent) => parent.child?.id === selectValue.childId)
-    ) {
-      setErrorText('Этот ребенок уже закреплен за другим родителем');
-    } else if (selectValue.childId !== '') {
-      setParentsState(
-        produce((draft) => {
-          const parent = draft.find(
-            (parent) => parent.id === selectValue.parentId
-          )!;
-
-          const child = children.find(
-            (child) => child.id === selectValue.childId
-          ) as Child;
-
-          parent.child = child;
-        })
-      );
-      setActiveModal('');
-      setErrorText('');
-    }
+  function handleSelect(parentId: string, childId: number) {
+    dispatch(
+      setChild({
+        parentId: parentId,
+        childId: childId,
+      })
+    );
+    setActiveModal('');
   }
 
   return (
     <>
-      <SearchTable handleSort={handleSort} />
+      <SearchTable onSort={setHighlightedValue} />
 
-      {parentsState.length !== 0 ? (
+      {sortedParents.length !== 0 ? (
         <>
           <table className={styles.parentsTable}>
             <thead>
@@ -67,23 +42,25 @@ export default function ParentsTable() {
               </tr>
             </thead>
             <tbody>
-              {parentsState.map((parent) => (
-                <ParentsRow
-                  key={`${parent.id}-row`}
-                  parent={parent}
-                  highlightedValue={highlightedValue}
-                  setActiveModal={setActiveModal}
-                />
-              ))}
+              <>
+                {sortedParents.map((parent) => (
+                  <ParentsRow
+                    key={`${parent.id}}-row`}
+                    parent={parent}
+                    children={parent.children}
+                    highlightedValue={highlightedValue}
+                    setActiveModal={setActiveModal}
+                  />
+                ))}
+              </>
             </tbody>
           </table>
           <>
-            {parentsState.map((parent) => (
+            {sortedParents.map((parent) => (
               <ParentsModal
                 key={`${parent.id}-modal`}
+                children={parent.children}
                 parent={parent}
-                errorText={errorText}
-                setErrorText={setErrorText}
                 handleSelect={handleSelect}
                 activeModal={activeModal}
                 setActiveModal={setActiveModal}

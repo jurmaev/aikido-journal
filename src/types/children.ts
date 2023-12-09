@@ -1,8 +1,8 @@
 export type Child = {
-  id: string;
+  id: number;
   name: string;
   surname: string;
-  patronymic: string;
+  patronymic: string | null;
 };
 
 export type Children = Child[];

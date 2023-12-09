@@ -1,8 +1,12 @@
-import { Child } from './children';
+import { Children } from './children';
 
 export type Parent = {
   id: string;
   name: string;
-  phone: string;
-  child: Child | null;
+  surname: string;
+  patronymic?: string;
+  phone_number: string;
+  children: Children;
 };
+
+export type Parents = Parent[];
