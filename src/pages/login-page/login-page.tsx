@@ -49,6 +49,7 @@ export default function LoginPage() {
               allowEmptyFormatting
               mask="_"
               getInputRef={phoneRef}
+              id="number"
               className={styles.formInput}
             />
             <label htmlFor="password" className={styles.formLabel}>

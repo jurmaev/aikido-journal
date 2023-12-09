@@ -37,7 +37,9 @@ export default function AddChild({ onAddChild }: AddChildProps) {
       <div className={cn(baseStyles.inputGroup, styles.childrenInputGroup)}>
         <input
           type="text"
-          className={cn(baseStyles.formInput, styles.childrenInput)}
+          className={cn(baseStyles.formInput, styles.childrenInput, {
+            [baseStyles.formInputError]: errorText !== '',
+          })}
           id="child"
           placeholder="Введите ФИО ребёнка"
           value={addInput}
