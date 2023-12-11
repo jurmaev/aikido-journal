@@ -21,6 +21,7 @@ import {
   setGroupParameters,
 } from '../../../store/group-data/api-actions';
 import { removeNewGroup } from '../../../store/group-data/group-data';
+import { getDatetime } from '../../../utils/time';
 
 type GroupModalProps = {
   group: Group;
@@ -110,12 +111,17 @@ export default function GroupModal({
     });
 
     if (isValid) {
+      const newGroup = {
+        ...groupState,
+        days: groupState.days.map((day) => getDatetime(day)),
+      };
+
       if (!isNew) {
-        dispatch(setGroupParameters({ name: group.name, group: groupState }));
+        dispatch(setGroupParameters({ name: group.name, group: newGroup }));
         setActiveGroupModal('');
         setIsChanged(false);
       } else {
-        dispatch(createGroup(groupState));
+        dispatch(createGroup(newGroup));
         dispatch(removeNewGroup());
         setActiveGroupModal('');
       }

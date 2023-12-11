@@ -10,7 +10,7 @@ import {
   removeGroup,
   setGroupParameters,
 } from './api-actions';
-import { TrainingTime } from '../../types/group';
+import { getTrainingTime } from '../../utils/time';
 
 const initialState: GroupData = {
   groups: [],
@@ -40,19 +40,7 @@ export const groupData = createSlice({
         state.groups = action.payload;
         state.groups.forEach(
           (group) =>
-            (group.days = group.days.map((day) => {
-              if (day) {
-                return {
-                  start: `${new Date(day.start).getHours()}:${new Date(
-                    day.start
-                  ).getMinutes()}`,
-                  end: `${new Date(day.end).getHours()}:${new Date(
-                    day.end
-                  ).getMinutes()}`,
-                } as TrainingTime;
-              }
-              return null;
-            }))
+            (group.days = group.days.map((day) => getTrainingTime(day)))
         );
       })
       .addCase(createGroup.fulfilled, (state, action) => {
