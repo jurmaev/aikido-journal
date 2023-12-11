@@ -6,9 +6,15 @@ type GroupNameProps = {
   name: string;
   value: string;
   onChange: (value: string) => void;
+  isValid: boolean;
 };
 
-export default function GroupName({ name, value, onChange }: GroupNameProps) {
+export default function GroupName({
+  name,
+  value,
+  onChange,
+  isValid,
+}: GroupNameProps) {
   return (
     <div className={styles.groupsModalInputContainer}>
       <label
@@ -20,7 +26,9 @@ export default function GroupName({ name, value, onChange }: GroupNameProps) {
       <input
         id={`group-${name}`}
         type="text"
-        className={styles.groupsModalInput}
+        className={
+          cn(styles.groupsModalInput, { [baseStyles.formInputError]: !isValid })
+        }
         value={value}
         onChange={(evt) => onChange(evt.target.value)}
       />

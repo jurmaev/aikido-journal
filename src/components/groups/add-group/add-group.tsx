@@ -11,12 +11,18 @@ type AddGroupProps = {
 
 export default function AddGroup({ setActiveGroupModal }: AddGroupProps) {
   const [groupName, setGroupName] = useState('');
+  const [errorText, setErrorText] = useState('');
   const dispatch = useAppDispatch();
 
   function handleClick() {
-    dispatch(addNewGroup(groupName.trim()));
-    setActiveGroupModal(groupName.trim());
-    setGroupName('');
+    if (groupName.trim().length < 5) {
+      setErrorText('Название группы должно быть не менее 5 символов');
+    } else {
+      dispatch(addNewGroup(groupName.trim()));
+      setActiveGroupModal(groupName.trim());
+      setGroupName('');
+      setErrorText('');
+    }
   }
 
   return (
@@ -24,10 +30,13 @@ export default function AddGroup({ setActiveGroupModal }: AddGroupProps) {
       <label htmlFor="group" className={styles.groupsLabel}>
         Создать группу
       </label>
+      <p className={baseStyles.formError}>{errorText}</p>
       <div className={cn(baseStyles.inputGroup, styles.groupsInputGroup)}>
         <input
           type="text"
-          className={cn(baseStyles.formInput, styles.groupsInput)}
+          className={cn(baseStyles.formInput, styles.groupsInput, {
+            [baseStyles.formInputError]: errorText !== '',
+          })}
           id="group"
           placeholder="Придумайте название группы"
           onChange={(evt) => setGroupName(evt.target.value)}

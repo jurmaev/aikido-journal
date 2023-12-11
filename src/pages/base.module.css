@@ -153,6 +153,11 @@ img {
   background-color: var(--red-400);
 }
 
+.btnRed:disabled {
+  background-color: var(--red-400);
+  cursor: default;
+}
+
 .inputGroup {
   display: flex;
   width: 100%;
@@ -211,8 +216,8 @@ img {
   color: var(--black-300);
 }
 
-.formInputError{
-  border-color: var(--red-700);
+.formInputError {
+  border-color: var(--red-700) !important;
 }
 
 .modal {

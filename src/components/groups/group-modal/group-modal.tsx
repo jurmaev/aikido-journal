@@ -40,6 +40,8 @@ export default function GroupModal({
   const [isExitModalActive, setIsExitModalActive] = useState(false);
   const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
   const dispatch = useAppDispatch();
+  const [isValidName, setIsValidName] = useState(true);
+  const [isValidPrice, setIsValidPrice] = useState(true);
 
   function handleNameChange(name: string) {
     setGroupState(
@@ -84,14 +86,27 @@ export default function GroupModal({
   }
 
   function handleSaveClick() {
-    if (!isNew) {
-      dispatch(setGroupParameters({ name: group.name, group: groupState }));
-      setActiveGroupModal('');
-      setIsChanged(false);
-    } else {
-      dispatch(createGroup(groupState));
-      dispatch(removeNewGroup());
-      setActiveGroupModal('');
+    let isValid = true;
+
+    if (groupState.name.trim().length < 5) {
+      setIsValidName(false);
+      isValid = false;
+    }
+    if (groupState.price === '') {
+      setIsValidPrice(false);
+      isValid = false;
+    }
+
+    if (isValid) {
+      if (!isNew) {
+        dispatch(setGroupParameters({ name: group.name, group: groupState }));
+        setActiveGroupModal('');
+        setIsChanged(false);
+      } else {
+        dispatch(createGroup(groupState));
+        dispatch(removeNewGroup());
+        setActiveGroupModal('');
+      }
     }
   }
 
@@ -128,7 +143,7 @@ export default function GroupModal({
   }
 
   function handleCloseClick() {
-    if (isChanged) {
+    if (isChanged || isNew) {
       setIsExitModalActive(true);
     } else {
       setGroupState(group);
@@ -159,12 +174,14 @@ export default function GroupModal({
           name={group.name}
           value={groupState.name}
           onChange={handleNameChange}
+          isValid={isValidName}
         />
 
         <GroupPrice
           name={group.name}
           value={groupState.price}
           onChange={handlePriceChange}
+          isValid={isValidPrice}
         />
 
         <p className={baseStyles.modalText}>Задать расписание для группы:</p>
@@ -216,6 +233,7 @@ export default function GroupModal({
               baseStyles.btnLarge
             )}
             onClick={() => setIsDeleteModalActive(true)}
+            disabled={isNew}
           >
             Удалить группу
           </button>
