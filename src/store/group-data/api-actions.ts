@@ -28,7 +28,7 @@ export const removeGroup = createAsyncThunk<
   string,
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
 >('groups/remove', async (name, { extra: api }) => {
-  await api.get(`${ApiRoute.Groups}/remove/${name}`);
+  await api.post(`${ApiRoute.Groups}/remove/${name}`);
   return name;
 });
 
@@ -64,4 +64,16 @@ export const fetchChildrenWithoutGroup = createAsyncThunk<
     `${ApiRoute.Children}/children_without_group`
   );
   return data;
+});
+
+export const setGroupParameters = createAsyncThunk<
+  { name: string; newGroup: Group },
+  { name: string; group: Group },
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>('groups/setParameters', async ({ name, group }, { extra: api }) => {
+  const { data } = await api.post<Group>(
+    `${ApiRoute.Groups}/${name}/set_parameters`,
+    group
+  );
+  return { name: name, newGroup: data };
 });

@@ -16,6 +16,7 @@ export default function AddGroup({ setActiveGroupModal }: AddGroupProps) {
   function handleClick() {
     dispatch(addNewGroup(groupName.trim()));
     setActiveGroupModal(groupName.trim());
+    setGroupName('');
   }
 
   return (
@@ -30,6 +31,7 @@ export default function AddGroup({ setActiveGroupModal }: AddGroupProps) {
           id="group"
           placeholder="Придумайте название группы"
           onChange={(evt) => setGroupName(evt.target.value)}
+          value={groupName}
           onKeyDown={(evt) => {
             if (evt.key === 'Enter') {
               handleClick();

@@ -8,6 +8,7 @@ import {
   fetchGroups,
   removeChild,
   removeGroup,
+  setGroupParameters,
 } from './api-actions';
 import { TrainingTime } from '../../types/group';
 
@@ -84,6 +85,11 @@ export const groupData = createSlice({
           (group) => group.name === newChild.group_name_id
         );
         group?.children.push(newChild);
+      })
+      .addCase(setGroupParameters.fulfilled, (state, action) => {
+        const { name, newGroup } = action.payload;
+        state.groups = state.groups.filter((group) => group.name !== name);
+        state.groups.push(newGroup);
       });
   },
 });

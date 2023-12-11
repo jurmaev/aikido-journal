@@ -18,6 +18,7 @@ import {
   createGroup,
   removeChild,
   removeGroup,
+  setGroupParameters,
 } from '../../../store/group-data/api-actions';
 import { removeNewGroup } from '../../../store/group-data/group-data';
 
@@ -84,16 +85,13 @@ export default function GroupModal({
 
   function handleSaveClick() {
     if (!isNew) {
-      onSave(
-        produce((draft) => {
-          draft = draft.filter((draftGroup) => draftGroup.id !== group.id);
-          draft.push(groupState);
-        })
-      );
+      dispatch(setGroupParameters({ name: group.name, group: groupState }));
       setActiveGroupModal('');
+      setIsChanged(false);
     } else {
       dispatch(createGroup(groupState));
       dispatch(removeNewGroup());
+      setActiveGroupModal('');
     }
   }
 
