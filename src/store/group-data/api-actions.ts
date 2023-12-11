@@ -3,7 +3,7 @@ import { Group, Groups } from '../../types/group';
 import { AppDispatch, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../const';
-import { Children } from '../../types/children';
+import { Child, Children } from '../../types/children';
 
 export const fetchGroups = createAsyncThunk<
   Groups,
@@ -33,21 +33,26 @@ export const removeGroup = createAsyncThunk<
 });
 
 export const addChild = createAsyncThunk<
-  { name: string; childId: number },
+  Child,
   { name: string; childId: number },
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
 >('groups/addChild', async ({ name, childId }, { extra: api }) => {
-  await api.get(`${ApiRoute.Groups}/${name}/add_child/${childId}`);
-  return { name, childId };
+  const { data } = await api.post<Child>(
+    `${ApiRoute.Groups}/${name}/add_child/${childId}`
+  );
+  return data;
 });
 
 export const removeChild = createAsyncThunk<
-  { name: string; childId: number },
+  Child,
   { name: string; childId: number },
   { dispatch: AppDispatch; state: State; extra: AxiosInstance }
 >('groups/removeChild', async ({ name, childId }, { extra: api }) => {
-  await api.get(`${ApiRoute.Groups}/${name}/remove_child/${childId}`);
-  return { name, childId };
+  const { data } = await api.post<Child>(
+    `${ApiRoute.Groups}/${name}/remove_child/${childId}`
+  );
+  data.group_name_id = name;
+  return data;
 });
 
 export const fetchChildrenWithoutGroup = createAsyncThunk<
