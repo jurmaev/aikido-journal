@@ -142,6 +142,10 @@ tr .tableCell:last-child {
   color: var(--black-600);
 }
 
+.tableInputError{
+  border-color: var(--red-700);
+}
+
 .tableCheck {
   display: flex;
   align-items: center;

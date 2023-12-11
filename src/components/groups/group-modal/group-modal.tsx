@@ -42,6 +42,12 @@ export default function GroupModal({
   const dispatch = useAppDispatch();
   const [isValidName, setIsValidName] = useState(true);
   const [isValidPrice, setIsValidPrice] = useState(true);
+  const validDays = groupState.days.map((day) => {
+    if (day) {
+      return { start: day.start !== '', end: day.end !== '' };
+    }
+    return { start: true, end: true };
+  });
 
   function handleNameChange(name: string) {
     setGroupState(
@@ -96,6 +102,12 @@ export default function GroupModal({
       setIsValidPrice(false);
       isValid = false;
     }
+
+    groupState.days.forEach((day) => {
+      if (day?.start === '' || day?.end === '') {
+        isValid = false;
+      }
+    });
 
     if (isValid) {
       if (!isNew) {
@@ -207,6 +219,7 @@ export default function GroupModal({
                   handleCheckClick={handleCheckClick}
                   handleEndTimeChange={handleEndTimeChange}
                   handleStartTimeChange={handleStartTimeChange}
+                  validity={validDays[index]}
                 />
               ))}
             </tr>

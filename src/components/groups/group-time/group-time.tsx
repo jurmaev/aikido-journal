@@ -14,6 +14,7 @@ type GroupTimeProps = {
     evt: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => void;
+  validity: { start: boolean; end: boolean };
 };
 
 export default function GroupTime({
@@ -22,6 +23,7 @@ export default function GroupTime({
   handleCheckClick,
   handleEndTimeChange,
   handleStartTimeChange,
+  validity,
 }: GroupTimeProps) {
   return (
     <td className={styles.tableCell}>
@@ -50,14 +52,18 @@ export default function GroupTime({
         </button>
         <input
           type="time"
-          className={styles.tableInput}
+          className={cn(styles.tableInput, {
+            [styles.tableInputError]: !validity.start,
+          })}
           placeholder="Время начала"
           value={day ? day?.start : ''}
           onChange={(evt) => handleStartTimeChange(evt, index)}
         />
         <input
           type="time"
-          className={styles.tableInput}
+          className={cn(styles.tableInput, {
+            [styles.tableInputError]: !validity.end,
+          })}
           placeholder="Время окончания"
           value={day ? day?.end : ''}
           onChange={(evt) => handleEndTimeChange(evt, index)}
