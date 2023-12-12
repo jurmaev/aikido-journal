@@ -8,9 +8,14 @@ import AttendanceHeader from '../../components/ui/attendance-header/attendance-h
 import TableCell from '../../components/parent-attendance/table-cell/table-cell';
 import AttendanceSelect from '../../components/parent-attendance/attendance-select/attendance-select';
 import { useIsMobile } from '../../hooks/use-is-mobile';
+import { useEffect } from 'react';
 
 export default function ParentAttendancePage() {
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    document.title = 'Посещаемость';
+  }, []);
 
   return (
     <>

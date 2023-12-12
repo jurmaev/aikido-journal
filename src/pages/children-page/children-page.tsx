@@ -11,6 +11,10 @@ export default function ChildrenPage() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    document.title = 'Дети';
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchChildren());
   }, [dispatch]);
 

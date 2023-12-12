@@ -14,6 +14,10 @@ export default function GroupsPage() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    document.title = 'Группы';
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchGroups());
     dispatch(fetchChildrenWithoutGroup());
   }, [dispatch]);

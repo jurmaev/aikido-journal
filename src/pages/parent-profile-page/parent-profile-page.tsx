@@ -4,9 +4,14 @@ import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import { parentProfile } from '../../mocks/parent-profile';
 import { getFullName } from '../../utils/names';
+import { useEffect } from 'react';
 
 export default function ParentProfilePage() {
   const profileInfo = parentProfile;
+
+  useEffect(() => {
+    document.title = 'Профиль';
+  }, []);
 
   return (
     <>

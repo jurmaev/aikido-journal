@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import Header from '../../components/ui/header/header';
 import baseStyles from '../base.module.css';
 import styles from './not-found.module.css';
 import cn from 'classnames';
 
 export default function NotFoundPage() {
+  useEffect(() => {
+    document.title = 'Ошибка 404';
+  }, []);
+
   return (
     <>
       <Header />

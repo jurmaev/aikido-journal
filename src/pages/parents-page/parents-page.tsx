@@ -12,6 +12,10 @@ export default function ParentsPage() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    document.title = 'Родители';
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchParents());
     dispatch(fetchChildrenWithoutParentApi());
   }, [dispatch]);

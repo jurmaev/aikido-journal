@@ -10,12 +10,17 @@ import {
   getUserRole,
 } from '../../store/user-data/user-data.selectors';
 import { logout } from '../../store/user-data/user-data';
+import { useEffect } from 'react';
 
 export default function MainPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const role = useAppSelector(getUserRole);
+
+  useEffect(() => {
+    document.title = 'Главная';
+  }, []);
 
   function getButtons() {
     if (authorizationStatus === AuthorizationStatus.Auth && role === 'parent') {

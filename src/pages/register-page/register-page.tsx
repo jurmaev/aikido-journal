@@ -1,7 +1,7 @@
 import styles from '../base.module.css';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { register } from '../../store/user-data/api-actions';
 import { UserRegister } from '../../types/user';
@@ -19,6 +19,10 @@ export default function RegisterPage() {
   const [nameError, setNameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [phoneError, setPhoneError] = useState('');
+
+  useEffect(() => {
+    document.title = 'Регистрация';
+  }, []);
 
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
