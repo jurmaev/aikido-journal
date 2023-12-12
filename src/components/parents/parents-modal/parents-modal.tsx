@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { removeChild } from '../../../store/parents-data/api-actions';
 import ChildItem from '../child/child';
 import { getChildrenWithoutParent } from '../../../store/children-data/children-data.selectors';
+import { createPortal } from 'react-dom';
 
 type ParentsModalProps = {
   parent: Parent;
@@ -37,7 +38,7 @@ export default function ParentsModal({
     dispatch(removeChild({ parentId: parent.id, childId: childId }));
   }
 
-  return (
+  return createPortal(
     <Modal
       isActive={activeModal === parent.id}
       isCentral
@@ -80,6 +81,7 @@ export default function ParentsModal({
         childrenOptions={childrenOptions}
         handleSelect={handleSelect}
       />
-    </Modal>
+    </Modal>,
+    document.body
   );
 }

@@ -5,6 +5,7 @@ import { Child } from '../../../types/children';
 import { getFullName } from '../../../utils/names';
 import Modal from '../../ui/modal/modal';
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 
 type GroupChildItemProps = {
   child: Child;
@@ -53,41 +54,44 @@ export default function GroupChildItem({
           </svg>
         </button>
       </li>
-      <Modal
-        key={`${child.id}-modal`}
-        isActive={isActive}
-        isCentral
-        onClose={() => setIsActive(false)}
-      >
-        <h2 className={baseStyles.modalTitle}>
-          Вы действительно хотите удалить ребенка?
-        </h2>
-        <p className={baseStyles.modalText}>ФИО: {getFullName(child)}</p>
-        <div className={baseStyles.inputGroup}>
-          <button
-            className={cn(
-              baseStyles.btn,
-              baseStyles.btnRed,
-              baseStyles.btnLarge
-            )}
-            aria-label="Удалить"
-            onClick={() => handleDelete(child.id)}
-          >
-            Удалить
-          </button>
-          <button
-            className={cn(
-              baseStyles.btn,
-              baseStyles.btnBlue,
-              baseStyles.btnLarge
-            )}
-            aria-label="Отменить"
-            onClick={() => setIsActive(false)}
-          >
-            Отменить
-          </button>
-        </div>
-      </Modal>
+      {createPortal(
+        <Modal
+          key={`${child.id}-modal`}
+          isActive={isActive}
+          isCentral
+          onClose={() => setIsActive(false)}
+        >
+          <h2 className={baseStyles.modalTitle}>
+            Вы действительно хотите удалить ребенка?
+          </h2>
+          <p className={baseStyles.modalText}>ФИО: {getFullName(child)}</p>
+          <div className={baseStyles.inputGroup}>
+            <button
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnRed,
+                baseStyles.btnLarge
+              )}
+              aria-label="Удалить"
+              onClick={() => handleDelete(child.id)}
+            >
+              Удалить
+            </button>
+            <button
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
+              aria-label="Отменить"
+              onClick={() => setIsActive(false)}
+            >
+              Отменить
+            </button>
+          </div>
+        </Modal>,
+        document.body
+      )}
     </>
   );
 }

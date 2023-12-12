@@ -1,6 +1,7 @@
 import Modal from '../../ui/modal/modal';
 import baseStyles from '../../../pages/base.module.css';
 import cn from 'classnames';
+import { createPortal } from 'react-dom';
 
 type DeleteGroupModalProps = {
   isActive: boolean;
@@ -15,7 +16,7 @@ export default function DeleteGroupModal({
   setActiveGroupModal,
   onDelete,
 }: DeleteGroupModalProps) {
-  return (
+  return createPortal(
     <Modal isActive={isActive} isCentral onClose={() => setIsActive(false)}>
       <h2 className={baseStyles.modalTitle}>
         Вы действительно хотите удалить группу?
@@ -42,6 +43,7 @@ export default function DeleteGroupModal({
           Отмена
         </button>
       </div>
-    </Modal>
+    </Modal>,
+    document.body
   );
 }

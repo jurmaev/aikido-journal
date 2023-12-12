@@ -1,6 +1,7 @@
 import baseStyles from '../../../pages/base.module.css';
 import cn from 'classnames';
 import Modal from '../../ui/modal/modal';
+import { createPortal } from 'react-dom';
 
 type ExitGroupModalProps = {
   isActive: boolean;
@@ -21,7 +22,7 @@ export default function ExitGroupModal({
     onExit();
   }
 
-  return (
+  return createPortal(
     <Modal isActive={isActive} isCentral onClose={() => setIsActive(false)}>
       <h2 className={baseStyles.modalTitle}>
         Изменения не сохранены. Вы действительно хотите выйти?
@@ -44,6 +45,7 @@ export default function ExitGroupModal({
           Отмена
         </button>
       </div>
-    </Modal>
+    </Modal>,
+    document.body
   );
 }
