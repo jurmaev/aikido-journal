@@ -2,7 +2,7 @@ import styles from './main.module.css';
 import baseStyles from '../base.module.css';
 import Header from '../../components/ui/header/header';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes, AuthorizationStatus, NavItems } from '../../const';
+import { AppRoutes, AuthorizationStatus } from '../../const';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
@@ -102,14 +102,7 @@ export default function MainPage() {
 
   return (
     <>
-      {authorizationStatus === AuthorizationStatus.Auth && role === 'coach' ? (
-        <Header navItems={NavItems.Trainer} />
-      ) : authorizationStatus === AuthorizationStatus.Auth &&
-        role === 'parent' ? (
-        <Header navItems={NavItems.Parent} />
-      ) : (
-        <Header />
-      )}
+      <Header />
       <main>
         <div className={cn(baseStyles.container, styles.mainContainer)}>
           <h1 className={styles.mainTitle}>

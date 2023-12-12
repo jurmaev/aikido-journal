@@ -1,6 +1,5 @@
 import baseStyles from '../base.module.css';
 import styles from './parent-schedule.module.css';
-import { NavItems } from '../../const';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import { parentSchedule } from '../../mocks/parent-schedule';
@@ -15,7 +14,7 @@ export default function ParentSchedulePage() {
 
   return (
     <>
-      <Header navItems={NavItems.Parent} />
+      <Header />
       <main>
         <div className={cn(baseStyles.container, styles.scheduleContainer)}>
           <h1 className={styles.scheduleTitle}>Расписание</h1>

@@ -1,6 +1,5 @@
 import styles from './parent-profile.module.css';
 import baseStyles from '../base.module.css';
-import { NavItems } from '../../const';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import { parentProfile } from '../../mocks/parent-profile';
@@ -11,7 +10,7 @@ export default function ParentProfilePage() {
 
   return (
     <>
-      <Header navItems={NavItems.Parent} />
+      <Header />
       <main>
         <div className={cn(baseStyles.container, styles.profileContainer)}>
           <h1 className={styles.profileTitle}>Профиль</h1>

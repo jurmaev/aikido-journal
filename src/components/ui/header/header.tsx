@@ -1,6 +1,6 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styles from '../../../pages/base.module.css';
-import { AppRoutes, AuthorizationStatus } from '../../../const';
+import { AppRoutes, AuthorizationStatus, NavItems } from '../../../const';
 import logoSrc from './logo.svg';
 import { useState } from 'react';
 import cn from 'classnames';
@@ -11,16 +11,28 @@ import {
 } from '../../../store/user-data/user-data.selectors';
 import { logout } from '../../../store/user-data/user-data';
 
-type HeaderProps = {
-  navItems?: Array<{ name: string; link: string }>;
-};
+// type HeaderProps = {
+//   navItems?: Array<{ name: string; link: string }>;
+// };
 
-export default function Header({ navItems }: HeaderProps) {
+export default function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isNavActive, setIsNavActive] = useState(false);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const role = useAppSelector(getUserRole);
+  let navItems = null;
+
+  switch (role) {
+    case 'parent':
+      navItems = NavItems.Parent;
+      break;
+    case 'coach':
+      navItems = NavItems.Trainer;
+      break;
+    default:
+      break;
+  }
 
   return (
     <header className={styles.header}>

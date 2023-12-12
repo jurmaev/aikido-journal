@@ -1,6 +1,5 @@
 import baseStyles from '../base.module.css';
 import styles from './parent-attendance.module.css';
-import { NavItems } from '../../const';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import { parentAttendance } from '../../mocks/parent-attendance';
@@ -15,7 +14,7 @@ export default function ParentAttendancePage() {
 
   return (
     <>
-      <Header navItems={NavItems.Parent} />
+      <Header />
       <main>
         <div
           className={cn(baseStyles.container, styles.parentAttendanceContainer)}

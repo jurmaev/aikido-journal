@@ -17,8 +17,8 @@ export const parentSchedule = {
     {
       day: 'monday',
       time: {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
     },
     {
@@ -28,8 +28,8 @@ export const parentSchedule = {
     {
       day: 'wednesday',
       time: {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
     },
     {
@@ -39,8 +39,8 @@ export const parentSchedule = {
     {
       day: 'friday',
       time: {
-        startTime: '18:30',
-        endTime: '19:30',
+        start: '18:30',
+        end: '19:30',
       },
     },
     {
