@@ -38,6 +38,7 @@ export default function GroupModal({
   isNew,
 }: GroupModalProps) {
   const [groupState, setGroupState] = useState(group);
+  const [price, setPrice] = useState(String(group.price));
   const [isChanged, setIsChanged] = useState(false);
   const [isExitModalActive, setIsExitModalActive] = useState(false);
   const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
@@ -60,12 +61,15 @@ export default function GroupModal({
     setIsChanged(true);
   }
 
-  function handlePriceChange(price: number) {
-    setGroupState(
-      produce((draft) => {
-        draft.price = price;
-      })
-    );
+  function handlePriceChange(price: string) {
+    setPrice(price);
+    // if (price !== '') {
+    //   setGroupState(
+    //     produce((draft) => {
+    //       draft.price = Number(price);
+    //     })
+    //   );
+    // }
     setIsChanged(true);
   }
 
@@ -99,10 +103,15 @@ export default function GroupModal({
     if (groupState.name.trim().length < 5) {
       setIsValidName(false);
       isValid = false;
+    } else {
+      setIsValidName(true);
     }
-    if (groupState.price === '') {
+
+    if (price === '') {
       setIsValidPrice(false);
       isValid = false;
+    } else {
+      setIsValidPrice(true);
     }
 
     groupState.days.forEach((day) => {
@@ -115,6 +124,7 @@ export default function GroupModal({
       const newGroup = {
         ...groupState,
         days: groupState.days.map((day) => getDatetime(day)),
+        price: Number(price),
       };
 
       if (!isNew) {
@@ -199,7 +209,7 @@ export default function GroupModal({
 
           <GroupPrice
             name={group.name}
-            value={groupState.price}
+            value={price}
             onChange={handlePriceChange}
             isValid={isValidPrice}
           />

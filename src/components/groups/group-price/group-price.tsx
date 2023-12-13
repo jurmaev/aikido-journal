@@ -4,8 +4,8 @@ import cn from 'classnames';
 
 type GroupPriceProps = {
   name: string;
-  value: number | string;
-  onChange: (value: number) => void;
+  value: string;
+  onChange: (value: string) => void;
   isValid: boolean;
 };
 
@@ -30,7 +30,7 @@ export default function GroupPrice({
           [baseStyles.formInputError]: !isValid,
         })}
         value={value}
-        onChange={(evt) => onChange(Number(evt.target.value))}
+        onChange={(evt) => onChange(evt.target.value)}
       />
     </div>
   );
