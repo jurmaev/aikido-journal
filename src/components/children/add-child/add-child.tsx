@@ -3,14 +3,13 @@ import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/children-page/children.module.css';
 import cn from 'classnames';
 import { capitalizeWords, trimSpaces } from '../../../utils/names';
+import { useAppDispatch } from '../../../hooks';
+import { createChild } from '../../../store/children-data/api-actions';
 
-type AddChildProps = {
-  onAddChild: (surname: string, name: string, patronymic: string) => void;
-};
-
-export default function AddChild({ onAddChild }: AddChildProps) {
+export default function AddChild() {
   const [addInput, setAddInput] = useState('');
   const [errorText, setErrorText] = useState('');
+  const dispatch = useAppDispatch();
 
   function handleAddClick() {
     if (
@@ -20,7 +19,17 @@ export default function AddChild({ onAddChild }: AddChildProps) {
       const [surname, name, patronymic] = capitalizeWords(
         addInput.trim()
       ).split(' ');
-      onAddChild(surname, name, patronymic);
+      dispatch(
+        createChild({
+          name: name,
+          surname: surname,
+          patronymic: patronymic ? patronymic : null,
+        })
+      ).then((data) => {
+        if (data.meta.requestStatus === 'rejected') {
+          setErrorText('Ребенок с таким ФИО уже существует');
+        }
+      });
       setErrorText('');
       setAddInput('');
     } else {
