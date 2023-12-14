@@ -4,6 +4,7 @@ import { GroupData } from '../../types/state';
 import {
   addChild,
   createGroup,
+  fetchAttendance,
   fetchChildrenWithoutGroup,
   fetchGroups,
   removeChild,
@@ -17,6 +18,7 @@ const initialState: GroupData = {
   newGroup: null,
   childrenWithoutGroup: [],
   isFetchingGroupData: true,
+  attendance: null,
 };
 
 export const groupData = createSlice({
@@ -91,6 +93,9 @@ export const groupData = createSlice({
           (group) =>
             (group.days = group.days.map((day) => getTrainingTime(day)))
         );
+      })
+      .addCase(fetchAttendance.fulfilled, (state, action) => {
+        state.attendance = action.payload;
       });
   },
 });

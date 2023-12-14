@@ -12,12 +12,12 @@ export default function AttendanceHeader({ day }: AttendanceHeaderProps) {
     <th
       key={day.date}
       className={cn(styles.tableHeader, {
-        [styles.tableHeaderInactive]: !day.isTraining,
+        [styles.tableHeaderInactive]: !day.is_training,
       })}
     >
       <div>{`${new Date(day.date).getDate()}.${new Date(
         day.date
-      ).getMonth()}`}</div>
+      ).getMonth() + 1}`}</div>
       <div>{Days[new Date(day.date).getDay()]}</div>
     </th>
   );

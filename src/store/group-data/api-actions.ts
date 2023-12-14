@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Group, Groups } from '../../types/group';
+import { Group, GroupAttendance, Groups } from '../../types/group';
 import { AppDispatch, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../const';
@@ -77,3 +77,18 @@ export const setGroupParameters = createAsyncThunk<
   );
   return { name: name, newGroup: data };
 });
+
+export const fetchAttendance = createAsyncThunk<
+  GroupAttendance,
+  { groupName: string; startDate: string },
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>(
+  'groups/fetchAttendance',
+  async ({ groupName, startDate }, { extra: api }) => {
+    const { data } = await api.post<GroupAttendance>(
+      `${ApiRoute.Groups}/${groupName}/get_attendance/${startDate}`,
+      { groupName, startDate }
+    );
+    return data;
+  }
+);

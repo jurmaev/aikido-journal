@@ -1,12 +1,19 @@
 import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/attendance-page/attendance.module.css';
 import cn from 'classnames';
-import { attendance } from '../../../mocks/attendance';
+import { useAppSelector } from '../../../hooks';
+import { getGroups } from '../../../store/group-data/group-data.selectors';
 
-export default function AttendanceSelect() {
-  const groups = attendance.map((groupAttendance) => {
-    return { id: groupAttendance.id, name: groupAttendance.name };
-  });
+type AttendanceSelectProps = {
+  groupName: string;
+  setGroupName: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export default function AttendanceSelect({
+  groupName,
+  setGroupName,
+}: AttendanceSelectProps) {
+  const groupNames = useAppSelector(getGroups).map((group) => group.name);
 
   return (
     <div className={cn(baseStyles.inputGroup, styles.attendanceInputGroup)}>
@@ -15,11 +22,13 @@ export default function AttendanceSelect() {
         id="group"
         className={cn(baseStyles.formInput, styles.attendanceSelect)}
         aria-label="Select group"
+        value={groupName}
+        onChange={(evt) => setGroupName(evt.target.value)}
       >
         <option value="">Выберите группу</option>
-        {groups.map((group) => (
-          <option key={group.id} value={group.id}>
-            {group.name}
+        {groupNames.map((groupName) => (
+          <option key={groupName} value={groupName}>
+            {groupName}
           </option>
         ))}
       </select>

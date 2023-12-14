@@ -1,6 +1,6 @@
 import { Namespace } from '../../const';
 import { Children } from '../../types/children';
-import { Group, Groups } from '../../types/group';
+import { Attendance, Group, GroupAttendance, Groups } from '../../types/group';
 import { State } from '../../types/state';
 
 export const getGroups = (state: State): Groups =>
@@ -14,3 +14,6 @@ export const getChildrenWithoutGroup = (state: State): Children =>
 
 export const getIsFetchingGroupData = (state: State): boolean =>
   state[Namespace.Groups].isFetchingGroupData;
+
+export const getAttendance = (state: State): GroupAttendance =>
+  state[Namespace.Groups].attendance;

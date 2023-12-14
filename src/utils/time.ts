@@ -42,3 +42,28 @@ export function getDatetime(day: TrainingTime | null) {
   }
   return null;
 }
+
+function getMondayDate() {
+  const date = new Date();
+  const day = date.getDay();
+  const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+  date.setDate(diff);
+  return date;
+}
+
+export function getMonday() {
+  const date = getMondayDate();
+  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
+}
+
+export function getPreviosMonday() {
+  const date = getMondayDate();
+  date.setDate(date.getDate() - 7);
+  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
+}
+
+export function getNextMonday() {
+  const date = getMondayDate();
+  date.setDate(date.getDate() + 7);
+  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
+}
