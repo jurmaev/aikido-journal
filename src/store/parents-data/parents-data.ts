@@ -5,6 +5,7 @@ import { fetchParents, removeChild, setChild } from './api-actions';
 
 const initialState: ParentsData = {
   parents: [],
+  isFetchingParentsData: true,
 };
 
 export const parentsData = createSlice({
@@ -13,8 +14,12 @@ export const parentsData = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(fetchParents.pending, (state) => {
+        state.isFetchingParentsData = true;
+      })
       .addCase(fetchParents.fulfilled, (state, action) => {
         state.parents = action.payload;
+        state.isFetchingParentsData = false;
       })
       .addCase(setChild.fulfilled, (state, action) => {
         const newParent = action.payload;

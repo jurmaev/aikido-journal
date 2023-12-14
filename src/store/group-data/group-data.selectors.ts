@@ -11,3 +11,6 @@ export const getNewGroup = (state: State): Group | null =>
 
 export const getChildrenWithoutGroup = (state: State): Children =>
   state[Namespace.Groups].childrenWithoutGroup;
+
+export const getIsFetchingGroupData = (state: State): boolean =>
+  state[Namespace.Groups].isFetchingGroupData;

@@ -23,14 +23,17 @@ export type LoginData = {
 export type ChildrenData = {
   children: Children;
   childrenWithoutParent: Children;
+  isFetchingChildrenData: boolean;
 };
 
 export type ParentsData = {
   parents: Parents;
+  isFetchingParentsData: boolean;
 };
 
 export type GroupData = {
   groups: Groups;
   newGroup: Group | null;
   childrenWithoutGroup: Children;
+  isFetchingGroupData: boolean;
 };

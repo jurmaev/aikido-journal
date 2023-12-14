@@ -16,6 +16,7 @@ const initialState: GroupData = {
   groups: [],
   newGroup: null,
   childrenWithoutGroup: [],
+  isFetchingGroupData: true,
 };
 
 export const groupData = createSlice({
@@ -36,12 +37,16 @@ export const groupData = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(fetchGroups.pending, (state) => {
+        state.isFetchingGroupData = true;
+      })
       .addCase(fetchGroups.fulfilled, (state, action) => {
         state.groups = action.payload;
         state.groups.forEach(
           (group) =>
             (group.days = group.days.map((day) => getTrainingTime(day)))
         );
+        state.isFetchingGroupData = false;
       })
       .addCase(createGroup.fulfilled, (state, action) => {
         state.groups.push(action.payload);

@@ -7,3 +7,6 @@ export const getChildren = (state: State): Children =>
 
 export const getChildrenWithoutParent = (state: State): Children =>
   state[Namespace.Children].childrenWithoutParent;
+
+export const getIsFetchingChildrenData = (state: State): boolean =>
+  state[Namespace.Children].isFetchingChildrenData;

@@ -5,9 +5,13 @@ import { useState } from 'react';
 import ParentsRow from '../parents-row/parents-row';
 import ParentsModal from '../parents-modal/parents-modal';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { getParents } from '../../../store/parents-data/parents-data.selectors';
+import {
+  getIsFetchingParentsData,
+  getParents,
+} from '../../../store/parents-data/parents-data.selectors';
 import { setChild } from '../../../store/parents-data/api-actions';
 import { getFullName } from '../../../utils/names';
+import Spinner from '../../ui/spinner/spinner';
 
 export default function ParentsTable() {
   const dispatch = useAppDispatch();
@@ -17,6 +21,7 @@ export default function ParentsTable() {
   const sortedParents = parents.filter((parent) =>
     getFullName(parent).toLowerCase().includes(highlightedValue)
   );
+  const isFetchingParentsData = useAppSelector(getIsFetchingParentsData);
 
   function handleSelect(parentId: string, childId: number) {
     dispatch(
@@ -32,7 +37,9 @@ export default function ParentsTable() {
     <>
       <SearchTable onSort={setHighlightedValue} />
 
-      {sortedParents.length !== 0 ? (
+      {isFetchingParentsData ? (
+        <Spinner />
+      ) : sortedParents.length !== 0 ? (
         <>
           <table className={styles.parentsTable}>
             <thead>
