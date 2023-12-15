@@ -3,73 +3,32 @@ import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/attendance-page/attendance.module.css';
 import cn from 'classnames';
 import { getFullName, getShortName } from '../../../utils/names';
-import { produce } from 'immer';
 import { useEffect, useState } from 'react';
 import AttendanceHeader from '../../ui/attendance-header/attendance-header';
 import { useIsMobile } from '../../../hooks/use-is-mobile';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { getAttendance } from '../../../store/group-data/group-data.selectors';
-import { ScheduleDay } from '../../../types/group';
+import { useAppDispatch } from '../../../hooks';
+import { GroupAttendance } from '../../../types/group';
 import {
   getMonday,
   getNextMonday,
   getPreviosMonday,
 } from '../../../utils/time';
 import { fetchAttendance } from '../../../store/group-data/api-actions';
+import AttendanceCell from '../attendance-cell/attendance-cell';
 
 export default function AttendanceTable() {
   const isMobile = useIsMobile();
   const dispatch = useAppDispatch();
-  const attendance = useAppSelector(getAttendance);
-  // const [attendanceState, setAttendanceState] = useState(attendance);
+  const [attendanceState, setAttendanceState] =
+    useState<GroupAttendance | null>(null);
   const [groupName, setGroupName] = useState('');
   const [startDate, setStartDate] = useState(getMonday());
-  console.log(startDate)
-
-  function getCell(childId: number, day: ScheduleDay) {
-    return (
-      <td key={day.date} className={styles.tableCell}>
-        <button
-          className={cn(styles.tableCheck, {
-            [styles.tableCheckChecked]: day.is_training,
-          })}
-          aria-label="Check"
-          disabled={day.is_training === null}
-          // onClick={() =>
-          //   setAttendanceState(
-          //     produce((draft) => {
-          //       const foundDay = draft.children_attendance
-          //         .find((child) => child.id === childId)
-          //         ?.attendance.find((attDay) => attDay.date === day.date);
-          //       if (foundDay) {
-          //         foundDay.is_training = !day.is_training;
-          //       }
-          //     })
-          //   )
-          // }
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            fill="none"
-          >
-            <path
-              d="M15 4.5L6.75 12.75L3 9"
-              stroke="black"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </td>
-    );
-  }
 
   useEffect(() => {
     if (groupName !== '') {
-      dispatch(fetchAttendance({ groupName: groupName, startDate: startDate }));
+      dispatch(
+        fetchAttendance({ groupName: groupName, startDate: startDate })
+      ).then((data) => setAttendanceState(data.payload as GroupAttendance));
       setStartDate(getMonday());
     }
   }, [groupName, dispatch, startDate]);
@@ -78,7 +37,7 @@ export default function AttendanceTable() {
     <>
       <AttendanceSelect groupName={groupName} setGroupName={setGroupName} />
 
-      {attendance && attendance.children_attendance.length !== 0 ? (
+      {attendanceState && attendanceState.children_attendance.length !== 0 ? (
         <>
           <table>
             <thead>
@@ -126,7 +85,7 @@ export default function AttendanceTable() {
                     </button>
                   </div>
                 </th>
-                {attendance.schedule.map((day) =>
+                {attendanceState.schedule.map((day) =>
                   isMobile ? (
                     day.is_training && (
                       <AttendanceHeader key={day.date} day={day} />
@@ -138,7 +97,7 @@ export default function AttendanceTable() {
               </tr>
             </thead>
             <tbody>
-              {attendance.children_attendance.map((child) => (
+              {attendanceState.children_attendance.map((child) => (
                 <tr key={child.id}>
                   <td className={styles.tableCell}>
                     {isMobile
@@ -146,9 +105,23 @@ export default function AttendanceTable() {
                       : getFullName(child)}
                   </td>
                   {child.attendance.map((day) =>
-                    isMobile
-                      ? day.is_training !== null && getCell(child.id, day)
-                      : getCell(child.id, day)
+                    isMobile ? (
+                      day.is_training !== null && (
+                        <AttendanceCell
+                          key={`${child.id}-${day.date}`}
+                          childId={child.id}
+                          day={day}
+                          setAttendanceState={setAttendanceState}
+                        />
+                      )
+                    ) : (
+                      <AttendanceCell
+                        key={`${child.id}-${day.date}`}
+                        childId={child.id}
+                        day={day}
+                        setAttendanceState={setAttendanceState}
+                      />
+                    )
                   )}
                 </tr>
               ))}
