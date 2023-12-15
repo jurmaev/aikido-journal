@@ -12,7 +12,7 @@ import {
   getMonday,
   getNextMonday,
   getPreviosMonday,
-} from '../../../utils/time';
+} from '../../../utils/datetime';
 import {
   fetchAttendance,
   setAttendance,
@@ -25,15 +25,17 @@ export default function AttendanceTable() {
   const [attendanceState, setAttendanceState] =
     useState<GroupAttendance | null>(null);
   const [groupName, setGroupName] = useState('');
+  const [month, setMonth] = useState(-1);
   const [startDate, setStartDate] = useState(getMonday(new Date()));
 
   useEffect(() => {
+    console.log(groupName, month);
     if (groupName !== '') {
       dispatch(
         fetchAttendance({ groupName: groupName, startDate: startDate })
       ).then((data) => setAttendanceState(data.payload as GroupAttendance));
     }
-  }, [groupName, dispatch, startDate]);
+  }, [groupName, dispatch, startDate, month]);
 
   function handleButtonClick() {
     if (attendanceState) {
@@ -49,7 +51,13 @@ export default function AttendanceTable() {
 
   return (
     <>
-      <AttendanceSelect groupName={groupName} setGroupName={setGroupName} />
+      <AttendanceSelect
+        groupName={groupName}
+        setGroupName={setGroupName}
+        month={month}
+        setMonth={setMonth}
+        setStartDate={setStartDate}
+      />
 
       {attendanceState && attendanceState.children_attendance.length !== 0 ? (
         <>

@@ -12,7 +12,7 @@ import {
   setAttendance,
   setGroupParameters,
 } from './api-actions';
-import { getTrainingTime } from '../../utils/time';
+import { getTrainingTime } from '../../utils/datetime';
 
 const initialState: GroupData = {
   groups: [],

@@ -43,6 +43,12 @@ export function getDatetime(day: TrainingTime | null) {
   return null;
 }
 
+function getStartDateString(date: Date) {
+  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(
+    date.getDate()
+  )}`;
+}
+
 function getMondayDate(currentDate: string | Date) {
   const date = new Date(currentDate);
   const day = date.getDay();
@@ -53,23 +59,30 @@ function getMondayDate(currentDate: string | Date) {
 
 export function getMonday(currentDate: string | Date) {
   const date = getMondayDate(currentDate);
-  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(
-    date.getDate()
-  )}`;
+  return getStartDateString(date);
 }
 
 export function getPreviosMonday(currentDate: string) {
   const date = getMondayDate(currentDate);
   date.setDate(date.getDate() - 7);
-  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(
-    date.getDate()
-  )}`;
+  return getStartDateString(date);
 }
 
 export function getNextMonday(currentDate: string) {
   const date = getMondayDate(currentDate);
   date.setDate(date.getDate() + 7);
-  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(
-    date.getDate()
-  )}`;
+  return getStartDateString(date);
+}
+
+export function getFirstMondayOfMonth(month: number) {
+  const date = new Date();
+  date.setMonth(month);
+  date.setDate(1);
+  getMondayDate(date).getMonth();
+  if (getMondayDate(date).getMonth() !== month) {
+    const diff = date.getDate() + 7;
+    date.setDate(diff);
+    return getStartDateString(getMondayDate(date));
+  }
+  return getStartDateString(date);
 }

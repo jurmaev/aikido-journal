@@ -104,7 +104,6 @@ export const setAttendance = createAsyncThunk<
 >(
   'groups/setAttendance',
   async ({ groupName, startDate, childAttendance }, { extra: api }) => {
-    console.log(childAttendance)
     const { data } = await api.post<GroupAttendance>(
       `${ApiRoute.Groups}/${groupName}/fill_attendance/${startDate}`,
       { children_attendance: childAttendance }

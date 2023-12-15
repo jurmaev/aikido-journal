@@ -21,7 +21,7 @@ import {
   setGroupParameters,
 } from '../../../store/group-data/api-actions';
 import { removeNewGroup } from '../../../store/group-data/group-data';
-import { getDatetime } from '../../../utils/time';
+import { getDatetime } from '../../../utils/datetime';
 import { createPortal } from 'react-dom';
 
 type GroupModalProps = {
