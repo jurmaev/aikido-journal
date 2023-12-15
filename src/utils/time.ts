@@ -43,27 +43,33 @@ export function getDatetime(day: TrainingTime | null) {
   return null;
 }
 
-function getMondayDate() {
-  const date = new Date();
+function getMondayDate(currentDate: string | Date) {
+  const date = new Date(currentDate);
   const day = date.getDay();
   const diff = date.getDate() - day + (day === 0 ? -6 : 1);
   date.setDate(diff);
   return date;
 }
 
-export function getMonday() {
-  const date = getMondayDate();
-  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
+export function getMonday(currentDate: string | Date) {
+  const date = getMondayDate(currentDate);
+  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(
+    date.getDate()
+  )}`;
 }
 
-export function getPreviosMonday() {
-  const date = getMondayDate();
+export function getPreviosMonday(currentDate: string) {
+  const date = getMondayDate(currentDate);
   date.setDate(date.getDate() - 7);
-  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
+  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(
+    date.getDate()
+  )}`;
 }
 
-export function getNextMonday() {
-  const date = getMondayDate();
+export function getNextMonday(currentDate: string) {
+  const date = getMondayDate(currentDate);
   date.setDate(date.getDate() + 7);
-  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
+  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(
+    date.getDate()
+  )}`;
 }

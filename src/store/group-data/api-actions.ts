@@ -1,5 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Group, GroupAttendance, Groups } from '../../types/group';
+import {
+  ChildAttendance,
+  Group,
+  GroupAttendance,
+  Groups,
+} from '../../types/group';
 import { AppDispatch, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
 import { ApiRoute } from '../../const';
@@ -86,8 +91,23 @@ export const fetchAttendance = createAsyncThunk<
   'groups/fetchAttendance',
   async ({ groupName, startDate }, { extra: api }) => {
     const { data } = await api.post<GroupAttendance>(
-      `${ApiRoute.Groups}/${groupName}/get_attendance/${startDate}`,
-      { groupName, startDate }
+      `${ApiRoute.Groups}/${groupName}/get_attendance/${startDate}`
+    );
+    return data;
+  }
+);
+
+export const setAttendance = createAsyncThunk<
+  GroupAttendance,
+  { groupName: string; startDate: string; childAttendance: ChildAttendance[] },
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>(
+  'groups/setAttendance',
+  async ({ groupName, startDate, childAttendance }, { extra: api }) => {
+    console.log(childAttendance)
+    const { data } = await api.post<GroupAttendance>(
+      `${ApiRoute.Groups}/${groupName}/fill_attendance/${startDate}`,
+      { children_attendance: childAttendance }
     );
     return data;
   }

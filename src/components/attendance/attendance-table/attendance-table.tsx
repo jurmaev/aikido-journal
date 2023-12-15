@@ -13,7 +13,10 @@ import {
   getNextMonday,
   getPreviosMonday,
 } from '../../../utils/time';
-import { fetchAttendance } from '../../../store/group-data/api-actions';
+import {
+  fetchAttendance,
+  setAttendance,
+} from '../../../store/group-data/api-actions';
 import AttendanceCell from '../attendance-cell/attendance-cell';
 
 export default function AttendanceTable() {
@@ -22,16 +25,27 @@ export default function AttendanceTable() {
   const [attendanceState, setAttendanceState] =
     useState<GroupAttendance | null>(null);
   const [groupName, setGroupName] = useState('');
-  const [startDate, setStartDate] = useState(getMonday());
+  const [startDate, setStartDate] = useState(getMonday(new Date()));
 
   useEffect(() => {
     if (groupName !== '') {
       dispatch(
         fetchAttendance({ groupName: groupName, startDate: startDate })
       ).then((data) => setAttendanceState(data.payload as GroupAttendance));
-      setStartDate(getMonday());
     }
   }, [groupName, dispatch, startDate]);
+
+  function handleButtonClick() {
+    if (attendanceState) {
+      dispatch(
+        setAttendance({
+          groupName: groupName,
+          startDate: startDate,
+          childAttendance: attendanceState.children_attendance,
+        })
+      );
+    }
+  }
 
   return (
     <>
@@ -48,7 +62,7 @@ export default function AttendanceTable() {
                     <button
                       className={styles.tableArrow}
                       aria-label="Previous week"
-                      onClick={() => setStartDate(getPreviosMonday())}
+                      onClick={() => setStartDate(getPreviosMonday(startDate))}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +81,7 @@ export default function AttendanceTable() {
                     <button
                       className={styles.tableArrow}
                       aria-label="Next week"
-                      onClick={() => setStartDate(getNextMonday())}
+                      onClick={() => setStartDate(getNextMonday(startDate))}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -134,6 +148,7 @@ export default function AttendanceTable() {
               baseStyles.btnLarge
             )}
             aria-label="Сохранить изменения"
+            onClick={handleButtonClick}
           >
             Сохранить изменения
           </button>

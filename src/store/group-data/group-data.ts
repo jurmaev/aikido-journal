@@ -9,6 +9,7 @@ import {
   fetchGroups,
   removeChild,
   removeGroup,
+  setAttendance,
   setGroupParameters,
 } from './api-actions';
 import { getTrainingTime } from '../../utils/time';
@@ -95,6 +96,9 @@ export const groupData = createSlice({
         );
       })
       .addCase(fetchAttendance.fulfilled, (state, action) => {
+        state.attendance = action.payload;
+      })
+      .addCase(setAttendance.fulfilled, (state, action) => {
         state.attendance = action.payload;
       });
   },
