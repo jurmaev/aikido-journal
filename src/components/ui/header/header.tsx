@@ -11,10 +11,6 @@ import {
 } from '../../../store/user-data/user-data.selectors';
 import { logout } from '../../../store/user-data/user-data';
 
-// type HeaderProps = {
-//   navItems?: Array<{ name: string; link: string }>;
-// };
-
 export default function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

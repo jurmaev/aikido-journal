@@ -1,6 +1,6 @@
 import { Namespace } from '../../const';
 import { Children } from '../../types/children';
-import { Attendance, Group, GroupAttendance, Groups } from '../../types/group';
+import { Group, GroupAttendance, Groups } from '../../types/group';
 import { State } from '../../types/state';
 
 export const getGroups = (state: State): Groups =>

@@ -29,7 +29,6 @@ export default function AttendanceTable() {
   const [startDate, setStartDate] = useState(getMonday(new Date()));
 
   useEffect(() => {
-    console.log(groupName, month);
     if (groupName !== '') {
       dispatch(
         fetchAttendance({ groupName: groupName, startDate: startDate })

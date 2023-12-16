@@ -16,7 +16,6 @@ import { createPortal } from 'react-dom';
 type ParentsModalProps = {
   parent: Parent;
   children: Children;
-  // childrenOptions: Children;
   handleSelect: (parentId: string, childId: number) => void;
   activeModal: string;
   setActiveModal: React.Dispatch<React.SetStateAction<string>>;
@@ -25,7 +24,6 @@ type ParentsModalProps = {
 export default function ParentsModal({
   parent,
   children,
-  // childrenOptions,
   handleSelect,
   activeModal,
   setActiveModal,
