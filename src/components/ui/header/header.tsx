@@ -10,6 +10,7 @@ import {
   getUserRole,
 } from '../../../store/user-data/user-data.selectors';
 import { logout } from '../../../store/user-data/user-data';
+import { useIsMobile } from '../../../hooks/use-is-mobile';
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ export default function Header() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const role = useAppSelector(getUserRole);
   let navItems = null;
+  const isMobile = useIsMobile();
 
   switch (role) {
     case 'parent':
@@ -63,6 +65,17 @@ export default function Header() {
                   <li>{item.name}</li>
                 </NavLink>
               ))}
+              {isMobile && (
+                <NavLink
+                  to={AppRoutes.Main}
+                  className={styles.navItem}
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                >
+                  <li>Выйти</li>
+                </NavLink>
+              )}
             </ul>
             <div
               className={styles.burger}
