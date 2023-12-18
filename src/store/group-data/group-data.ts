@@ -52,11 +52,11 @@ export const groupData = createSlice({
         state.isFetchingGroupData = false;
       })
       .addCase(createGroup.fulfilled, (state, action) => {
-        state.groups.push(action.payload);
-        state.groups.forEach(
-          (group) =>
-            (group.days = group.days.map((day) => getTrainingTime(day)))
+        const createdGroup = action.payload;
+        createdGroup.days = createdGroup.days.map((day) =>
+          getTrainingTime(day)
         );
+        state.groups.push(createdGroup);
       })
       .addCase(removeGroup.fulfilled, (state, action) => {
         state.groups = state.groups.filter(
@@ -88,12 +88,9 @@ export const groupData = createSlice({
       })
       .addCase(setGroupParameters.fulfilled, (state, action) => {
         const { name, newGroup } = action.payload;
+        newGroup.days = newGroup.days.map((day) => getTrainingTime(day));
         state.groups = state.groups.filter((group) => group.name !== name);
         state.groups.push(newGroup);
-        state.groups.forEach(
-          (group) =>
-            (group.days = group.days.map((day) => getTrainingTime(day)))
-        );
       })
       .addCase(fetchAttendance.fulfilled, (state, action) => {
         state.attendance = action.payload;
