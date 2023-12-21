@@ -25,7 +25,7 @@ export default function AttendanceTable() {
   const [attendanceState, setAttendanceState] =
     useState<GroupAttendance | null>(null);
   const [groupName, setGroupName] = useState('');
-  const [month, setMonth] = useState(-1);
+
   const [startDate, setStartDate] = useState(getMonday(new Date()));
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function AttendanceTable() {
         fetchAttendance({ groupName: groupName, startDate: startDate })
       ).then((data) => setAttendanceState(data.payload as GroupAttendance));
     }
-  }, [groupName, dispatch, startDate, month]);
+  }, [groupName, dispatch, startDate]);
 
   function handleButtonClick() {
     if (attendanceState) {
@@ -53,8 +53,6 @@ export default function AttendanceTable() {
       <AttendanceSelect
         groupName={groupName}
         setGroupName={setGroupName}
-        month={month}
-        setMonth={setMonth}
         setStartDate={setStartDate}
       />
 

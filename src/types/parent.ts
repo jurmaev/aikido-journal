@@ -1,4 +1,10 @@
-import { ChildAttendance, GroupSchedule, TrainingTime } from './group';
+import { Child } from './children';
+import {
+  ChildAttendance,
+  GroupAttendance,
+  GroupSchedule,
+  TrainingTime,
+} from './group';
 
 export type GroupInfo = {
   group_name: string;
@@ -17,10 +23,4 @@ export type ScheduleInfo = {
   group_inf: GroupInfo;
 };
 
-export type Attendance = {
-  name: string;
-  surname: string;
-  patronymic: string;
-  attendance: ChildAttendance;
-  schedule: GroupSchedule;
-};
+export type Attendance = ChildAttendance & { schedule: GroupSchedule };

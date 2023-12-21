@@ -5,23 +5,21 @@ import { useAppSelector } from '../../../hooks';
 import { getGroups } from '../../../store/group-data/group-data.selectors';
 import { Months } from '../../../const';
 import { getFirstMondayOfMonth } from '../../../utils/datetime';
+import { useState } from 'react';
 
 type AttendanceSelectProps = {
   groupName: string;
   setGroupName: React.Dispatch<React.SetStateAction<string>>;
-  month: number;
-  setMonth: React.Dispatch<React.SetStateAction<number>>;
   setStartDate: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default function AttendanceSelect({
   groupName,
   setGroupName,
-  month,
-  setMonth,
   setStartDate,
 }: AttendanceSelectProps) {
   const groupNames = useAppSelector(getGroups).map((group) => group.name);
+  const [month, setMonth] = useState(-1);
 
   return (
     <div className={cn(baseStyles.inputGroup, styles.attendanceInputGroup)}>
