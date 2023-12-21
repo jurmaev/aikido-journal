@@ -1,10 +1,4 @@
-import { Child } from './children';
-import {
-  ChildAttendance,
-  GroupAttendance,
-  GroupSchedule,
-  TrainingTime,
-} from './group';
+import { ChildAttendance, GroupSchedule, TrainingTime } from './group';
 
 export type GroupInfo = {
   group_name: string;

@@ -25,6 +25,7 @@ export default function AttendanceTable() {
   const [attendanceState, setAttendanceState] =
     useState<GroupAttendance | null>(null);
   const [groupName, setGroupName] = useState('');
+  const [message, setMessage] = useState('');
 
   const [startDate, setStartDate] = useState(getMonday(new Date()));
 
@@ -45,6 +46,7 @@ export default function AttendanceTable() {
           childAttendance: attendanceState.children_attendance,
         })
       );
+      setMessage('Изменения сохранены');
     }
   }
 
@@ -146,6 +148,7 @@ export default function AttendanceTable() {
               ))}
             </tbody>
           </table>
+          <p className={baseStyles.redText}>{message}</p>
           <button
             className={cn(
               baseStyles.btn,
