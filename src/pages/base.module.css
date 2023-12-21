@@ -336,6 +336,10 @@ img {
   color: var(--red-700);
 }
 
+.redText {
+  color: var(--red-700);
+}
+
 .failText {
   text-align: center;
 }

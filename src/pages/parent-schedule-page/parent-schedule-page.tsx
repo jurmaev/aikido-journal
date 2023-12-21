@@ -31,52 +31,82 @@ export default function ParentSchedulePage() {
       <main>
         <div className={cn(baseStyles.container, styles.scheduleContainer)}>
           <h1 className={styles.scheduleTitle}>Расписание</h1>
-          {scheduleInfo.map((info) => (
-            <>
-              <p className={styles.scheduleText}>
-                Ребёнок: {getFullName(info)}
-              </p>
-              <p className={styles.scheduleText}>
-                Название группы: {info.group_inf.group_name}
-              </p>
-              <p className={styles.scheduleText}>
-                Цена за занятие: {info.group_inf.group_price}₽
-              </p>
-              <p className={styles.scheduleText}>
-                Тренер: {info.group_inf.coach_name}
-              </p>
-              <p className={styles.scheduleText}>
-                Номер тренера: {info.group_inf.coach_phone_number}
-              </p>
-              <p className={styles.scheduleText}>Расписание:</p>
-              <table>
-                <thead>
-                  <tr>
-                    {days.map((day, index) =>
-                      isMobile ? (
-                        info.group_inf.schedule[index] && (
-                          <TableHeader key={index} day={day} index={index} />
-                        )
-                      ) : (
-                        <TableHeader key={index} day={day} index={index} />
-                      )
-                    )}
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    {info.group_inf.schedule.map((item, index) =>
-                      isMobile ? (
-                        item && <TableCell key={index} time={item} />
-                      ) : (
-                        <TableCell key={index} time={item} />
-                      )
-                    )}
-                  </tr>
-                </tbody>
-              </table>
-            </>
-          ))}
+          {scheduleInfo.length !== 0 ? (
+            scheduleInfo.map((info) => (
+              <>
+                <p className={styles.scheduleText}>
+                  Ребёнок: {getFullName(info)}
+                </p>
+                {info.group_inf ? (
+                  <>
+                    <p className={styles.scheduleText}>
+                      Название группы: {info.group_inf.group_name}
+                    </p>
+                    <p className={styles.scheduleText}>
+                      Цена за занятие: {info.group_inf.group_price}₽
+                    </p>
+                    <p className={styles.scheduleText}>
+                      Тренер:{' '}
+                      {getFullName({
+                        name: info.group_inf.coach_name,
+                        surname: info.group_inf.coach_surname,
+                        patronymic: info.group_inf.coach_patronymic,
+                      })}
+                    </p>
+                    <p className={styles.scheduleText}>
+                      Номер тренера: {info.group_inf.coach_phone_number}
+                    </p>
+                    <p className={styles.scheduleText}>Расписание:</p>
+                    <table>
+                      <thead>
+                        <tr>
+                          {days.map((day, index) =>
+                            isMobile ? (
+                              info.group_inf.schedule[index] && (
+                                <TableHeader
+                                  key={index}
+                                  day={day}
+                                  index={index}
+                                />
+                              )
+                            ) : (
+                              <TableHeader
+                                key={index}
+                                day={day}
+                                index={index}
+                              />
+                            )
+                          )}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          {info.group_inf.schedule.map((item, index) =>
+                            isMobile ? (
+                              item && <TableCell key={index} time={item} />
+                            ) : (
+                              <TableCell key={index} time={item} />
+                            )
+                          )}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </>
+                ) : (
+                  <p className={styles.scheduleText}>
+                    Название группы:{' '}
+                    <span className={baseStyles.redText}>
+                      не состоит в группе
+                    </span>
+                  </p>
+                )}
+              </>
+            ))
+          ) : (
+            <p className={styles.scheduleText}>
+              Ребенок: <span className={baseStyles.redText}>не закреплен</span>
+            </p>
+          )}
         </div>
       </main>
     </>

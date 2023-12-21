@@ -15,12 +15,13 @@ export const parentData = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchChildrenSchedule.fulfilled, (state, action) => {
       state.schedule = action.payload;
-      state.schedule.forEach(
-        (info) =>
-          (info.group_inf.schedule = info.group_inf.schedule.map((day) =>
+      state.schedule.forEach((info) => {
+        if (info.group_inf) {
+          info.group_inf.schedule = info.group_inf.schedule.map((day) =>
             getTrainingTime(day)
-          ))
-      );
+          );
+        }
+      });
     });
   },
 });
