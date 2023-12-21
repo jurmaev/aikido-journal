@@ -2,7 +2,7 @@ import { AuthorizationStatusValues } from '../const';
 import { store } from '../store';
 import { Children } from './children';
 import { Group, GroupAttendance, Groups } from './group';
-import { ScheduleInfo } from './parent';
+import { Attendance, ScheduleInfo } from './parent';
 import { Parents } from './parents';
 
 export type State = ReturnType<typeof store.getState>;
@@ -34,6 +34,7 @@ export type ParentsData = {
 
 export type ParentData = {
   schedule: ScheduleInfo[];
+  attendance: Attendance[];
 };
 
 export type GroupData = {

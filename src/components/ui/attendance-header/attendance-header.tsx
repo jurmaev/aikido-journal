@@ -13,7 +13,6 @@ export default function AttendanceHeader({ day }: AttendanceHeaderProps) {
 
   return (
     <th
-      key={day.date}
       className={cn(styles.tableHeader, {
         [styles.tableHeaderInactive]: !day.is_training,
       })}

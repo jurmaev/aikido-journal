@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Namespace } from '../../const';
 import { ParentData } from '../../types/state';
-import { fetchChildrenSchedule } from './api-actions';
+import { fetchChildrenAttendance, fetchChildrenSchedule } from './api-actions';
 import { getTrainingTime } from '../../utils/datetime';
 
 const initialState: ParentData = {
   schedule: [],
+  attendance: [],
 };
 
 export const parentData = createSlice({
@@ -13,15 +14,19 @@ export const parentData = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchChildrenSchedule.fulfilled, (state, action) => {
-      state.schedule = action.payload;
-      state.schedule.forEach((info) => {
-        if (info.group_inf) {
-          info.group_inf.schedule = info.group_inf.schedule.map((day) =>
-            getTrainingTime(day)
-          );
-        }
+    builder
+      .addCase(fetchChildrenSchedule.fulfilled, (state, action) => {
+        state.schedule = action.payload;
+        state.schedule.forEach((info) => {
+          if (info.group_inf) {
+            info.group_inf.schedule = info.group_inf.schedule.map((day) =>
+              getTrainingTime(day)
+            );
+          }
+        });
+      })
+      .addCase(fetchChildrenAttendance.fulfilled, (state, action) => {
+        state.attendance = action.payload;
       });
-    });
   },
 });

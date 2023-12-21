@@ -1,4 +1,4 @@
-import { TrainingTime } from './group';
+import { ChildAttendance, GroupSchedule, TrainingTime } from './group';
 
 export type GroupInfo = {
   group_name: string;
@@ -15,4 +15,12 @@ export type ScheduleInfo = {
   surname: string;
   patronymic: string;
   group_inf: GroupInfo;
+};
+
+export type Attendance = {
+  name: string;
+  surname: string;
+  patronymic: string;
+  attendance: ChildAttendance;
+  schedule: GroupSchedule;
 };

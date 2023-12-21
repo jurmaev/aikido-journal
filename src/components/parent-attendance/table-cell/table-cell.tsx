@@ -2,13 +2,12 @@ import styles from '../../../pages/parent-attendance-page/parent-attendance.modu
 import cn from 'classnames';
 
 type TableCellProps = {
-  date: string;
   isTraining: boolean | null;
 };
 
-export default function TableCell({ date, isTraining }: TableCellProps) {
+export default function TableCell({ isTraining }: TableCellProps) {
   return (
-    <td key={date} className={styles.tableCell}>
+    <td className={styles.tableCell}>
       <div className={styles.tableCellContainer}>
         <div
           className={cn(

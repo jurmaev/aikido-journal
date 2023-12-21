@@ -63,13 +63,6 @@ export default function GroupModal({
 
   function handlePriceChange(price: string) {
     setPrice(price);
-    // if (price !== '') {
-    //   setGroupState(
-    //     produce((draft) => {
-    //       draft.price = Number(price);
-    //     })
-    //   );
-    // }
     setIsChanged(true);
   }
 
