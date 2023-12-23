@@ -93,7 +93,7 @@ export default function ParentSchedulePage() {
                     </table>
                   </>
                 ) : (
-                  <p className={styles.scheduleText}>
+                  <p className={baseStyles.text}>
                     Название группы:{' '}
                     <span className={baseStyles.redText}>
                       не состоит в группе
@@ -103,7 +103,7 @@ export default function ParentSchedulePage() {
               </>
             ))
           ) : (
-            <p className={styles.scheduleText}>
+            <p className={baseStyles.text}>
               Ребенок: <span className={baseStyles.redText}>не закреплен</span>
             </p>
           )}

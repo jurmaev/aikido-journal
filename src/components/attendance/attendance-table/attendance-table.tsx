@@ -58,7 +58,12 @@ export default function AttendanceTable() {
         setStartDate={setStartDate}
       />
 
-      {attendanceState && attendanceState.children_attendance.length !== 0 ? (
+      {attendanceState &&
+      attendanceState.children_attendance.length === 0 &&
+      groupName !== '' ? (
+        <p className={baseStyles.failText}>В этой группе не добавлены дети</p>
+      ) : attendanceState &&
+        attendanceState.children_attendance.length !== 0 ? (
         <>
           <table>
             <thead>

@@ -141,7 +141,9 @@ export default function ParentAttendancePage() {
               })}
             </>
           ) : (
-            <p className={baseStyles.redText}>ребенок не закреплен</p>
+            <p className={baseStyles.text}>
+              Ребенок: <span className={baseStyles.redText}>не закреплен</span>
+            </p>
           )}
         </div>
       </main>
