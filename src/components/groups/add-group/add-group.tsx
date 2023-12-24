@@ -4,6 +4,7 @@ import styles from '../../../pages/groups-page/groups.module.css';
 import cn from 'classnames';
 import { useAppDispatch } from '../../../hooks';
 import { addNewGroup } from '../../../store/group-data/group-data';
+import { hasNumber } from '../../../utils/names';
 
 type AddGroupProps = {
   setActiveGroupModal: React.Dispatch<React.SetStateAction<string>>;
@@ -17,6 +18,8 @@ export default function AddGroup({ setActiveGroupModal }: AddGroupProps) {
   function handleClick() {
     if (groupName.trim().length < 5) {
       setErrorText('Название группы должно быть не менее 5 символов');
+    } else if (hasNumber(groupName)) {
+      setErrorText('Название группы не должно содержать цифр');
     } else {
       dispatch(addNewGroup(groupName.trim()));
       setActiveGroupModal(groupName.trim());

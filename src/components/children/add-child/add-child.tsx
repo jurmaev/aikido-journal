@@ -2,7 +2,7 @@ import { useState } from 'react';
 import baseStyles from '../../../pages/base.module.css';
 import styles from '../../../pages/children-page/children.module.css';
 import cn from 'classnames';
-import { capitalizeWords, trimSpaces } from '../../../utils/names';
+import { capitalizeWords, hasNumber, trimSpaces } from '../../../utils/names';
 import { useAppDispatch } from '../../../hooks';
 import { createChild } from '../../../store/children-data/api-actions';
 
@@ -12,7 +12,9 @@ export default function AddChild() {
   const dispatch = useAppDispatch();
 
   function handleAddClick() {
-    if (
+    if (hasNumber(addInput)) {
+      setErrorText('ФИО не должно содержать цифр');
+    } else if (
       trimSpaces(addInput).split(' ').length >= 2 &&
       trimSpaces(addInput).split(' ').length < 4
     ) {

@@ -23,6 +23,10 @@ export function getFullName(fullName: FullName): string {
   }
 }
 
+export function hasNumber(str: string) {
+  return /\d/.test(str);
+}
+
 export function trimSpaces(string: string) {
   return string.trim().replace(/\s+/g, ' ');
 }

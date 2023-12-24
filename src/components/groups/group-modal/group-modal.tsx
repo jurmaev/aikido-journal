@@ -23,6 +23,7 @@ import {
 import { removeNewGroup } from '../../../store/group-data/group-data';
 import { getDatetime } from '../../../utils/datetime';
 import { createPortal } from 'react-dom';
+import { hasNumber } from '../../../utils/names';
 
 type GroupModalProps = {
   group: Group;
@@ -93,7 +94,7 @@ export default function GroupModal({
   function handleSaveClick() {
     let isValid = true;
 
-    if (groupState.name.trim().length < 5) {
+    if (groupState.name.trim().length < 5 || hasNumber(groupState.name)) {
       setIsValidName(false);
       isValid = false;
     } else {
