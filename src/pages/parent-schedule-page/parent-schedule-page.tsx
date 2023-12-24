@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchChildrenSchedule } from '../../store/parent-data/api-actions';
 import { getChildrenSchedule } from '../../store/parent-data/parent-data.selectors';
+import React from 'react';
 
 export default function ParentSchedulePage() {
   const isMobile = useIsMobile();
@@ -32,8 +33,8 @@ export default function ParentSchedulePage() {
         <div className={cn(baseStyles.container, styles.scheduleContainer)}>
           <h1 className={styles.scheduleTitle}>Расписание</h1>
           {scheduleInfo.length !== 0 ? (
-            scheduleInfo.map((info) => (
-              <>
+            scheduleInfo.map((info, index) => (
+              <React.Fragment key={index}>
                 <p className={styles.scheduleText}>
                   Ребёнок: {getFullName(info)}
                 </p>
@@ -100,7 +101,7 @@ export default function ParentSchedulePage() {
                     </span>
                   </p>
                 )}
-              </>
+              </React.Fragment>
             ))
           ) : (
             <p className={baseStyles.text}>

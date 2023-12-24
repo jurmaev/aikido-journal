@@ -1,6 +1,7 @@
 import { AuthorizationStatusValues } from '../const';
 import { store } from '../store';
 import { Children } from './children';
+import { Debt } from './debt';
 import { Group, GroupAttendance, Groups } from './group';
 import { Attendance, ScheduleInfo } from './parent';
 import { Parents } from './parents';
@@ -43,4 +44,8 @@ export type GroupData = {
   childrenWithoutGroup: Children;
   isFetchingGroupData: boolean;
   attendance: GroupAttendance | null;
+};
+
+export type DebtData = {
+  debt: Debt[];
 };
