@@ -11,20 +11,15 @@ import { getFullName } from '../../../utils/names';
 export default function PaymentList() {
   const isMobile = useIsMobile();
   const payment = useAppSelector(getDebt);
-  const [paymentState, setPaymentState] = useState(payment);
   const [highlightedValue, setHighlightedValue] = useState('');
+  const filteredPayment = payment
+    .filter((item) =>
+      getFullName(item).toLowerCase().includes(highlightedValue.trim())
+    )
+    .filter((item) => item.payment_arrears !== 0);
 
   function handleFilter(filterValue: string) {
-    if (filterValue === '') {
-      setPaymentState(payment);
-    } else {
-      setPaymentState(
-        payment.filter((item) =>
-          item.name.toLowerCase().includes(filterValue.trim())
-        )
-      );
-      setHighlightedValue(filterValue.trim());
-    }
+    setHighlightedValue(filterValue.trim());
   }
 
   return (
@@ -34,9 +29,9 @@ export default function PaymentList() {
         setHighlightedValue={setHighlightedValue}
       />
 
-      {paymentState.length !== 0 ? (
+      {filteredPayment.length !== 0 ? (
         <ul className={styles.paymentList}>
-          {paymentState.map((item, index) => (
+          {filteredPayment.map((item, index) => (
             <li key={index} className={styles.paymentItem}>
               {getHighlightedParentName(
                 getFullName(item),
