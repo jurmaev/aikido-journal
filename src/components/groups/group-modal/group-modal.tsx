@@ -18,8 +18,11 @@ import {
   createGroup,
   removeChild,
   removeGroup,
+  setGroupParameters,
 } from '../../../store/group-data/api-actions';
 import { removeNewGroup } from '../../../store/group-data/group-data';
+import { getDatetime } from '../../../utils/datetime';
+import { createPortal } from 'react-dom';
 
 type GroupModalProps = {
   group: Group;
@@ -35,10 +38,19 @@ export default function GroupModal({
   isNew,
 }: GroupModalProps) {
   const [groupState, setGroupState] = useState(group);
+  const [price, setPrice] = useState(String(group.price));
   const [isChanged, setIsChanged] = useState(false);
   const [isExitModalActive, setIsExitModalActive] = useState(false);
   const [isDeleteModalActive, setIsDeleteModalActive] = useState(false);
   const dispatch = useAppDispatch();
+  const [isValidName, setIsValidName] = useState(true);
+  const [isValidPrice, setIsValidPrice] = useState(true);
+  const validDays = groupState.days.map((day) => {
+    if (day) {
+      return { start: day.start !== '', end: day.end !== '' };
+    }
+    return { start: true, end: true };
+  });
 
   function handleNameChange(name: string) {
     setGroupState(
@@ -49,12 +61,8 @@ export default function GroupModal({
     setIsChanged(true);
   }
 
-  function handlePriceChange(price: number) {
-    setGroupState(
-      produce((draft) => {
-        draft.price = price;
-      })
-    );
+  function handlePriceChange(price: string) {
+    setPrice(price);
     setIsChanged(true);
   }
 
@@ -83,17 +91,44 @@ export default function GroupModal({
   }
 
   function handleSaveClick() {
-    if (!isNew) {
-      onSave(
-        produce((draft) => {
-          draft = draft.filter((draftGroup) => draftGroup.id !== group.id);
-          draft.push(groupState);
-        })
-      );
-      setActiveGroupModal('');
+    let isValid = true;
+
+    if (groupState.name.trim().length < 5) {
+      setIsValidName(false);
+      isValid = false;
     } else {
-      dispatch(createGroup(groupState));
-      dispatch(removeNewGroup());
+      setIsValidName(true);
+    }
+
+    if (price === '') {
+      setIsValidPrice(false);
+      isValid = false;
+    } else {
+      setIsValidPrice(true);
+    }
+
+    groupState.days.forEach((day) => {
+      if (day?.start === '' || day?.end === '') {
+        isValid = false;
+      }
+    });
+
+    if (isValid) {
+      const newGroup = {
+        ...groupState,
+        days: groupState.days.map((day) => getDatetime(day)),
+        price: Number(price),
+      };
+
+      if (!isNew) {
+        dispatch(setGroupParameters({ name: group.name, group: newGroup }));
+        setActiveGroupModal('');
+        setIsChanged(false);
+      } else {
+        dispatch(createGroup(newGroup));
+        dispatch(removeNewGroup());
+        setActiveGroupModal('');
+      }
     }
   }
 
@@ -130,7 +165,7 @@ export default function GroupModal({
   }
 
   function handleCloseClick() {
-    if (isChanged) {
+    if (isChanged || isNew) {
       setIsExitModalActive(true);
     } else {
       setGroupState(group);
@@ -150,93 +185,100 @@ export default function GroupModal({
 
   return (
     <>
-      <Modal
-        isActive={activeGroupModal === group.name}
-        isCentral={false}
-        onClose={handleCloseClick}
-      >
-        <h2 className={baseStyles.modalTitle}>Настройка группы</h2>
-
-        <GroupName
-          name={group.name}
-          value={groupState.name}
-          onChange={handleNameChange}
-        />
-
-        <GroupPrice
-          name={group.name}
-          value={groupState.price}
-          onChange={handlePriceChange}
-        />
-
-        <p className={baseStyles.modalText}>Задать расписание для группы:</p>
-        <table>
-          <thead>
-            <tr>
-              <th className={styles.tableHeader}>Пн</th>
-              <th className={styles.tableHeader}>Вт</th>
-              <th className={styles.tableHeader}>Ср</th>
-              <th className={styles.tableHeader}>Чт</th>
-              <th className={styles.tableHeader}>Пт</th>
-              <th className={styles.tableHeader}>Сб</th>
-              <th className={styles.tableHeader}>Вс</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {groupState.days.map((day, index) => (
-                <GroupTime
-                  key={index}
-                  day={day}
-                  index={index}
-                  handleCheckClick={handleCheckClick}
-                  handleEndTimeChange={handleEndTimeChange}
-                  handleStartTimeChange={handleStartTimeChange}
-                />
-              ))}
-            </tr>
-          </tbody>
-        </table>
-
-        <div
-          className={cn(baseStyles.inputGroup, styles.groupsModalInputGroup)}
+      {createPortal(
+        <Modal
+          isActive={activeGroupModal === group.name}
+          isCentral={false}
+          onClose={handleCloseClick}
         >
-          <button
-            className={cn(
-              baseStyles.btn,
-              baseStyles.btnBlue,
-              baseStyles.btnLarge
-            )}
-            onClick={handleSaveClick}
+          <h2 className={baseStyles.modalTitle}>Настройка группы</h2>
+
+          <GroupName
+            name={group.name}
+            value={groupState.name}
+            onChange={handleNameChange}
+            isValid={isValidName}
+          />
+
+          <GroupPrice
+            name={group.name}
+            value={price}
+            onChange={handlePriceChange}
+            isValid={isValidPrice}
+          />
+
+          <p className={baseStyles.modalText}>Задать расписание для группы:</p>
+          <table>
+            <thead>
+              <tr>
+                <th className={styles.tableHeader}>Пн</th>
+                <th className={styles.tableHeader}>Вт</th>
+                <th className={styles.tableHeader}>Ср</th>
+                <th className={styles.tableHeader}>Чт</th>
+                <th className={styles.tableHeader}>Пт</th>
+                <th className={styles.tableHeader}>Сб</th>
+                <th className={styles.tableHeader}>Вс</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {groupState.days.map((day, index) => (
+                  <GroupTime
+                    key={index}
+                    day={day}
+                    index={index}
+                    handleCheckClick={handleCheckClick}
+                    handleEndTimeChange={handleEndTimeChange}
+                    handleStartTimeChange={handleStartTimeChange}
+                    validity={validDays[index]}
+                  />
+                ))}
+              </tr>
+            </tbody>
+          </table>
+
+          <div
+            className={cn(baseStyles.inputGroup, styles.groupsModalInputGroup)}
           >
-            Сохранить изменения
-          </button>
-          <button
-            className={cn(
-              baseStyles.btn,
-              baseStyles.btnRed,
-              baseStyles.btnLarge
-            )}
-            onClick={() => setIsDeleteModalActive(true)}
-          >
-            Удалить группу
-          </button>
-        </div>
+            <button
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
+              onClick={handleSaveClick}
+            >
+              Сохранить изменения
+            </button>
+            <button
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnRed,
+                baseStyles.btnLarge
+              )}
+              onClick={() => setIsDeleteModalActive(true)}
+              disabled={isNew}
+            >
+              Удалить группу
+            </button>
+          </div>
 
-        <h2 className={baseStyles.modalTitle}>Список детей</h2>
+          <h2 className={baseStyles.modalTitle}>Список детей</h2>
 
-        <AddChild name={group.name} handleAddChild={handleAddChild} />
+          <AddChild name={group.name} handleAddChild={handleAddChild} />
 
-        <ul className={styles.list}>
-          {group.children.map((child) => (
-            <GroupChildItem
-              key={child.id}
-              child={child}
-              handleDelete={handleDeleteChild}
-            />
-          ))}
-        </ul>
-      </Modal>
+          <ul className={styles.list}>
+            {group.children.map((child) => (
+              <GroupChildItem
+                key={child.id}
+                child={child}
+                handleDelete={handleDeleteChild}
+              />
+            ))}
+          </ul>
+        </Modal>,
+        document.body
+      )}
       <ExitGroupModal
         isActive={isExitModalActive}
         setIsActive={setIsExitModalActive}

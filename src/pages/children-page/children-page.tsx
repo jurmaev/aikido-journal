@@ -1,6 +1,5 @@
 import baseStyles from '../base.module.css';
 import styles from './children.module.css';
-import { NavItems } from '../../const';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import ChildrenList from '../../components/children/children-list/children-list';
@@ -12,12 +11,16 @@ export default function ChildrenPage() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    document.title = 'Дети';
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchChildren());
   }, [dispatch]);
 
   return (
     <>
-      <Header navItems={NavItems.Trainer} />
+      <Header />
       <main>
         <div className={cn(baseStyles.container, styles.childrenContainer)}>
           <h1 className={styles.childrenTitle}>Дети</h1>

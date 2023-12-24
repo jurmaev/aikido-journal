@@ -12,6 +12,7 @@ import ParentProfilePage from '../../pages/parent-profile-page/parent-profile-pa
 import ParentSchedulePage from '../../pages/parent-schedule-page/parent-schedule-page';
 import ParentAttendancePage from '../../pages/parent-attendance-page/parent-attendance-page';
 import PrivateRoute from '../private-route/private-route';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
 function App() {
   return (
@@ -139,6 +140,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </>

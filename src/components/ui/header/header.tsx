@@ -1,6 +1,6 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styles from '../../../pages/base.module.css';
-import { AppRoutes, AuthorizationStatus } from '../../../const';
+import { AppRoutes, AuthorizationStatus, NavItems } from '../../../const';
 import logoSrc from './logo.svg';
 import { useState } from 'react';
 import cn from 'classnames';
@@ -10,17 +10,27 @@ import {
   getUserRole,
 } from '../../../store/user-data/user-data.selectors';
 import { logout } from '../../../store/user-data/user-data';
+import { useIsMobile } from '../../../hooks/use-is-mobile';
 
-type HeaderProps = {
-  navItems?: Array<{ name: string; link: string }>;
-};
-
-export default function Header({ navItems }: HeaderProps) {
+export default function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isNavActive, setIsNavActive] = useState(false);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const role = useAppSelector(getUserRole);
+  let navItems = null;
+  const isMobile = useIsMobile();
+
+  switch (role) {
+    case 'parent':
+      navItems = NavItems.Parent;
+      break;
+    case 'coach':
+      navItems = NavItems.Trainer;
+      break;
+    default:
+      break;
+  }
 
   return (
     <header className={styles.header}>
@@ -55,6 +65,17 @@ export default function Header({ navItems }: HeaderProps) {
                   <li>{item.name}</li>
                 </NavLink>
               ))}
+              {isMobile && (
+                <NavLink
+                  to={AppRoutes.Main}
+                  className={styles.navItem}
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                >
+                  <li>Выйти</li>
+                </NavLink>
+              )}
             </ul>
             <div
               className={styles.burger}

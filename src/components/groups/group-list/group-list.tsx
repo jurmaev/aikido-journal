@@ -9,12 +9,15 @@ import { highlightText } from '../../../utils/highlight';
 import { useAppSelector } from '../../../hooks';
 import {
   getGroups,
+  getIsFetchingGroupData,
   getNewGroup,
 } from '../../../store/group-data/group-data.selectors';
+import Spinner from '../../ui/spinner/spinner';
 
 export default function GroupList() {
   const [activeGroupModal, setActiveGroupModal] = useState<string>('');
   const newGroup = useAppSelector(getNewGroup);
+  const isFetchingGroupData = useAppSelector(getIsFetchingGroupData);
   const groups = useAppSelector(getGroups);
   const [highlightedValue, setHighlightedValue] = useState('');
   const sortedGroups = groups.filter((group) =>
@@ -35,7 +38,9 @@ export default function GroupList() {
 
       <SearchGroups onSearch={handleSearch} />
 
-      {sortedGroups.length !== 0 ? (
+      {isFetchingGroupData ? (
+        <Spinner />
+      ) : sortedGroups.length !== 0 ? (
         <ul className={styles.groupsList}>
           {sortedGroups.map((group) => [
             <li key={`${group.name}-group`} className={styles.groupsItem}>

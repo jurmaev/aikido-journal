@@ -36,6 +36,7 @@ export const Namespace = {
   Children: 'chlidren',
   Parents: 'parents',
   Groups: 'groups',
+  Parent: 'parent'
 };
 
 export const AuthorizationStatus = {
@@ -52,3 +53,18 @@ export const ApiRoute = {
   Parents: '/parents',
   Groups: '/groups',
 };
+
+export const Months = [
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь',
+];

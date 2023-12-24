@@ -153,6 +153,11 @@ img {
   background-color: var(--red-400);
 }
 
+.btnRed:disabled {
+  background-color: var(--red-400);
+  cursor: default;
+}
+
 .inputGroup {
   display: flex;
   width: 100%;
@@ -209,6 +214,10 @@ img {
 
 .formInput::placeholder {
   color: var(--black-300);
+}
+
+.formInputError {
+  border-color: var(--red-700) !important;
 }
 
 .modal {
@@ -324,6 +333,17 @@ img {
 .formError {
   font-size: 0.9375rem;
   line-height: 1.5;
+  color: var(--red-700);
+}
+
+.text {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+.redText {
   color: var(--red-700);
 }
 

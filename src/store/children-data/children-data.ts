@@ -11,6 +11,7 @@ import {
 const initialState: ChildrenData = {
   children: [],
   childrenWithoutParent: [],
+  isFetchingChildrenData: false,
 };
 
 export const childrenData = createSlice({
@@ -19,8 +20,12 @@ export const childrenData = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(fetchChildren.pending, (state) => {
+        state.isFetchingChildrenData = true;
+      })
       .addCase(fetchChildren.fulfilled, (state, action) => {
         state.children = action.payload;
+        state.isFetchingChildrenData = false;
       })
       .addCase(createChild.fulfilled, (state, action) => {
         state.children.push(action.payload);

@@ -1,7 +1,7 @@
 import styles from '../base.module.css';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { UserLogin } from '../../types/user';
 import { login } from '../../store/user-data/api-actions';
@@ -15,6 +15,10 @@ export default function LoginPage() {
   const phoneRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    document.title = 'Вход';
+  }, []);
 
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
@@ -49,6 +53,7 @@ export default function LoginPage() {
               allowEmptyFormatting
               mask="_"
               getInputRef={phoneRef}
+              id="number"
               className={styles.formInput}
             />
             <label htmlFor="password" className={styles.formLabel}>

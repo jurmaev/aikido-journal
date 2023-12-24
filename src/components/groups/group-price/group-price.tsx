@@ -4,11 +4,17 @@ import cn from 'classnames';
 
 type GroupPriceProps = {
   name: string;
-  value: number | string;
-  onChange: (value: number) => void;
+  value: string;
+  onChange: (value: string) => void;
+  isValid: boolean;
 };
 
-export default function GroupPrice({ name, value, onChange }: GroupPriceProps) {
+export default function GroupPrice({
+  name,
+  value,
+  onChange,
+  isValid,
+}: GroupPriceProps) {
   return (
     <div className={styles.groupsModalInputContainer}>
       <label
@@ -20,9 +26,11 @@ export default function GroupPrice({ name, value, onChange }: GroupPriceProps) {
       <input
         id={`cost-${name}`}
         type="number"
-        className={styles.groupsModalInput}
+        className={cn(styles.groupsModalInput, {
+          [baseStyles.formInputError]: !isValid,
+        })}
         value={value}
-        onChange={(evt) => onChange(Number(evt.target.value))}
+        onChange={(evt) => onChange(evt.target.value)}
       />
     </div>
   );

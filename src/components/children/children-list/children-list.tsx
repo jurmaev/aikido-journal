@@ -6,11 +6,12 @@ import SearchChildren from '../search-children/search-children';
 import { getFullName } from '../../../utils/names';
 import AddChild from '../add-child/add-child';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { getChildren } from '../../../store/children-data/children-data.selectors';
 import {
-  createChild,
-  removeChild,
-} from '../../../store/children-data/api-actions';
+  getChildren,
+  getIsFetchingChildrenData,
+} from '../../../store/children-data/children-data.selectors';
+import { removeChild } from '../../../store/children-data/api-actions';
+import Spinner from '../../ui/spinner/spinner';
 
 export default function ChildrenList() {
   const dispatch = useAppDispatch();
@@ -19,43 +20,38 @@ export default function ChildrenList() {
   const filteredChildren = children.filter((child) =>
     getFullName(child).toLowerCase().includes(highlightedValue)
   );
+  const isFetchingChildrenData = useAppSelector(getIsFetchingChildrenData);
 
   function handleDelete(id: number) {
     dispatch(removeChild(id));
   }
 
-  function handleAddChild(surname: string, name: string, patronymic?: string) {
-    dispatch(
-      createChild({
-        name: name,
-        surname: surname,
-        patronymic: patronymic ? patronymic : null,
-      })
-    );
-  }
-
   return (
     <>
-      <AddChild onAddChild={handleAddChild} />
+      <AddChild />
 
       <SearchChildren setHighlightedValue={setHighlightedValue} />
 
-      <ul className={styles.childrenList}>
-        {filteredChildren.length !== 0 ? (
-          filteredChildren.map((child) => (
-            <ChildItem
-              key={child.id}
-              child={child}
-              handleDelete={handleDelete}
-              highlightedValue={highlightedValue}
-            />
-          ))
-        ) : (
-          <p className={baseStyles.failText}>
-            По вашему запросу детей не найдено
-          </p>
-        )}
-      </ul>
+      {isFetchingChildrenData ? (
+        <Spinner />
+      ) : (
+        <ul className={styles.childrenList}>
+          {filteredChildren.length !== 0 ? (
+            filteredChildren.map((child) => (
+              <ChildItem
+                key={child.id}
+                child={child}
+                handleDelete={handleDelete}
+                highlightedValue={highlightedValue}
+              />
+            ))
+          ) : (
+            <p className={baseStyles.failText}>
+              По вашему запросу детей не найдено
+            </p>
+          )}
+        </ul>
+      )}
     </>
   );
 }

@@ -11,11 +11,11 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { removeChild } from '../../../store/parents-data/api-actions';
 import ChildItem from '../child/child';
 import { getChildrenWithoutParent } from '../../../store/children-data/children-data.selectors';
+import { createPortal } from 'react-dom';
 
 type ParentsModalProps = {
   parent: Parent;
   children: Children;
-  // childrenOptions: Children;
   handleSelect: (parentId: string, childId: number) => void;
   activeModal: string;
   setActiveModal: React.Dispatch<React.SetStateAction<string>>;
@@ -24,7 +24,6 @@ type ParentsModalProps = {
 export default function ParentsModal({
   parent,
   children,
-  // childrenOptions,
   handleSelect,
   activeModal,
   setActiveModal,
@@ -37,7 +36,7 @@ export default function ParentsModal({
     dispatch(removeChild({ parentId: parent.id, childId: childId }));
   }
 
-  return (
+  return createPortal(
     <Modal
       isActive={activeModal === parent.id}
       isCentral
@@ -80,6 +79,7 @@ export default function ParentsModal({
         childrenOptions={childrenOptions}
         handleSelect={handleSelect}
       />
-    </Modal>
+    </Modal>,
+    document.body
   );
 }

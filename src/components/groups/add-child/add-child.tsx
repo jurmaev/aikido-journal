@@ -35,6 +35,7 @@ export default function AddChild({ name, handleAddChild }: AddChildProps) {
       <button
         className={cn(baseStyles.btn, baseStyles.btnBlue, baseStyles.btnLarge)}
         onClick={() => handleAddChild(Number(selectValue))}
+        disabled={selectValue === ''}
       >
         Добавить в группу
       </button>

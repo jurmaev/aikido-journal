@@ -1,11 +1,11 @@
 import styles from '../base.module.css';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { register } from '../../store/user-data/api-actions';
 import { UserRegister } from '../../types/user';
-import { trimSpaces } from '../../utils/names';
+import { capitalizeWords, trimSpaces } from '../../utils/names';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { PatternFormat } from 'react-number-format';
@@ -18,6 +18,11 @@ export default function RegisterPage() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const [nameError, setNameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
+
+  useEffect(() => {
+    document.title = 'Регистрация';
+  }, []);
 
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
@@ -28,6 +33,7 @@ export default function RegisterPage() {
 
       let isValidName = true;
       let isValidPassword = true;
+      let isValidPhone = true;
 
       if (
         trimSpaces(fullName).split(' ').length < 2 ||
@@ -40,6 +46,14 @@ export default function RegisterPage() {
         isValidName = true;
       }
 
+      if (phone.includes('_')) {
+        setPhoneError('Введите номер телефона полностью');
+        isValidPhone = false;
+      } else {
+        setPhoneError('');
+        isValidPhone = true;
+      }
+
       if (password.length < 5) {
         setPasswordError('Длина пароля должна быть не менее 5 символов');
         isValidPassword = false;
@@ -48,8 +62,10 @@ export default function RegisterPage() {
         isValidPassword = true;
       }
 
-      if (isValidName && isValidPassword) {
-        const [surname, name, patronymic] = trimSpaces(fullName).split(' ');
+      if (isValidName && isValidPassword && isValidPhone) {
+        const [surname, name, patronymic] = capitalizeWords(
+          trimSpaces(fullName)
+        ).split(' ');
         const userData: UserRegister = {
           phone_number: phone,
           surname: surname,
@@ -61,6 +77,11 @@ export default function RegisterPage() {
         dispatch(register(userData)).then((data) => {
           if (data.meta.requestStatus === 'fulfilled') {
             navigate(AppRoutes.Main);
+          } else if (data.meta.requestStatus === 'rejected') {
+            isValidPhone = false;
+            setPhoneError(
+              'Пользователь с таким номером телефона уже существует'
+            );
           }
         });
       }
@@ -75,27 +96,34 @@ export default function RegisterPage() {
           <div className={styles.formContainer}>
             <h1 className={styles.formTitle}>Регистрация</h1>
 
-            <label htmlFor="number" className={styles.formLabel}>
+            <label htmlFor="name" className={styles.formLabel}>
               Введите ваше ФИО
             </label>
             <p className={styles.formError}>{nameError}</p>
             <input
               type="text"
-              className={styles.formInput}
+              className={cn(styles.formInput, {
+                [styles.formInputError]: nameError !== '',
+              })}
               id="name"
               placeholder="Иванова Елизавета Петровна"
+              autoComplete="name"
               ref={nameRef}
             />
 
-            <label htmlFor="name" className={styles.formLabel}>
+            <label htmlFor="number" className={styles.formLabel}>
               Введите номер телефона
             </label>
+            <p className={styles.formError}>{phoneError}</p>
             <PatternFormat
               format="+7 (###) ###-##-##"
               allowEmptyFormatting
               mask="_"
               getInputRef={phoneRef}
-              className={styles.formInput}
+              id="number"
+              className={cn(styles.formInput, {
+                [styles.formInputError]: phoneError !== '',
+              })}
             />
 
             <label htmlFor="password" className={styles.formLabel}>
@@ -104,7 +132,9 @@ export default function RegisterPage() {
             <p className={styles.formError}>{passwordError}</p>
             <input
               type="password"
-              className={styles.formInput}
+              className={cn(styles.formInput, {
+                [styles.formInputError]: passwordError !== '',
+              })}
               id="password"
               placeholder="**********"
               ref={passwordRef}

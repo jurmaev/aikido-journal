@@ -2,7 +2,7 @@ import styles from './main.module.css';
 import baseStyles from '../base.module.css';
 import Header from '../../components/ui/header/header';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes, AuthorizationStatus, NavItems } from '../../const';
+import { AppRoutes, AuthorizationStatus } from '../../const';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
@@ -10,12 +10,17 @@ import {
   getUserRole,
 } from '../../store/user-data/user-data.selectors';
 import { logout } from '../../store/user-data/user-data';
+import { useEffect } from 'react';
 
 export default function MainPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const role = useAppSelector(getUserRole);
+
+  useEffect(() => {
+    document.title = 'Главная';
+  }, []);
 
   function getButtons() {
     if (authorizationStatus === AuthorizationStatus.Auth && role === 'parent') {
@@ -102,14 +107,7 @@ export default function MainPage() {
 
   return (
     <>
-      {authorizationStatus === AuthorizationStatus.Auth && role === 'coach' ? (
-        <Header navItems={NavItems.Trainer} />
-      ) : authorizationStatus === AuthorizationStatus.Auth &&
-        role === 'parent' ? (
-        <Header navItems={NavItems.Parent} />
-      ) : (
-        <Header />
-      )}
+      <Header />
       <main>
         <div className={cn(baseStyles.container, styles.mainContainer)}>
           <h1 className={styles.mainTitle}>

@@ -3,6 +3,7 @@ import cn from 'classnames';
 import Modal from '../../ui/modal/modal';
 import { getFullName } from '../../../utils/names';
 import { Child } from '../../../types/children';
+import { createPortal } from 'react-dom';
 
 type DeleteChildModalProps = {
   child: Child;
@@ -17,7 +18,7 @@ export default function DeleteChildModal({
   setIsActive,
   handleDelete,
 }: DeleteChildModalProps) {
-  return (
+  return createPortal(
     <Modal isActive={isActive} isCentral onClose={() => setIsActive(false)}>
       <h2 className={baseStyles.modalTitle}>
         Вы действительно хотите удалить ребенка?
@@ -43,6 +44,7 @@ export default function DeleteChildModal({
           Отменить
         </button>
       </div>
-    </Modal>
+    </Modal>,
+    document.body
   );
 }

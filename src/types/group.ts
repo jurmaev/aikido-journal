@@ -1,6 +1,6 @@
-import { Children } from './children';
+import { Child, Children } from './children';
 
-export type ScheduleDay = { date: string; isTraining: boolean };
+export type ScheduleDay = { date: string; is_training: boolean | null };
 
 export type GroupSchedule = ScheduleDay[];
 
@@ -9,14 +9,16 @@ export type TrainingTime = {
   end: string;
 };
 
-export type ChildAttendance = Array<{
-  date: string;
-  isTraining: boolean | null;
-}>;
+export type ChildAttendance = Child & {
+  attendance: Array<{
+    date: string;
+    is_training: boolean | null;
+  }>;
+};
 
 export type Group = {
   name: string;
-  price: number | string;
+  price: number;
   children: Children;
   days: Array<TrainingTime | null>;
 };
@@ -24,14 +26,7 @@ export type Group = {
 export type Groups = Group[];
 
 export type GroupAttendance = {
-  id: string;
-  name: string;
+  group_name: string;
   schedule: GroupSchedule;
-  children: {
-    id: string;
-    name: string;
-    attendance: ChildAttendance;
-  }[];
+  children_attendance: ChildAttendance[];
 };
-
-export type Attendance = GroupAttendance[];
