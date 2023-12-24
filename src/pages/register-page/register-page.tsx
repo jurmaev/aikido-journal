@@ -5,7 +5,12 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { register } from '../../store/user-data/api-actions';
 import { UserRegister } from '../../types/user';
-import { capitalizeWords, hasNumber, trimSpaces } from '../../utils/names';
+import {
+  capitalizeWords,
+  hasNumber,
+  isCyryllic,
+  trimSpaces,
+} from '../../utils/names';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { PatternFormat } from 'react-number-format';
@@ -37,6 +42,9 @@ export default function RegisterPage() {
 
       if (hasNumber(fullName)) {
         setNameError('ФИО не должно содержать цифр');
+        isValidName = false;
+      } else if (!isCyryllic(fullName)) {
+        setNameError('ФИО должно содержать только кириллицу');
         isValidName = false;
       } else if (
         trimSpaces(fullName).split(' ').length < 2 ||

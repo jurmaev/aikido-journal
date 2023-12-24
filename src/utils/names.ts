@@ -23,6 +23,10 @@ export function getFullName(fullName: FullName): string {
   }
 }
 
+export function isCyryllic(str: string) {
+  return /^[\u0400-\u04FF]+$/.test(str);
+}
+
 export function hasNumber(str: string) {
   return /\d/.test(str);
 }
