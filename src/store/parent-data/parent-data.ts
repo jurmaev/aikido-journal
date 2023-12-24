@@ -1,12 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Namespace } from '../../const';
 import { ParentData } from '../../types/state';
-import { fetchChildrenAttendance, fetchChildrenSchedule } from './api-actions';
+import {
+  fetchChildrenAttendance,
+  fetchChildrenSchedule,
+  fetchProfileInfo,
+} from './api-actions';
 import { getTrainingTime } from '../../utils/datetime';
 
 const initialState: ParentData = {
   schedule: [],
   attendance: [],
+  profile: null,
 };
 
 export const parentData = createSlice({
@@ -27,6 +32,9 @@ export const parentData = createSlice({
       })
       .addCase(fetchChildrenAttendance.fulfilled, (state, action) => {
         state.attendance = action.payload;
+      })
+      .addCase(fetchProfileInfo.fulfilled, (state, action) => {
+        state.profile = action.payload;
       });
   },
 });

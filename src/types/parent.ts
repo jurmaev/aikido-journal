@@ -1,3 +1,4 @@
+import { Children } from './children';
 import { ChildAttendance, GroupSchedule, TrainingTime } from './group';
 
 export type GroupInfo = {
@@ -18,3 +19,12 @@ export type ScheduleInfo = {
 };
 
 export type Attendance = ChildAttendance & { schedule: GroupSchedule };
+
+export type Profile = {
+  phone_number: string;
+  name: string;
+  surname: string;
+  patronymic?: string;
+  payment_arrears: number;
+  children: Children;
+};

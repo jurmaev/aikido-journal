@@ -3,7 +3,7 @@ import { store } from '../store';
 import { Children } from './children';
 import { Debt } from './debt';
 import { Group, GroupAttendance, Groups } from './group';
-import { Attendance, ScheduleInfo } from './parent';
+import { Attendance, Profile, ScheduleInfo } from './parent';
 import { Parents } from './parents';
 
 export type State = ReturnType<typeof store.getState>;
@@ -36,6 +36,7 @@ export type ParentsData = {
 export type ParentData = {
   schedule: ScheduleInfo[];
   attendance: Attendance[];
+  profile: Profile | null;
 };
 
 export type GroupData = {
