@@ -18,9 +18,7 @@ export default function AddGroup({ setActiveGroupModal }: AddGroupProps) {
   function handleClick() {
     if (groupName.trim().length < 5) {
       setErrorText('Название группы должно быть не менее 5 символов');
-    } else if (hasNumber(groupName)) {
-      setErrorText('Название группы не должно содержать цифр');
-    } else if (!isCyryllic(groupName)) {
+    } else if (!isCyryllic(groupName) && !hasNumber(groupName)) {
       setErrorText('Название группы должно содержать только кириллицу');
     } else {
       dispatch(addNewGroup(groupName.trim()));

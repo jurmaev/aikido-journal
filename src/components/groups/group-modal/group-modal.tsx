@@ -96,8 +96,7 @@ export default function GroupModal({
 
     if (
       groupState.name.trim().length < 5 ||
-      hasNumber(groupState.name) ||
-      !isCyryllic(groupState.name)
+      (!hasNumber(groupState.name) && !isCyryllic(groupState.name))
     ) {
       setIsValidName(false);
       isValid = false;
