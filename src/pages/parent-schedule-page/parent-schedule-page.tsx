@@ -5,7 +5,6 @@ import cn from 'classnames';
 import { getFullName } from '../../utils/names';
 import TableHeader from '../../components/parent-schedule/table-header/table-header';
 import TableCell from '../../components/parent-schedule/table-cell/table-cell';
-import { useIsMobile } from '../../hooks/use-is-mobile';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchChildrenSchedule } from '../../store/parent-data/api-actions';
@@ -13,7 +12,6 @@ import { getChildrenSchedule } from '../../store/parent-data/parent-data.selecto
 import React from 'react';
 
 export default function ParentSchedulePage() {
-  const isMobile = useIsMobile();
   const days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс '];
   const dispatch = useAppDispatch();
   const scheduleInfo = useAppSelector(getChildrenSchedule);
@@ -61,8 +59,8 @@ export default function ParentSchedulePage() {
                     <table>
                       <thead>
                         <tr>
-                          {days.map((day, index) =>
-                            isMobile ? (
+                          {days.map(
+                            (day, index) =>
                               info.group_inf.schedule[index] && (
                                 <TableHeader
                                   key={index}
@@ -70,24 +68,14 @@ export default function ParentSchedulePage() {
                                   index={index}
                                 />
                               )
-                            ) : (
-                              <TableHeader
-                                key={index}
-                                day={day}
-                                index={index}
-                              />
-                            )
                           )}
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          {info.group_inf.schedule.map((item, index) =>
-                            isMobile ? (
+                          {info.group_inf.schedule.map(
+                            (item, index) =>
                               item && <TableCell key={index} time={item} />
-                            ) : (
-                              <TableCell key={index} time={item} />
-                            )
                           )}
                         </tr>
                       </tbody>

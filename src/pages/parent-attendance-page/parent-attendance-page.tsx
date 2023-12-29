@@ -100,14 +100,11 @@ export default function ParentAttendancePage() {
                               </button>
                             </div>
                           </th>
-                          {child.schedule.map((day) =>
-                            isMobile ? (
+                          {child.schedule.map(
+                            (day) =>
                               day.is_training && (
                                 <AttendanceHeader key={day.date} day={day} />
                               )
-                            ) : (
-                              <AttendanceHeader key={day.date} day={day} />
-                            )
                           )}
                         </tr>
                       </thead>
@@ -118,20 +115,14 @@ export default function ParentAttendancePage() {
                               ? getShortName(getFullName(child))
                               : getFullName(child)}
                           </td>
-                          {child.attendance.map((day) =>
-                            isMobile ? (
+                          {child.attendance.map(
+                            (day) =>
                               day.is_training !== null && (
                                 <TableCell
                                   key={day.date}
                                   isTraining={day.is_training}
                                 />
                               )
-                            ) : (
-                              <TableCell
-                                key={day.date}
-                                isTraining={day.is_training}
-                              />
-                            )
                           )}
                         </tr>
                       </tbody>

@@ -111,14 +111,11 @@ export default function AttendanceTable() {
                     </button>
                   </div>
                 </th>
-                {attendanceState.schedule.map((day) =>
-                  isMobile ? (
+                {attendanceState.schedule.map(
+                  (day) =>
                     day.is_training && (
                       <AttendanceHeader key={day.date} day={day} />
                     )
-                  ) : (
-                    <AttendanceHeader key={day.date} day={day} />
-                  )
                 )}
               </tr>
             </thead>
@@ -130,8 +127,8 @@ export default function AttendanceTable() {
                       ? getShortName(getFullName(child))
                       : getFullName(child)}
                   </td>
-                  {child.attendance.map((day) =>
-                    isMobile ? (
+                  {child.attendance.map(
+                    (day) =>
                       day.is_training !== null && (
                         <AttendanceCell
                           key={`${child.id}-${day.date}`}
@@ -140,14 +137,6 @@ export default function AttendanceTable() {
                           setAttendanceState={setAttendanceState}
                         />
                       )
-                    ) : (
-                      <AttendanceCell
-                        key={`${child.id}-${day.date}`}
-                        childId={child.id}
-                        day={day}
-                        setAttendanceState={setAttendanceState}
-                      />
-                    )
                   )}
                 </tr>
               ))}
