@@ -55,31 +55,43 @@ export default function ParentSchedulePage() {
                     <p className={styles.scheduleText}>
                       Номер тренера: {info.group_inf.coach_phone_number}
                     </p>
-                    <p className={styles.scheduleText}>Расписание:</p>
-                    <table>
-                      <thead>
-                        <tr>
-                          {days.map(
-                            (day, index) =>
-                              info.group_inf.schedule[index] && (
-                                <TableHeader
-                                  key={index}
-                                  day={day}
-                                  index={index}
-                                />
-                              )
-                          )}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          {info.group_inf.schedule.map(
-                            (item, index) =>
-                              item && <TableCell key={index} time={item} />
-                          )}
-                        </tr>
-                      </tbody>
-                    </table>
+                    <p className={styles.scheduleText}>
+                      Расписание:{' '}
+                      {!info.group_inf.schedule.some((day) => day) && (
+                        <span
+                          className={cn(baseStyles.text, baseStyles.redText)}
+                        >
+                          не задано
+                        </span>
+                      )}
+                    </p>
+
+                    {info.group_inf.schedule.some((day) => day) && (
+                      <table>
+                        <thead>
+                          <tr>
+                            {days.map(
+                              (day, index) =>
+                                info.group_inf.schedule[index] && (
+                                  <TableHeader
+                                    key={index}
+                                    day={day}
+                                    index={index}
+                                  />
+                                )
+                            )}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            {info.group_inf.schedule.map(
+                              (item, index) =>
+                                item && <TableCell key={index} time={item} />
+                            )}
+                          </tr>
+                        </tbody>
+                      </table>
+                    )}
                   </>
                 ) : (
                   <p className={baseStyles.text}>

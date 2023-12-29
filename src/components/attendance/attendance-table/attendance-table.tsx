@@ -26,7 +26,7 @@ export default function AttendanceTable() {
     useState<GroupAttendance | null>(null);
   const [groupName, setGroupName] = useState('');
   const [message, setMessage] = useState('');
-
+  const hasSchedule = attendanceState?.schedule.some((day) => day.is_training);
   const [startDate, setStartDate] = useState(getMonday(new Date()));
 
   useEffect(() => {
@@ -58,9 +58,13 @@ export default function AttendanceTable() {
         setStartDate={setStartDate}
       />
 
-      {attendanceState &&
-      attendanceState.children_attendance.length === 0 &&
-      groupName !== '' ? (
+      {!hasSchedule ? (
+        <p className={baseStyles.failText}>
+          В этой группе не добавлено расписание
+        </p>
+      ) : attendanceState &&
+        attendanceState.children_attendance.length === 0 &&
+        groupName !== '' ? (
         <p className={baseStyles.failText}>В этой группе не добавлены дети</p>
       ) : attendanceState &&
         attendanceState.children_attendance.length !== 0 ? (

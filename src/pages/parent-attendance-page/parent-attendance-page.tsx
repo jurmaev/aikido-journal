@@ -48,7 +48,20 @@ export default function ParentAttendancePage() {
             <>
               <AttendanceSelect setStartDate={setStartDate} />
               {attendance.map((child, index) => {
-                if (child.attendance) {
+                const hasSchedule =
+                  !child.attendance ||
+                  child.schedule?.some((day) => day.is_training);
+
+                if (!hasSchedule) {
+                  return (
+                    <p className={baseStyles.text}>
+                      {getFullName(child) + ": "}
+                      <span className={baseStyles.redText}>
+                        расписание группы не задано
+                      </span>
+                    </p>
+                  );
+                } else if (child.attendance) {
                   return (
                     <table key={index}>
                       <thead>
