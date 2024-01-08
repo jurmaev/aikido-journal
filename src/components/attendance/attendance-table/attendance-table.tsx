@@ -10,6 +10,7 @@ import { useAppDispatch } from '../../../hooks';
 import { GroupAttendance } from '../../../types/group';
 import {
   getMonday,
+  getNextMonday,
   getPreviosMonday,
   getStartDateString,
 } from '../../../utils/datetime';
@@ -32,6 +33,7 @@ export default function AttendanceTable() {
   const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
+    console.log(startDate.getMonth());
     if (groupName !== '') {
       if (!isMobile) {
         dispatch(
@@ -62,6 +64,7 @@ export default function AttendanceTable() {
         })
       );
       setMessage('Изменения сохранены');
+      setCanEdit(false);
       setTimeout(() => {
         setMessage('');
       }, 5000);
@@ -70,20 +73,22 @@ export default function AttendanceTable() {
 
   function handlePreviousButtonClick() {
     if (!isMobile) {
-      const newDate = startDate;
+      const newDate = new Date(startDate);
       newDate.setMonth(newDate.getMonth() - 1);
       setStartDate(newDate);
+    } else {
+      setStartDate(getPreviosMonday(startDate));
     }
-    setStartDate(getPreviosMonday(startDate));
   }
 
   function handleNextButtonClick() {
     if (!isMobile) {
-      const newDate = startDate;
+      const newDate = new Date(startDate);
       newDate.setMonth(newDate.getMonth() + 1);
       setStartDate(newDate);
+    } else {
+      setStartDate(getNextMonday(startDate));
     }
-    setStartDate(getPreviosMonday(startDate));
   }
 
   return (
@@ -154,7 +159,11 @@ export default function AttendanceTable() {
                 {attendanceState.schedule.map(
                   (day) =>
                     day.is_training && (
-                      <AttendanceHeader key={day.date} day={day} canEdit={canEdit} />
+                      <AttendanceHeader
+                        key={day.date}
+                        day={day}
+                        canEdit={canEdit || isMobile}
+                      />
                     )
                 )}
               </tr>
@@ -175,7 +184,7 @@ export default function AttendanceTable() {
                           childId={child.id}
                           day={day}
                           setAttendanceState={setAttendanceState}
-                          canEdit={canEdit}
+                          canEdit={canEdit || isMobile}
                         />
                       )
                   )}
@@ -185,7 +194,7 @@ export default function AttendanceTable() {
           </table>
           <p className={baseStyles.redText}>{message}</p>
           <div className={baseStyles.inputGroup}>
-            <button
+            {!isMobile && <button
               className={cn(
                 baseStyles.btn,
                 baseStyles.btnBlue,
@@ -194,7 +203,7 @@ export default function AttendanceTable() {
               onClick={() => setCanEdit(!canEdit)}
             >
               Редактировать прошедшие дни
-            </button>
+            </button>}
             <button
               className={cn(
                 baseStyles.btn,

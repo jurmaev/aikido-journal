@@ -2,6 +2,7 @@ import { GroupAttendance, ScheduleDay } from '../../../types/group';
 import styles from '../../../pages/attendance-page/attendance.module.css';
 import cn from 'classnames';
 import { produce } from 'immer';
+import { getStartDateString } from '../../../utils/datetime';
 
 type AttendanceCellProps = {
   childId: number;
@@ -20,6 +21,9 @@ export default function AttendanceCell({
 }: AttendanceCellProps) {
   const date = new Date(day.date);
   const currentDate = new Date();
+  const weekEndDate = new Date();
+  weekEndDate.setDate(weekEndDate.getDate() + 6);
+
   return (
     <td key={day.date} className={styles.tableCell}>
       <button
@@ -28,9 +32,10 @@ export default function AttendanceCell({
         })}
         aria-label="Check"
         disabled={
-          date.getDate() > currentDate.getDate() + 6 ||
-          (date.getDate() < currentDate.getDate() &&
-          canEdit)
+          getStartDateString(date) > getStartDateString(weekEndDate) ||
+          (date < currentDate &&
+            getStartDateString(date) !== getStartDateString(currentDate) &&
+            !canEdit)
         }
         onClick={() =>
           setAttendanceState(
