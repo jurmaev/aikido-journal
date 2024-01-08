@@ -9,18 +9,17 @@ type AttendanceHeaderProps = {
 };
 
 export default function AttendanceHeader({ day }: AttendanceHeaderProps) {
-  const currentDate = new Date(day.date);
+  const date = new Date(day.date);
+  const currentDate = new Date();
 
   return (
     <th
       className={cn(styles.tableHeader, {
-        [styles.tableHeaderInactive]: !day.is_training,
+        [styles.tableHeaderInactive]: currentDate.getDate() < date.getDate() || currentDate.getDate() > date.getDate(),
       })}
     >
-      <div>{`${addZero(currentDate.getDate())}.${addZero(
-        currentDate.getMonth() + 1
-      )}`}</div>
-      <div>{Days[currentDate.getDay()]}</div>
+      <div>{`${addZero(date.getDate())}.${addZero(date.getMonth() + 1)}`}</div>
+      <div>{Days[date.getDay()]}</div>
     </th>
   );
 }

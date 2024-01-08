@@ -5,6 +5,7 @@ import {
   addChild,
   createGroup,
   fetchAttendance,
+  fetchAttendanceForMonth,
   fetchChildrenWithoutGroup,
   fetchGroups,
   removeChild,
@@ -96,6 +97,9 @@ export const groupData = createSlice({
         state.attendance = action.payload;
       })
       .addCase(setAttendance.fulfilled, (state, action) => {
+        state.attendance = action.payload;
+      })
+      .addCase(fetchAttendanceForMonth.fulfilled, (state, action) => {
         state.attendance = action.payload;
       });
   },

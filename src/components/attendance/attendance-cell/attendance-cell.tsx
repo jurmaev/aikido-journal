@@ -16,14 +16,17 @@ export default function AttendanceCell({
   day,
   setAttendanceState,
 }: AttendanceCellProps) {
+  const date = new Date(day.date);
+  const currentDate = new Date();
   return (
     <td key={day.date} className={styles.tableCell}>
       <button
         className={cn(styles.tableCheck, {
           [styles.tableCheckChecked]: day.is_training,
+          // [styles.tableCheckEmpty]: date.getDate() > currentDate.getDate(),
         })}
         aria-label="Check"
-        disabled={day.is_training === null}
+        disabled={date.getDate() > currentDate.getDate()}
         onClick={() =>
           setAttendanceState(
             produce((draft) => {

@@ -10,11 +10,12 @@ import { useAppDispatch } from '../../../hooks';
 import { GroupAttendance } from '../../../types/group';
 import {
   getMonday,
-  getNextMonday,
   getPreviosMonday,
+  getStartDateString,
 } from '../../../utils/datetime';
 import {
   fetchAttendance,
+  fetchAttendanceForMonth,
   setAttendance,
 } from '../../../store/group-data/api-actions';
 import AttendanceCell from '../attendance-cell/attendance-cell';
@@ -31,23 +32,57 @@ export default function AttendanceTable() {
 
   useEffect(() => {
     if (groupName !== '') {
-      dispatch(
-        fetchAttendance({ groupName: groupName, startDate: startDate })
-      ).then((data) => setAttendanceState(data.payload as GroupAttendance));
+      if (!isMobile) {
+        dispatch(
+          fetchAttendanceForMonth({
+            groupName: groupName,
+            year: startDate.getFullYear(),
+            month: startDate.getMonth() + 1,
+          })
+        ).then((data) => setAttendanceState(data.payload as GroupAttendance));
+      } else {
+        dispatch(
+          fetchAttendance({
+            groupName: groupName,
+            startDate: getStartDateString(startDate),
+          })
+        ).then((data) => setAttendanceState(data.payload as GroupAttendance));
+      }
     }
-  }, [groupName, dispatch, startDate]);
+  }, [groupName, dispatch, startDate, isMobile]);
 
   function handleButtonClick() {
     if (attendanceState) {
       dispatch(
         setAttendance({
           groupName: groupName,
-          startDate: startDate,
+          startDate: getStartDateString(startDate),
           childAttendance: attendanceState.children_attendance,
         })
       );
       setMessage('Изменения сохранены');
+      setTimeout(() => {
+        setMessage('');
+      }, 5000);
     }
+  }
+
+  function handlePreviousButtonClick() {
+    if (!isMobile) {
+      const newDate = startDate;
+      newDate.setMonth(newDate.getMonth() - 1);
+      setStartDate(newDate);
+    }
+    setStartDate(getPreviosMonday(startDate));
+  }
+
+  function handleNextButtonClick() {
+    if (!isMobile) {
+      const newDate = startDate;
+      newDate.setMonth(newDate.getMonth() + 1);
+      setStartDate(newDate);
+    }
+    setStartDate(getPreviosMonday(startDate));
   }
 
   return (
@@ -74,11 +109,11 @@ export default function AttendanceTable() {
               <tr>
                 <th className={styles.tableHeader}>
                   <div className={styles.tableHeaderContainer}>
-                    ФИО ребенка:
+                    Ребёнок:
                     <button
                       className={styles.tableArrow}
-                      aria-label="Previous week"
-                      onClick={() => setStartDate(getPreviosMonday(startDate))}
+                      aria-label="Previous"
+                      onClick={handlePreviousButtonClick}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -96,8 +131,8 @@ export default function AttendanceTable() {
                     </button>
                     <button
                       className={styles.tableArrow}
-                      aria-label="Next week"
-                      onClick={() => setStartDate(getNextMonday(startDate))}
+                      aria-label="Next"
+                      onClick={handleNextButtonClick}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -147,17 +182,28 @@ export default function AttendanceTable() {
             </tbody>
           </table>
           <p className={baseStyles.redText}>{message}</p>
-          <button
-            className={cn(
-              baseStyles.btn,
-              baseStyles.btnRed,
-              baseStyles.btnLarge
-            )}
-            aria-label="Сохранить изменения"
-            onClick={handleButtonClick}
-          >
-            Сохранить изменения
-          </button>
+          <div className={baseStyles.inputGroup}>
+            <button
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
+            >
+              Редактировать прошедшие дни
+            </button>
+            <button
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnRed,
+                baseStyles.btnLarge
+              )}
+              aria-label="Сохранить изменения"
+              onClick={handleButtonClick}
+            >
+              Сохранить изменения
+            </button>
+          </div>
         </>
       ) : (
         <p className={baseStyles.failText}>

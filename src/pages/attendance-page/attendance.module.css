@@ -83,7 +83,7 @@ table {
 
 .tableHeader:first-child,
 .tableCell:first-child {
-  width: 30%;
+  width: 15%;
   padding: 0.25rem 0.5rem;
   text-align: left;
 }
@@ -147,6 +147,15 @@ tr:last-child td:last-child {
 
 .tableCheck svg {
   opacity: 0;
+}
+
+.tableCheckEmpty {
+  border-color: var(--black-300);
+  cursor: default;
+}
+
+.tableCheckEmpty svg {
+  opacity: 1;
 }
 
 .tableCheck:disabled {
