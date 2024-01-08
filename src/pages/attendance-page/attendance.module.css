@@ -167,6 +167,12 @@ tr:last-child td:last-child {
   background-color: transparent;
 }
 
+.tableCheck:disabled.tableCheckChecked {
+  border-color: var(--black);
+  background-color: var(--blue-200);
+
+}
+
 .tableCheckChecked {
   background-color: var(--blue-500);
 }

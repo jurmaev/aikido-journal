@@ -29,6 +29,7 @@ export default function AttendanceTable() {
   const [message, setMessage] = useState('');
   const hasSchedule = attendanceState?.schedule.some((day) => day.is_training);
   const [startDate, setStartDate] = useState(getMonday(new Date()));
+  const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
     if (groupName !== '') {
@@ -153,7 +154,7 @@ export default function AttendanceTable() {
                 {attendanceState.schedule.map(
                   (day) =>
                     day.is_training && (
-                      <AttendanceHeader key={day.date} day={day} />
+                      <AttendanceHeader key={day.date} day={day} canEdit={canEdit} />
                     )
                 )}
               </tr>
@@ -174,6 +175,7 @@ export default function AttendanceTable() {
                           childId={child.id}
                           day={day}
                           setAttendanceState={setAttendanceState}
+                          canEdit={canEdit}
                         />
                       )
                   )}
@@ -189,6 +191,7 @@ export default function AttendanceTable() {
                 baseStyles.btnBlue,
                 baseStyles.btnLarge
               )}
+              onClick={() => setCanEdit(!canEdit)}
             >
               Редактировать прошедшие дни
             </button>

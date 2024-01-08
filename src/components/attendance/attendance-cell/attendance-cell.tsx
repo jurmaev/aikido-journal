@@ -9,12 +9,14 @@ type AttendanceCellProps = {
   setAttendanceState: React.Dispatch<
     React.SetStateAction<GroupAttendance | null>
   >;
+  canEdit: boolean;
 };
 
 export default function AttendanceCell({
   childId,
   day,
   setAttendanceState,
+  canEdit,
 }: AttendanceCellProps) {
   const date = new Date(day.date);
   const currentDate = new Date();
@@ -23,10 +25,13 @@ export default function AttendanceCell({
       <button
         className={cn(styles.tableCheck, {
           [styles.tableCheckChecked]: day.is_training,
-          // [styles.tableCheckEmpty]: date.getDate() > currentDate.getDate(),
         })}
         aria-label="Check"
-        disabled={date.getDate() > currentDate.getDate()}
+        disabled={
+          date.getDate() > currentDate.getDate() + 6 ||
+          (date.getDate() < currentDate.getDate() &&
+          canEdit)
+        }
         onClick={() =>
           setAttendanceState(
             produce((draft) => {
