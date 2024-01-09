@@ -149,6 +149,10 @@ tr:last-child td:last-child {
   opacity: 0;
 }
 
+.tableCheck:hover svg {
+  opacity: 1;
+}
+
 .tableCheckEmpty {
   border-color: var(--black-300);
   cursor: default;
@@ -170,7 +174,6 @@ tr:last-child td:last-child {
 .tableCheck:disabled.tableCheckChecked {
   border-color: var(--black);
   background-color: var(--blue-200);
-
 }
 
 .tableCheckChecked {
