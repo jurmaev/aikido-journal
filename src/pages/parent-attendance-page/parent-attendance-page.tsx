@@ -3,7 +3,6 @@ import styles from './parent-attendance.module.css';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import { getFullName, getShortName } from '../../utils/names';
-import AttendanceHeader from '../../components/ui/attendance-header/attendance-header';
 import TableCell from '../../components/parent-attendance/table-cell/table-cell';
 import AttendanceSelect from '../../components/parent-attendance/attendance-select/attendance-select';
 import { useIsMobile } from '../../hooks/use-is-mobile';
@@ -12,10 +11,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getChildrenAttendance } from '../../store/parent-data/parent-data.selectors';
 import { fetchChildrenAttendance } from '../../store/parent-data/api-actions';
 import {
+  addZero,
   getMonday,
   getNextMonday,
   getPreviosMonday,
+  getStartDateString,
 } from '../../utils/datetime';
+import { Days } from '../../const';
 
 export default function ParentAttendancePage() {
   const isMobile = useIsMobile();
@@ -24,7 +26,7 @@ export default function ParentAttendancePage() {
   const [startDate, setStartDate] = useState(getMonday(new Date()));
 
   useEffect(() => {
-    dispatch(fetchChildrenAttendance(startDate));
+    dispatch(fetchChildrenAttendance(getStartDateString(startDate)));
   }, [dispatch, startDate]);
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export default function ParentAttendancePage() {
                 if (!hasSchedule) {
                   return (
                     <p className={baseStyles.text}>
-                      {getFullName(child) + ": "}
+                      {getFullName(child) + ': '}
                       <span className={baseStyles.redText}>
                         расписание группы не задано
                       </span>
@@ -116,7 +118,14 @@ export default function ParentAttendancePage() {
                           {child.schedule.map(
                             (day) =>
                               day.is_training && (
-                                <AttendanceHeader key={day.date} day={day} />
+                                <th className={styles.tableHeader} key={day.date}>
+                                  <div>{`${addZero(
+                                    new Date(day.date).getDate()
+                                  )}.${addZero(
+                                    new Date(day.date).getMonth() + 1
+                                  )}`}</div>
+                                  <div>{Days[new Date(day.date).getDay()]}</div>
+                                </th>
                               )
                           )}
                         </tr>

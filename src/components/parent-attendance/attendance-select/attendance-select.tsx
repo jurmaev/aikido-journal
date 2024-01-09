@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { getFirstMondayOfMonth } from '../../../utils/datetime';
 
 type AttendanceSelectProps = {
-  setStartDate: React.Dispatch<React.SetStateAction<string>>;
+  setStartDate: React.Dispatch<React.SetStateAction<Date>>;
 };
 
 export default function AttendanceSelect({

@@ -201,6 +201,7 @@ export default function AttendanceTable() {
                 baseStyles.btnLarge
               )}
               onClick={() => setCanEdit(!canEdit)}
+              disabled={canEdit}
             >
               Редактировать прошедшие дни
             </button>}
