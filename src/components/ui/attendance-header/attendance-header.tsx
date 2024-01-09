@@ -2,7 +2,11 @@ import { Days } from '../../../const';
 import styles from '../../../pages/attendance-page/attendance.module.css';
 import { ScheduleDay } from '../../../types/group';
 import cn from 'classnames';
-import { addZero, getStartDateString } from '../../../utils/datetime';
+import {
+  addZero,
+  getNextMonday,
+  getStartDateString,
+} from '../../../utils/datetime';
 
 type AttendanceHeaderProps = {
   day: ScheduleDay;
@@ -15,8 +19,8 @@ export default function AttendanceHeader({
 }: AttendanceHeaderProps) {
   const date = new Date(day.date);
   const currentDate = new Date();
-  const weekEndDate = new Date();
-  weekEndDate.setDate(weekEndDate.getDate() + 6);
+  const weekEndDate = getNextMonday(new Date());
+  weekEndDate.setDate(weekEndDate.getDate() - 1);
 
   return (
     <th
@@ -24,7 +28,8 @@ export default function AttendanceHeader({
         [styles.tableHeaderInactive]:
           getStartDateString(date) > getStartDateString(weekEndDate) ||
           (date < currentDate &&
-            getStartDateString(date) !== getStartDateString(currentDate)) && !canEdit,
+            getStartDateString(date) !== getStartDateString(currentDate) &&
+            !canEdit),
       })}
     >
       <div>{`${addZero(date.getDate())}.${addZero(date.getMonth() + 1)}`}</div>

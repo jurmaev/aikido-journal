@@ -2,7 +2,7 @@ import { GroupAttendance, ScheduleDay } from '../../../types/group';
 import styles from '../../../pages/attendance-page/attendance.module.css';
 import cn from 'classnames';
 import { produce } from 'immer';
-import { getStartDateString } from '../../../utils/datetime';
+import { getNextMonday, getStartDateString } from '../../../utils/datetime';
 
 type AttendanceCellProps = {
   childId: number;
@@ -21,8 +21,8 @@ export default function AttendanceCell({
 }: AttendanceCellProps) {
   const date = new Date(day.date);
   const currentDate = new Date();
-  const weekEndDate = new Date();
-  weekEndDate.setDate(weekEndDate.getDate() + 6);
+  const weekEndDate = getNextMonday(new Date());
+  weekEndDate.setDate(weekEndDate.getDate() - 1);
 
   return (
     <td key={day.date} className={styles.tableCell}>
