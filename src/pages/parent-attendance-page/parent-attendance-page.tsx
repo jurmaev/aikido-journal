@@ -27,17 +27,18 @@ export default function ParentAttendancePage() {
   const attendance = useAppSelector(getChildrenAttendance);
   const dispatch = useAppDispatch();
   const [startDate, setStartDate] = useState(getMonday(new Date()));
+  console.log(isMobile)
 
   useEffect(() => {
-    if (isMobile) {
-      dispatch(fetchChildrenAttendance(getStartDateString(startDate)));
-    } else {
+    if (!isMobile) {
       dispatch(
         fetchChildrenAttendanceForMonth({
           year: startDate.getFullYear(),
           month: startDate.getMonth() + 1,
         })
       );
+    } else {
+      dispatch(fetchChildrenAttendance(getStartDateString(startDate)));
     }
   }, [dispatch, startDate, isMobile]);
 

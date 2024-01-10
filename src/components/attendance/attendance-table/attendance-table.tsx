@@ -33,7 +33,6 @@ export default function AttendanceTable() {
   const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
-    console.log(startDate.getMonth());
     if (groupName !== '') {
       if (!isMobile) {
         dispatch(
