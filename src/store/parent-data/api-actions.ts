@@ -26,6 +26,21 @@ export const fetchChildrenAttendance = createAsyncThunk<
   return data;
 });
 
+export const fetchChildrenAttendanceForMonth = createAsyncThunk<
+  Attendance[],
+  { year: number; month: number },
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>(
+  'parents/fetchChildrenAttendanceForMonth',
+  async ({ year, month }, { extra: api }) => {
+    const { data } = await api.post<Attendance[]>(
+      `${ApiRoute.Parents}/get_children_attendance_for_month`,
+      { year, month }
+    );
+    return data;
+  }
+);
+
 export const fetchProfileInfo = createAsyncThunk<
   Profile,
   undefined,

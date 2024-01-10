@@ -3,6 +3,7 @@ import { Namespace } from '../../const';
 import { ParentData } from '../../types/state';
 import {
   fetchChildrenAttendance,
+  fetchChildrenAttendanceForMonth,
   fetchChildrenSchedule,
   fetchProfileInfo,
 } from './api-actions';
@@ -35,6 +36,9 @@ export const parentData = createSlice({
       })
       .addCase(fetchProfileInfo.fulfilled, (state, action) => {
         state.profile = action.payload;
+      })
+      .addCase(fetchChildrenAttendanceForMonth.fulfilled, (state, action) => {
+        state.attendance = action.payload;
       });
   },
 });

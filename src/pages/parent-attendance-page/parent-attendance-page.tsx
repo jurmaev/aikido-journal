@@ -9,7 +9,10 @@ import { useIsMobile } from '../../hooks/use-is-mobile';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getChildrenAttendance } from '../../store/parent-data/parent-data.selectors';
-import { fetchChildrenAttendance } from '../../store/parent-data/api-actions';
+import {
+  fetchChildrenAttendance,
+  fetchChildrenAttendanceForMonth,
+} from '../../store/parent-data/api-actions';
 import {
   addZero,
   getMonday,
@@ -26,12 +29,41 @@ export default function ParentAttendancePage() {
   const [startDate, setStartDate] = useState(getMonday(new Date()));
 
   useEffect(() => {
-    dispatch(fetchChildrenAttendance(getStartDateString(startDate)));
-  }, [dispatch, startDate]);
+    if (isMobile) {
+      dispatch(fetchChildrenAttendance(getStartDateString(startDate)));
+    } else {
+      dispatch(
+        fetchChildrenAttendanceForMonth({
+          year: startDate.getFullYear(),
+          month: startDate.getMonth() + 1,
+        })
+      );
+    }
+  }, [dispatch, startDate, isMobile]);
 
   useEffect(() => {
     document.title = 'Посещаемость';
   }, []);
+
+  function handlePreviousButtonClick() {
+    if (!isMobile) {
+      const newDate = new Date(startDate);
+      newDate.setMonth(newDate.getMonth() - 1);
+      setStartDate(newDate);
+    } else {
+      setStartDate(getPreviosMonday(startDate));
+    }
+  }
+
+  function handleNextButtonClick() {
+    if (!isMobile) {
+      const newDate = new Date(startDate);
+      newDate.setMonth(newDate.getMonth() + 1);
+      setStartDate(newDate);
+    } else {
+      setStartDate(getNextMonday(startDate));
+    }
+  }
 
   return (
     <>
@@ -73,10 +105,8 @@ export default function ParentAttendancePage() {
                               ФИО ребенка:
                               <button
                                 className={styles.tableArrow}
-                                aria-label="Previos week"
-                                onClick={() =>
-                                  setStartDate(getPreviosMonday(startDate))
-                                }
+                                aria-label="Previos"
+                                onClick={handlePreviousButtonClick}
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -94,10 +124,8 @@ export default function ParentAttendancePage() {
                               </button>
                               <button
                                 className={styles.tableArrow}
-                                aria-label="Next week"
-                                onClick={() =>
-                                  setStartDate(getNextMonday(startDate))
-                                }
+                                aria-label="Next"
+                                onClick={handleNextButtonClick}
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +146,13 @@ export default function ParentAttendancePage() {
                           {child.schedule.map(
                             (day) =>
                               day.is_training && (
-                                <th className={styles.tableHeader} key={day.date}>
+                                <th
+                                  className={cn(styles.tableHeader, {
+                                    [styles.tableHeaderInactive]:
+                                      new Date(day.date) > new Date(),
+                                  })}
+                                  key={day.date}
+                                >
                                   <div>{`${addZero(
                                     new Date(day.date).getDate()
                                   )}.${addZero(
@@ -142,6 +176,7 @@ export default function ParentAttendancePage() {
                               day.is_training !== null && (
                                 <TableCell
                                   key={day.date}
+                                  date={day.date}
                                   isTraining={day.is_training}
                                 />
                               )
