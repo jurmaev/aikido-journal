@@ -3,21 +3,24 @@ import cn from 'classnames';
 
 type TableCellProps = {
   isTraining: boolean | null;
+  date: string;
 };
 
-export default function TableCell({ isTraining }: TableCellProps) {
+export default function TableCell({ isTraining, date }: TableCellProps) {
+  const isEmpty = new Date(date) > new Date();
+
   return (
     <td className={styles.tableCell}>
       <div className={styles.tableCellContainer}>
         <div
           className={cn(
             styles.tableCheck,
-            { [styles.tableCheckChecked]: isTraining },
+            { [styles.tableCheckChecked]: isTraining  },
             {
-              [styles.tableCheckDisabled]: isTraining === null,
+              [styles.tableCheckDisabled]: isTraining === null || isEmpty,
             },
             {
-              [styles.tableCross]: isTraining !== null && !isTraining,
+              [styles.tableCross]: isTraining !== null && !isTraining ,
             }
           )}
         >

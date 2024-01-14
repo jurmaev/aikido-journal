@@ -83,7 +83,7 @@ table {
 
 .tableHeader:first-child,
 .tableCell:first-child {
-  width: 30%;
+  width: 22.5%;
   padding: 0.25rem 0.5rem;
   text-align: left;
 }
@@ -149,6 +149,15 @@ tr:last-child td:last-child {
   opacity: 0;
 }
 
+.tableCheckEmpty {
+  border-color: var(--black-300);
+  cursor: default;
+}
+
+.tableCheckEmpty svg {
+  opacity: 1;
+}
+
 .tableCheck:disabled {
   border-color: var(--black-300);
   cursor: default;
@@ -156,6 +165,11 @@ tr:last-child td:last-child {
 
 .tableCheck:disabled {
   background-color: transparent;
+}
+
+.tableCheck:disabled.tableCheckChecked {
+  border-color: var(--black);
+  background-color: var(--blue-200);
 }
 
 .tableCheckChecked {

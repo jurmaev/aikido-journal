@@ -10,7 +10,7 @@ import { useState } from 'react';
 type AttendanceSelectProps = {
   groupName: string;
   setGroupName: React.Dispatch<React.SetStateAction<string>>;
-  setStartDate: React.Dispatch<React.SetStateAction<string>>;
+  setStartDate: React.Dispatch<React.SetStateAction<Date>>;
 };
 
 export default function AttendanceSelect({

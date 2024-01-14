@@ -2,6 +2,7 @@ import { GroupAttendance, ScheduleDay } from '../../../types/group';
 import styles from '../../../pages/attendance-page/attendance.module.css';
 import cn from 'classnames';
 import { produce } from 'immer';
+import { getNextMonday, getStartDateString } from '../../../utils/datetime';
 
 type AttendanceCellProps = {
   childId: number;
@@ -9,13 +10,20 @@ type AttendanceCellProps = {
   setAttendanceState: React.Dispatch<
     React.SetStateAction<GroupAttendance | null>
   >;
+  canEdit: boolean;
 };
 
 export default function AttendanceCell({
   childId,
   day,
   setAttendanceState,
+  canEdit,
 }: AttendanceCellProps) {
+  const date = new Date(day.date);
+  const currentDate = new Date();
+  const weekEndDate = getNextMonday(new Date());
+  weekEndDate.setDate(weekEndDate.getDate() - 1);
+
   return (
     <td key={day.date} className={styles.tableCell}>
       <button
@@ -23,7 +31,12 @@ export default function AttendanceCell({
           [styles.tableCheckChecked]: day.is_training,
         })}
         aria-label="Check"
-        disabled={day.is_training === null}
+        disabled={
+          getStartDateString(date) > getStartDateString(weekEndDate) ||
+          (date < currentDate &&
+            getStartDateString(date) !== getStartDateString(currentDate) &&
+            !canEdit)
+        }
         onClick={() =>
           setAttendanceState(
             produce((draft) => {

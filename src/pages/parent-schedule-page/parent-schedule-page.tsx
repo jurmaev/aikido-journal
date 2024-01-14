@@ -5,14 +5,13 @@ import cn from 'classnames';
 import { getFullName } from '../../utils/names';
 import TableHeader from '../../components/parent-schedule/table-header/table-header';
 import TableCell from '../../components/parent-schedule/table-cell/table-cell';
-import { useIsMobile } from '../../hooks/use-is-mobile';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchChildrenSchedule } from '../../store/parent-data/api-actions';
 import { getChildrenSchedule } from '../../store/parent-data/parent-data.selectors';
+import React from 'react';
 
 export default function ParentSchedulePage() {
-  const isMobile = useIsMobile();
   const days = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс '];
   const dispatch = useAppDispatch();
   const scheduleInfo = useAppSelector(getChildrenSchedule);
@@ -32,8 +31,8 @@ export default function ParentSchedulePage() {
         <div className={cn(baseStyles.container, styles.scheduleContainer)}>
           <h1 className={styles.scheduleTitle}>Расписание</h1>
           {scheduleInfo.length !== 0 ? (
-            scheduleInfo.map((info) => (
-              <>
+            scheduleInfo.map((info, index) => (
+              <React.Fragment key={index}>
                 <p className={styles.scheduleText}>
                   Ребёнок: {getFullName(info)}
                 </p>
@@ -56,41 +55,43 @@ export default function ParentSchedulePage() {
                     <p className={styles.scheduleText}>
                       Номер тренера: {info.group_inf.coach_phone_number}
                     </p>
-                    <p className={styles.scheduleText}>Расписание:</p>
-                    <table>
-                      <thead>
-                        <tr>
-                          {days.map((day, index) =>
-                            isMobile ? (
-                              info.group_inf.schedule[index] && (
-                                <TableHeader
-                                  key={index}
-                                  day={day}
-                                  index={index}
-                                />
-                              )
-                            ) : (
-                              <TableHeader
-                                key={index}
-                                day={day}
-                                index={index}
-                              />
-                            )
-                          )}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          {info.group_inf.schedule.map((item, index) =>
-                            isMobile ? (
-                              item && <TableCell key={index} time={item} />
-                            ) : (
-                              <TableCell key={index} time={item} />
-                            )
-                          )}
-                        </tr>
-                      </tbody>
-                    </table>
+                    <p className={styles.scheduleText}>
+                      Расписание:{' '}
+                      {!info.group_inf.schedule.some((day) => day) && (
+                        <span
+                          className={cn(baseStyles.text, baseStyles.redText)}
+                        >
+                          не задано
+                        </span>
+                      )}
+                    </p>
+
+                    {info.group_inf.schedule.some((day) => day) && (
+                      <table>
+                        <thead>
+                          <tr>
+                            {days.map(
+                              (day, index) =>
+                                info.group_inf.schedule[index] && (
+                                  <TableHeader
+                                    key={index}
+                                    day={day}
+                                    index={index}
+                                  />
+                                )
+                            )}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            {info.group_inf.schedule.map(
+                              (item, index) =>
+                                item && <TableCell key={index} time={item} />
+                            )}
+                          </tr>
+                        </tbody>
+                      </table>
+                    )}
                   </>
                 ) : (
                   <p className={baseStyles.text}>
@@ -100,7 +101,7 @@ export default function ParentSchedulePage() {
                     </span>
                   </p>
                 )}
-              </>
+              </React.Fragment>
             ))
           ) : (
             <p className={baseStyles.text}>

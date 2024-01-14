@@ -12,9 +12,11 @@ import {
   getMonday,
   getNextMonday,
   getPreviosMonday,
+  getStartDateString,
 } from '../../../utils/datetime';
 import {
   fetchAttendance,
+  fetchAttendanceForMonth,
   setAttendance,
 } from '../../../store/group-data/api-actions';
 import AttendanceCell from '../attendance-cell/attendance-cell';
@@ -26,27 +28,65 @@ export default function AttendanceTable() {
     useState<GroupAttendance | null>(null);
   const [groupName, setGroupName] = useState('');
   const [message, setMessage] = useState('');
-
+  const hasSchedule = attendanceState?.schedule.some((day) => day.is_training);
   const [startDate, setStartDate] = useState(getMonday(new Date()));
+  const [canEdit, setCanEdit] = useState(false);
 
   useEffect(() => {
     if (groupName !== '') {
-      dispatch(
-        fetchAttendance({ groupName: groupName, startDate: startDate })
-      ).then((data) => setAttendanceState(data.payload as GroupAttendance));
+      if (!isMobile) {
+        dispatch(
+          fetchAttendanceForMonth({
+            groupName: groupName,
+            year: startDate.getFullYear(),
+            month: startDate.getMonth() + 1,
+          })
+        ).then((data) => setAttendanceState(data.payload as GroupAttendance));
+      } else {
+        dispatch(
+          fetchAttendance({
+            groupName: groupName,
+            startDate: getStartDateString(startDate),
+          })
+        ).then((data) => setAttendanceState(data.payload as GroupAttendance));
+      }
     }
-  }, [groupName, dispatch, startDate]);
+  }, [groupName, dispatch, startDate, isMobile]);
 
   function handleButtonClick() {
     if (attendanceState) {
       dispatch(
         setAttendance({
           groupName: groupName,
-          startDate: startDate,
+          startDate: getStartDateString(startDate),
           childAttendance: attendanceState.children_attendance,
         })
       );
       setMessage('Изменения сохранены');
+      setCanEdit(false);
+      setTimeout(() => {
+        setMessage('');
+      }, 5000);
+    }
+  }
+
+  function handlePreviousButtonClick() {
+    if (!isMobile) {
+      const newDate = new Date(startDate);
+      newDate.setMonth(newDate.getMonth() - 1);
+      setStartDate(newDate);
+    } else {
+      setStartDate(getPreviosMonday(startDate));
+    }
+  }
+
+  function handleNextButtonClick() {
+    if (!isMobile) {
+      const newDate = new Date(startDate);
+      newDate.setMonth(newDate.getMonth() + 1);
+      setStartDate(newDate);
+    } else {
+      setStartDate(getNextMonday(startDate));
     }
   }
 
@@ -58,9 +98,13 @@ export default function AttendanceTable() {
         setStartDate={setStartDate}
       />
 
-      {attendanceState &&
-      attendanceState.children_attendance.length === 0 &&
-      groupName !== '' ? (
+      {!hasSchedule ? (
+        <p className={baseStyles.failText}>
+          В этой группе не добавлено расписание
+        </p>
+      ) : attendanceState &&
+        attendanceState.children_attendance.length === 0 &&
+        groupName !== '' ? (
         <p className={baseStyles.failText}>В этой группе не добавлены дети</p>
       ) : attendanceState &&
         attendanceState.children_attendance.length !== 0 ? (
@@ -70,11 +114,11 @@ export default function AttendanceTable() {
               <tr>
                 <th className={styles.tableHeader}>
                   <div className={styles.tableHeaderContainer}>
-                    ФИО ребенка:
+                    Ребёнок:
                     <button
                       className={styles.tableArrow}
-                      aria-label="Previous week"
-                      onClick={() => setStartDate(getPreviosMonday(startDate))}
+                      aria-label="Previous"
+                      onClick={handlePreviousButtonClick}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -92,8 +136,8 @@ export default function AttendanceTable() {
                     </button>
                     <button
                       className={styles.tableArrow}
-                      aria-label="Next week"
-                      onClick={() => setStartDate(getNextMonday(startDate))}
+                      aria-label="Next"
+                      onClick={handleNextButtonClick}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -111,14 +155,15 @@ export default function AttendanceTable() {
                     </button>
                   </div>
                 </th>
-                {attendanceState.schedule.map((day) =>
-                  isMobile ? (
+                {attendanceState.schedule.map(
+                  (day) =>
                     day.is_training && (
-                      <AttendanceHeader key={day.date} day={day} />
+                      <AttendanceHeader
+                        key={day.date}
+                        day={day}
+                        canEdit={canEdit || isMobile}
+                      />
                     )
-                  ) : (
-                    <AttendanceHeader key={day.date} day={day} />
-                  )
                 )}
               </tr>
             </thead>
@@ -130,41 +175,47 @@ export default function AttendanceTable() {
                       ? getShortName(getFullName(child))
                       : getFullName(child)}
                   </td>
-                  {child.attendance.map((day) =>
-                    isMobile ? (
+                  {child.attendance.map(
+                    (day) =>
                       day.is_training !== null && (
                         <AttendanceCell
                           key={`${child.id}-${day.date}`}
                           childId={child.id}
                           day={day}
                           setAttendanceState={setAttendanceState}
+                          canEdit={canEdit || isMobile}
                         />
                       )
-                    ) : (
-                      <AttendanceCell
-                        key={`${child.id}-${day.date}`}
-                        childId={child.id}
-                        day={day}
-                        setAttendanceState={setAttendanceState}
-                      />
-                    )
                   )}
                 </tr>
               ))}
             </tbody>
           </table>
           <p className={baseStyles.redText}>{message}</p>
-          <button
-            className={cn(
-              baseStyles.btn,
-              baseStyles.btnRed,
-              baseStyles.btnLarge
-            )}
-            aria-label="Сохранить изменения"
-            onClick={handleButtonClick}
-          >
-            Сохранить изменения
-          </button>
+          <div className={baseStyles.inputGroup}>
+            {!isMobile && <button
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnBlue,
+                baseStyles.btnLarge
+              )}
+              onClick={() => setCanEdit(!canEdit)}
+              disabled={canEdit}
+            >
+              Редактировать прошедшие дни
+            </button>}
+            <button
+              className={cn(
+                baseStyles.btn,
+                baseStyles.btnRed,
+                baseStyles.btnLarge
+              )}
+              aria-label="Сохранить изменения"
+              onClick={handleButtonClick}
+            >
+              Сохранить изменения
+            </button>
+          </div>
         </>
       ) : (
         <p className={baseStyles.failText}>

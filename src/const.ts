@@ -36,7 +36,8 @@ export const Namespace = {
   Children: 'chlidren',
   Parents: 'parents',
   Groups: 'groups',
-  Parent: 'parent'
+  Parent: 'parent',
+  Debt: 'debt',
 };
 
 export const AuthorizationStatus = {

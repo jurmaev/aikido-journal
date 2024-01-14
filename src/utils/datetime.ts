@@ -43,7 +43,7 @@ export function getDatetime(day: TrainingTime | null) {
   return null;
 }
 
-function getStartDateString(date: Date) {
+export function getStartDateString(date: Date) {
   return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(
     date.getDate()
   )}`;
@@ -59,22 +59,22 @@ function getMondayDate(currentDate: string | Date) {
 
 export function getMonday(currentDate: string | Date) {
   const date = getMondayDate(currentDate);
-  return getStartDateString(date);
+  return date;
 }
 
-export function getPreviosMonday(currentDate: string) {
+export function getPreviosMonday(currentDate: Date) {
   const date = getMondayDate(currentDate);
   date.setDate(date.getDate() - 7);
-  return getStartDateString(date);
+  return date;
 }
 
-export function getNextMonday(currentDate: string) {
+export function getNextMonday(currentDate: Date) {
   const date = getMondayDate(currentDate);
   date.setDate(date.getDate() + 7);
-  return getStartDateString(date);
+  return date;
 }
 
-export function getFirstMondayOfMonth(month: number) {
+export function getFirstMondayOfMonth(month: number): Date {
   const date = new Date();
   date.setMonth(month);
   date.setDate(1);
@@ -82,7 +82,7 @@ export function getFirstMondayOfMonth(month: number) {
   if (getMondayDate(date).getMonth() !== month) {
     const diff = date.getDate() + 7;
     date.setDate(diff);
-    return getStartDateString(getMondayDate(date));
+    return getMondayDate(date);
   }
-  return getStartDateString(date);
+  return date;
 }

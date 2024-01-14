@@ -4,8 +4,16 @@ import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import PaymentList from '../../components/payment/payment-list/payment-list';
 import { useEffect } from 'react';
+import { useAppDispatch } from '../../hooks';
+import { fetchDebt } from '../../store/debt-data/api-actions';
 
 export default function PaymentPage() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchDebt());
+  }, [dispatch]);
+
   useEffect(() => {
     document.title = 'Задолженность';
   }, []);

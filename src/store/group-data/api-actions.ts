@@ -97,6 +97,21 @@ export const fetchAttendance = createAsyncThunk<
   }
 );
 
+export const fetchAttendanceForMonth = createAsyncThunk<
+  GroupAttendance,
+  { groupName: string; year: number; month: number },
+  { dispatch: AppDispatch; state: State; extra: AxiosInstance }
+>(
+  'groups/fetchAttendanceForMonth',
+  async ({ groupName, year, month }, { extra: api }) => {
+    const { data } = await api.post<GroupAttendance>(
+      `${ApiRoute.Groups}/${groupName}/get_attendance_for_month`,
+      { year, month }
+    );
+    return data;
+  }
+);
+
 export const setAttendance = createAsyncThunk<
   GroupAttendance,
   { groupName: string; startDate: string; childAttendance: ChildAttendance[] },

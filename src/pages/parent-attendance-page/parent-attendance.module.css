@@ -96,7 +96,7 @@ table {
 
 .tableHeader:first-child,
 .tableCell:first-child {
-  width: 30%;
+  width: 22.5%;
   padding: 0.25rem 0.5rem;
   text-align: left;
 }
@@ -147,13 +147,7 @@ tr:last-child td:last-child {
   border-radius: 0.3125rem;
 }
 
-.tableCheckDisabled {
-  border-color: var(--black-300);
-}
 
-.tableCheckDisabled {
-  background-color: transparent;
-}
 
 .tableCheckDisabled svg {
   opacity: 0;
@@ -166,6 +160,11 @@ tr:last-child td:last-child {
 .tableCross {
   padding: 0;
   background-color: var(--red-400);
+}
+
+.tableCheckDisabled {
+  border-color: var(--black-300);
+  background-color: transparent;
 }
 
 @media (max-width: 1024px) {

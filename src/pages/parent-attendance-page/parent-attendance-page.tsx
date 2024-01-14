@@ -3,33 +3,68 @@ import styles from './parent-attendance.module.css';
 import Header from '../../components/ui/header/header';
 import cn from 'classnames';
 import { getFullName, getShortName } from '../../utils/names';
-import AttendanceHeader from '../../components/ui/attendance-header/attendance-header';
 import TableCell from '../../components/parent-attendance/table-cell/table-cell';
 import AttendanceSelect from '../../components/parent-attendance/attendance-select/attendance-select';
 import { useIsMobile } from '../../hooks/use-is-mobile';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getChildrenAttendance } from '../../store/parent-data/parent-data.selectors';
-import { fetchChildrenAttendance } from '../../store/parent-data/api-actions';
 import {
+  fetchChildrenAttendance,
+  fetchChildrenAttendanceForMonth,
+} from '../../store/parent-data/api-actions';
+import {
+  addZero,
   getMonday,
   getNextMonday,
   getPreviosMonday,
+  getStartDateString,
 } from '../../utils/datetime';
+import { Days } from '../../const';
 
 export default function ParentAttendancePage() {
   const isMobile = useIsMobile();
   const attendance = useAppSelector(getChildrenAttendance);
   const dispatch = useAppDispatch();
   const [startDate, setStartDate] = useState(getMonday(new Date()));
+  console.log(isMobile)
 
   useEffect(() => {
-    dispatch(fetchChildrenAttendance(startDate));
-  }, [dispatch, startDate]);
+    if (!isMobile) {
+      dispatch(
+        fetchChildrenAttendanceForMonth({
+          year: startDate.getFullYear(),
+          month: startDate.getMonth() + 1,
+        })
+      );
+    } else {
+      dispatch(fetchChildrenAttendance(getStartDateString(startDate)));
+    }
+  }, [dispatch, startDate, isMobile]);
 
   useEffect(() => {
     document.title = 'Посещаемость';
   }, []);
+
+  function handlePreviousButtonClick() {
+    if (!isMobile) {
+      const newDate = new Date(startDate);
+      newDate.setMonth(newDate.getMonth() - 1);
+      setStartDate(newDate);
+    } else {
+      setStartDate(getPreviosMonday(startDate));
+    }
+  }
+
+  function handleNextButtonClick() {
+    if (!isMobile) {
+      const newDate = new Date(startDate);
+      newDate.setMonth(newDate.getMonth() + 1);
+      setStartDate(newDate);
+    } else {
+      setStartDate(getNextMonday(startDate));
+    }
+  }
 
   return (
     <>
@@ -48,7 +83,20 @@ export default function ParentAttendancePage() {
             <>
               <AttendanceSelect setStartDate={setStartDate} />
               {attendance.map((child, index) => {
-                if (child.attendance) {
+                const hasSchedule =
+                  !child.attendance ||
+                  child.schedule?.some((day) => day.is_training);
+
+                if (!hasSchedule) {
+                  return (
+                    <p className={baseStyles.text}>
+                      {getFullName(child) + ': '}
+                      <span className={baseStyles.redText}>
+                        расписание группы не задано
+                      </span>
+                    </p>
+                  );
+                } else if (child.attendance) {
                   return (
                     <table key={index}>
                       <thead>
@@ -58,10 +106,8 @@ export default function ParentAttendancePage() {
                               ФИО ребенка:
                               <button
                                 className={styles.tableArrow}
-                                aria-label="Previos week"
-                                onClick={() =>
-                                  setStartDate(getPreviosMonday(startDate))
-                                }
+                                aria-label="Previos"
+                                onClick={handlePreviousButtonClick}
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -79,10 +125,8 @@ export default function ParentAttendancePage() {
                               </button>
                               <button
                                 className={styles.tableArrow}
-                                aria-label="Next week"
-                                onClick={() =>
-                                  setStartDate(getNextMonday(startDate))
-                                }
+                                aria-label="Next"
+                                onClick={handleNextButtonClick}
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -100,14 +144,24 @@ export default function ParentAttendancePage() {
                               </button>
                             </div>
                           </th>
-                          {child.schedule.map((day) =>
-                            isMobile ? (
+                          {child.schedule.map(
+                            (day) =>
                               day.is_training && (
-                                <AttendanceHeader key={day.date} day={day} />
+                                <th
+                                  className={cn(styles.tableHeader, {
+                                    [styles.tableHeaderInactive]:
+                                      new Date(day.date) > new Date(),
+                                  })}
+                                  key={day.date}
+                                >
+                                  <div>{`${addZero(
+                                    new Date(day.date).getDate()
+                                  )}.${addZero(
+                                    new Date(day.date).getMonth() + 1
+                                  )}`}</div>
+                                  <div>{Days[new Date(day.date).getDay()]}</div>
+                                </th>
                               )
-                            ) : (
-                              <AttendanceHeader key={day.date} day={day} />
-                            )
                           )}
                         </tr>
                       </thead>
@@ -118,20 +172,15 @@ export default function ParentAttendancePage() {
                               ? getShortName(getFullName(child))
                               : getFullName(child)}
                           </td>
-                          {child.attendance.map((day) =>
-                            isMobile ? (
+                          {child.attendance.map(
+                            (day) =>
                               day.is_training !== null && (
                                 <TableCell
                                   key={day.date}
+                                  date={day.date}
                                   isTraining={day.is_training}
                                 />
                               )
-                            ) : (
-                              <TableCell
-                                key={day.date}
-                                isTraining={day.is_training}
-                              />
-                            )
                           )}
                         </tr>
                       </tbody>
